@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/buttonFinalizarPedido"
+            android:layout_width="388dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/finalizar_pedido_string"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPtotal" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="140dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="202dp"
+            android:layout_marginBottom="286dp"
+            app:layout_constraintBottom_toTopOf="@+id/textViewPtotal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/color_mode_inncoffe_ek1" />
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="353dp"
+            android:layout_height="97dp"
+            android:layout_marginBottom="8dp"
+            android:background="#5E35B1"
+            app:layout_constraintBottom_toTopOf="@+id/textViewPtotal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewContinuaComida"
+            android:layout_width="161dp"
+            android:layout_height="93dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/tostadas_string"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.516"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.543" />
+
+        <TextView
+            android:id="@+id/textViewPtotal"
+            android:layout_width="100dp"
+            android:layout_height="43dp"
+            android:layout_marginEnd="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/buttonFinalizarPedido"
+            app:layout_constraintEnd_toEndOf="@+id/listView"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <TextView
+            android:id="@+id/textViewContinuaBebida"
+            android:layout_width="152dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="372dp"
+            android:text="BEBIDAS"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toTopOf="@+id/listView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

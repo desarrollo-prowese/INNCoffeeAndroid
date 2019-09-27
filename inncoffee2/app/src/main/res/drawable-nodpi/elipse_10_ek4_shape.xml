@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- elipse_10_ek4 from your PSD file. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+	android:shape="oval" >
+	<stroke android:color="#6b5d4a" android:width="110dp" />
+	<solid android:color="@color/_bg__menu_parallax_ek2_color" />
+</shape>
+

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/buttonGluten"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="gluten"
+            app:layout_constraintBaseline_toBaselineOf="@+id/buttonCrustaceos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.136"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/buttonCrustaceos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:text="crustaceos"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCacahuetes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/buttonHuevos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:text="huevos"
+            app:layout_constraintBaseline_toBaselineOf="@+id/buttonCrustaceos"
+            app:layout_constraintStart_toEndOf="@+id/buttonCrustaceos" />
+
+        <Button
+            android:id="@+id/buttonPescado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pescado"
+            app:layout_constraintBaseline_toBaselineOf="@+id/buttonCacahuetes"
+            app:layout_constraintStart_toStartOf="@+id/buttonGluten" />
+
+        <Button
+            android:id="@+id/buttonCacahuetes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="cacahuetes"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonApio"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/buttonApio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="157dp"
+            android:text="apio"
+            app:layout_constraintStart_toEndOf="@+id/buttonCacahuetes"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/buttonSoja"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="soja"
+            app:layout_constraintBaseline_toBaselineOf="@+id/buttonLacteos"
+            app:layout_constraintStart_toStartOf="@+id/buttonPescado" />
+
+        <Button
+            android:id="@+id/buttonLacteos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="19dp"
+            android:text="lacteos"
+            app:layout_constraintBottom_toTopOf="@+id/buttonMostaza"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/buttonFrutosSecos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="frutos secos"
+            app:layout_constraintStart_toStartOf="@+id/buttonApio"
+            app:layout_constraintTop_toBottomOf="@+id/buttonApio" />
+
+        <Button
+            android:id="@+id/buttonDioxido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dioxido"
+            app:layout_constraintBaseline_toBaselineOf="@+id/buttonMostaza"
+            app:layout_constraintStart_toStartOf="@+id/buttonSoja" />
+
+        <Button
+            android:id="@+id/buttonMostaza"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mostaza"
+            app:layout_constraintBaseline_toBaselineOf="@+id/buttonSesamo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/buttonSesamo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="sesamo"
+            app:layout_constraintStart_toStartOf="@+id/buttonFrutosSecos"
+            app:layout_constraintTop_toBottomOf="@+id/buttonFrutosSecos" />
+
+        <Button
+            android:id="@+id/buttonMoluscos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="moluscos"
+            app:layout_constraintBaseline_toBaselineOf="@+id/buttonAltramuces"
+            app:layout_constraintStart_toStartOf="@+id/buttonDioxido" />
+
+        <Button
+            android:id="@+id/buttonAltramuces"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="altramuces"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonMostaza" />
+
+        <Button
+            android:id="@+id/buttonDesayuno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="17dp"
+            android:text="Carta de desayunos"
+            app:layout_constraintBottom_toTopOf="@+id/buttonComidas"
+            app:layout_constraintStart_toStartOf="@+id/buttonComidas" />
+
+        <Button
+            android:id="@+id/buttonComidas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="140dp"
+            android:layout_marginBottom="32dp"
+            android:text="carta de comidas"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

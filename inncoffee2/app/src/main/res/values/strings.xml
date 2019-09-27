@@ -1,0 +1,512 @@
+<resources>
+    <string name="app_name">INN COFFEE</string>
+    <string name="email">Correo Electronico</string>
+    <string name="facebook_app_id">2318764478221653</string>
+    <string name="fb_login_protocol_scheme">fb2318764478221653</string>
+    <string name="password">contraseña</string>
+    <string name="sign_in">Iniciar Sesion</string>
+    <string name="register">Registrarse con correo</string>
+    <string name="full_name">Nombre completo</string>
+    <string name="center">Centro INN Office</string>
+    <string name="phone">Teléfono</string>
+    <string name="confirm_password">confirmar contraseña</string>
+    <string name="already_having_account">Tienes ya una cuenta?</string>
+    <string name="log_in">Iniciar Sesion</string>
+    <string name="not_having_account">No tienes cuenta?</string>
+    <string name="sign_up">Registrarse</string>
+    <string name="logout">Cerrar Sesion</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="ek_img_content">ExportKit Image</string>
+    <string name="quiero_string">QUIERO</string>
+    <string name="mis_ofertas_string">MIS OFERTAS</string>
+    <string name="mis_puntos_string">MIS PUNTOS</string>
+    <string name="quiero_ek1_string">QUIERO</string>
+    <string name="pago_y_gano_string">PAGO Y GANO</string>
+    <string name="pago_y_gano_ek1_string">PAGO Y GANO</string>
+    <string name="mis_ofertas_ek1_string">MIS OFERTAS</string>
+    <string name="mis_puntos_ek1_string">MIS PUNTOS</string>
+    <string name="facebook_ek1_string">Facebook</string>
+    <string name="google_string">Google</string>
+    <string name="registrarse_con_correo_string">Registrarse con correo</string>
+    <string name="iniciar_sesi_n_string">Iniciar sesin</string>
+    <string name="__a_n_no_tienes_cuenta__string">An no tienes cuenta?</string>
+    <string name="email_string">Email</string>
+    <string name="inicio_string">Inicio</string>
+    <string name="pagos_string">Pagos</string>
+    <string name="pedidos_string">Pedidos</string>
+    <string name="hola__jose_string">Hola, Jose</string>
+    <string name="ofertas_string">Ofertas</string>
+    <string name="invita_a_tus_amigos_string">Invita a tus\
+amigos</string>
+    <string name="__ir_a_inn_offices_string"> IR A INN OFFICES</string>
+    <string name="cerrar_sesi_n_string">Cerrar sesin</string>
+    <string name="quiero_ek2_string">QUIERO</string>
+    <string name="nuevo_pedido_string">Nuevo pedido</string>
+    <string name="mis_pedidos_string">Mis pedidos</string>
+    <string name="mis_ofertas_ek5_string">MIS OFERTAS</string>
+    <string name="nuevo_taz_n_con_cereales_string">NUEVO\
+TAZN\
+CON\
+CEREALES</string>
+    <string name="ofertas_ek1_string">Ofertas</string>
+    <string name="mensajes_string">Mensajes</string>
+    <string name="__20__string">-20%</string>
+    <string name="nuevo_taz_n_con_cereales_ek1_string">NUEVO\
+TAZN\
+CON\
+CEREALES</string>
+    <string name="__20__ek1_string">-20%</string>
+    <string name="nuevo_taz_n_con_cereales_ek2_string">NUEVO\
+TAZN\
+CON\
+CEREALES</string>
+    <string name="__20__ek2_string">-20%</string>
+    <string name="mis_puntos_ek5_string">MIS PUNTOS</string>
+    <string name="_13_07_2019_string">13/07/2019</string>
+    <string name="_5_50__string">5,50</string>
+    <string name="puntos_acumulados__string">Puntos acumulados:</string>
+    <string name="_55_string">55</string>
+    <string name="_1507_2019_string">1507/2019</string>
+    <string name="_10__string">10</string>
+    <string name="puntos_acumulados__ek1_string">Puntos acumulados:</string>
+    <string name="_100_string">100</string>
+    <string name="total_de_puntos__string">TOTAL DE PUNTOS:</string>
+    <string name="_155_string">155</string>
+    <string name="__qu__puedo_hacer_con_mis_puntos__string">Qu puedo hacer\
+con mis puntos?</string>
+    <string name="pago_y_gano_ek5_string">PAGO Y GANO</string>
+    <string name="mis_pedidos_ek1_string">Mis pedidos</string>
+    <string name="configurar_pago_en_1_click_string">Configurar pago en 1 click</string>
+    <string name="mis_puntos_ek6_string">Mis puntos</string>
+    <string name="quiero___nuevo_pedido_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="selecciona_establecimiento_string">Selecciona\
+establecimiento</string>
+    <string name="quiero___nuevo_pedido_ek1_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="inn_coffee_nervi_n_string">INN COFFEE\
+Nervin</string>
+    <string name="c_mo_llegar_string">Cmo llegar</string>
+    <string name="quiero___nuevo_pedido_ek2_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="carta_desayunos_string">Carta desayunos</string>
+    <string name="carta_comidas_string">Carta comidas</string>
+    <string name="__tienes_alg_n_tipo_de_alergia_alimentaria__string">Tienes algn tipo\
+de alergia alimentaria?</string>
+    <string name="quiero___nuevo_pedido_ek3_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="carta_desayunos_ek1_string">Carta desayunos</string>
+    <string name="carta_comidas_ek1_string">Carta comidas</string>
+    <string name="marca_tus_alergias_alimentarias_antes_de_hacer_tu_pedido_string">Marca tus alergias\
+alimentarias antes\
+de hacer tu pedido</string>
+    <string name="ahora_s____buen_provecho__string">Ahora s,\
+Buen provecho!</string>
+    <string name="quiero___nuevo_pedido_ek4_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="carta_desayunos_ek2_string">Carta desayunos</string>
+    <string name="carta_comidas_ek2_string">Carta comidas</string>
+    <string name="marca_tus_alergias_alimentarias_antes_de_hacer_tu_pedido_ek1_string">Marca tus alergias\
+alimentarias antes\
+de hacer tu pedido</string>
+    <string name="ahora_s____buen_provecho__ek1_string">Ahora s,\
+Buen provecho!</string>
+    <string name="x_string">X</string>
+    <string name="quiero___nuevo_pedido_ek5_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="tostadas_string">TOSTADAS</string>
+    <string name="bebidas_string">BEBIDAS</string>
+    <string name="quiero___nuevo_pedido_ek6_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="carta_desayunos_ek6_string">Carta desayunos</string>
+    <string name="carta_comidas_ek3_string">Carta comidas</string>
+    <string name="marca_tus_alergias_alimentarias_antes_de_hacer_tu_pedido_ek2_string">Marca tus alergias\
+alimentarias antes\
+de hacer tu pedido</string>
+    <string name="ahora_s____buen_provecho__ek2_string">Ahora s,\
+Buen provecho!</string>
+    <string name="x_ek1_string">X</string>
+    <string name="quiero___nuevo_pedido_ek7_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="carta_comidas_ek4_string">Carta comidas</string>
+    <string name="tostadas___cl_sicas_string">TOSTADAS / CLSICAS</string>
+    <string name="aceite_de_oliva_string">Aceite\
+de Oliva</string>
+    <string name="el_cl_sico_que_nunca_falla__con_aove__string">El clsico que nunca\
+falla, con AOVE.</string>
+    <string name="___string">+</string>
+    <string name="___ek1_string">-</string>
+    <string name="_0_string">0</string>
+    <string name="_1_20__string">1,20</string>
+    <string name="a_adir_string">AADIR</string>
+    <string name="entera_string">Entera</string>
+    <string name="media_string">Media</string>
+    <string name="seleccionar_tipo_de_pan_string">Seleccionar tipo de pan</string>
+    <string name="quiero___nuevo_pedido_ek8_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="caf_s_string">Cafs</string>
+    <string name="t__e_infusiones_string">T e\
+infusiones</string>
+    <string name="bebidas_ek4_string">Bebidas</string>
+    <string name="zumos_string">Zumos</string>
+    <string name="quiero___nuevo_pedido_ek9_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="tostadas_cl_sicas_string">Tostadas\Clasicas</string>
+    <string name="tostadas_originales_string">Tostadas\
+Originales</string>
+    <string name="tostadas_extraordinarias_string">Tostadas\
+Extraordinarias</string>
+    <string name="quiero___nuevo_pedido_ek10_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="carta_comidas_ek5_string">Carta comidas</string>
+    <string name="tipos_de_panes_string">TIPOS DE PANES</string>
+    <string name="chapata_string">Chapata</string>
+    <string name="ideal_para_combinar_con__completar__string">Ideal para combinar\con (completar)</string>
+    <string name="___ek2_string">+</string>
+    <string name="___ek3_string">-</string>
+    <string name="_0_ek1_string">0</string>
+    <string name="_1_20__ek1_string">1,20</string>
+    <string name="seleccionar_string">SELECCIONAR</string>
+    <string name="quiero___nuevo_pedido_ek11_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="carta_comidas_ek6_string">Carta comidas</string>
+    <string name="tostadas___cl_sicas_ek1_string">TOSTADAS / CLSICAS</string>
+    <string name="aceite_de_oliva_ek1_string">Aceite\
+de Oliva</string>
+    <string name="el_cl_sico_que_nunca_falla__con_aove__ek1_string">El clsico que nunca\
+falla, con AOVE.</string>
+    <string name="___ek4_string">+</string>
+    <string name="___ek5_string">-</string>
+    <string name="_1_string">1</string>
+    <string name="_1_20__ek2_string">1,20</string>
+    <string name="a_adir_ek1_string">AADIR</string>
+    <string name="entera_ek1_string">Entera</string>
+    <string name="media_ek1_string">Media</string>
+    <string name="chapata__cambiar__string">Chapata (cambiar)</string>
+    <string name="tostadas_ek1_string">TOSTADAS</string>
+    <string name="bebidas_ek5_string">BEBIDAS</string>
+    <string name="total__1_20__string">Total: 1,20</string>
+    <string name="finalizar_pedido_string">FINALIZAR PEDIDO</string>
+    <string name="quiero___nuevo_pedido_ek12_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="entera___aceite___chapata_string">Entera / Aceite / Chapata</string>
+    <string name="_1_20__ek3_string">1,20</string>
+    <string name="_2_string">2</string>
+    <string name="correo_electr_nico_string">Correo electronico</string>
+    <string name="crear_cuenta_string">Crear Cuenta</string>
+    <string name="nombre_string">Nombre</string>
+    <string name="contrase_a_string">Contrasea</string>
+    <string name="repetir_contrase_a_string">Repetir contrasea</string>
+    <string name="quiero___nuevo_pedido_ek13_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="inn_coffee_nervi_n_ek1_string">INN COFFEE\
+Nervin</string>
+    <string name="c_mo_llegar_ek1_string">Como llegar</string>
+    <string name="tiempo_string">Tiempo</string>
+    <string name="distancia_string">Distancia</string>
+    <string name="m_todo_string">Mtodo</string>
+    <string name="_12_min__string">12 min.</string>
+    <string name="_54_m__string">54 m.</string>
+    <string name="andando_string">andando</string>
+    <string name="correo_electr_nico_ek1_string">Correo electrnico</string>
+    <string name="iniciar_sesi_n_ek1_string">Iniciar sesion</string>
+    <string name="contrase_a_ek1_string">Contrasea</string>
+    <string name="__has_olvidado_tu_contrase_a__string">Has olvidado tu contrasea?</string>
+    <string name="iniciar_sesi_n_ek2_string">Iniciar sesion</string>
+    <string name="para_terminar_tu_registro_verifica_tu_correo_electr_nico_mediante_el_enlace_que_acabamos_de_enviarte_por_mail__string">Para terminar tu registro\
+verifica tu correo electrnico\
+mediante el enlace que acabamos\
+de enviarte por mail\
+</string>
+    <string name="mis_pedidos_ek5_string">MIS PEDIDOS</string>
+    <string name="_13_07_2019_ek1_string">13/07/2019</string>
+    <string name="_5_50__ek1_string">5,50</string>
+    <string name="ver_pedido_string">ver pedido</string>
+    <string name="marcar_como_favorito_string">marcar como favorito</string>
+    <string name="mis_puntos_ek7_string">MIS PUNTOS</string>
+    <string name="todos_string">Todos</string>
+    <string name="favoritos_string">Favoritos</string>
+    <string name="mis_pedidos_ek6_string">MIS PEDIDOS</string>
+    <string name="_13_07_2019_ek2_string">13/07/2019</string>
+    <string name="_5_50__ek2_string">5,50</string>
+    <string name="ver_pedido_ek1_string">ver pedido</string>
+    <string name="marcar_como_favorito_ek1_string">marcar como favorito</string>
+    <string name="mis_puntos_ek8_string">MIS PUNTOS</string>
+    <string name="tostada_de_pera___entera_string">Tostada de pera / entera</string>
+    <string name="_2_30__string">2,30</string>
+    <string name="caf__bomb_n_string">Caf bombn</string>
+    <string name="_1_30__string">1,30</string>
+    <string name="botella_agua_50cl_string">Botella agua 50cl</string>
+    <string name="_0_90__string">0,90</string>
+    <string name="poleo_menta_string">Poleo menta</string>
+    <string name="_1_00__string">1,00</string>
+    <string name="todos_ek1_string">Todos</string>
+    <string name="favoritos_ek1_string">Favoritos</string>
+    <string name="ver_pago__string">Ver pago\
+</string>
+    <string name="imagen_del_pago_string">IMAGEN\
+DEL PAGO</string>
+    <string name="quiero___nuevo_pedido_ek14_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="carta_comidas_ek7_string">Carta comidas</string>
+    <string name="caf_s_ek1_string">CAFS</string>
+    <string name="caf__solo_string">Caf solo</string>
+    <string name="tueste_natural____string">Tueste natural...</string>
+    <string name="___ek6_string">+</string>
+    <string name="___ek7_string">-</string>
+    <string name="_0_ek2_string">0</string>
+    <string name="_1_10__string">1,10</string>
+    <string name="a_adir_ek2_string">AADIR</string>
+    <string name="quiero___nuevo_pedido_ek15_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="carta_comidas_ek8_string">Carta comidas</string>
+    <string name="t__e_infusiones_ek1_string">T E INFUSIONES</string>
+    <string name="t__negro_string">T negro</string>
+    <string name="explicar_caracter_stica_o_beneficio____string">Explicar caracterstica\
+o beneficio...</string>
+    <string name="___ek8_string">+</string>
+    <string name="___ek9_string">-</string>
+    <string name="_0_ek3_string">0</string>
+    <string name="_1_00__ek1_string">1,00</string>
+    <string name="a_adir_ek3_string">AADIR</string>
+    <string name="quiero___nuevo_pedido_ek16_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="carta_comidas_ek9_string">Carta comidas</string>
+    <string name="bebidas_ek9_string">BEBIDAS</string>
+    <string name="agua_mineral_50_cl__string">Agua\
+mineral 50 cl.</string>
+    <string name="texto_string">texto</string>
+    <string name="___ek10_string">+</string>
+    <string name="___ek11_string">-</string>
+    <string name="_0_ek4_string">0</string>
+    <string name="_0_90__ek1_string">0,90</string>
+    <string name="a_adir_ek4_string">AADIR</string>
+    <string name="quiero___nuevo_pedido_ek17_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="carta_comidas_ek10_string">Carta comidas</string>
+    <string name="zumos_ek4_string">ZUMOS</string>
+    <string name="pi_a_y_coco_string">Pia y coco</string>
+    <string name="texto___string">texto..</string>
+    <string name="___ek12_string">+</string>
+    <string name="___ek13_string">-</string>
+    <string name="_0_ek5_string">0</string>
+    <string name="_1_20__ek4_string">1,20</string>
+    <string name="a_adir_ek5_string">AADIR</string>
+    <string name="quiero___nuevo_pedido_ek18_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="carta_comidas_ek11_string">Carta comidas</string>
+    <string name="tostadas___originales_string">TOSTADAS / ORIGINALES</string>
+    <string name="aguacate_y_pavo_string">Aguacate\
+y pavo</string>
+    <string name="texto_ek1_string">texto</string>
+    <string name="___ek14_string">+</string>
+    <string name="___ek15_string">-</string>
+    <string name="_0_ek6_string">0</string>
+    <string name="_1_65__string">1,65</string>
+    <string name="a_adir_ek6_string">AADIR</string>
+    <string name="entera_ek2_string">Entera</string>
+    <string name="media_ek2_string">Media</string>
+    <string name="seleccionar_tipo_de_pan_ek1_string">Seleccionar tipo de pan</string>
+    <string name="quiero___nuevo_pedido_ek19_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="carta_comidas_ek12_string">Carta comidas</string>
+    <string name="tostadas___extraordinarias_string">TOSTADAS / EXTRAORDINARIAS</string>
+    <string name="tostada_de_pera_string">Tostada\
+de pera</string>
+    <string name="este_producto_no_est__disponible_para_ti_porque_contiene_al_rgenos_que_no_puedes_consumir__string">Este producto no est\
+disponible para ti porque\
+contiene alrgenos que\
+no puedes consumir.</string>
+    <string name="___ek16_string">+</string>
+    <string name="___ek17_string">-</string>
+    <string name="_0_ek7_string">0</string>
+    <string name="_2_30__ek1_string">2,30</string>
+    <string name="ver_mis_al_rgenos_string">Ver mis alrgenos</string>
+    <string name="mis_ofertas___mensajes_string">MIS OFERTAS / MENSAJES</string>
+    <string name="ofertas_ek2_string">Ofertas</string>
+    <string name="mensajes_ek1_string">Mensajes</string>
+    <string name="abrimos_nuevo_inncoffee_string">ABRIMOS NUEVO INNCOFFEE</string>
+    <string name="abrimos_nuevo_inncoffee_ek1_string">ABRIMOS NUEVO INNCOFFEE</string>
+    <string name="quiero___nuevo_pedido_ek20_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="combos_string">COMBOS</string>
+    <string name="sandwiches_string">SANDWICHES</string>
+    <string name="platos_y_tapas_string">PLATOS Y TAPAS</string>
+    <string name="postres_string">POSTRES</string>
+    <string name="bebidas_ek10_string">BEBIDAS</string>
+    <string name="quiero___nuevo_pedido_ek21_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="combos_ek4_string">COMBOS</string>
+    <string name="men__completo_string">MEN COMPLETO</string>
+    <string name="medio_men__string">MEDIO MEN</string>
+    <string name="tapa_y_bebida_string">TAPA Y BEBIDA</string>
+    <string name="_2_platos___bebida___pan___postre_string">2 platos + bebida\
++ pan + postre</string>
+    <string name="_1_platos___bebida___pan___postre_string">1 platos + bebida\
++ pan + postre</string>
+    <string name="tapa___bebida_string">tapa + bebida</string>
+    <string name="_7_80__string">7,80</string>
+    <string name="_5_80__string">5,80</string>
+    <string name="_2_60__string">2,60</string>
+    <string name="quiero___nuevo_pedido_ek22_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="carta_comidas_ek16_string">Carta comidas</string>
+    <string name="sandwiches_ek4_string">SANDWICHES</string>
+    <string name="mixto_con_huevo_string">Mixto\
+con huevo</string>
+    <string name="jam_n_cocido__queso_fundido_y_huevo_plancha__string">Jamn cocido,\
+queso fundido y\
+huevo plancha.</string>
+    <string name="___ek18_string">+</string>
+    <string name="___ek19_string">-</string>
+    <string name="_0_ek8_string">0</string>
+    <string name="_4_00__string">4,00</string>
+    <string name="a_adir_ek7_string">AADIR</string>
+    <string name="quiero___nuevo_pedido_ek23_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="carta_comidas_ek17_string">Carta comidas</string>
+    <string name="platos_y_tapas_ek4_string">PLATOS Y TAPAS</string>
+    <string name="solomillo_al_jerez_string">Solomillo\
+al Jerez</string>
+    <string name="breve_descripci_n_del_plato_string">Breve descripcin\
+del plato</string>
+    <string name="___ek20_string">+</string>
+    <string name="___ek21_string">-</string>
+    <string name="_0_ek9_string">0</string>
+    <string name="_3_70__string">3,70</string>
+    <string name="a_adir_ek8_string">AADIR</string>
+    <string name="plato_string">Plato</string>
+    <string name="tapa_string">Tapa</string>
+    <string name="quiero___nuevo_pedido_ek24_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="carta_comidas_ek18_string">Carta comidas</string>
+    <string name="postres_ek4_string">POSTRES</string>
+    <string name="tarta_de_queso_string">Tarta\
+de queso</string>
+    <string name="___ek22_string">+</string>
+    <string name="___ek23_string">-</string>
+    <string name="_0_ek10_string">0</string>
+    <string name="_1_20__ek5_string">1,20</string>
+    <string name="a_adir_ek9_string">AADIR</string>
+    <string name="breve_descripci_n_del_plato_ek1_string">Breve descripcin\
+del plato</string>
+    <string name="quiero___nuevo_pedido_ek25_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="combos_ek5_string">COMBOS</string>
+    <string name="men__completo_ek1_string">MEN COMPLETO</string>
+    <string name="elige_primer_plato_string">Elige primer plato</string>
+    <string name="elige_segundo_plato_string">Elige segundo plato</string>
+    <string name="elige_bebida_string">Elige bebida</string>
+    <string name="elige_postre_string">Elige postre</string>
+    <string name="___ek24_string">+</string>
+    <string name="___ek25_string">-</string>
+    <string name="_0_ek11_string">0</string>
+    <string name="_7_80__ek1_string">7,80</string>
+    <string name="a_adir_combo_string">AADIR COMBO</string>
+    <string name="quiero___nuevo_pedido_ek26_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="combos_ek6_string">COMBOS</string>
+    <string name="medio_men__ek1_string">MEDIO MEN</string>
+    <string name="elige_plato_string">Elige plato</string>
+    <string name="elige_bebida_ek1_string">Elige bebida</string>
+    <string name="elige_postre_ek1_string">Elige postre</string>
+    <string name="___ek26_string">+</string>
+    <string name="___ek27_string">-</string>
+    <string name="_0_ek12_string">0</string>
+    <string name="_5_80__ek1_string">5,80</string>
+    <string name="a_adir_combo_ek1_string">AADIR COMBO</string>
+    <string name="quiero___nuevo_pedido_ek27_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="combos_ek7_string">COMBOS</string>
+    <string name="medio_men__ek2_string">MEDIO MEN</string>
+    <string name="elige_tapa_string">Elige tapa</string>
+    <string name="elige_bebida_ek2_string">Elige bebida</string>
+    <string name="___ek28_string">+</string>
+    <string name="___ek29_string">-</string>
+    <string name="_0_ek13_string">0</string>
+    <string name="_2_60__ek1_string">2,60</string>
+    <string name="a_adir_combo_ek2_string">AADIR COMBO</string>
+    <string name="total__5_50__string">Total: 5,50</string>
+    <string name="quiero___nuevo_pedido_ek28_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="tostada_de_pera___entera_ek1_string">Tostada de pera / entera</string>
+    <string name="_2_30__ek2_string">2,30</string>
+    <string name="caf__bomb_n_ek1_string">Caf bombn</string>
+    <string name="_1_30__ek1_string">1,30</string>
+    <string name="botella_agua_50cl_ek1_string">Botella agua 50cl</string>
+    <string name="_0_90__ek2_string">0,90</string>
+    <string name="poleo_menta_ek1_string">Poleo menta</string>
+    <string name="_1_00__ek2_string">1,00</string>
+    <string name="datos_pedido_string">Datos pedido</string>
+    <string name="pagar_string">PAGAR</string>
+    <string name="cancelar_pedido_string">CANCELAR PEDIDO</string>
+    <string name="utilizar_puntos_string">UTILIZAR PUNTOS</string>
+    <string name="est_s_a_punto_de_cancelar_tu_pedido___est_s_segur___string">Ests a punto\
+de cancelar\
+tu pedido.\
+Ests segur@?</string>
+    <string name="cancelar_string">CANCELAR</string>
+    <string name="pago_y_gano_ek6_string">PAGO Y GANO</string>
+    <string name="puedes_configurar_has_un_m_ximo_de_3_cuentas_en_tu__wallet__al_a_adir_tu_tarjeta__el_banco_har__simult_neamente_un_cargo_y_una_devoluci_n_de_1__para_validar_la_misma__string">Puedes configurar has un\
+mximo de 3 cuentas en\
+tu \"wallet\"\
+Al aadir tu tarjeta, el banco\
+har simultneamente un\
+cargo y una devolucin de\
+1 para validar la misma.</string>
+    <string name="a_adir_tarjeta_string">Aadir tarjeta</string>
+    <string name="enlace_externo_al_tpv_para_pago_de_1___y_se_guardad_la_tarjeta__string">ENLACE EXTERNO\
+AL TPV PARA\
+PAGO DE 1\
+(Y SE GUARDAD LA TARJETA)</string>
+    <string name="no_tienes_puntos_acumulados_en_estos_momentos_string">No tienes puntos\
+acumulados en estos\
+momentos</string>
+    <string name="aceptar_string">ACEPTAR</string>
+    <string name="texto_explicando_para_qu__usar_los_puntos_string">TEXTO EXPLICANDO\
+PARA QU\
+USAR LOS PUNTOS</string>
+    <string name="total__5_50__ek1_string">Total: 5,50</string>
+    <string name="quiero___nuevo_pedido_ek29_string">QUIERO / NUEVO PEDIDO</string>
+    <string name="tostada_de_pera___entera_ek2_string">Tostada de pera / entera</string>
+    <string name="_2_30__ek3_string">2,30</string>
+    <string name="caf__bomb_n_ek2_string">Caf bombn</string>
+    <string name="_1_30__ek2_string">1,30</string>
+    <string name="botella_agua_50cl_ek2_string">Botella agua 50cl</string>
+    <string name="_0_90__ek3_string">0,90</string>
+    <string name="poleo_menta_ek2_string">Poleo menta</string>
+    <string name="_1_00__ek3_string">1,00</string>
+    <string name="datos_pedido_ek1_string">Datos pedido</string>
+    <string name="pago_realizado_con__xito__en_breve_podr__recoger_su_pedido___gracias__string">Pago realizado\
+con xito. En breve\
+podr recoger su\
+pedido. GRACIAS!</string>
+    <string name="ver_puntos_string">VER PUNTOS</string>
+    <string name="mis_pedidos_ek7_string">MIS PEDIDOS</string>
+    <string name="_12_30_string">12:30</string>
+    <string name="avatar_timestamp___attribution_string">Avatar\
+Timestamp  Attribution</string>
+    <string name="consulta__se_puede_hacer_que_solo_aparezca_un_bot_n_de_carta_seg_n_la_hora__string">consulta.\
+se puede hacer que solo\
+aparezca un botn de carta\
+segn la hora?</string>
+    <string name="___ek30_string">+</string>
+    <string name="___ek31_string">-</string>
+    <string name="_0_90__ek4_string">0,90</string>
+    <string name="text_string">Inbox</string>
+    <string name="text_ek1_string">Outbox</string>
+    <string name="text_ek2_string">Trash</string>
+    <string name="text_ek3_string">Spam</string>
+    <string name="text_ek4_string">Forums</string>
+    <string name="text_ek5_string">Updates</string>
+    <string name="text_ek6_string">Promos</string>
+    <string name="text_ek7_string">Purchases</string>
+    <string name="text_ek8_string">Social</string>
+    <string name="email_ek1_string">Email</string>
+    <string name="whatsapp_image_2019_07_23_at_15_12_24_2_ek1">whatsapp_image_2019_07_23_at_15_12_24_2__ek1</string>
+    <string name="color_mode_inncoffe_ek15">color_mode_inncoffe_ek15</string>
+    <string name="rectangle_ek9">rectangle_ek9</string>
+    <string name="path_ek22">path_ek22</string>
+    <string name="light_background">light_background</string>
+    <string name="path_ek47">path_ek47</string>
+    <string name="path_ek48">path_ek48</string>
+    <string name="path_ek49">path_ek49</string>
+    <string name="ic_more_vert_black">ic_more_vert_black</string>
+    <string name="grupo_279">grupo_279</string>
+    <string name="grupo_276">grupo_276</string>
+    <string name="navbar_icon_back">navbar_icon_back</string>
+    <string name="xmlid_1">xmlid_1_</string>
+    <string name="path_ek50">path_ek50</string>
+    <string name="trazado_78">trazado_78</string>
+    <string name="trazado_79">trazado_79</string>
+    <string name="trazado_80">trazado_80</string>
+    <string name="icon">icon</string>
+    <string name="icon_ek2">icon_ek2</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="openDrawer" />
+    <string name="closeDrawer" />
+    <string name="open_drawer">Drawer Open</string>
+    <string name="close_drawer">Drawer Close</string>
+</resources>

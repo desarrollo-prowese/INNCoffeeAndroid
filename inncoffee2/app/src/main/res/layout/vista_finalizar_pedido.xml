@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/buttonUPuntos"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="28dp"
+            android:text="Utilizar Puntos"
+            app:layout_constraintBottom_toTopOf="@+id/buttonPagar"
+            app:layout_constraintEnd_toEndOf="@+id/buttonPagar"
+            app:layout_constraintStart_toStartOf="@+id/buttonPagar"
+            app:layout_constraintTop_toBottomOf="@+id/listViewPedido" />
+
+        <Button
+            android:id="@+id/buttonPagar"
+            android:layout_width="219dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="16dp"
+            android:text="Pagar"
+            app:layout_constraintBottom_toTopOf="@+id/buttonCPedido"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonUPuntos" />
+
+        <Button
+            android:id="@+id/buttonCPedido"
+            android:layout_width="217dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="47dp"
+            android:text="Cancelar Pedido"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonPagar" />
+
+        <ListView
+            android:id="@+id/listViewPedido"
+            android:layout_width="321dp"
+            android:layout_height="145dp"
+            android:layout_marginBottom="92dp"
+            app:layout_constraintBottom_toTopOf="@+id/buttonUPuntos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+        </ListView>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="41dp"
+            android:layout_marginBottom="20dp"
+            android:text="Datos del Pedido"
+            app:layout_constraintBottom_toTopOf="@+id/listViewPedido"
+            app:layout_constraintEnd_toStartOf="@+id/textView8"
+            app:layout_constraintStart_toStartOf="@+id/listViewPedido"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="46dp"
+            android:layout_marginEnd="53dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView8"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="0dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="182dp"
+            android:layout_marginEnd="34dp"
+            android:text="Total"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
