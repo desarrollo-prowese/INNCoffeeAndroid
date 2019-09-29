@@ -12,7 +12,7 @@
     <string name="confirm_password">confirmar contraseña</string>
     <string name="already_having_account">Tienes ya una cuenta?</string>
     <string name="log_in">Iniciar Sesion</string>
-    <string name="not_having_account">No tienes cuenta?</string>
+    <string name="not_having_account">¿Aún no tienes cuenta?</string>
     <string name="sign_up">Registrarse</string>
     <string name="logout">Cerrar Sesion</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
