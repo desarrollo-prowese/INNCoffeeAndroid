@@ -41,6 +41,7 @@ import java.util.Map;
 
 public class PrincipalActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
+    
     public static final String GOOGLE_ACCOUNT = "google_account";
     public static final int SIGN_IN_CODE = 777;
     private static final String TAG = "SignInActivity";

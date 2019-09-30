@@ -1,4 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <!--
@@ -26,7 +27,6 @@
             android:layout_width="wrap_content"
             android:layout_height="812dp">
 
-
             <ImageView
                 android:id="@+id/light_background"
                 android:layout_width="385dp"
@@ -36,7 +36,6 @@
                 android:layout_marginTop="-942dp"
                 android:contentDescription="light_background"
                 android:src="@drawable/light_background" />
-
 
             <RelativeLayout
                 android:id="@+id/page_carta_comidas_ek14"
@@ -54,7 +53,6 @@
                     android:layout_marginTop="24dp"
                     android:contentDescription="trazado_115_ek22"
                     android:src="@drawable/trazado_115_ek22" />
-
 
                 <RelativeLayout
                     android:id="@+id/componente_16___65"
@@ -75,7 +73,6 @@
 
                 </RelativeLayout>
 
-
                 <RelativeLayout
                     android:id="@+id/componente_16___66"
                     android:layout_width="wrap_content"
@@ -94,7 +91,6 @@
                         android:src="@drawable/trazado_52_ek51" />
 
                 </RelativeLayout>
-
 
                 <RelativeLayout
                     android:id="@+id/componente_16___63"
@@ -115,7 +111,6 @@
 
                 </RelativeLayout>
 
-
                 <RelativeLayout
                     android:id="@+id/componente_16___64"
                     android:layout_width="wrap_content"
@@ -135,7 +130,6 @@
 
                 </RelativeLayout>
 
-
                 <RelativeLayout
                     android:id="@+id/componente_16___30"
                     android:layout_width="wrap_content"
@@ -154,7 +148,6 @@
                         android:src="@drawable/trazado_52_ek54" />
 
                 </RelativeLayout>
-
 
                 <RelativeLayout
                     android:id="@+id/componente_16___62"
@@ -198,7 +191,8 @@
                             android:layout_marginLeft="3dp"
                             android:layout_marginTop="4dp"
                             android:contentDescription="combined_shape_ek59"
-                            android:src="@drawable/combined_shape_ek59" />
+                            android:src="@drawable/combined_shape_ek59"
+                            tools:ignore="HardcodedText,RtlHardcoded" />
 
                         <View
                             android:id="@+id/bound_ek30"
@@ -207,10 +201,10 @@
                             android:layout_marginStart="0dp"
                             android:layout_marginLeft="0dp"
                             android:layout_marginTop="0dp"
-                            android:background="@drawable/bound_ek30_shape" />
+                            android:background="@drawable/bound_ek30_shape"
+                            tools:ignore="RtlHardcoded" />
 
                     </RelativeLayout>
-
 
                     <RelativeLayout
                         android:id="@+id/nav_icon_ek29"
@@ -227,10 +221,10 @@
                             android:layout_marginLeft="0dp"
                             android:layout_marginTop="0dp"
                             android:contentDescription="combined_shape_ek60"
-                            android:src="@drawable/combined_shape_ek60" />
+                            android:src="@drawable/combined_shape_ek60"
+                            tools:ignore="HardcodedText,RtlHardcoded" />
 
                     </RelativeLayout>
-
 
                     <View
                         android:id="@+id/rect_ngulo_1470_ek27"

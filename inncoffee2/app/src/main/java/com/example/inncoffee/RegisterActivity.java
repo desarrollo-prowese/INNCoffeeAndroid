@@ -48,7 +48,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         };
 
-
         etFullName = findViewById(R.id.etFullName);
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);

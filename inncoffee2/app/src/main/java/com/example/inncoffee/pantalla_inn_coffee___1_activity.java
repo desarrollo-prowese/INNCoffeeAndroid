@@ -70,21 +70,7 @@
             super.onCreate(savedInstanceState);
             setContentView(R.layout.pantalla_inn_coffee___1);
 
-
-            _bg__pantalla_inn_coffee___1_ek2 = findViewById(R.id._bg__pantalla_inn_coffee___1_ek2);
-            whatsapp_image_2019_07_23_at_15_12_24_2__ek1 = findViewById(R.id.whatsapp_image_2019_07_23_at_15_12_24_2__ek1);
-            rectangle_ek9 = findViewById(R.id.rectangle_ek9);
             color_mode_inncoffe_ek15 = findViewById(R.id.color_mode_inncoffe_ek15);
-            rectangle_ek10 = findViewById(R.id.rectangle_ek10);
-            path_ek22 = findViewById(R.id.path_ek22);
-            rect_ngulo_1460_ek1 = findViewById(R.id.rect_ngulo_1460_ek1);
-            correo_electr_nico = (EditText) findViewById(R.id.correo_electr_nico);
-            rect_ngulo_1461_ek9 = findViewById(R.id.rect_ngulo_1461_ek9);
-            crear_cuenta = findViewById(R.id.crear_cuenta);
-            rect_ngulo_1478 = findViewById(R.id.rect_ngulo_1478);
-            nombre = (EditText) findViewById(R.id.nombre);
-            rect_ngulo_1479 = findViewById(R.id.rect_ngulo_1479);
-            contrase_a = (EditText) findViewById(R.id.contrase_a);
             rect_ngulo_1480 = findViewById(R.id.rect_ngulo_1480);
             repetir_contrase_a = (EditText) findViewById(R.id.repetir_contrase_a);
 

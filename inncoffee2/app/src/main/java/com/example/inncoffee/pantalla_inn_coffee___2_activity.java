@@ -38,7 +38,6 @@
 
     public class pantalla_inn_coffee___2_activity extends Activity {
 
-
         private View _bg__pantalla_inn_coffee___2_ek2;
         private ImageView whatsapp_image_2019_07_23_at_15_12_24_2__ek2;
         private ImageView rectangle_ek11;
@@ -63,7 +62,6 @@
             super.onCreate(savedInstanceState);
             setContentView(R.layout.pantalla_inn_coffee___2);
 
-
             _bg__pantalla_inn_coffee___2_ek2 = findViewById(R.id._bg__pantalla_inn_coffee___2_ek2);
             whatsapp_image_2019_07_23_at_15_12_24_2__ek2 = findViewById(R.id.whatsapp_image_2019_07_23_at_15_12_24_2__ek2);
             rectangle_ek11 = findViewById(R.id.rectangle_ek11);
@@ -77,7 +75,6 @@
             rect_ngulo_1478_ek1 = findViewById(R.id.rect_ngulo_1478_ek1);
             contrase_a_ek1 = findViewById(R.id.contrase_a_ek1);
             __has_olvidado_tu_contrase_a_ = findViewById(R.id.__has_olvidado_tu_contrase_a_);
-
 
             //custom code goes here
             mAuth = FirebaseAuth.getInstance();

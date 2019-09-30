@@ -16,11 +16,9 @@ public class ObjetosViewHolderPedidos extends RecyclerView.ViewHolder {
 
     public ObjetosViewHolderPedidos(View itemView) {
         super(itemView);
-
         precioPedido = itemView.findViewById(R.id.textViewPrecioPedido);
         fechaPedido = itemView.findViewById(R.id.textViewFecha);
         Nombre = itemView.findViewById(R.id.textViewNombreO);
         Precio = itemView.findViewById(R.id.textViewPrecioO);
-
     }
 }

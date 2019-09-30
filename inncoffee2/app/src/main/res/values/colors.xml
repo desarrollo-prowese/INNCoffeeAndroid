@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<!-- pag_inicial colors -->
+    <!-- pag_inicial colors -->
 
-	<color name="colorPrimary">#008577</color>
-	<color name="colorPrimaryDark">#00574B</color>
-	<color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
 
-	<color name="_bg__pag_inicial_ek2_color">#fffcfc</color>
-	<color name="_bg__menu_parallax_ek2_color">#ffffff</color>
-	<color name="rect_ngulo_2_color">#a48b68</color>
-	<color name="quiero_color">#070707</color>
-	<color name="rect_ngulo_3_color">#040404</color>
-	<color name="bound_color">#d8d8d8</color>
-	<color name="rect_ngulo_4_color">#ac9676</color>
-	<color name="rect_ngulo_5_color">#b8a489</color>
-	<color name="rect_ngulo_9_color">#d5c9b9</color>
-	<color name="rectangle_ek1_color">#000000</color>
-	<color name="rect_ngulo_160_color">#3a5aa5</color>
-	<color name="facebook_ek1_color">#ffffff</color>
-	<color name="google_color">#000000</color>
-	<color name="rectangle_ek2_color">#fafafa</color>
-	<color name="sidenav_left_top_ek1_color">#fefdef</color>
-	<color name="email_color">#fefdef</color>
-	<color name="quiero_ek2_color">#b8a489</color>
-	<color name="rect_ngulo_1482_color">#fefbf2</color>
-	<color name="__20__color">#db9600</color>
-	<color name="rect_ngulo_1461_ek2_color">#6b5d4a</color>
-	<color name="rect_ngulo_1474_color">#e6ca6c</color>
-	<color name="rect_ngulo_1461_ek6_color">#d5d5d5</color>
-	<color name="aceite_de_oliva_color">#6b5d4a</color>
-	<color name="rect_ngulo_1476_color">#db9600</color>
-	<color name="background_color">#00ffffff</color>
-	<color name="footprint_color">#ff00ff</color>
-	<color name="text_color">#4285f4</color>
-	<color name="sidenav_left_top_ek3_color">#616161</color>
+    <color name="_bg__pag_inicial_ek2_color">#fffcfc</color>
+    <color name="_bg__menu_parallax_ek2_color">#ffffff</color>
+    <color name="rect_ngulo_2_color">#a48b68</color>
+    <color name="quiero_color">#070707</color>
+    <color name="rect_ngulo_3_color">#040404</color>
+    <color name="bound_color">#d8d8d8</color>
+    <color name="rect_ngulo_4_color">#ac9676</color>
+    <color name="rect_ngulo_5_color">#b8a489</color>
+    <color name="rect_ngulo_9_color">#d5c9b9</color>
+    <color name="rectangle_ek1_color">#000000</color>
+    <color name="rect_ngulo_160_color">@android:color/transparent</color>
+    <color name="facebook_ek1_color">#ffffff</color>
+    <color name="google_color">#000000</color>
+    <color name="rectangle_ek2_color">#fafafa</color>
+    <color name="sidenav_left_top_ek1_color">#fefdef</color>
+    <color name="email_color">#fefdef</color>
+    <color name="quiero_ek2_color">#b8a489</color>
+    <color name="rect_ngulo_1482_color">#fefbf2</color>
+    <color name="__20__color">#db9600</color>
+    <color name="rect_ngulo_1461_ek2_color">#6b5d4a</color>
+    <color name="rect_ngulo_1474_color">#e6ca6c</color>
+    <color name="rect_ngulo_1461_ek6_color">#d5d5d5</color>
+    <color name="aceite_de_oliva_color">#6b5d4a</color>
+    <color name="rect_ngulo_1476_color">#db9600</color>
+    <color name="background_color">#00ffffff</color>
+    <color name="footprint_color">#ff00ff</color>
+    <color name="text_color">#4285f4</color>
+    <color name="sidenav_left_top_ek3_color">#616161</color>
 </resources>
