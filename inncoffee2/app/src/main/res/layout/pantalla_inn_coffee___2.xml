@@ -8,11 +8,25 @@
         android:id="@+id/content_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         tools:ignore="ScrollViewSize">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/ic_keyboard_backspace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="ContentDescription" />
+
+        </RelativeLayout>
 
         <ImageView
             android:layout_width="297dp"
@@ -37,7 +51,7 @@
                 android:fontFamily="Arial"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="@string/correo_electr_nico_ek1_string"
+                android:hint="@string/correo_electr_nico_ek1_string"
                 android:textColor="@color/facebook_ek1_color"
                 android:textSize="20sp"
                 tools:ignore="Autofill,LabelFor,RtlHardcoded,TextFields" />
@@ -65,7 +79,7 @@
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:gravity="center_horizontal|center_vertical"
                 android:fontFamily="Arial"
-                android:text="@string/contrase_a_ek1_string"
+                android:hint="@string/contrase_a_ek1_string"
                 android:textColor="@color/facebook_ek1_color"
                 android:textSize="20sp"
                 tools:ignore="Autofill,LabelFor,RtlHardcoded,TextFields" />
@@ -82,7 +96,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_horizontal|center_vertical"
             android:gravity="center_horizontal|center_vertical"
             android:layout_margin="20dp"

@@ -1,166 +1,193 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/background_inncoffee">
+    android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/content_container"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@drawable/background_inncoffee"
+        android:layout_height="match_parent"
+        tools:ignore="ContentDescription" />
 
-        <RelativeLayout
-            android:id="@+id/color_mode_inncoffe_ek14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="59dp"
-            android:layout_marginBottom="50dp"
-            android:layout_marginTop="58dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
 
-            <ImageView
-                android:id="@+id/color_mode_inncoffe_ek15"
-                android:layout_width="297dp"
-                android:layout_height="297dp"
-                android:src="@drawable/inncoffeelogo"
-                tools:ignore="ContentDescription,HardcodedText,RtlHardcoded" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/content_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:ignore="UselessLeaf">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_marginEnd="60dp"
-                android:fontFamily="Arial"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="Nombre"
-                android:textColor="@color/facebook_ek1_color"
-                android:textSize="21sp"
-                tools:ignore="Autofill,HardcodedText,LabelFor,RtlHardcoded,TextFields" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginEnd="60dp"
-                android:background="@drawable/edit_text_shape"
-                tools:ignore="RtlHardcoded" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="UselessLeaf">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_marginEnd="60dp"
-                android:fontFamily="Arial"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="Correo electrónico"
-                android:textColor="@color/facebook_ek1_color"
-                android:textSize="21sp"
-                tools:ignore="Autofill,HardcodedText,LabelFor,RtlHardcoded,TextFields" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginEnd="60dp"
-                android:background="@drawable/edit_text_shape"
-                tools:ignore="RtlHardcoded" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="UselessLeaf">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_marginEnd="60dp"
-                android:fontFamily="Arial"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="Contraseña"
-                android:textColor="@color/facebook_ek1_color"
-                android:textSize="21sp"
-                tools:ignore="Autofill,HardcodedText,LabelFor,RtlHardcoded,TextFields" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginEnd="60dp"
-                android:background="@drawable/edit_text_shape"
-                tools:ignore="RtlHardcoded" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:ignore="UselessLeaf">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
-                android:layout_marginEnd="60dp"
-                android:fontFamily="Arial"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="@string/repetir_contrase_a_string"
-                android:textColor="@color/facebook_ek1_color"
-                android:textSize="21sp"
-                tools:ignore="Autofill,LabelFor,RtlHardcoded,TextFields" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="42dp"
-                android:layout_marginStart="60dp"
-                android:layout_marginEnd="60dp"
-                android:background="@drawable/edit_text_shape"
-                tools:ignore="RtlHardcoded" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_marginStart="75dp"
-            android:layout_marginEnd="75dp"
-            android:layout_height="50dp"
             android:layout_marginTop="20dp"
-            tools:ignore="UselessLeaf">
+            android:orientation="vertical">
 
-            <View
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:src="@drawable/ic_keyboard_backspace"
+                    tools:ignore="ContentDescription" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/color_mode_inncoffe_ek14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="59dp"
+                android:layout_marginBottom="50dp">
+
+                <ImageView
+                    android:id="@+id/color_mode_inncoffe_ek15"
+                    android:layout_width="297dp"
+                    android:layout_height="297dp"
+                    android:src="@drawable/inncoffeelogo"
+                    tools:ignore="ContentDescription,HardcodedText,RtlHardcoded" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="UselessLeaf">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginEnd="60dp"
+                    android:fontFamily="Arial"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:hint="Nombre"
+                    android:textColor="@color/facebook_ek1_color"
+                    android:textSize="21sp"
+                    tools:ignore="Autofill,HardcodedText,LabelFor,RtlHardcoded,TextFields" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginEnd="60dp"
+                    android:background="@drawable/edit_text_shape"
+                    tools:ignore="RtlHardcoded" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="UselessLeaf">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginEnd="60dp"
+                    android:fontFamily="Arial"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:hint="Correo electrónico"
+                    android:textColor="@color/facebook_ek1_color"
+                    android:textSize="21sp"
+                    tools:ignore="Autofill,HardcodedText,LabelFor,RtlHardcoded,TextFields" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginEnd="60dp"
+                    android:background="@drawable/edit_text_shape"
+                    tools:ignore="RtlHardcoded" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="UselessLeaf">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginEnd="60dp"
+                    android:fontFamily="Arial"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:hint="Contraseña"
+                    android:textColor="@color/facebook_ek1_color"
+                    android:textSize="21sp"
+                    tools:ignore="Autofill,HardcodedText,LabelFor,RtlHardcoded,TextFields" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginEnd="60dp"
+                    android:background="@drawable/edit_text_shape"
+                    tools:ignore="RtlHardcoded" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="UselessLeaf">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginEnd="60dp"
+                    android:fontFamily="Arial"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:hint="@string/repetir_contrase_a_string"
+                    android:textColor="@color/facebook_ek1_color"
+                    android:textSize="21sp"
+                    tools:ignore="Autofill,LabelFor,RtlHardcoded,TextFields" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginEnd="60dp"
+                    android:background="@drawable/edit_text_shape"
+                    tools:ignore="RtlHardcoded" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/login_button_shape"
-                tools:ignore="RtlHardcoded" />
+                android:layout_marginStart="75dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="75dp"
+                tools:ignore="UselessLeaf">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:fontFamily="Arial"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="Crear cuenta"
-                android:textColor="@color/facebook_ek1_color"
-                android:textSize="25sp"
-                tools:ignore="Autofill,HardcodedText,LabelFor,RtlHardcoded,TextFields" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:fontFamily="Arial"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:text="Crear cuenta"
+                    android:textColor="@color/facebook_ek1_color"
+                    android:textSize="25sp"
+                    tools:ignore="Autofill,HardcodedText,LabelFor,RtlHardcoded,TextFields" />
 
-        </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/login_button_shape"
+                    tools:ignore="RtlHardcoded" />
 
-    </LinearLayout>
+            </RelativeLayout>
 
-</ScrollView>
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

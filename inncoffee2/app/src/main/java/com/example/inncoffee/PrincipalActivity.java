@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,7 +41,7 @@ import java.util.Map;
 
 public class PrincipalActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
-    
+
     public static final String GOOGLE_ACCOUNT = "google_account";
     public static final int SIGN_IN_CODE = 777;
     private static final String TAG = "SignInActivity";
@@ -62,8 +62,8 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        Button register = findViewById(R.id.btnLoginRegister);
-        Button login = findViewById(R.id.btnLogin);
+        RelativeLayout register = findViewById(R.id.btnLoginRegister);
+        RelativeLayout login = findViewById(R.id.btnLogin);
 
 
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -117,10 +117,10 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
                 finish();
             }
         });
-        SignInButton mGoogleSignInButton = findViewById(R.id.sign_in_button);
+        // SignInButton mGoogleSignInButton = findViewById(R.id.sign_in_button);
 
         // Set click listeners
-        mGoogleSignInButton.setOnClickListener(this);
+        // mGoogleSignInButton.setOnClickListener(this);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))

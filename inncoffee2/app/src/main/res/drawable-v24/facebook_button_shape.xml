@@ -6,9 +6,9 @@
         android:bottomRightRadius="0dp"
         android:radius="5dp"
         android:topRightRadius="0dp" />
-    <solid android:color="#3b5998" />
+    <solid android:color="#3F4EB3" />
     <stroke
         android:width="3dp"
-        android:color="#3b5998" />
+        android:color="#3F4EB3" />
 </shape>
 
