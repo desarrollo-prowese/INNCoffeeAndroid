@@ -36,12 +36,6 @@
         android:layout_gravity="center_vertical|center_horizontal"
         android:gravity="center_horizontal|center_vertical">
 
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/login_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal" />
-
         <View
             android:id="@+id/facebook_button"
             android:layout_width="match_parent"
@@ -65,6 +59,15 @@
             android:textSize="30sp"
             android:textColor="@android:color/white"
             tools:ignore="HardcodedText" />
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="match_parent"
+            android:visibility="invisible"
+            android:layout_alignTop="@+id/facebook_button"
+            android:layout_alignBottom="@id/facebook_button"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal" />
 
     </RelativeLayout>
 

@@ -22,7 +22,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -149,6 +148,17 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         };
     }
 
+    public void initializeUi() {
+
+    }
+
+    public void initializeObjects() {
+
+    }
+
+    public void initializeListeners() {
+
+    }
 
     @Override
     public void onStart() {

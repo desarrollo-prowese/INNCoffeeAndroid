@@ -114,6 +114,18 @@ public class LoginAct extends AppCompatActivity implements GoogleApiClient.OnCon
         };
     }
 
+    public void initializeUi() {
+
+    }
+
+    public void initializeObjects() {
+
+    }
+
+    public void initializeListeners() {
+
+    }
+
     @Override
     public void onStart() {
         super.onStart();

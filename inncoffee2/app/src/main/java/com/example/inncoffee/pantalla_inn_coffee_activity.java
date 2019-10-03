@@ -171,6 +171,18 @@ public class pantalla_inn_coffee_activity extends AppCompatActivity implements G
 
     }
 
+    public void initializeUi() {
+
+    }
+
+    public void initializeObjects() {
+
+    }
+
+    public void initializeListeners() {
+
+    }
+
     @Override
     public void onStart() {
         super.onStart();

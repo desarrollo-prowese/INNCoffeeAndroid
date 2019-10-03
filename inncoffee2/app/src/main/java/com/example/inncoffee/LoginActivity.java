@@ -68,6 +68,18 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void initializeUi() {
+
+    }
+
+    public void initializeObjects() {
+
+    }
+
+    public void initializeListeners() {
+
+    }
 }
 
 

@@ -101,6 +101,19 @@ public class menu_lateral_activity extends Activity {
         //custom code goes here
 
     }
+
+    public void initializeUi() {
+
+    }
+
+    public void initializeObjects() {
+
+    }
+
+    public void initializeListeners() {
+
+    }
+
 }
 	
 	

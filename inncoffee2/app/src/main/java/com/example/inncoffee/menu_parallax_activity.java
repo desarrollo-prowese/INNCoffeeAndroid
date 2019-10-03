@@ -84,6 +84,19 @@ public class menu_parallax_activity extends AppCompatActivity {
         //setSupportActionBar(myToolbar);
 
     }
+
+    public void initializeUi() {
+
+    }
+
+    public void initializeObjects() {
+
+    }
+
+    public void initializeListeners() {
+
+    }
+
 }
 	
 	

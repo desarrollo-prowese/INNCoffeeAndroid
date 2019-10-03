@@ -1,40 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal|center_vertical"
+    android:gravity="center_vertical|center_horizontal"
+    android:background="@drawable/background_inncoffee"
     android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ImageView
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:id="@+id/imageView6"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        app:srcCompat="@drawable/inncoffeelogo"
+        tools:ignore="ContentDescription" />
+
+    <RelativeLayout
+        android:id="@+id/buttonNuevoPedido"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="50dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="70dp"
+        tools:ignore="UselessLeaf">
 
-        <Button
-            android:id="@+id/buttonNuevoPedido"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="23dp"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/login_button_shape"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fontFamily="Arial"
+            android:gravity="center_vertical|center_horizontal"
             android:text="@string/nuevo_pedido_string"
-            app:layout_constraintStart_toStartOf="@+id/imageView6"
-            app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+            android:textColor="@color/facebook_ek1_color"
+            android:textSize="25sp"
+            tools:ignore="Autofill,HardcodedText,LabelFor,RtlHardcoded,TextFields" />
 
-        <Button
-            android:id="@+id/buttonMisPedidos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
-            android:text="@string/mis_pedidos_ek5_string"
-            app:layout_constraintStart_toStartOf="@+id/buttonNuevoPedido"
-            app:layout_constraintTop_toBottomOf="@+id/buttonNuevoPedido" />
+    </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/imageView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="144dp"
-            android:layout_marginTop="125dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/color_mode_inncoffe_ek1" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/buttonMisPedidos"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="70dp"
+        tools:ignore="UselessLeaf">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/login_button_shape"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fontFamily="Arial"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Mis Pedidos"
+            android:textColor="@color/facebook_ek1_color"
+            android:textSize="25sp"
+            tools:ignore="Autofill,HardcodedText,LabelFor,RtlHardcoded,TextFields" />
+
+    </RelativeLayout>
+
 </LinearLayout>

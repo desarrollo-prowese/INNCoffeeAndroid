@@ -31,6 +31,19 @@ public class pag_inicial_activity extends Activity {
         //custom code goes here
 
     }
+
+    public void initializeUi() {
+
+    }
+
+    public void initializeObjects() {
+
+    }
+
+    public void initializeListeners() {
+
+    }
+
 }
 	
 	

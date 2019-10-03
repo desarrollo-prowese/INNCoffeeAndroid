@@ -46,4 +46,16 @@ public class MainActivity extends AppCompatActivity {
                 });
 
     }
+
+    public void initializeUi() {
+
+    }
+
+    public void initializeObjects() {
+
+    }
+
+    public void initializeListeners() {
+
+    }
 }

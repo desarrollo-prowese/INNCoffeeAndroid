@@ -7,7 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class pantalla_inn_coffee___1_activity extends Activity {
 
@@ -29,36 +30,25 @@ public class pantalla_inn_coffee___1_activity extends Activity {
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private EditText etFullName, etUsername, etPassword, etConfirmPassword, etTelefono, etCentro;
 
-    private View _bg__pantalla_inn_coffee___1_ek2;
-    private ImageView whatsapp_image_2019_07_23_at_15_12_24_2__ek1;
-    private ImageView rectangle_ek9;
-    private ImageView color_mode_inncoffe_ek15;
-    private View rectangle_ek10;
-    private ImageView path_ek22;
-    private View rect_ngulo_1460_ek1;
-    private TextView correo_electr_nico;
-    private View rect_ngulo_1461_ek9;
-    private TextView crear_cuenta;
-    private View rect_ngulo_1478;
-    private TextView nombre;
-    private View rect_ngulo_1479;
-    private TextView contrase_a;
-    private View rect_ngulo_1480;
-    private TextView repetir_contrase_a;
-    private TextView label;
+    private EditText emailEditText;
+    private EditText passwordConfirmationEditText;
+    private EditText passwordEditText;
+    private EditText nameEditText;
+    private RelativeLayout createAccountRelativeLayout;
+    private RelativeLayout back;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.pantalla_inn_coffee___1);
-
-        color_mode_inncoffe_ek15 = findViewById(R.id.color_mode_inncoffe_ek15);
-        rect_ngulo_1480 = findViewById(R.id.rect_ngulo_1480);
-        // repetir_contrase_a = (EditText) findViewById(R.id.repetir_contrase_a);
-
         mAuth = FirebaseAuth.getInstance();
-        label = findViewById(R.id.txViewNombre);
+        createAccountRelativeLayout = findViewById(R.id.create_account);
+        nameEditText = findViewById(R.id.name_edit_text);
+        passwordConfirmationEditText = findViewById(R.id.password_confirmation_edit_text);
+        passwordEditText = findViewById(R.id.password_edit_text);
+        emailEditText = findViewById(R.id.email_edit_text);
+        back = findViewById(R.id.back);
 
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -69,29 +59,32 @@ public class pantalla_inn_coffee___1_activity extends Activity {
                     startActivity(intent);
                     finish();
                 }
-                return;
             }
         };
 
-        /*
-        rect_ngulo_1461_ek9.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(pantalla_inn_coffee___1_activity.this, PrincipalActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
-                String email = correo_electr_nico.getText().toString();
-                String password = contrase_a.getText().toString();
+        createAccountRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = emailEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(pantalla_inn_coffee___1_activity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (!task.isSuccessful()) {
                             Toast.makeText(pantalla_inn_coffee___1_activity.this, "sign up error", Toast.LENGTH_SHORT).show();
                         } else {
-                            String user_id = mAuth.getCurrentUser().getUid();
+                            String user_id = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
                             DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
-
-                            String FullName = nombre.getText().toString();
-                            //String Telefono = etTelefono.getText().toString();
-                            //String Center = etCentro.getText().toString();
+                            String FullName = nameEditText.getText().toString();
                             String Alergias = "nu";
                             Object obj = new Object();
                             obj = Alergias;
@@ -103,33 +96,40 @@ public class pantalla_inn_coffee___1_activity extends Activity {
                             Toast.makeText(pantalla_inn_coffee___1_activity.this, "Registro completado", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(pantalla_inn_coffee___1_activity.this, pantalla_inn_coffee___3_activity.class);
                             startActivity(intent);
-
                             finish();
                         }
                     }
                 });
             }
         });
-        */
-        //custom code goes here
+    }
+
+    public void initializeUi() {
+
+    }
+
+    public void initializeObjects() {
+
+    }
+
+    public void initializeListeners() {
 
     }
 
     public void sendEmailVerification() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser user = auth.getCurrentUser();
-
-
-        user.sendEmailVerification()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Log.d("TAG", "Email sent.");
+        if (user != null) {
+            user.sendEmailVerification()
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.d("TAG", "Email sent.");
+                            }
                         }
-                    }
-                });
-
+                    });
+        }
     }
 }
 	

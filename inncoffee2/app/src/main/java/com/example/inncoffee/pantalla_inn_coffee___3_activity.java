@@ -40,6 +40,18 @@ public class pantalla_inn_coffee___3_activity extends Activity {
             }
         });
     }
+
+    public void initializeUi() {
+
+    }
+
+    public void initializeObjects() {
+
+    }
+
+    public void initializeListeners() {
+
+    }
 }
 	
 	

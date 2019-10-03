@@ -59,6 +59,18 @@ public class Main2Activity extends AppCompatActivity
 
     }
 
+    public void initializeUi() {
+
+    }
+
+    public void initializeObjects() {
+
+    }
+
+    public void initializeListeners() {
+
+    }
+
     @Override
     public void onBackPressed() {
         drawer = findViewById(R.id.drawer_layout);
