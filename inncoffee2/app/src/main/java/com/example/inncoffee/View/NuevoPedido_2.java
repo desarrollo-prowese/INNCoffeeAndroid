@@ -17,7 +17,6 @@ public class NuevoPedido_2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.nuevo_pedido_2);
 
         cartaComida = findViewById(R.id.buttonCartaComida);

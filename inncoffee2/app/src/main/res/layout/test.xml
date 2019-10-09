@@ -33,6 +33,7 @@
                 android:layout_marginStart="103dp"
                 android:layout_marginLeft="103dp"
                 android:layout_marginTop="24dp"
+                android:contentDescription="trazado_115_ek9"
                 android:src="@drawable/trazado_115_ek9" />
 
 
@@ -50,6 +51,7 @@
                     android:layout_marginStart="-7dp"
                     android:layout_marginLeft="-7dp"
                     android:layout_marginTop="141dp"
+                    android:contentDescription="l_nea_1_ek2"
                     android:src="@drawable/l_nea_1_ek2" />
 
                 <ImageView
@@ -59,6 +61,7 @@
                     android:layout_marginStart="-7dp"
                     android:layout_marginLeft="-7dp"
                     android:layout_marginTop="220dp"
+                    android:contentDescription="l_nea_2_ek2"
                     android:src="@drawable/l_nea_2_ek2" />
 
                 <ImageView
@@ -68,6 +71,7 @@
                     android:layout_marginStart="-7dp"
                     android:layout_marginLeft="-7dp"
                     android:layout_marginTop="300dp"
+                    android:contentDescription="l_nea_3_ek2"
                     android:src="@drawable/l_nea_3_ek2" />
 
                 <ImageView
@@ -77,6 +81,7 @@
                     android:layout_marginStart="-7dp"
                     android:layout_marginLeft="-7dp"
                     android:layout_marginTop="379dp"
+                    android:contentDescription="l_nea_4_ek2"
                     android:src="@drawable/l_nea_4_ek2" />
 
                 <ImageView
@@ -86,6 +91,7 @@
                     android:layout_marginStart="-7dp"
                     android:layout_marginLeft="-7dp"
                     android:layout_marginTop="459dp"
+                    android:contentDescription="l_nea_5_ek2"
                     android:src="@drawable/l_nea_5_ek2" />
 
                 <ImageView
@@ -95,6 +101,7 @@
                     android:layout_marginStart="-7dp"
                     android:layout_marginLeft="-7dp"
                     android:layout_marginTop="538dp"
+                    android:contentDescription="l_nea_6_ek2"
                     android:src="@drawable/l_nea_6_ek2" />
 
                 <ImageView
@@ -104,6 +111,7 @@
                     android:layout_marginStart="-7dp"
                     android:layout_marginLeft="-7dp"
                     android:layout_marginTop="620dp"
+                    android:contentDescription="l_nea_7_ek2"
                     android:src="@drawable/l_nea_7_ek2" />
 
                 <ImageView
@@ -113,6 +121,7 @@
                     android:layout_marginStart="-7dp"
                     android:layout_marginLeft="-7dp"
                     android:layout_marginTop="699dp"
+                    android:contentDescription="l_nea_8_ek2"
                     android:src="@drawable/l_nea_8_ek2" />
 
                 <ImageView
@@ -122,6 +131,7 @@
                     android:layout_marginStart="-7dp"
                     android:layout_marginLeft="-7dp"
                     android:layout_marginTop="776dp"
+                    android:contentDescription="l_nea_9_ek2"
                     android:src="@drawable/l_nea_9_ek2" />
 
                 <ImageView
@@ -131,6 +141,7 @@
                     android:layout_marginStart="-7dp"
                     android:layout_marginLeft="-7dp"
                     android:layout_marginTop="855dp"
+                    android:contentDescription="l_nea_10_ek2"
                     android:src="@drawable/l_nea_10_ek2" />
 
                 <ImageView
@@ -140,9 +151,11 @@
                     android:layout_marginStart="-7dp"
                     android:layout_marginLeft="-7dp"
                     android:layout_marginTop="-13dp"
+                    android:contentDescription="l_nea_11_ek2"
                     android:src="@drawable/l_nea_11_ek2" />
 
             </RelativeLayout>
+
 
             <RelativeLayout
                 android:id="@+id/componente_16___38_ek1"
@@ -158,9 +171,11 @@
                     android:layout_marginStart="0dp"
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="0dp"
+                    android:contentDescription="trazado_52_ek21"
                     android:src="@drawable/trazado_52_ek21" />
 
             </RelativeLayout>
+
 
             <RelativeLayout
                 android:id="@+id/grupo_298_ek13"
@@ -183,6 +198,7 @@
                         android:layout_marginStart="3dp"
                         android:layout_marginLeft="3dp"
                         android:layout_marginTop="4dp"
+                        android:contentDescription="combined_shape_ek31"
                         android:src="@drawable/combined_shape_ek31" />
 
                     <View
@@ -195,6 +211,7 @@
                         android:background="@drawable/bound_ek16_shape" />
 
                 </RelativeLayout>
+
 
                 <RelativeLayout
                     android:id="@+id/nav_icon_ek15"
@@ -210,9 +227,11 @@
                         android:layout_marginStart="0dp"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="0dp"
+                        android:contentDescription="combined_shape_ek32"
                         android:src="@drawable/combined_shape_ek32" />
 
                 </RelativeLayout>
+
 
                 <View
                     android:id="@+id/rect_ngulo_1470_ek13"
@@ -239,6 +258,7 @@
                     android:layout_marginStart="0dp"
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="0dp"
+                    android:contentDescription="path_ek18"
                     android:src="@drawable/path_ek18" />
 
                 <ImageView
@@ -248,6 +268,7 @@
                     android:layout_marginStart="3dp"
                     android:layout_marginLeft="3dp"
                     android:layout_marginTop="3dp"
+                    android:contentDescription="ic_message_ek14"
                     android:src="@drawable/ic_message_ek14" />
 
             </RelativeLayout>
@@ -266,9 +287,11 @@
                     android:layout_marginStart="0dp"
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="0dp"
+                    android:contentDescription="trazado_52_ek22"
                     android:src="@drawable/trazado_52_ek22" />
 
             </RelativeLayout>
+
 
             <RelativeLayout
                 android:id="@+id/componente_16___49"
@@ -284,6 +307,7 @@
                     android:layout_marginStart="0dp"
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="0dp"
+                    android:contentDescription="trazado_52_ek23"
                     android:src="@drawable/trazado_52_ek23" />
 
             </RelativeLayout>
@@ -298,6 +322,7 @@
                 android:text="@string/quiero___nuevo_pedido_ek9_string"
                 android:textColor="@color/quiero_ek2_color"
                 android:textSize="12sp" />
+
 
             <TextView
                 android:id="@+id/tostadas_cl_sicas"
@@ -365,6 +390,7 @@
                 android:layout_marginStart="-6dp"
                 android:layout_marginLeft="-6dp"
                 android:layout_marginTop="-6dp"
+                android:contentDescription="path_ek47"
                 android:src="@drawable/path_ek47" />
 
             <ImageView
@@ -374,6 +400,7 @@
                 android:layout_marginStart="-3dp"
                 android:layout_marginLeft="-3dp"
                 android:layout_marginTop="-2dp"
+                android:contentDescription="path_ek48"
                 android:src="@drawable/path_ek48" />
 
             <ImageView
@@ -383,6 +410,7 @@
                 android:layout_marginStart="362dp"
                 android:layout_marginLeft="362dp"
                 android:layout_marginTop="28dp"
+                android:contentDescription="path_ek49"
                 android:src="@drawable/path_ek49" />
 
             <ImageView
@@ -392,9 +420,11 @@
                 android:layout_marginStart="364dp"
                 android:layout_marginLeft="364dp"
                 android:layout_marginTop="31dp"
+                android:contentDescription="ic_more_vert_black"
                 android:src="@drawable/ic_more_vert_black" />
 
         </RelativeLayout>
+
 
         <RelativeLayout
             android:id="@+id/navbar"
@@ -402,6 +432,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="-9625dp"
             android:layout_marginTop="-356.79998779297dp">
+
 
             <RelativeLayout
                 android:id="@+id/navbar_tablet"
@@ -417,7 +448,9 @@
                     android:layout_marginStart="122dp"
                     android:layout_marginLeft="122dp"
                     android:layout_marginTop="9dp"
+                    android:contentDescription="navbar_icon_back"
                     android:src="@drawable/navbar_icon_back" />
+
 
                 <RelativeLayout
                     android:id="@+id/navbar_x5f_mobile_copy_ek1"
@@ -433,6 +466,7 @@
                         android:layout_marginStart="0dp"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="0dp"
+                        android:contentDescription="grupo_276"
                         android:src="@drawable/grupo_276" />
 
                 </RelativeLayout>
@@ -451,9 +485,11 @@
                         android:layout_marginStart="0dp"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="0dp"
+                        android:contentDescription="grupo_279"
                         android:src="@drawable/grupo_279" />
 
                 </RelativeLayout>
+
 
                 <RelativeLayout
                     android:id="@+id/navbar_x5f_mobile_copy_ek2"
@@ -469,6 +505,7 @@
                         android:layout_marginStart="0dp"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="0dp"
+                        android:contentDescription="xmlid_1_"
                         android:src="@drawable/xmlid_1_" />
 
                 </RelativeLayout>
@@ -483,6 +520,7 @@
                     android:alpha="0"
                     android:background="@drawable/navbar_icon_home_shape" />
 
+
                 <View
                     android:id="@+id/rectangle_ek20"
                     android:layout_width="385dp"
@@ -495,6 +533,7 @@
             </RelativeLayout>
 
         </RelativeLayout>
+
 
         <RelativeLayout
             android:id="@+id/sysbar"
@@ -512,6 +551,7 @@
                 android:layout_marginTop="0dp"
                 android:contentDescription="path_ek50"
                 android:src="@drawable/path_ek50" />
+
 
             <RelativeLayout
                 android:id="@+id/sysbar_light"
@@ -549,12 +589,14 @@
 
                 </RelativeLayout>
 
+
                 <RelativeLayout
                     android:id="@+id/sysbar_wifi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="3dp">
+
 
                     <RelativeLayout
                         android:id="@+id/grupo_285"
@@ -570,6 +612,7 @@
                             android:layout_marginStart="0dp"
                             android:layout_marginLeft="0dp"
                             android:layout_marginTop="0dp"
+                            android:contentDescription="trazado_78"
                             android:src="@drawable/trazado_78" />
 
                     </RelativeLayout>
@@ -586,6 +629,7 @@
 
                 </RelativeLayout>
 
+
                 <RelativeLayout
                     android:id="@+id/sysbar_status"
                     android:layout_width="wrap_content"
@@ -600,6 +644,7 @@
                         android:layout_marginStart="1dp"
                         android:layout_marginLeft="1dp"
                         android:layout_marginTop="1dp"
+                        android:contentDescription="trazado_79"
                         android:src="@drawable/trazado_79" />
 
                     <View
@@ -613,6 +658,7 @@
                         android:background="@drawable/rect_ngulo_158_shape" />
 
                 </RelativeLayout>
+
 
                 <RelativeLayout
                     android:id="@+id/sysbar_battery"
@@ -628,6 +674,7 @@
                         android:layout_marginStart="3dp"
                         android:layout_marginLeft="3dp"
                         android:layout_marginTop="1dp"
+                        android:contentDescription="trazado_80"
                         android:src="@drawable/trazado_80" />
 
                     <View
@@ -641,6 +688,7 @@
                         android:background="@drawable/rect_ngulo_159_shape" />
 
                 </RelativeLayout>
+
 
                 <View
                     android:id="@+id/sysbar_ek1"
@@ -670,6 +718,7 @@
                 android:layout_marginStart="0dp"
                 android:layout_marginLeft="0dp"
                 android:layout_marginTop="0dp"
+                android:contentDescription="trazado_52_ek68"
                 android:src="@drawable/trazado_52_ek68" />
 
         </RelativeLayout>

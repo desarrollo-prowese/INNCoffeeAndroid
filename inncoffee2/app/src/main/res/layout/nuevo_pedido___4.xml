@@ -1,25 +1,7 @@
-<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:id="@+id/nuevo_pedido___4"
     android:layout_height="wrap_content">
-    <!--
-    /*
-     *	This content is generated from the API File Info.
-     *	(Alt+Shift+Ctrl+I).
-     *
-     *	@desc
-     *	@file 		pag_inicial
-     *	@date 		0
-     *	@title 		PAG INICIAL
-     *	@author
-     *	@keywords
-     *	@generator 	Export Kit v1.2.8.xd
-     *
-     */
-    -->
-    <ScrollView
-        android:id="@+id/nuevo_pedido___4"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
 
         <RelativeLayout
             android:id="@+id/content_container"
@@ -254,15 +236,6 @@
                     android:text="@string/x_string"
                     android:textColor="@color/google_color"
                     android:textSize="45sp" />
-
-                <View
-                    android:id="@+id/_bg__nuevo_pedido___4_ek2"
-                    android:layout_width="375dp"
-                    android:layout_height="812dp"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="0dp"
-                    android:background="@drawable/_bg__nuevo_pedido___4_ek2_shape" />
 
                 <View
                     android:id="@+id/rect_ngulo_1461_ek5"
@@ -1394,4 +1367,3 @@
         </RelativeLayout>
 
     </ScrollView>
-</HorizontalScrollView>
