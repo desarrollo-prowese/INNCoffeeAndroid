@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/principalactivitybackground"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingLeft="50dp"
+    android:paddingRight="50dp"
+    android:paddingBottom="50dp"
+    tools:context="com.example.inncoffee.Registrotest">
+
+    <ImageView
+        android:id="@+id/imageViewTe"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/inncoffeelogo"
+        tools:ignore="ContentDescription" />
+
+
+    <EditText
+        android:id="@+id/etFullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/menu_registronew"
+        android:hint="@string/full_name"
+        android:textColorHint="#FFFFFF"
+        android:textAlignment="center"
+        android:inputType="textPersonName"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/menu_registronew"
+        android:hint="@string/email"
+        android:textAlignment="center"
+        android:textColorHint="#FFFFFF"
+        android:inputType="textPersonName"
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/menu_registronew"
+        android:hint="@string/password"
+        android:textColorHint="#FFFFFF"
+        android:textAlignment="center"
+        android:inputType="textPassword"
+        android:padding="10dp" />
+
+    <EditText
+
+        android:id="@+id/etConfirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/menu_registronew"
+        android:hint="@string/confirm_password"
+        android:textColorHint="#FFFFFF"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:background="#000000"
+        android:padding="5dp"
+        android:text="@string/register"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

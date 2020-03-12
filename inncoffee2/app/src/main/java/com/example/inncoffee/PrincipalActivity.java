@@ -103,7 +103,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(com.example.inncoffee.PrincipalActivity.this, pantalla_inn_coffee___1_activity.class);
+                Intent i = new Intent(com.example.inncoffee.PrincipalActivity.this, Registrotest.class);
                 startActivity(i);
                 finish();
             }

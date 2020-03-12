@@ -21,7 +21,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <include
-        layout="@layout/layout_principal"
+        layout="@layout/menu_parallax"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

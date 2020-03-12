@@ -201,6 +201,7 @@
         <activity android:name=".pantalla_inn_coffee___1_activity" />
         <activity android:name=".pantalla_inn_coffee___2_activity" />
         <activity android:name=".pantalla_inn_coffee___3_activity" />
+        <activity android:name=".Registrotest" />
     </application>
 
 </manifest>

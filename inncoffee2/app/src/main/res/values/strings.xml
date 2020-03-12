@@ -5,7 +5,7 @@
     <string name="fb_login_protocol_scheme">fb2318764478221653</string>
     <string name="password">contraseña</string>
     <string name="sign_in">Iniciar Sesion</string>
-    <string name="register">Registrarse con correo</string>
+    <string name="register">Crear Cuenta</string>
     <string name="full_name">Nombre completo</string>
     <string name="center">Centro INN Office</string>
     <string name="phone">Teléfono</string>
