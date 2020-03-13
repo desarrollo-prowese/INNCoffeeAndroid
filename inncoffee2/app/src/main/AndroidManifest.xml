@@ -153,7 +153,10 @@
             android:name=".View.Home"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-
+        <activity
+            android:name=".Registrotest"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -201,7 +204,6 @@
         <activity android:name=".pantalla_inn_coffee___1_activity" />
         <activity android:name=".pantalla_inn_coffee___2_activity" />
         <activity android:name=".pantalla_inn_coffee___3_activity" />
-        <activity android:name=".Registrotest" />
     </application>
 
 </manifest>

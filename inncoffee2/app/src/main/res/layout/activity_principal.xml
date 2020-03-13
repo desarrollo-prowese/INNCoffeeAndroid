@@ -30,23 +30,25 @@
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
-        android:layout_width="206dp"
-        android:layout_height="wrap_content"
+        android:layout_width="288dp"
+        android:layout_height="56dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp" />
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="35dp" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
-        android:layout_width="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
 
     <Button
         android:id="@+id/btnLoginRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="#aaa"
+        android:background="@drawable/menu_registronew"
         android:text="@string/register"
         android:textColor="@android:color/white" />
 
@@ -55,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="#f05924"
+        android:background="#000000"
         android:text="@string/sign_in"
         android:textColor="@android:color/white" />
 

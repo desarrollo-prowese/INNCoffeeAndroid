@@ -3,13 +3,13 @@
     <string name="email">Correo Electronico</string>
     <string name="facebook_app_id">2318764478221653</string>
     <string name="fb_login_protocol_scheme">fb2318764478221653</string>
-    <string name="password">contraseña</string>
+    <string name="password">Contraseña</string>
     <string name="sign_in">Iniciar Sesion</string>
-    <string name="register">Crear Cuenta</string>
+    <string name="register">Registrarse Por Correo</string>
     <string name="full_name">Nombre completo</string>
     <string name="center">Centro INN Office</string>
     <string name="phone">Teléfono</string>
-    <string name="confirm_password">confirmar contraseña</string>
+    <string name="confirm_password">Confirmar Contraseña</string>
     <string name="already_having_account">Tienes ya una cuenta?</string>
     <string name="log_in">Iniciar Sesion</string>
     <string name="not_having_account">¿Aún no tienes cuenta?</string>

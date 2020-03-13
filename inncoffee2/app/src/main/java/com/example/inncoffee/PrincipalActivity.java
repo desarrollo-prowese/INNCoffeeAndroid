@@ -152,11 +152,8 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-      /*  FirebaseUser currentUser = mAuth.getCurrentUser();
-        mAuth.addAuthStateListener(firebaseAuthListener);
-        GoogleSignIn.getLastSignedInAccount(this);*/
         mAuth.addAuthStateListener(mAuthListener);
+        mAuth.addAuthStateListener(firebaseAuthListener);
 
 
     }
@@ -164,7 +161,13 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
     @Override
     protected void onStop() {
         super.onStop();
+        if (firebaseAuthListener != null) {
+            mAuth.signOut();
+            mAuth.removeAuthStateListener(firebaseAuthListener);
+        }
+
         if (mAuthListener != null) {
+            mAuth.signOut();
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }

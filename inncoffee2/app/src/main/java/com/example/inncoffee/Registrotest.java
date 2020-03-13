@@ -24,13 +24,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Registrotest extends Activity{
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
-    private EditText etFullName, etUsername, etPassword, etConfirmPassword,etTelefono, etCentro;
+    private EditText etFullName, etUsername, etPassword, etConfirmPassword;
 
     private Button btnRegister;
     public void sendEmailVerification() {
@@ -48,33 +49,53 @@ public class Registrotest extends Activity{
         });
 
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+      /*  FirebaseUser currentUser = mAuth.getCurrentUser();
+        mAuth.addAuthStateListener(firebaseAuthListener);
+        GoogleSignIn.getLastSignedInAccount(this);*/
+        mAuth.addAuthStateListener(firebaseAuthListener);
+
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (firebaseAuthListener != null) {
+            mAuth.signOut();
+            mAuth.removeAuthStateListener(firebaseAuthListener);
+        }
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registro_test);
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        etFullName = findViewById(R.id.etFullName);
+        etUsername = findViewById(R.id.etUsername);
+        etPassword = findViewById(R.id.etPassword);
+        etConfirmPassword = findViewById(R.id.etConfirmPassword);
+        btnRegister = findViewById(R.id.btnRegister);
 
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
-                    Intent intent = new Intent(Registrotest.this, menu_parallax_activity.class);
+                    Intent intent = new Intent(Registrotest.this, pantalla_inn_coffee___3_activity.class);
                     startActivity(intent);
                     finish();
-                }
-                return;
+                }return;
+
             }
         };
 
 
-        etFullName = findViewById(R.id.etFullName);
-        etUsername = findViewById(R.id.etUsername);
-        etPassword = findViewById(R.id.etPassword);
-        etConfirmPassword = findViewById(R.id.etConfirmPassword);
-        btnRegister = findViewById(R.id.btnRegister);
-        etTelefono = findViewById(R.id.etTelefono);
-        etCentro = findViewById(R.id.etCentro);
+
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,49 +112,52 @@ public class Registrotest extends Activity{
                     Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                //create user
+
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(Registrotest.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                  if (!task.isSuccessful()) {
+                                if (task.isSuccessful()) {
+                                    Map <String, Object> newPost = new HashMap<>();
+                                    Log.w("TAG","Se Registro Correctamente ", task.getException());
+                                    // Sign in success, update UI with the signed-in user's information
+                                    String user_id = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+                                    String FullName = etFullName.getText().toString();
+                                    boolean Verify = mAuth.getCurrentUser().isEmailVerified();
+                                    Object obj = new Object();String Alergia = "0";obj = Alergia;
+                                    Object obj1 = new Object();String Phone = "";obj1 = Phone;
+                                    Object obj2 = new Object();String Center = "";obj2 = Center;
+                                    Object obj3 = new Object();String PhotoURL = "";obj3 = PhotoURL;
+                                    Object obj4 = new Object();String FechaNac = "";obj4 = FechaNac;
+                                    newPost.put("FullName", FullName);
+                                    newPost.put("Alergias", obj);
+                                    newPost.put("Phone", obj1);
+                                    newPost.put("Center", obj2);
+                                    newPost.put("PhotoURL", obj3);
+                                    newPost.put("FechaNac", obj4);
+                                    newPost.put("Verify", Verify);
+                                    sendEmailVerification();
+                                    mDatabase.child("Users").child(user_id).setValue(newPost).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task2) {
+                                            if (!task2.isSuccessful()) {
+                                                Toast.makeText(Registrotest.this, "Se Registro " + task2.isSuccessful(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
 
-                                      String user_id = mAuth.getCurrentUser().getUid();
-                                      String FullName = etFullName.getText().toString();
-                                      String Phone = etTelefono.getText().toString();
-                                      String Center   = etFullName.getText().toString();
-                                      Object obj = new Object();
-                                      String alergias = "na";
-                                      obj = alergias;
-                                      Map <String, Object> newPost = new HashMap();
-                                      newPost.put("FullName", FullName);
-                                      newPost.put("Alergias", obj);
-                                      newPost.put("Phone", Phone);
-                                      newPost.put("Center", Center);
-                                      sendEmailVerification();
-                                      mDatabase.child("Users").child(user_id).setValue(newPost).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                          @Override
-                                          public void onComplete(@NonNull Task<Void> task2) {
-                                              if (!task2.isSuccessful()) {
-                                                  startActivity(new Intent(Registrotest.this, menu_parallax_activity.class));
-                                                  finish();
-                                              }
-                                              else {
+                                    mAuth.getCurrentUser();
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                   // Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                    Toast.makeText(Registrotest.this, "Authentication failed. " + task.isSuccessful(),
+                                            Toast.LENGTH_SHORT).show();
 
-                                                  Toast.makeText(Registrotest.this, "Error al Registro " + task2.isSuccessful(), Toast.LENGTH_SHORT).show();
-                                              }
-                                          }
-                                      });
-                                  }
-                                  else {
-
-                                      Toast.makeText(Registrotest.this, "Error No se a Podido Registrar este Usuario " + task.getException(),
-                                              Toast.LENGTH_SHORT).show();
                                 }
+
 
                             }
                         });
-
             }
         });
     }

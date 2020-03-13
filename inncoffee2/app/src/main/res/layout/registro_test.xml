@@ -27,7 +27,8 @@
         android:layout_margin="5dp"
         android:background="@drawable/menu_registronew"
         android:hint="@string/full_name"
-        android:textColorHint="#FFFFFF"
+        android:textColorHint="#FFFFFFFF"
+        android:textColor="#ffffffff"
         android:textAlignment="center"
         android:inputType="textPersonName"
         android:padding="10dp" />
@@ -40,7 +41,8 @@
         android:background="@drawable/menu_registronew"
         android:hint="@string/email"
         android:textAlignment="center"
-        android:textColorHint="#FFFFFF"
+        android:textColorHint="#FFFffFFF"
+        android:textColor="#ffffffff"
         android:inputType="textPersonName"
         android:padding="10dp" />
 
@@ -51,8 +53,9 @@
         android:layout_margin="5dp"
         android:background="@drawable/menu_registronew"
         android:hint="@string/password"
-        android:textColorHint="#FFFFFF"
+        android:textColorHint="#FFffFFFF"
         android:textAlignment="center"
+        android:textColor="#ffffffff"
         android:inputType="textPassword"
         android:padding="10dp" />
 
@@ -64,8 +67,9 @@
         android:layout_margin="5dp"
         android:background="@drawable/menu_registronew"
         android:hint="@string/confirm_password"
-        android:textColorHint="#FFFFFF"
+        android:textColorHint="#FFffFFFF"
         android:inputType="textPassword"
+        android:textColor="#ffffffff"
         android:textAlignment="center"
         android:padding="10dp" />
 
