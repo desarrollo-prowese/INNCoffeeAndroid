@@ -1,67 +1,31 @@
 
 	 
-	/*
-     *	This content is generated from the API File Info.
-     *	(Alt+Shift+Ctrl+I).
-     *
-     *	@desc
-     *	@file 		pag_inicial
-     *	@date 		0
-     *	@title 		PAG INICIAL
-     *	@author
-     *	@keywords
-     *	@generator 	Export Kit v1.2.8.xd
-     *
-     */
+
 
 
     package com.example.inncoffee;
 
     import android.os.Bundle;
+    import android.view.Menu;
+    import android.view.MenuItem;
     import android.view.View;
-    import android.widget.ImageView;
+    import android.view.ViewGroup;
     import android.widget.TextView;
+    import android.widget.Toast;
+
+    import com.squareup.picasso.Picasso;
+    import com.squareup.picasso.Target;
+
+    import java.util.ArrayList;
+    import java.util.List;
 
     import androidx.appcompat.app.AppCompatActivity;
-    import androidx.drawerlayout.widget.DrawerLayout;
+    import androidx.recyclerview.widget.LinearLayoutManager;
+    import androidx.recyclerview.widget.RecyclerView;
 
     public class menu_parallax_activity extends AppCompatActivity {
 
-
-        private View _bg__menu_parallax_ek2;
-        private View rect_ngulo_2;
-        private ImageView coffee_801781_1920;
-        private ImageView enmascarar_grupo_3;
-        private View rect_ngulo_1;
-        private TextView quiero;
-        private View rect_ngulo_3;
-        private ImageView trazado_52;
-        private ImageView trazado_52_ek1;
-        private ImageView trazado_52_ek2;
-        private View bound;
-        private ImageView combined_shape;
-        private View rect_ngulo_4;
-        private TextView mis_ofertas;
-        private View rect_ngulo_5;
-        private TextView mis_puntos;
-        private View rect_ngulo_6;
-        private TextView quiero_ek1;
-        private ImageView trazado_52_ek3;
-        private ImageView trazado_52_ek4;
-        private ImageView trazado_52_ek5;
-        private ImageView _002;
-        private TextView pago_y_gano;
-        private View rect_ngulo_7;
-        private TextView pago_y_gano_ek1;
-        private View rect_ngulo_8;
-        private TextView mis_ofertas_ek1;
-        private View rect_ngulo_9;
-        private TextView mis_puntos_ek1;
-        private ImageView combined_shape_ek1;
-        private ImageView path;
-        private ImageView ic_message;
-        private DrawerLayout drawerLayout;
-
+/*
         @Override
         public void onCreate(Bundle savedInstanceState) {
 
@@ -69,38 +33,208 @@
             setContentView(R.layout.menu_parallax);
 
 
-            _bg__menu_parallax_ek2 = findViewById(R.id._bg__menu_parallax_ek2);
-            rect_ngulo_2 = findViewById(R.id.rect_ngulo_2);
-            coffee_801781_1920 = findViewById(R.id.coffee_801781_1920);
-            enmascarar_grupo_3 = findViewById(R.id.enmascarar_grupo_3);
-            rect_ngulo_1 = findViewById(R.id.rect_ngulo_1);
-            quiero = findViewById(R.id.quiero);
-            trazado_52 = findViewById(R.id.trazado_52);
-            trazado_52_ek1 = findViewById(R.id.trazado_52_ek1);
-            trazado_52_ek2 = findViewById(R.id.trazado_52_ek2);
+            ParallaxRecyclerView recyclerView = (ParallaxRecyclerView) findViewById(R.id.recyclerView);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setAdapter(new TestRecyclerAdapter(this));
 
-            rect_ngulo_4 = findViewById(R.id.rect_ngulo_4);
-            mis_ofertas = findViewById(R.id.mis_ofertas);
-            rect_ngulo_5 = findViewById(R.id.rect_ngulo_5);
-            mis_puntos = findViewById(R.id.mis_puntos);
-            rect_ngulo_6 = findViewById(R.id.rect_ngulo_6);
-            quiero_ek1 = findViewById(R.id.quiero_ek1);
-            trazado_52_ek3 = findViewById(R.id.trazado_52_ek3);
-            trazado_52_ek4 = findViewById(R.id.trazado_52_ek4);
-            trazado_52_ek5 = findViewById(R.id.trazado_52_ek5);
-            _002 = findViewById(R.id._002);
-            pago_y_gano = findViewById(R.id.pago_y_gano);
-            rect_ngulo_7 = findViewById(R.id.rect_ngulo_7);
-            pago_y_gano_ek1 = findViewById(R.id.pago_y_gano_ek1);
-            rect_ngulo_8 = findViewById(R.id.rect_ngulo_8);
-            mis_ofertas_ek1 = findViewById(R.id.mis_ofertas_ek1);
-            rect_ngulo_9 = findViewById(R.id.rect_ngulo_9);
-            mis_puntos_ek1 = findViewById(R.id.mis_puntos_ek1);
+        }*/
 
-            //Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-            //setSupportActionBar(myToolbar);
 
+            private boolean isNormalAdapter = false;
+            private RecyclerView mRecyclerView;
+
+
+            @Override
+            protected void onCreate(Bundle savedInstanceState) {
+                super.onCreate(savedInstanceState);
+                setContentView(R.layout.menu_parallax);
+                mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+                createAdapter(mRecyclerView);
+            }
+
+            @Override
+            public boolean onOptionsItemSelected(MenuItem item) {
+                if (isNormalAdapter) {
+                    createCardAdapter(mRecyclerView);
+                } else {
+                    createAdapter(mRecyclerView);
+                }
+                isNormalAdapter = !isNormalAdapter;
+                return super.onOptionsItemSelected(item);
+            }
+
+            @Override
+            public boolean onCreateOptionsMenu(Menu menu) {
+                getMenuInflater().inflate(R.menu.main, menu);
+                return super.onCreateOptionsMenu(menu);
+            }
+        private int[] imageIds = new int[]{
+                R.drawable.menu_quiero2,
+                R.drawable.pago_y_gano_menu_2,
+                R.drawable.mis_ofertas_menu2,
+                R.drawable.mis_puntos_menu2,};
+
+            private void createCardAdapter(RecyclerView recyclerView) {
+                final List<String> content = new ArrayList<>();
+                for (int i = 0; i < 25; i++) {
+                    if (i == 0){
+                        content.add(" QUIERO " );
+                    }
+                    if (i == 1){
+                        content.add(" PAGO Y GANO ");
+                    }
+                    if (i == 2){
+                        content.add(" MIS OFFERTAS ");
+                    }
+                    if (i == 3){
+                        content.add(" MIS PUNTOS ");
+                    }
+                    if (i == 4){
+                        content.add(" QUIERO " );
+                    }
+                    if (i == 5){
+                        content.add(" PAGO Y GANO ");
+                    }
+                    if (i == 6){
+                        content.add(" MIS OFFERTAS ");
+
+                    }
+                    if (i == 7){
+                        content.add(" MIS PUNTOS ");
+                    }
+                    if (i == 8){
+                        content.add(" QUIERO " );
+                    }
+                    if (i == 9){
+                        content.add(" PAGO Y GANO ");
+                    }
+                    if (i == 10){
+                        content.add(" MIS OFFERTAS ");
+                    }
+                    if (i == 11){
+                        content.add(" MIS PUNTOS ");
+                    }
+                }
+
+                final ParallaxRecyclerAdapter<String> adapter = new ParallaxRecyclerAdapter<String>(content) {
+                    @Override
+                    public void onBindViewHolderImpl(RecyclerView.ViewHolder viewHolder, ParallaxRecyclerAdapter<String> adapter, int i) {
+                        ((ViewHolder) viewHolder).textView.setText(adapter.getData().get(i));
+                        ((ViewHolder) viewHolder).getBackgroundImage().setImageResource(imageIds[i % imageIds.length]);
+
+                    }
+
+                    @Override
+                    public RecyclerView.ViewHolder onCreateViewHolderImpl(ViewGroup viewGroup, final ParallaxRecyclerAdapter<String> adapter, int i) {
+                        return new ViewHolder(getLayoutInflater().inflate(R.layout.item, viewGroup, false));
+                    }
+
+                    @Override
+                    public int getItemCountImpl(ParallaxRecyclerAdapter<String> adapter) {
+                        return content.size();
+                    }
+                };
+
+                adapter.setOnClickEvent(new ParallaxRecyclerAdapter.OnClickEvent() {
+                    @Override
+                    public void onClick(View v, int position) {
+                        Toast.makeText(menu_parallax_activity.this, "You clicked '" + position + "'", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                HeaderLayoutManagerFixed layoutManagerFixed = new HeaderLayoutManagerFixed(this);
+                recyclerView.setLayoutManager(layoutManagerFixed);
+                View header = getLayoutInflater().inflate(R.layout.header, recyclerView, false);
+                layoutManagerFixed.setHeaderIncrementFixer(header);
+                adapter.setShouldClipView(false);
+                adapter.setParallaxHeader(header, recyclerView);
+                adapter.setData(content);
+                recyclerView.setAdapter(adapter);
+            }
+
+            private void createAdapter(RecyclerView recyclerView) {
+                final List<String> content = new ArrayList<>();
+                for (int i = 0; i < 25; i++) {
+                    if (i == 0){
+                       content.add(" QUIERO " );
+                    }
+                    if (i == 1){
+                        content.add(" PAGO Y GANO ");
+                    }
+                    if (i == 2){
+                        content.add(" MIS OFFERTAS ");
+                    }
+                    if (i == 3){
+                        content.add(" MIS PUNTOS ");
+                    }
+                    if (i == 4){
+                        content.add(" QUIERO " );
+                    }
+                    if (i == 5){
+                        content.add(" PAGO Y GANO ");
+                    }
+                    if (i == 6){
+                        content.add(" MIS OFFERTAS ");
+                    }
+                    if (i == 7){
+                        content.add(" MIS PUNTOS ");
+                    }
+                    if (i == 8){
+                        content.add(" QUIERO " );
+                    }
+                    if (i == 9){
+                        content.add(" PAGO Y GANO ");
+                    }
+                    if (i == 10){
+                        content.add(" MIS OFFERTAS ");
+                    }
+                    if (i == 11){
+                        content.add(" MIS PUNTOS ");
+                    }
+
+                }
+
+                final ParallaxRecyclerAdapter<String> adapter = new ParallaxRecyclerAdapter<String>(content) {
+                    @Override
+                    public void onBindViewHolderImpl(RecyclerView.ViewHolder viewHolder, ParallaxRecyclerAdapter<String> adapter, int i) {
+                        ((ViewHolder) viewHolder).textView.setText(adapter.getData().get(i));
+                        ((ViewHolder) viewHolder).getBackgroundImage().setImageResource(imageIds[i % imageIds.length]);
+                    }
+
+                    @Override
+                    public RecyclerView.ViewHolder onCreateViewHolderImpl(ViewGroup viewGroup, final ParallaxRecyclerAdapter<String> adapter, int i) {
+                        return new ViewHolder(getLayoutInflater().inflate(R.layout.item, viewGroup, false));
+                    }
+
+                    @Override
+                    public int getItemCountImpl(ParallaxRecyclerAdapter<String> adapter) {
+                        return content.size();
+                    }
+                };
+
+                adapter.setOnClickEvent(new ParallaxRecyclerAdapter.OnClickEvent() {
+                    @Override
+                    public void onClick(View v, int position) {
+                        Toast.makeText(menu_parallax_activity.this, "You clicked '" + position + "'", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+                View header = getLayoutInflater().inflate(R.layout.header, recyclerView, false);
+                adapter.setParallaxHeader(header, recyclerView);
+                adapter.setData(content);
+                recyclerView.setAdapter(adapter);
+            }
+
+
+            static class ViewHolder extends RecyclerView.ViewHolder {
+                public TextView textView;
+
+                public ViewHolder(View itemView) {
+                    super(itemView);
+                    textView = (TextView) itemView.findViewById(R.id.textView);
+                }
+            }
         }
-    }
-	
-	
+
