@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".PrincipalActivity"
+            android:name=".Pag_inicial"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -203,6 +203,8 @@
         <activity android:name=".Pag_MisPuntos" />
         <activity android:name=".View.Pedidos" />
         <activity android:name=".RegistroLogin.Login" />
+        <activity android:name=".PrincipalActivity"/>
+
         <activity android:name=".RegistroLogin.RegistroVerifica" />
     </application>
 
