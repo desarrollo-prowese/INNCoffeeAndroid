@@ -20,6 +20,7 @@
     import android.app.Activity;
     import android.content.Intent;
     import android.os.Bundle;
+    import android.text.TextUtils;
     import android.view.View;
     import android.widget.Button;
     import android.widget.EditText;
@@ -75,6 +76,16 @@
                 public void onClick(View v) {
                     String email = etUsername.getText().toString();
                     String password = etPassword.getText().toString();
+
+                    if (TextUtils.isEmpty(email)) {
+                        Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (TextUtils.isEmpty(password)) {
+                        Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(pantalla_inn_coffee___2_activity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {

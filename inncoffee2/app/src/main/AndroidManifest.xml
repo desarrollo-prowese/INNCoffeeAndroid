@@ -200,6 +200,7 @@
             android:name=".menu_parallax_activity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".menu_lateral_activity" />
+        <activity android:name=".Pag_MisPuntos" />
         <activity android:name=".View.Pedidos" />
         <activity android:name=".pantalla_inn_coffee___1_activity" />
         <activity android:name=".pantalla_inn_coffee___2_activity" />

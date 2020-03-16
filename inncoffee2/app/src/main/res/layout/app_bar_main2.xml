@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main2Activity">
+    tools:context=".MainActivity3">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -20,10 +20,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include
-        layout="@layout/menu_parallax"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
+    <include layout="@layout/menu_parallax" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
