@@ -1,4 +1,4 @@
-package com.example.inncoffee;
+package com.example.inncoffee.RegistroLogin;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,12 +8,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.inncoffee.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class Registrotest extends Activity{
+public class Registro extends Activity{
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -72,7 +71,7 @@ public class Registrotest extends Activity{
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.registro_test);
+        setContentView(R.layout.registro);
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         etFullName = findViewById(R.id.etFullName);
@@ -86,7 +85,7 @@ public class Registrotest extends Activity{
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
-                    Intent intent = new Intent(Registrotest.this, pantalla_inn_coffee___3_activity.class);
+                    Intent intent = new Intent(Registro.this, RegistroVerifica.class);
                     startActivity(intent);
                     finish();
                 }return;
@@ -114,7 +113,7 @@ public class Registrotest extends Activity{
                 }
 
                 mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(Registrotest.this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(Registro.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
@@ -141,7 +140,7 @@ public class Registrotest extends Activity{
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task2) {
                                             if (!task2.isSuccessful()) {
-                                                Toast.makeText(Registrotest.this, "Se Registro " + task2.isSuccessful(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(Registro.this, "Se Registro " + task2.isSuccessful(), Toast.LENGTH_SHORT).show();
                                             }
                                         }
                                     });
@@ -150,7 +149,7 @@ public class Registrotest extends Activity{
                                 } else {
                                     // If sign in fails, display a message to the user.
                                    // Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(Registrotest.this, "Authentication failed. " + task.isSuccessful(),
+                                    Toast.makeText(Registro.this, "Authentication failed. " + task.isSuccessful(),
                                             Toast.LENGTH_SHORT).show();
 
                                 }

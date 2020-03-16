@@ -9,7 +9,7 @@
     android:paddingLeft="50dp"
     android:paddingRight="50dp"
     android:paddingBottom="50dp"
-    tools:context="com.example.inncoffee.Registrotest">
+    tools:context="com.example.inncoffee.RegistroLogin.Registro">
 
     <ImageView
         android:id="@+id/imageViewTe"
@@ -18,6 +18,20 @@
         android:layout_marginBottom="10dp"
         android:src="@drawable/inncoffeelogo"
         tools:ignore="ContentDescription" />
+
+
+    <EditText
+        android:id="@+id/etFullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/menu_registronew"
+        android:hint="@string/full_name"
+        android:textColorHint="#FFFFFFFF"
+        android:textColor="#ffffffff"
+        android:textAlignment="center"
+        android:inputType="textPersonName"
+        android:padding="10dp" />
 
     <EditText
         android:id="@+id/etUsername"
@@ -45,23 +59,28 @@
         android:inputType="textPassword"
         android:padding="10dp" />
 
-    <TextView
+    <EditText
+
+        android:id="@+id/etConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:gravity="center"
-        android:text="@string/__has_olvidado_tu_contrase_a__string"
-        android:textColor="@android:color/white"
-        android:textSize="18sp" />
+        android:layout_margin="5dp"
+        android:background="@drawable/menu_registronew"
+        android:hint="@string/confirm_password"
+        android:textColorHint="#FFffFFFF"
+        android:inputType="textPassword"
+        android:textColor="#ffffffff"
+        android:textAlignment="center"
+        android:padding="10dp" />
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:background="#000000"
         android:padding="5dp"
-        android:text="@string/log_in"
+        android:text="@string/register"
         android:textColor="@android:color/white" />
 
 </LinearLayout>

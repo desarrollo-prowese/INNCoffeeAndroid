@@ -154,7 +154,7 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name=".Registrotest"
+            android:name=".RegistroLogin.Registro"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
@@ -202,9 +202,8 @@
         <activity android:name=".menu_lateral_activity" />
         <activity android:name=".Pag_MisPuntos" />
         <activity android:name=".View.Pedidos" />
-        <activity android:name=".pantalla_inn_coffee___1_activity" />
-        <activity android:name=".pantalla_inn_coffee___2_activity" />
-        <activity android:name=".pantalla_inn_coffee___3_activity" />
+        <activity android:name=".RegistroLogin.Login" />
+        <activity android:name=".RegistroLogin.RegistroVerifica" />
     </application>
 
 </manifest>

@@ -1,7 +1,8 @@
 <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:theme="@style/Theme.AppCompat.NoActionBar">
+    tools:context="com.example.inncoffee.RegistroLogin.RegistroVerifica">
     <!--
     /*
      *	This content is generated from the API File Info.
@@ -18,7 +19,7 @@
      */
     -->
     <ScrollView
-        android:id="@+id/pantalla_inn_coffee"
+        android:id="@+id/pantalla_inn_coffee___3"
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
 
@@ -40,188 +41,95 @@
 
 
             <RelativeLayout
-                android:id="@+id/page_pantalla_inn_coffee_ek1"
+                android:id="@+id/page_pantalla_inn_coffee___3_ek1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp">
 
                 <ImageButton
-                    android:id="@+id/rect_ngulo_1460"
-                    android:layout_width="293dp"
-                    android:layout_height="60dp"
-                    android:layout_marginStart="38dp"
-                    android:layout_marginLeft="38dp"
-                    android:layout_marginTop="611dp"
-                    android:background="@drawable/rect_ngulo_1460_shape" />
-
-                <ImageButton
-                    android:id="@+id/rect_ngulo_1461"
+                    android:id="@+id/rect_ngulo_1461_ek12"
                     android:layout_width="253dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="61dp"
                     android:layout_marginLeft="61dp"
-                    android:layout_marginTop="716dp"
-                    android:background="@drawable/rect_ngulo_1461_shape" />
+                    android:layout_marginTop="559dp"
+                    android:background="@drawable/rect_ngulo_1461_ek12_shape" />
 
                 <ImageView
-                    android:id="@+id/whatsapp_image_2019_07_23_at_15_12_24_2_"
+                    android:id="@+id/rectangle_ek13"
+                    android:layout_width="384.5dp"
+                    android:layout_height="812.19995117188dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="1dp"
+                    android:contentDescription="rectangle_ek13"
+                    android:src="@drawable/rectangle_ek13" />
+
+                <ImageView
+                    android:id="@+id/whatsapp_image_2019_07_23_at_15_12_24_2__ek3"
                     android:layout_width="394.5dp"
                     android:layout_height="812dp"
                     android:layout_marginStart="-10dp"
                     android:layout_marginLeft="-10dp"
                     android:layout_marginTop="0dp"
-                    android:contentDescription="whatsapp_image_2019_07_23_at_15_12_24_2_"
-                    android:src="@drawable/whatsapp_image_2019_07_23_at_15_12_24_2_" />
-
-
-                <ImageView
-                    android:id="@+id/rectangle"
-                    android:layout_width="384.5dp"
-                    android:layout_height="812.20001220703dp"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginLeft="0dp"
-                    android:layout_marginTop="0dp"
-                    android:contentDescription="rectangle"
-                    android:src="@drawable/rectangle" />
+                    android:contentDescription="whatsapp_image_2019_07_23_at_15_12_24_2__ek3"
+                    android:src="@drawable/whatsapp_image_2019_07_23_at_15_12_24_2__ek3" />
 
 
                 <RelativeLayout
-                    android:id="@+id/color_mode_inncoffe_ek2"
+                    android:id="@+id/color_mode_inncoffe_ek18"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="59dp"
                     android:layout_marginTop="58dp">
 
                     <ImageView
-                        android:id="@+id/color_mode_inncoffe_ek3"
+                        android:id="@+id/color_mode_inncoffe_ek19"
                         android:layout_width="258dp"
                         android:layout_height="297dp"
                         android:layout_marginStart="0dp"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="0dp"
-                        android:contentDescription="color_mode_inncoffe_ek3"
-                        android:src="@drawable/color_mode_inncoffe_ek3" />
+                        android:contentDescription="color_mode_inncoffe_ek19"
+                        android:src="@drawable/color_mode_inncoffe_ek19" />
 
                 </RelativeLayout>
-
-                <RelativeLayout
-                    android:id="@+id/ic_arrow_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="26dp"
-                    android:layout_marginTop="17dp">
-
-                    <ImageView
-                        android:id="@+id/path_ek1"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginTop="4dp"
-                        android:contentDescription="path_ek1"
-                        android:src="@drawable/path_ek1" />
-
-                    <View
-                        android:id="@+id/rectangle_ek1"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginTop="0dp"
-                        android:alpha="0"
-                        android:background="@drawable/rectangle_ek1_shape" />
-
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/messages"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="57dp"
-                    android:layout_marginTop="629dp">
-
-                    <ImageView
-                        android:id="@+id/trazado_50"
-                        android:layout_width="31.5dp"
-                        android:layout_height="23.625dp"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginTop="4dp"
-                        android:contentDescription="trazado_50"
-                        android:src="@drawable/trazado_50" />
-
-                    <View
-                        android:id="@+id/rect_ngulo_117"
-                        android:layout_width="31.5dp"
-                        android:layout_height="31.5dp"
-                        android:layout_marginStart="0dp"
-                        android:layout_marginLeft="0dp"
-                        android:layout_marginTop="0dp"
-                        android:background="@drawable/rect_ngulo_117_shape" />
-
-                </RelativeLayout>
-
 
                 <TextView
-                    android:id="@+id/registrarse_con_correo"
-                    android:layout_width="207dp"
-                    android:layout_height="26dp"
-                    android:layout_marginLeft="101dp"
-                    android:layout_marginTop="633dp"
-                    android:fontFamily="Arial"
-                    android:text="@string/registrarse_con_correo_string"
-                    android:textColor="@color/facebook_ek1_color"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/iniciar_sesi_n"
+                    android:id="@+id/iniciar_sesi_n_ek2"
                     android:layout_width="139dp"
                     android:layout_height="31dp"
                     android:layout_marginLeft="121dp"
-                    android:layout_marginTop="728dp"
+                    android:layout_marginTop="571dp"
                     android:fontFamily="Arial"
-                    android:text="@string/iniciar_sesi_n_string"
+                    android:text="@string/iniciar_sesi_n_ek2_string"
                     android:textColor="@color/facebook_ek1_color"
                     android:textSize="23sp" />
 
-
                 <TextView
-                    android:id="@+id/__a_n_no_tienes_cuenta_"
-                    android:layout_width="174dp"
-                    android:layout_height="20dp"
-                    android:layout_marginLeft="103dp"
-                    android:layout_marginTop="402dp"
+                    android:id="@+id/para_terminar_tu_registro_verifica_tu_correo_electr_nico_mediante_el_enlace_que_acabamos_de_enviarte_por_mail_"
+                    android:layout_width="309dp"
+                    android:layout_height="118dp"
+                    android:layout_gravity="center_horizontal|center"
+                    android:layout_marginLeft="33dp"
+                    android:layout_marginTop="420dp"
                     android:fontFamily="Arial"
-                    android:text="@string/__a_n_no_tienes_cuenta__string"
+                    android:gravity="center"
+                    android:text="@string/para_terminar_tu_registro_verifica_tu_correo_electr_nico_mediante_el_enlace_que_acabamos_de_enviarte_por_mail__string"
                     android:textColor="@color/facebook_ek1_color"
-                    android:textSize="16sp" />
+                    android:textSize="20sp" />
 
                 <View
-                    android:id="@+id/_bg__pantalla_inn_coffee_ek2"
-                    android:layout_width="375dp"
-                    android:layout_height="812dp"
+                    android:id="@+id/_bg__pantalla_inn_coffee___3_ek2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
                     android:layout_marginLeft="0dp"
                     android:layout_marginTop="0dp"
-                    android:background="@drawable/_bg__pantalla_inn_coffee_ek2_shape" />
-
-                <com.facebook.login.widget.LoginButton
-                    android:id="@+id/facebook_button"
-                    android:layout_width="313dp"
-                    android:layout_height="66dp"
-                    android:layout_alignTop="@+id/rect_ngulo_1460"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="-149dp" />
-
-                <com.google.android.gms.common.SignInButton
-                    android:id="@+id/google_button"
-                    android:layout_width="313dp"
-                    android:layout_height="72dp"
-                    android:layout_below="@+id/facebook_button"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="15dp" />
+                    android:background="@drawable/_bg__pantalla_inn_coffee___3_ek2_shape" />
 
             </RelativeLayout>
 

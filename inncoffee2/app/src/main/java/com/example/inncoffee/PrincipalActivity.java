@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.inncoffee.RegistroLogin.Registro;
+import com.example.inncoffee.RegistroLogin.Login;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -103,7 +105,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(com.example.inncoffee.PrincipalActivity.this, Registrotest.class);
+                Intent i = new Intent(com.example.inncoffee.PrincipalActivity.this, Registro.class);
                 startActivity(i);
                 finish();
             }
@@ -111,7 +113,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(com.example.inncoffee.PrincipalActivity.this, pantalla_inn_coffee___2_activity.class);
+                Intent i = new Intent(com.example.inncoffee.PrincipalActivity.this, Login.class);
                 startActivity(i);
                 finish();
             }

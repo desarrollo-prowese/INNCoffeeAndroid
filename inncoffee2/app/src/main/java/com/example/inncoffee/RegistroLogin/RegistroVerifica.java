@@ -15,7 +15,7 @@
      */
 
 
-    package com.example.inncoffee;
+    package com.example.inncoffee.RegistroLogin;
 
     import android.app.Activity;
     import android.content.Intent;
@@ -24,16 +24,12 @@
     import android.widget.ImageButton;
     import android.widget.ImageView;
     import android.widget.TextView;
-    import android.widget.Toast;
 
+    import com.example.inncoffee.R;
     import com.google.firebase.auth.FirebaseAuth;
-    import com.google.firebase.auth.FirebaseUser;
     import com.google.firebase.database.DatabaseReference;
-    import com.google.firebase.database.FirebaseDatabase;
 
-    import java.util.Objects;
-
-    public class pantalla_inn_coffee___3_activity extends Activity {
+    public class RegistroVerifica extends Activity {
 
 
         private View _bg__pantalla_inn_coffee___3_ek2;
@@ -51,7 +47,7 @@
         public void onCreate(Bundle savedInstanceState) {
 
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.pantalla_inn_coffee___3);
+            setContentView(R.layout.registro_verifica);
 
             _bg__pantalla_inn_coffee___3_ek2 = findViewById(R.id._bg__pantalla_inn_coffee___3_ek2);
             whatsapp_image_2019_07_23_at_15_12_24_2__ek3 = findViewById(R.id.whatsapp_image_2019_07_23_at_15_12_24_2__ek3);
@@ -69,7 +65,7 @@
             rect_ngulo_1461_ek12.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                      startActivity(new Intent(pantalla_inn_coffee___3_activity.this, pantalla_inn_coffee___2_activity.class));
+                      startActivity(new Intent(RegistroVerifica.this, Login.class));
                       finish();
                 }
             });
