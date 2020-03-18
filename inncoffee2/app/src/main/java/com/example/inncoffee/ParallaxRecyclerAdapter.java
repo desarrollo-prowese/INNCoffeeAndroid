@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -211,6 +212,7 @@ public abstract class ParallaxRecyclerAdapter<T> extends RecyclerView.Adapter<Re
      static class ViewHolder extends RecyclerView.ViewHolder {
 
          public final TextView textView;
+         public final ImageView imgViewIcon;
 
          public TextView getTextView() {
              return textView;
@@ -219,12 +221,9 @@ public abstract class ParallaxRecyclerAdapter<T> extends RecyclerView.Adapter<Re
         public ViewHolder(View itemView) {
             super(itemView);
             textView = (TextView) itemView.findViewById(R.id.label);
+            imgViewIcon = (ImageView) itemView.findViewById(R.id.backgroundImage);
         }
 
-
-         public ImageSwitcher getBackgroundImage() {
-             return null;
-         }
      }
 
     static class CustomRelativeWrapper extends RelativeLayout {

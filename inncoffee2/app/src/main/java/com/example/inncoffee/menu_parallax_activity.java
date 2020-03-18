@@ -5,16 +5,21 @@
 
     package com.example.inncoffee;
 
+    import android.content.Context;
     import android.content.Intent;
     import android.os.Bundle;
+    import android.view.LayoutInflater;
     import android.view.Menu;
     import android.view.MenuItem;
     import android.view.View;
     import android.view.ViewGroup;
+    import android.widget.AdapterView;
     import android.widget.Button;
+    import android.widget.ListView;
     import android.widget.TextView;
     import android.widget.Toast;
 
+    import com.example.inncoffee.Adapter.AdapterMenu;
     import com.example.inncoffee.View.NuevoPedido;
     import com.squareup.picasso.Picasso;
     import com.squareup.picasso.Target;
@@ -42,8 +47,43 @@
             recyclerView.setAdapter(new TestRecyclerAdapter(this));
 
         }*/
+        private ListView mlist;
 
-            private boolean isNormalAdapter = false;
+        private int[] imageIds = new int[]{
+                R.drawable.menu_quiero2,
+                R.drawable.pago_y_gano_menu_2,
+                R.drawable.mis_ofertas_menu2,
+                R.drawable.mis_puntos_menu2,
+                R.drawable.menu_quiero2,
+                R.drawable.pago_y_gano_menu_2,
+                R.drawable.mis_ofertas_menu2,
+                R.drawable.mis_puntos_menu2,
+                R.drawable.menu_quiero2,
+                R.drawable.pago_y_gano_menu_2,
+                R.drawable.mis_ofertas_menu2,
+                R.drawable.mis_puntos_menu2};
+
+        private String[] label= {
+
+                "QUIERO ",
+                "PAGO Y GANO",
+                "MIS OFFERTAS",
+                "MIS PUNTOS",
+                "QUIERO ",
+                "PAGO Y GANO",
+                "MIS OFFERTAS",
+                "MIS PUNTOS",
+                "QUIERO ",
+                "PAGO Y GANO",
+                "MIS OFFERTAS",
+                "MIS PUNTOS",
+
+        };
+
+
+
+
+           private boolean isNormalAdapter = false;
             private RecyclerView mRecyclerView;
 
 
@@ -95,7 +135,6 @@
                     }
                     if (i == 6){
                         content.add(" MIS OFFERTAS ");
-
                     }
                     if (i == 7){
                         content.add(" MIS PUNTOS ");
@@ -112,12 +151,14 @@
                     if (i == 11){
                         content.add(" MIS PUNTOS ");
                     }
+
                 }
 
                 final ParallaxRecyclerAdapter<String> adapter = new ParallaxRecyclerAdapter<String>(content) {
                     @Override
                     public void onBindViewHolderImpl(RecyclerView.ViewHolder viewHolder, ParallaxRecyclerAdapter<String> adapter, int i) {
                         ((ViewHolder) viewHolder).textView.setText(adapter.getData().get(i));
+                        ((ViewHolder) viewHolder).imgViewIcon.setImageResource(imageIds[i]);
 
                     }
 
@@ -240,6 +281,7 @@
                     @Override
                     public void onBindViewHolderImpl(RecyclerView.ViewHolder viewHolder, ParallaxRecyclerAdapter<String> adapter, int i) {
                         ((ViewHolder) viewHolder).textView.setText(adapter.getData().get(i));
+                        ((ViewHolder) viewHolder).imgViewIcon.setImageResource(imageIds[i]);
                     }
 
                     @Override
