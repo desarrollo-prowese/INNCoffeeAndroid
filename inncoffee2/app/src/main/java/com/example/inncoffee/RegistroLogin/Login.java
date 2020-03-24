@@ -21,6 +21,7 @@
     import android.content.Intent;
     import android.os.Bundle;
     import android.text.TextUtils;
+    import android.util.Log;
     import android.view.View;
     import android.widget.Button;
     import android.widget.EditText;
@@ -44,27 +45,38 @@
         private Button btnLogin;
         private EditText etUsername, etPassword;
 
+        private void inicialize() {
+            firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+                @Override
+                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    if (user != null) {
+                        Intent intent = new Intent(Login.this, menu_parallax_activity.class);
+                        startActivity(intent);
+                        finish();
+                        Log.w("TAG", "onAuthStateChanged - Logueado");
+
+                    } else {
+                        Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+                    }
+                }
+            };
+
+        }
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.login);
-
+            inicialize();
 
             //custom code goes here
             mAuth = FirebaseAuth.getInstance();
-            firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
-                @Override
-                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    if (user != null) {
-                        Intent intent = new Intent(Login.this, menu_parallax_activity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                    return;
-                }
-            };
+
+
+
 
             etUsername = findViewById(R.id.etUsername);
             etPassword = findViewById(R.id.etPassword);

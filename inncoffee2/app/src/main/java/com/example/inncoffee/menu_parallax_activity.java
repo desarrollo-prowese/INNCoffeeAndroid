@@ -5,29 +5,24 @@
 
     package com.example.inncoffee;
 
-    import android.content.Context;
     import android.content.Intent;
+    import android.graphics.Color;
     import android.os.Bundle;
-    import android.view.LayoutInflater;
     import android.view.Menu;
     import android.view.MenuItem;
     import android.view.View;
     import android.view.ViewGroup;
-    import android.widget.AdapterView;
-    import android.widget.Button;
     import android.widget.ListView;
     import android.widget.TextView;
     import android.widget.Toast;
 
-    import com.example.inncoffee.Adapter.AdapterMenu;
     import com.example.inncoffee.View.NuevoPedido;
-    import com.squareup.picasso.Picasso;
-    import com.squareup.picasso.Target;
 
     import java.util.ArrayList;
     import java.util.List;
 
     import androidx.appcompat.app.AppCompatActivity;
+    import androidx.core.content.ContextCompat;
     import androidx.recyclerview.widget.LinearLayoutManager;
     import androidx.recyclerview.widget.RecyclerView;
 
@@ -90,7 +85,7 @@
             @Override
             protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
-                setContentView(R.layout.activity_main2);
+                setContentView(R.layout.menu_parallax);
                 mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
                 createAdapter(mRecyclerView);
             }
@@ -117,6 +112,7 @@
                 for (int i = 0; i < 25; i++) {
                     if (i == 0){
                         content.add(" QUIERO " );
+
                     }
                     if (i == 1){
                         content.add(" PAGO Y GANO ");
@@ -159,6 +155,18 @@
                     public void onBindViewHolderImpl(RecyclerView.ViewHolder viewHolder, ParallaxRecyclerAdapter<String> adapter, int i) {
                         ((ViewHolder) viewHolder).textView.setText(adapter.getData().get(i));
                         ((ViewHolder) viewHolder).imgViewIcon.setImageResource(imageIds[i]);
+                        if (i == 0 ){
+
+                            ((ViewHolder) viewHolder).textView.setTextColor(Color.BLACK);
+                        }
+                        if (i == 4 ){
+
+                            ((ViewHolder) viewHolder).textView.setTextColor(Color.BLACK);
+                        }
+                        if (i == 8 ){
+
+                            ((ViewHolder) viewHolder).textView.setTextColor(Color.BLACK);
+                        }
 
                     }
 
@@ -239,7 +247,7 @@
                 final List<String> content = new ArrayList<>();
                 for (int i = 0; i < 25; i++) {
                     if (i == 0){
-                       content.add(" QUIERO " );
+                       content.add("QUIERO");
                     }
                     if (i == 1){
                         content.add(" PAGO Y GANO ");
@@ -282,6 +290,18 @@
                     public void onBindViewHolderImpl(RecyclerView.ViewHolder viewHolder, ParallaxRecyclerAdapter<String> adapter, int i) {
                         ((ViewHolder) viewHolder).textView.setText(adapter.getData().get(i));
                         ((ViewHolder) viewHolder).imgViewIcon.setImageResource(imageIds[i]);
+                        if (i == 0 ){
+
+                            ((ViewHolder) viewHolder).textView.setTextColor(Color.BLACK);
+                        }
+                        if (i == 4 ){
+
+                            ((ViewHolder) viewHolder).textView.setTextColor(Color.BLACK);
+                        }
+                        if (i == 8 ){
+
+                            ((ViewHolder) viewHolder).textView.setTextColor(Color.BLACK);
+                        }
                     }
 
                     @Override

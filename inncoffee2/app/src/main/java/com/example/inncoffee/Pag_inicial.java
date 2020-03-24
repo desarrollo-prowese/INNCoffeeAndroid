@@ -2,6 +2,7 @@ package com.example.inncoffee;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,12 +28,29 @@ import java.util.Map;
 
 public class Pag_inicial extends Activity {
 
+    private ImageView imageView13;
+    private LinearLayout imageView18;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_pag_inicial);
 
-        LinearLayout imageView18 = findViewById(R.id.imageView18);
+
+        imageView13 = findViewById(R.id.imageView13);
+        imageView18 = findViewById(R.id.imageView18);
+
+        imageView13.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse("https://innoffices.es/"));
+                startActivity(intent);
+
+            }
+        });
 
         imageView18.setOnClickListener(new View.OnClickListener() {
             @Override

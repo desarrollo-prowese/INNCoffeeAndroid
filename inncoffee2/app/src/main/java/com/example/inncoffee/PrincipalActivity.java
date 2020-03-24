@@ -56,6 +56,42 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private GoogleSignInClient mGoogleSignInClient;
 
+    private void inicialize() {
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                if (user != null) {
+                    Intent intent = new Intent(PrincipalActivity.this, menu_parallax_activity.class);
+                    startActivity(intent);
+                    finish();
+                    Log.w("TAG", "onAuthStateChanged - Logueado");
+
+                } else {
+                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+                }
+            }
+        };
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+                    Intent intent = new Intent(PrincipalActivity.this, menu_parallax_activity.class);
+                    startActivity(intent);
+                    finish();
+                    Log.w("TAG", "onAuthStateChanged - Logueado");
+
+                } else {
+                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+                }
+            }
+        };
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,17 +101,8 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
 
         Button register = findViewById(R.id.btnLoginRegister);
         Button login = findViewById(R.id.btnLogin);
+        inicialize();
 
-
-        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-
-                }
-            }
-        };
 
         mCallbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = findViewById(R.id.login_button);
@@ -135,19 +162,6 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
         // Initialize FirebaseAuth
         mAuth = FirebaseAuth.getInstance();
 
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                } else {
-                    // User is signed out
-                    Log.d(TAG, "onAuthStateChanged:signed_out");
-                }
-            }
-        };
     }
 
 

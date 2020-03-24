@@ -7,7 +7,6 @@ import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
-import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,6 +24,7 @@ public abstract class ParallaxRecyclerAdapter<T> extends RecyclerView.Adapter<Re
         public static final int HEADER = 2;
         public static final int FIRST_VIEW = 3;
     }
+
 
     public abstract void onBindViewHolderImpl(RecyclerView.ViewHolder viewHolder, ParallaxRecyclerAdapter<T> adapter, int i);
 

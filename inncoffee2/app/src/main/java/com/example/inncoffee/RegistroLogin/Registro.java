@@ -12,7 +12,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.inncoffee.PrincipalActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.menu_parallax_activity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -32,6 +34,25 @@ public class Registro extends Activity{
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private EditText etFullName, etUsername, etPassword, etConfirmPassword;
 
+    private void inicialize() {
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                if (user != null) {
+                    Intent intent = new Intent(Registro.this, menu_parallax_activity.class);
+                    startActivity(intent);
+                    finish();
+                    Log.w("TAG", "onAuthStateChanged - Logueado");
+
+                } else {
+                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+                }
+            }
+        };
+
+    }
     private Button btnRegister;
     public void sendEmailVerification() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -80,22 +101,7 @@ public class Registro extends Activity{
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
         btnRegister = findViewById(R.id.btnRegister);
 
-        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null) {
-                    Intent intent = new Intent(Registro.this, RegistroVerifica.class);
-                    startActivity(intent);
-                    finish();
-                }return;
-
-            }
-        };
-
-
-
-
+        inicialize();
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,6 +147,8 @@ public class Registro extends Activity{
                                         public void onComplete(@NonNull Task<Void> task2) {
                                             if (!task2.isSuccessful()) {
                                                 Toast.makeText(Registro.this, "Se Registro " + task2.isSuccessful(), Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(Registro.this, Registro.class);
+                                                startActivity(intent);
                                             }
                                         }
                                     });
@@ -149,7 +157,7 @@ public class Registro extends Activity{
                                 } else {
                                     // If sign in fails, display a message to the user.
                                    // Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(Registro.this, "Authentication failed. " + task.isSuccessful(),
+                                    Toast.makeText(Registro.this, "Ya estas registrado " + task.isSuccessful(),
                                             Toast.LENGTH_SHORT).show();
 
                                 }
