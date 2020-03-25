@@ -27,17 +27,21 @@
     import android.widget.EditText;
     import android.widget.Toast;
 
-    import androidx.annotation.NonNull;
-
+    import com.example.inncoffee.MainActivity;
+    import com.example.inncoffee.PrincipalActivity;
     import com.example.inncoffee.R;
-    import com.example.inncoffee.menu_parallax_activity;
+    import com.example.inncoffee.ui.home.HomeFragment;
     import com.google.android.gms.tasks.OnCompleteListener;
     import com.google.android.gms.tasks.Task;
     import com.google.firebase.auth.AuthResult;
     import com.google.firebase.auth.FirebaseAuth;
     import com.google.firebase.auth.FirebaseUser;
 
-    public class Login extends Activity {
+    import androidx.annotation.NonNull;
+    import androidx.appcompat.app.AppCompatActivity;
+    import androidx.fragment.app.FragmentTransaction;
+
+    public class Login extends AppCompatActivity {
 
         private FirebaseAuth mAuth;
         private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -52,7 +56,7 @@
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                     if (user != null) {
-                        Intent intent = new Intent(Login.this, menu_parallax_activity.class);
+                        Intent intent = new Intent(Login.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                         Log.w("TAG", "onAuthStateChanged - Logueado");
@@ -102,7 +106,9 @@
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 if (mAuth.getCurrentUser().isEmailVerified()) {
-                                    startActivity(new Intent(Login.this, menu_parallax_activity.class));
+                                    Intent intent = new Intent(Login.this, MainActivity.class);
+                                    startActivity(intent);
+
                                 } else {
                                     Toast.makeText(Login.this, "Porfavor verifica tu correo", Toast.LENGTH_LONG).show();
                                 }

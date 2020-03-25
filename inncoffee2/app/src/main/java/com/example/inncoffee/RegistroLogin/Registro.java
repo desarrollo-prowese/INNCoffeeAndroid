@@ -10,11 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.example.inncoffee.PrincipalActivity;
+import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
-import com.example.inncoffee.menu_parallax_activity;
+import com.example.inncoffee.ui.home.HomeFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,6 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import androidx.annotation.NonNull;
 
 public class Registro extends Activity{
 
@@ -41,7 +41,7 @@ public class Registro extends Activity{
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                 if (user != null) {
-                    Intent intent = new Intent(Registro.this, menu_parallax_activity.class);
+                    Intent intent = new Intent(Registro.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                     Log.w("TAG", "onAuthStateChanged - Logueado");
@@ -147,7 +147,7 @@ public class Registro extends Activity{
                                         public void onComplete(@NonNull Task<Void> task2) {
                                             if (!task2.isSuccessful()) {
                                                 Toast.makeText(Registro.this, "Se Registro " + task2.isSuccessful(), Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(Registro.this, Registro.class);
+                                                Intent intent = new Intent(Registro.this, RegistroVerifica.class);
                                                 startActivity(intent);
                                             }
                                         }

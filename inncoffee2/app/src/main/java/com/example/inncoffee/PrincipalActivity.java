@@ -7,11 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.inncoffee.RegistroLogin.Registro;
 import com.example.inncoffee.RegistroLogin.Login;
+import com.example.inncoffee.RegistroLogin.Registro;
+import com.example.inncoffee.ui.home.HomeFragment;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -40,6 +38,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
 
 public class PrincipalActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
@@ -63,8 +65,13 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                 if (user != null) {
-                    Intent intent = new Intent(PrincipalActivity.this, menu_parallax_activity.class);
+                    Intent intent = new Intent(PrincipalActivity.this, MainActivity.class);
                     startActivity(intent);
+                   /* HomeFragment fragment = new HomeFragment();
+                    FragmentTransaction ftEs = getSupportFragmentManager().beginTransaction();
+                    ftEs.replace(R.id.nav_home, fragment);
+                    ftEs.addToBackStack(null);
+                    ftEs.commit();*/
                     finish();
                     Log.w("TAG", "onAuthStateChanged - Logueado");
 
@@ -79,9 +86,12 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
-                    Intent intent = new Intent(PrincipalActivity.this, menu_parallax_activity.class);
+
+
+                    Intent intent = new Intent(PrincipalActivity.this, MainActivity.class);
                     startActivity(intent);
-                    finish();
+
+
                     Log.w("TAG", "onAuthStateChanged - Logueado");
 
                 } else {
@@ -265,7 +275,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
                             newPost.put("FullName", user.getDisplayName());
                             newPost.put("Alergias", obj);
                             current_user_db.updateChildren(newPost);
-                            startActivity(new Intent(PrincipalActivity.this, Main2Activity.class));
+                            startActivity(new Intent(PrincipalActivity.this, HomeFragment.class));
                             finish();
                         }
 
@@ -300,7 +310,7 @@ public class PrincipalActivity extends AppCompatActivity implements GoogleApiCli
                             newPost.put("FullName", user.getDisplayName());
                             newPost.put("Alergias", obj);
                             current_user_db.updateChildren(newPost);
-                            startActivity(new Intent(PrincipalActivity.this, Main2Activity.class));
+                            startActivity(new Intent(PrincipalActivity.this, HomeFragment.class));
                             finish();
                         }
                     }

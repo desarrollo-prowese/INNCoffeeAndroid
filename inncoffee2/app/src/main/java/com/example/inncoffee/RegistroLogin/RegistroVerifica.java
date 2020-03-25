@@ -20,20 +20,14 @@
     import android.app.Activity;
     import android.content.Intent;
     import android.os.Bundle;
-    import android.util.Log;
     import android.view.View;
     import android.widget.ImageButton;
     import android.widget.ImageView;
     import android.widget.TextView;
 
-    import com.example.inncoffee.PrincipalActivity;
     import com.example.inncoffee.R;
-    import com.example.inncoffee.menu_parallax_activity;
     import com.google.firebase.auth.FirebaseAuth;
-    import com.google.firebase.auth.FirebaseUser;
     import com.google.firebase.database.DatabaseReference;
-
-    import androidx.annotation.NonNull;
 
     public class RegistroVerifica extends Activity {
 
