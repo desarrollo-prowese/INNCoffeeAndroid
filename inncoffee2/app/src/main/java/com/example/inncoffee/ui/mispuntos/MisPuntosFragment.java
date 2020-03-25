@@ -1,0 +1,32 @@
+package com.example.inncoffee.ui.mispuntos;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+
+import com.example.inncoffee.MainActivity;
+import com.example.inncoffee.R;
+
+public class MisPuntosFragment extends Fragment {
+
+
+
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+
+        View root = inflater.inflate(R.layout.fragment_puntos, container, false);
+        MainActivity.mensajeToolbar.setText("MIS PUNTOS");
+
+
+
+
+
+        return root;
+    }
+}
