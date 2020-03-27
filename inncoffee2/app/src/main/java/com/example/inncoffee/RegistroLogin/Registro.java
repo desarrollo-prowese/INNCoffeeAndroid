@@ -41,7 +41,7 @@ public class Registro extends Activity{
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                 if (user != null) {
-                    Intent intent = new Intent(Registro.this, MainActivity.class);
+                    Intent intent = new Intent(Registro.this, RegistroVerifica.class);
                     startActivity(intent);
                     finish();
                     Log.w("TAG", "onAuthStateChanged - Logueado");
@@ -128,7 +128,7 @@ public class Registro extends Activity{
                                     // Sign in success, update UI with the signed-in user's information
                                     String user_id = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
                                     String FullName = etFullName.getText().toString();
-                                    boolean Verify = mAuth.getCurrentUser().isEmailVerified();
+                                    String email = etUsername.getText().toString();
                                     Object obj = new Object();String Alergia = "0";obj = Alergia;
                                     Object obj1 = new Object();String Phone = "";obj1 = Phone;
                                     Object obj2 = new Object();String Center = "";obj2 = Center;
@@ -140,15 +140,15 @@ public class Registro extends Activity{
                                     newPost.put("Center", obj2);
                                     newPost.put("PhotoURL", obj3);
                                     newPost.put("FechaNac", obj4);
-                                    newPost.put("Verify", Verify);
+                                    newPost.put("Email", email);
                                     sendEmailVerification();
                                     mDatabase.child("Users").child(user_id).setValue(newPost).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task2) {
                                             if (!task2.isSuccessful()) {
+                                                FirebaseUser user = mAuth.getCurrentUser();
+                                                updateUI(user);
                                                 Toast.makeText(Registro.this, "Se Registro " + task2.isSuccessful(), Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(Registro.this, RegistroVerifica.class);
-                                                startActivity(intent);
                                             }
                                         }
                                     });
@@ -169,6 +169,11 @@ public class Registro extends Activity{
         });
     }
 
-
+    public void updateUI(FirebaseUser currentUser) {
+        String keyid = mDatabase.push().getKey();
+        mDatabase.child(keyid).setValue(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()); //adding user info to database
+        Intent loginIntent = new Intent(this, RegistroVerifica.class);
+        startActivity(loginIntent);
+    }
 
 }

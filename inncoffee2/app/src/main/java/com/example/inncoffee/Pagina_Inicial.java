@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -43,7 +45,7 @@ public class Pagina_Inicial extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     startActivity(new Intent(Pagina_Inicial.this, PrincipalActivity.class));
-
+                    FirebaseAuth.getInstance().signOut();
                 }
             });
         }

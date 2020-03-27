@@ -127,16 +127,49 @@ public class HomeFragment extends Fragment {
                 ((ViewHolder) viewHolder).textView.setText(adapter.getData().get(i));
                 ((ViewHolder) viewHolder).imgViewIcon.setImageResource(imageIds[i]);
                 if (i == 0 ){
-
                     ((ViewHolder) viewHolder).textView.setTextColor(Color.BLACK);
+                }
+                if (i == 1 ){
+
+                    ((ViewHolder) viewHolder).textView.setTextColor(Color.WHITE);
+                }
+                if (i == 2 ){
+
+                   ((ViewHolder) viewHolder).textView.setTextColor(Color.WHITE);
+                }
+                if (i == 3 ){
+                    ((ViewHolder) viewHolder).textView.setTextColor(Color.WHITE);
                 }
                 if (i == 4 ){
 
                     ((ViewHolder) viewHolder).textView.setTextColor(Color.BLACK);
                 }
+                if (i == 5 ){
+
+                    ((ViewHolder) viewHolder).textView.setTextColor(Color.WHITE);
+                }
+                if (i == 6 ){
+                    ((ViewHolder) viewHolder).textView.setTextColor(Color.WHITE);
+                }
+                if (i == 7 ){
+
+                    ((ViewHolder) viewHolder).textView.setTextColor(Color.WHITE);
+                }
                 if (i == 8 ){
 
-                   ((ViewHolder) viewHolder).textView.setTextColor(Color.BLACK);
+                    ((ViewHolder) viewHolder).textView.setTextColor(Color.BLACK);
+                }
+                if (i == 9 ){
+
+                    ((ViewHolder) viewHolder).textView.setTextColor(Color.WHITE);
+                }
+                if (i == 10 ){
+
+                    ((ViewHolder) viewHolder).textView.setTextColor(Color.WHITE);
+                }
+                if (i == 11 ){
+
+                    ((ViewHolder) viewHolder).textView.setTextColor(Color.WHITE);
                 }
             }
 

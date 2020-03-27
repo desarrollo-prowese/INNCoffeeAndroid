@@ -1,26 +1,40 @@
 package com.example.inncoffee.ui.mensajes;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
-import com.example.inncoffee.ui.mispuntos.MisPuntosFragment;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class MensajesFragment extends Fragment {
+
+
+
+    private AdapterMensaje mAdapter;
+    private RecyclerView mRecycle;
+    private ArrayList<MensajesClass> mMensaje = new ArrayList<>();
+    private ArrayList<String> keys = new ArrayList<>();
+    private DatabaseReference mDatabase;
+
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -28,7 +42,71 @@ public class MensajesFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_mensajes, container, false);
         MainActivity.mensajeToolbar.setText("MIS OFFERTAS / MIS MENSAJES");
+        mRecycle = (RecyclerView) root.findViewById(R.id.listamensajes);
 
-        return root;
+        mRecycle.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+
+
+        getMensajesFromFirebase();
+
+      return root;
+    }
+    public void removeItem(int position) {
+        mAdapter.deleteItem(position);
+        MensajesFragment fragment = new MensajesFragment();
+        FragmentTransaction ftEs = getFragmentManager().beginTransaction();
+        ftEs.replace(R.id.nav_host_fragment, fragment);
+        ftEs.addToBackStack(null);
+        ftEs.commit();
+
+
+    }
+
+    private void getMensajesFromFirebase() {
+        mDatabase.child("Mensajes").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+
+
+                        mMensaje.clear();
+                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+
+                            String texto = ds.child("texto").getValue().toString();
+                            mMensaje.add(new MensajesClass(texto));
+                            keys.add(ds.getKey());
+
+                        }
+
+
+
+
+                        mAdapter = new AdapterMensaje(getContext(), mMensaje, keys, R.layout.contenido_mensaje);
+                        mAdapter.setOnItemClickListener(new AdapterMensaje.OnItemClickListener() {
+
+                            @Override
+                            public void onItemClick(int position) {
+                                removeItem(position);
+                            }
+
+                        });
+                        mRecycle.setAdapter(mAdapter);
+                        mAdapter.notifyDataSetChanged();
+
+                    }
+
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
     }
 }

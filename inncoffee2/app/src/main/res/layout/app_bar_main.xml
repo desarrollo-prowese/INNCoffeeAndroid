@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:label="@null"
@@ -19,37 +19,66 @@
             android:layout_height="?attr/actionBarSize"
             android:background="#000000"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|center_horizontal"
-            android:layout_marginRight="8dp"
-            android:padding="16dp">
 
-
-            <TextView
-                android:id="@+id/mesajestolbar"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="10sp"
-                android:textColor="@color/letraToolbar" />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginRight="8dp"
-            android:padding="16dp">
+                android:gravity="center|left">
 
 
+                <ImageView
+                    android:id="@+id/bInicio"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/combined_shape" />
+            </LinearLayout>
 
-            <ImageView
-                android:id="@+id/irmensaje"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/ic_message" />
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:gravity="center|left">
+
+
+                <TextView
+                    android:id="@+id/mesajestolbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/letraToolbar"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|right"
+                android:layout_marginRight="10dp">
+
+
+                <ImageView
+                    android:layout_width="@dimen/notification_icon_size"
+                    android:layout_height="@dimen/notification_icon_size"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_message"
+                    android:id="@+id/irmensaje"/>
+
+                <TextView
+                    android:id="@+id/badge_counter"
+                    android:layout_width="@dimen/badge_size"
+                    android:layout_height="@dimen/badge_size"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="-15dp"
+                    android:background="@drawable/badge"
+                    android:gravity="center"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="10sp" />
+
+
+            </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

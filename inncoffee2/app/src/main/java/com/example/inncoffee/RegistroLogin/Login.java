@@ -106,8 +106,8 @@
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 if (mAuth.getCurrentUser().isEmailVerified()) {
-                                    Intent intent = new Intent(Login.this, MainActivity.class);
-                                    startActivity(intent);
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    updateUI(user);
 
                                 } else {
                                     Toast.makeText(Login.this, "Porfavor verifica tu correo", Toast.LENGTH_LONG).show();
@@ -123,6 +123,12 @@
 
 
         }
+        public void updateUI(FirebaseUser currentUser) {
+            Intent profileIntent = new Intent(getApplicationContext(), MainActivity.class);
+            profileIntent.putExtra("Email", currentUser.getEmail());
+            Log.v("DATA", currentUser.getUid());
+            startActivity(profileIntent);
+    }
     }
 	
 	

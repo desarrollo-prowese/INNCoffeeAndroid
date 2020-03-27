@@ -1,48 +1,116 @@
 package com.example.inncoffee;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.inncoffee.RegistroLogin.Login;
 import com.example.inncoffee.ui.home.HomeFragment;
+import com.example.inncoffee.ui.mensajes.AdapterMensaje;
+import com.example.inncoffee.ui.mensajes.MensajesClass;
 import com.example.inncoffee.ui.mensajes.MensajesFragment;
 import com.example.inncoffee.ui.mispuntos.MisPuntosFragment;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration mAppBarConfiguration;
     public static TextView mensajeToolbar;
     public static ImageView irmensaje;
     protected DrawerLayout drawer;
+    public static ImageView bIncio;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mRef;
+    private DatabaseReference mUsuario;
+    private FirebaseUser mUser;
+    private FirebaseAuth mAuth;
+    private TextView nameTxtView;
+    public static int pendingNotifications;
+    private static final String USERS = "Users";
+    private String email;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseAuth.AuthStateListener firebaseAuthListener;
+
+
+    // badge text view
+    TextView badgeCounter;
+    // change the number to see badge in action
+    private void inicialize() {
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                if (user != null) {
+                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                    Log.w("TAG", "onAuthStateChanged - Logueado");
+
+                } else {
+                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+                }
+            }
+        };
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+
+
+                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(intent);
+
+
+                    Log.w("TAG", "onAuthStateChanged - Logueado");
+
+                } else {
+                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+                }
+            }
+        };
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        inicialize();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -50,27 +118,41 @@ public class MainActivity extends AppCompatActivity {
         drawer.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
+        mAuth = FirebaseAuth.getInstance();
 
 
         Intent intent = this.getIntent();
+        final String email  = intent.getStringExtra("Email");
         Bundle extra = intent.getExtras();
         View navHeaderView = navigationView.inflateHeaderView(R.layout.nav_header_main);
         navHeaderView = navigationView.getHeaderView(0);
 
+        mDatabase = FirebaseDatabase.getInstance();
+        mRef = mDatabase.getReference("Mensajes");
+        mUsuario = mDatabase.getReference(USERS);
+        Log.v("USERID", mUsuario.getKey());
+        Log.v("USERGUID", mAuth.getUid());
+        mUsuario.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    for (DataSnapshot keyId: dataSnapshot.getChildren()) {
+                        nameTxtView = findViewById(R.id.TextoNombre);
+                        nameTxtView.setText(keyId.child("FullName").getValue(String.class));
+                        }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("TAG", "Failed to read value.", databaseError.toException());
+            }
+        });
+
+
         mensajeToolbar = (TextView) findViewById(R.id.mesajestolbar);
 
 
-       /* DrawerLayout drawer = findViewById(R.id.drawer_layout);
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        Intent intent = this.getIntent();
-        Bundle extra = intent.getExtras();
-        View navHeaderView = navigationView.inflateHeaderView(R.layout.nav_header_main);
-        navHeaderView = navigationView.getHeaderView(0);*/
         navigationView.bringToFront();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -84,12 +166,44 @@ public class MainActivity extends AppCompatActivity {
                         ftEs.commit();
                         mensajeToolbar.setText("");
                         break;
-                    case R.id.nav_mensaje:
-                        Toast.makeText(MainActivity.this, "nav1 selected", Toast.LENGTH_SHORT).show();
+                    case R.id.tInvita:
+
+                        String texto = "Probando INN COFFEE";
+
+                        MensajesClass user=new MensajesClass(texto);
+
+                        String key=mRef.push().getKey();
+                        mRef.child(key).setValue(user);
+
+
+                        Toast.makeText(MainActivity.this, "Data inserted...", Toast.LENGTH_SHORT).show();
+                    //    Toast.makeText(MainActivity.this, "Proximamente", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.nav_puntos:
-                        Toast.makeText(MainActivity.this, "nav1 selected", Toast.LENGTH_SHORT).show();
+                    case R.id.tOfertas:
+
+
+                        Toast.makeText(MainActivity.this, "Proximamente", Toast.LENGTH_SHORT).show();
                         break;
+                    case R.id.tPagos:
+                        Toast.makeText(MainActivity.this, "Proximamente", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.tPedidos:
+                        Toast.makeText(MainActivity.this, "Proximamente", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.tIra:
+                        Intent intent = new Intent();
+                        intent.setAction(Intent.ACTION_VIEW);
+                        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                        intent.setData(Uri.parse("https://innoffices.es/"));
+                        startActivity(intent);
+                        break;
+                    case R.id.tCerrar:
+                        mAuth.signOut();
+                        startActivity(new Intent(MainActivity.this, Pagina_Inicial.class));
+                        Toast.makeText(MainActivity.this, "Cerrar sesion", Toast.LENGTH_SHORT).show();
+                        finish();
+                        break;
+
                 }
 
                 DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -97,7 +211,54 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+
+
+        bIncio = (ImageView) findViewById(R.id.bInicio);
+        bIncio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HomeFragment fragment = new HomeFragment();
+                FragmentTransaction ftEs = getSupportFragmentManager().beginTransaction();
+                ftEs.replace(R.id.nav_host_fragment, fragment);
+                ftEs.addToBackStack(null);
+                ftEs.commit();
+                finish();
+                startActivity(getIntent());
+            }
+        });
+
+
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+
+
+                    pendingNotifications = (int) dataSnapshot.getChildrenCount();
+                    badgeCounter = findViewById(R.id.badge_counter);
+                    badgeCounter.setText(Integer.toString(pendingNotifications));
+
+
+                }else {
+
+                    badgeCounter = findViewById(R.id.badge_counter);
+                    badgeCounter.setVisibility(View.INVISIBLE);
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
         irmensaje = (ImageView) findViewById(R.id.irmensaje);
+
         irmensaje.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,32 +269,40 @@ public class MainActivity extends AppCompatActivity {
                 ftEs.addToBackStack(null);
                 ftEs.commit();
 
-
-
             }
         });
+
+
     }
-
-
-
 
     private void closeDrawer() {
         drawer.closeDrawer(GravityCompat.START);
     }
 
 
+   /* @Override
+    protected void onResume() {
+        super.onResume();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            updateUI(currentUser);
+        }
+    }
+
+    public void updateUI(FirebaseUser currentUser) {
+        Intent profileIntent = new Intent(getApplicationContext(), MainActivity.class);
+        profileIntent.putExtra("Email", currentUser.getEmail());
+        Log.v("DATA", currentUser.getUid());
+        startActivity(profileIntent);
+    }*/
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+        return true;
     }
 
 

@@ -5,4 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/_bg__carta_comidas_ek15_shape"
-    tools:context=".ui.mensajes.MensajesFragment" />
+    tools:context=".ui.mensajes.MensajesFragment" >
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listamensajes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
