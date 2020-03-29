@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.example.inncoffee.RegistroLogin.Login;
 import com.example.inncoffee.ui.home.HomeFragment;
 import com.example.inncoffee.ui.mensajes.AdapterMensaje;
@@ -55,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mUsuario;
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
-    private TextView nameTxtView;
     public static int pendingNotifications;
     private static final String USERS = "Users";
     private String email;
@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = getIntent();
         Toolbar toolbar = findViewById(R.id.toolbar);
         inicialize();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -119,29 +120,40 @@ public class MainActivity extends AppCompatActivity {
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
         mAuth = FirebaseAuth.getInstance();
-
-
-        Intent intent = this.getIntent();
         final String email  = intent.getStringExtra("Email");
         Bundle extra = intent.getExtras();
         View navHeaderView = navigationView.inflateHeaderView(R.layout.nav_header_main);
         navHeaderView = navigationView.getHeaderView(0);
-
+        final TextView fnames = (TextView) navHeaderView.findViewById(R.id.TextoNombre);
+        final TextView centro = (TextView) navHeaderView.findViewById(R.id.Centro);
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference("Mensajes");
         mUsuario = mDatabase.getReference(USERS);
         Log.v("USERID", mUsuario.getKey());
         Log.v("USERGUID", mAuth.getUid());
         mUsuario.addValueEventListener(new ValueEventListener() {
+            String fname;
+            String centre;
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    for (DataSnapshot keyId: dataSnapshot.getChildren()) {
-                        nameTxtView = findViewById(R.id.TextoNombre);
-                        nameTxtView.setText(keyId.child("FullName").getValue(String.class));
-                        }
-                }
+                for (DataSnapshot keyId: dataSnapshot.getChildren()) {
+                    if(dataSnapshot.exists()){
+                       if(Objects.equals(keyId.child("Email").getValue(), email)) {
+                           fname = keyId.child("FullName").getValue().toString().trim();
+                           centre = keyId.child("Center").getValue().toString().trim();
+
+                   }
+               }
             }
+                if (fname != null )
+                fnames.setText(fname);
+                if (centre != null){
+                centro.setText(centre);
+                }
+
+        }
+
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

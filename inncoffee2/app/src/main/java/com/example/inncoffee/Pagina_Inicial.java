@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -24,7 +25,6 @@ public class Pagina_Inicial extends AppCompatActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.fragment_pag_inicial);
-
 
             imageView13 = findViewById(R.id.imageView13);
             imageView18 = findViewById(R.id.imageView18);

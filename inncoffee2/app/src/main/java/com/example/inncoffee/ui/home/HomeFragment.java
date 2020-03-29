@@ -25,6 +25,7 @@ import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
 import com.example.inncoffee.ui.mensajes.MensajesFragment;
 import com.example.inncoffee.ui.mispuntos.MisPuntosFragment;
+import com.example.inncoffee.ui.quiero.QuieroFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -189,7 +190,11 @@ public class HomeFragment extends Fragment {
             public void onClick(View v, int position) {
                 if (position == 0){
                     Toast.makeText(getActivity(), " Quiero ", Toast.LENGTH_SHORT).show();
-                  //  startActivity(new Intent(getActivity(), NuevoPedido.class));
+                    QuieroFragment fragment = new QuieroFragment();
+                    FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                    ftEs.replace(R.id.nav_host_fragment, fragment);
+                    ftEs.addToBackStack(null);
+                    ftEs.commit();
                 }
                 else if (position == 1){
                     Toast.makeText(getActivity(), " PAGO Y GANO ", Toast.LENGTH_SHORT).show();
@@ -207,7 +212,11 @@ public class HomeFragment extends Fragment {
                 }
                 else if (position == 4){
                     Toast.makeText(getActivity(), " Quiero ", Toast.LENGTH_SHORT).show();
-                  //  startActivity(new Intent(getActivity(), NuevoPedido.class));
+                    QuieroFragment fragment = new QuieroFragment();
+                    FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                    ftEs.replace(R.id.nav_host_fragment, fragment);
+                    ftEs.addToBackStack(null);
+                    ftEs.commit();
                 }
                 else if (position == 5){
                     Toast.makeText(getActivity(), " PAGO Y GANO ", Toast.LENGTH_SHORT).show();
@@ -225,7 +234,11 @@ public class HomeFragment extends Fragment {
                 }
                 else if (position == 8){
                     Toast.makeText(getActivity(), " Quiero ", Toast.LENGTH_SHORT).show();
-                  //  startActivity(new Intent(getActivity(), NuevoPedido.class));
+                    QuieroFragment fragment = new QuieroFragment();
+                    FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                    ftEs.replace(R.id.nav_host_fragment, fragment);
+                    ftEs.addToBackStack(null);
+                    ftEs.commit();
                 }
                 else if (position == 9){
                     Toast.makeText(getActivity(), " PAGO Y GANO ", Toast.LENGTH_SHORT).show();
