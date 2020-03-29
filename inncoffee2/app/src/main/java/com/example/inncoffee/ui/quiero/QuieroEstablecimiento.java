@@ -44,8 +44,48 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
     private static final String USERS = "Users";
-    private static final String ID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    private String ID ;
 
+
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseAuth.AuthStateListener firebaseAuthListener;
+    private void inicialize() {
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                if (user != null) {
+                    Intent intent = new Intent(getActivity(), QuieroEstablecimiento.class);
+                    startActivity(intent);
+                    Log.w("TAG", "onAuthStateChanged - Logueado");
+
+                } else {
+                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+                }
+            }
+        };
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+
+
+                    Intent intent = new Intent(getActivity(), QuieroEstablecimiento.class);
+                    startActivity(intent);
+
+
+                    Log.w("TAG", "onAuthStateChanged - Logueado");
+
+                } else {
+                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+                }
+            }
+        };
+
+    }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
@@ -56,7 +96,9 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
         mUsuario = mDatabase.getReference(USERS);
-
+        inicialize();
+        ID = mAuth.getUid();
+        Log.v("QUe esta pasando ", ID);
         Log.v("USERID", mUsuario.getKey());
         Log.v("USERGUID", mAuth.getUid());
 

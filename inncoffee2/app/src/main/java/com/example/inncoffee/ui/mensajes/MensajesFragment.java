@@ -1,6 +1,8 @@
 package com.example.inncoffee.ui.mensajes;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.ui.quiero.QuieroNuevoPedido;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,6 +38,45 @@ public class MensajesFragment extends Fragment {
     private ArrayList<MensajesClass> mMensaje = new ArrayList<>();
     private ArrayList<String> keys = new ArrayList<>();
     private DatabaseReference mDatabase;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseAuth.AuthStateListener firebaseAuthListener;
+    private void inicialize() {
+        firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                if (user != null) {
+                    Intent intent = new Intent(getActivity(), MensajesFragment.class);
+                    startActivity(intent);
+                    Log.w("TAG", "onAuthStateChanged - Logueado");
+
+                } else {
+                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+                }
+            }
+        };
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+
+
+                    Intent intent = new Intent(getActivity(), MensajesFragment.class);
+                    startActivity(intent);
+
+
+                    Log.w("TAG", "onAuthStateChanged - Logueado");
+
+                } else {
+                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+                }
+            }
+        };
+
+    }
 
 
 
@@ -48,7 +92,7 @@ public class MensajesFragment extends Fragment {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-
+        inicialize();
 
         getMensajesFromFirebase();
 
