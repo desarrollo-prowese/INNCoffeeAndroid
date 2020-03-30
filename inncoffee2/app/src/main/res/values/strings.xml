@@ -514,5 +514,6 @@ segn la hora?</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="mis_ofertas_mis_mensajes">MIS OFERTAS/MIS MENSAJES</string>
     <string name="notifications" />
+    <string name="tienes_alg_n_tipo_de_alergia_alimentaria">¿Tienes algún tipo de alergia alimentaria?</string>
 
 </resources>

@@ -25,6 +25,7 @@ import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
 import com.example.inncoffee.ui.mensajes.MensajesFragment;
 import com.example.inncoffee.ui.mispuntos.MisPuntosFragment;
+import com.example.inncoffee.ui.ofertas.OfertasFragment;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
 
 import java.util.ArrayList;
@@ -201,6 +202,11 @@ public class HomeFragment extends Fragment {
                 }
                 else if (position == 2){
                     Toast.makeText(getActivity(), " MIS OFFERTAS ", Toast.LENGTH_SHORT).show();
+                    OfertasFragment fragment = new OfertasFragment();
+                    FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                    ftEs.replace(R.id.nav_host_fragment, fragment);
+                    ftEs.addToBackStack(null);
+                    ftEs.commit();
                 }
                 else if (position == 3){
                     Toast.makeText(getActivity(), " MIS PUNTOS ", Toast.LENGTH_SHORT).show();
@@ -223,6 +229,11 @@ public class HomeFragment extends Fragment {
                 }
                 else if (position == 6){
                     Toast.makeText(getActivity(), " MIS OFFERTAS ", Toast.LENGTH_SHORT).show();
+                    OfertasFragment fragment = new OfertasFragment();
+                    FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                    ftEs.replace(R.id.nav_host_fragment, fragment);
+                    ftEs.addToBackStack(null);
+                    ftEs.commit();
                 }
                 else if (position == 7){
                     Toast.makeText(getActivity(), " MIS PUNTOS ", Toast.LENGTH_SHORT).show();
@@ -245,6 +256,11 @@ public class HomeFragment extends Fragment {
                 }
                 else if (position == 10){
                     Toast.makeText(getActivity(), " MIS OFFERTAS ", Toast.LENGTH_SHORT).show();
+                    OfertasFragment fragment = new OfertasFragment();
+                    FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                    ftEs.replace(R.id.nav_host_fragment, fragment);
+                    ftEs.addToBackStack(null);
+                    ftEs.commit();
                 }
                 else if (position == 11){
                     Toast.makeText(getActivity(), "  MIS PUNTOS ", Toast.LENGTH_SHORT).show();

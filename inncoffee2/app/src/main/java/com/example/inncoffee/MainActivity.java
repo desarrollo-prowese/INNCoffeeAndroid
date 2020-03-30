@@ -20,6 +20,7 @@ import com.example.inncoffee.ui.mensajes.AdapterMensaje;
 import com.example.inncoffee.ui.mensajes.MensajesClass;
 import com.example.inncoffee.ui.mensajes.MensajesFragment;
 import com.example.inncoffee.ui.mispuntos.MisPuntosFragment;
+import com.example.inncoffee.ui.ofertas.OfertasClass;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     public static ImageView bIncio;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
+    private DatabaseReference mRefo;
     private DatabaseReference mUsuario;
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
@@ -128,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView centro = (TextView) navHeaderView.findViewById(R.id.Centro);
         mDatabase = FirebaseDatabase.getInstance();
         mRef = mDatabase.getReference("Mensajes");
+        mRefo = mDatabase.getReference("Ofertas");
         mUsuario = mDatabase.getReference(USERS);
         Log.v("USERID", mUsuario.getKey());
         Log.v("USERGUID", mAuth.getUid());
@@ -192,6 +195,14 @@ public class MainActivity extends AppCompatActivity {
                     //    Toast.makeText(MainActivity.this, "Proximamente", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.tOfertas:
+
+                        String ofertas = "NUEVO TAZON CON CEREALES";
+                        String porcentaje = "-20%";
+
+                        OfertasClass user1=new OfertasClass(ofertas,porcentaje);
+
+                        String key1=mRefo.push().getKey();
+                        mRefo.child(key1).setValue(user1);
 
 
                         Toast.makeText(MainActivity.this, "Proximamente", Toast.LENGTH_SHORT).show();

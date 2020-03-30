@@ -33,6 +33,7 @@ public class AdapterMensaje  extends RecyclerView.Adapter<AdapterMensaje.ViewHol
     private ArrayList<MensajesClass> mensajeslist;
     private OnItemClickListener mListener;
 
+
     public AdapterMensaje(Context mContext,ArrayList<MensajesClass> mensajeslist,ArrayList<String> keys, int resource){
         this.mContext = mContext;
         this.mensajeslist = mensajeslist;
@@ -99,17 +100,6 @@ public class AdapterMensaje  extends RecyclerView.Adapter<AdapterMensaje.ViewHol
             this.Fondo = (ImageView) view.findViewById(R.id.fondo);
             this.borrar = (ImageView) view.findViewById(R.id.BasuraMensaje);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
-                        }
-                    }
-                }
-            });
 
             borrar.setOnClickListener(new View.OnClickListener() {
                 @Override

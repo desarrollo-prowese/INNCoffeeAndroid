@@ -5,9 +5,7 @@
     android:id="@+id/LinearLayoutQuiero"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/whatsapp_image_2019_07_23_at_15_12_59"
-    android:backgroundTint="#527A6B56"
-    android:backgroundTintMode="add"
+    android:background="@drawable/nuevopedido"
     android:scrollbarSize="0dp">
 
 

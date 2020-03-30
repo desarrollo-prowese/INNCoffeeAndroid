@@ -5,7 +5,7 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-<color name = "letraToolbar">#db9600</color>
+    <color name = "letraToolbar">#db9600</color>
     <color name="_bg__pag_inicial_ek2_color">#fffcfc</color>
     <color name="_bg__menu_parallax_ek2_color">#ffffff</color>
     <color name="rect_ngulo_2_color">#a48b68</color>

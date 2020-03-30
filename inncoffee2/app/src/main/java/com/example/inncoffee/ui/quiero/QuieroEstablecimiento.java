@@ -135,7 +135,7 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
 
                                 mUsuario.child(ID).child("Center").setValue("INN COFFEE SEVILLA NERVION");
 
-                                HomeFragment fragment = new HomeFragment();
+                                QuieroNuevoPedido2 fragment = new QuieroNuevoPedido2();
                                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                                 ftEs.replace(R.id.nav_host_fragment, fragment);
                                 ftEs.addToBackStack(null);
@@ -165,7 +165,7 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
 
                                 mUsuario.child(ID).child("Center").setValue("INN COFFEE SEVILLA ESTE");
 
-                                HomeFragment fragment = new HomeFragment();
+                                QuieroNuevoPedido2 fragment = new QuieroNuevoPedido2();
                                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                                 ftEs.replace(R.id.nav_host_fragment, fragment);
                                 ftEs.addToBackStack(null);
@@ -195,7 +195,7 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
 
                                     mUsuario.child(ID).child("Center").setValue("INN COFFEE SEVILLA CARTUJA");
 
-                                    HomeFragment fragment = new HomeFragment();
+                                    QuieroNuevoPedido2 fragment = new QuieroNuevoPedido2();
                                     FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                                     ftEs.replace(R.id.nav_host_fragment, fragment);
                                     ftEs.addToBackStack(null);

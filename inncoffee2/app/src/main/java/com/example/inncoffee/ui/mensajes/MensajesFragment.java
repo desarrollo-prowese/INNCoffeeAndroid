@@ -2,6 +2,7 @@ package com.example.inncoffee.ui.mensajes;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,7 +92,6 @@ public class MensajesFragment extends Fragment {
         mRecycle.setLayoutManager(new LinearLayoutManager(getContext()));
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
         inicialize();
 
         getMensajesFromFirebase();
@@ -101,7 +101,7 @@ public class MensajesFragment extends Fragment {
     public void removeItem(int position) {
         mAdapter.deleteItem(position);
         MensajesFragment fragment = new MensajesFragment();
-        FragmentTransaction ftEs = getFragmentManager().beginTransaction();
+        FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
         ftEs.replace(R.id.nav_host_fragment, fragment);
         ftEs.addToBackStack(null);
         ftEs.commit();
