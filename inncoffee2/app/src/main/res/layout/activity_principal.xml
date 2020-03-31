@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:background="@drawable/menu_registronew1"
         android:gravity="center"
         android:text="@string/not_having_account"
         android:textColor="@android:color/white"
@@ -59,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:background="#000000"
+        android:background="@drawable/registro_negro"
         android:text="@string/sign_in"
         android:textColor="@android:color/white" />
 

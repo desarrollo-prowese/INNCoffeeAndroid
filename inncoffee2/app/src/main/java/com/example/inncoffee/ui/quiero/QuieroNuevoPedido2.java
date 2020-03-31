@@ -75,21 +75,33 @@ public class QuieroNuevoPedido2 extends Fragment {
         alojenos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                QuieroAlojenos fragment = new QuieroAlojenos();
+                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                ftEs.replace(R.id.nav_host_fragment, fragment);
+                ftEs.addToBackStack(null);
+                ftEs.commit();
             }
         });
 
         cartadesayunos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                QuieroAlojenos fragment = new QuieroAlojenos();
+                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                ftEs.replace(R.id.nav_host_fragment, fragment);
+                ftEs.addToBackStack(null);
+                ftEs.commit();
             }
         });
 
         cartacomidas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                QuieroAlojenos fragment = new QuieroAlojenos();
+                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                ftEs.replace(R.id.nav_host_fragment, fragment);
+                ftEs.addToBackStack(null);
+                ftEs.commit();
             }
         });
 

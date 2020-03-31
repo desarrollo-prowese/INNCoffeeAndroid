@@ -141,11 +141,11 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot keyId: dataSnapshot.getChildren()) {
                     if(dataSnapshot.exists()){
-                       if(Objects.equals(keyId.child("Email").getValue(), email)) {
-                           fname = keyId.child("FullName").getValue().toString().trim();
-                           centre = keyId.child("Center").getValue().toString().trim();
 
-                   }
+                           fname = keyId.child("FullName").getValue().toString();
+                           centre = keyId.child("Center").getValue().toString();
+
+
                }
             }
                 if (fname != null )

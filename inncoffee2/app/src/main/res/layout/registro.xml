@@ -78,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:background="#000000"
+        android:background="@drawable/registro_negro"
         android:padding="5dp"
         android:text="@string/register"
         android:textColor="@android:color/white" />

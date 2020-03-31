@@ -49,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:background="@drawable/menu_registronew1"
         android:gravity="center"
         android:text="@string/__has_olvidado_tu_contrase_a__string"
         android:textColor="@android:color/white"
@@ -59,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
-        android:background="#000000"
+        android:background="@drawable/registro_negro"
         android:padding="5dp"
         android:text="@string/log_in"
         android:textColor="@android:color/white" />

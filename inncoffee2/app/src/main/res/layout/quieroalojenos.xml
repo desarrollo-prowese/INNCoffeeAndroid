@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/nuevopedido3">
+
+    <ImageView
+        android:id="@+id/trigo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/a0_04"
+        android:tag="trigooriginal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.257" />
+
+    <ImageView
+        android:id="@+id/cangrejo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/trigo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.257"
+        android:tag="cangrejooriginal"
+        android:background="@drawable/a0_01" />
+
+    <ImageView
+        android:id="@+id/huevo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cangrejo"
+        app:layout_constraintTop_toTopOf="parent"
+        android:tag="huevooriginal"
+        app:layout_constraintVertical_bias="0.257"
+        android:background="@drawable/a0_05" />
+
+    <ImageView
+        android:id="@+id/pescado"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/huevo"
+        app:layout_constraintTop_toTopOf="parent"
+        android:tag="pescadooriginal"
+        app:layout_constraintVertical_bias="0.257"
+        android:background="@drawable/a0_06" />
+
+    <ImageView
+        android:id="@+id/cacahuete"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:tag="cacahueteoriginal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pescado"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.257"
+        android:background="@drawable/a0_10" />
+
+    <ImageView
+        android:id="@+id/frutosecos"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:tag="frutosecosoriginal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/huevo"
+        app:layout_constraintTop_toBottomOf="@+id/pescado"
+        app:layout_constraintVertical_bias="0.042"
+        android:background="@drawable/a0_03" />
+
+    <ImageView
+        android:id="@+id/altramuzes"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:tag="altramuzesoriginal"
+        android:layout_marginStart="48dp"
+        android:background="@drawable/a0_14"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/huevo"
+        app:layout_constraintTop_toBottomOf="@+id/frutosecos"
+        app:layout_constraintVertical_bias="0.059" />
+
+    <ImageView
+        android:id="@+id/moluscos"
+        android:layout_width="50dp"
+        android:tag="moluscosoriginal"
+        android:layout_height="50dp"
+        android:layout_marginStart="48dp"
+        android:background="@drawable/a0_07"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cangrejo"
+        app:layout_constraintTop_toBottomOf="@+id/lacteos"
+        app:layout_constraintVertical_bias="0.059" />
+
+    <ImageView
+        android:id="@+id/mostaza"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:tag="mostazaoriginal"
+        android:layout_marginStart="48dp"
+        android:background="@drawable/a0_08"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/apio"
+        app:layout_constraintVertical_bias="0.059" />
+
+    <ImageView
+        android:id="@+id/semillas"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:tag="semillaoriginal"
+        android:layout_marginStart="48dp"
+        android:background="@drawable/a0_02"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/trigo"
+        app:layout_constraintTop_toBottomOf="@+id/soja"
+        app:layout_constraintVertical_bias="0.059" />
+
+    <ImageView
+        android:id="@+id/apio"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:tag="apiooriginal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/trigo"
+        app:layout_constraintVertical_bias="0.042"
+        android:background="@drawable/a0_09" />
+
+    <ImageView
+        android:id="@+id/lacteos"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:tag="lacteosoriginal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cangrejo"
+        app:layout_constraintTop_toBottomOf="@+id/huevo"
+        app:layout_constraintVertical_bias="0.042"
+        android:background="@drawable/a0_11" />
+
+    <ImageView
+        android:id="@+id/soja"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="15dp"
+        android:tag="sojaoriginal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/trigo"
+        app:layout_constraintTop_toBottomOf="@+id/cangrejo"
+        app:layout_constraintVertical_bias="0.042"
+        android:background="@drawable/a0_13" />
+
+    <ImageView
+        android:id="@+id/dioxidoysulfito"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="15dp"
+        android:tag="dioxidooriginal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/pescado"
+        app:layout_constraintTop_toBottomOf="@+id/cacahuete"
+        app:layout_constraintVertical_bias="0.042"
+        android:background="@drawable/a0_12" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/marca_tus_alergias_alimentarias_antes_de_hacer_tu_pedido_string"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="364dp"
+        android:text="@string/ahora_s____buen_provecho__string"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/alojernosdesayuno"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rect_ngulo_1493_shape"
+        android:text="@string/carta_desayunos_ek1_string"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.82" />
+
+    <Button
+        android:id="@+id/alojenoscomidas"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rect_ngulo_1461_ek2_shape"
+        android:text="@string/carta_comidas_ek10_string"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alojernosdesayuno"
+        app:layout_constraintVertical_bias="0.19" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -107,7 +107,7 @@ de alergia alimentaria?</string>
     <string name="marca_tus_alergias_alimentarias_antes_de_hacer_tu_pedido_string">Marca tus alergias\
 alimentarias antes\
 de hacer tu pedido</string>
-    <string name="ahora_s____buen_provecho__string">Ahora s,\
+    <string name="ahora_s____buen_provecho__string">Ahora si,\
 Buen provecho!</string>
     <string name="quiero___nuevo_pedido_ek4_string">QUIERO / NUEVO PEDIDO</string>
     <string name="carta_desayunos_ek2_string">Carta desayunos</string>
@@ -115,8 +115,7 @@ Buen provecho!</string>
     <string name="marca_tus_alergias_alimentarias_antes_de_hacer_tu_pedido_ek1_string">Marca tus alergias\
 alimentarias antes\
 de hacer tu pedido</string>
-    <string name="ahora_s____buen_provecho__ek1_string">Ahora s,\
-Buen provecho!</string>
+
     <string name="x_string">X</string>
     <string name="quiero___nuevo_pedido_ek5_string">QUIERO / NUEVO PEDIDO</string>
     <string name="tostadas_string">TOSTADAS</string>
@@ -127,8 +126,6 @@ Buen provecho!</string>
     <string name="marca_tus_alergias_alimentarias_antes_de_hacer_tu_pedido_ek2_string">Marca tus alergias\
 alimentarias antes\
 de hacer tu pedido</string>
-    <string name="ahora_s____buen_provecho__ek2_string">Ahora s,\
-Buen provecho!</string>
     <string name="x_ek1_string">X</string>
     <string name="quiero___nuevo_pedido_ek7_string">QUIERO / NUEVO PEDIDO</string>
     <string name="carta_comidas_ek4_string">Carta comidas</string>
@@ -515,5 +512,10 @@ segn la hora?</string>
     <string name="mis_ofertas_mis_mensajes">MIS OFERTAS/MIS MENSAJES</string>
     <string name="notifications" />
     <string name="tienes_alg_n_tipo_de_alergia_alimentaria">¿Tienes algún tipo de alergia alimentaria?</string>
+
+
+    <string name="trigoOriginal">original</string>
+    <string name="trigox">marcado</string>
+
 
 </resources>
