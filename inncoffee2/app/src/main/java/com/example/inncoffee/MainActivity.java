@@ -1,8 +1,20 @@
 package com.example.inncoffee;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.MaskFilter;
+import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Shader;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +26,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.Request;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.SizeReadyCallback;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.inncoffee.RegistroLogin.Login;
 import com.example.inncoffee.ui.home.HomeFragment;
 import com.example.inncoffee.ui.mensajes.AdapterMensaje;
@@ -21,19 +41,30 @@ import com.example.inncoffee.ui.mensajes.MensajesClass;
 import com.example.inncoffee.ui.mensajes.MensajesFragment;
 import com.example.inncoffee.ui.mispuntos.MisPuntosFragment;
 import com.example.inncoffee.ui.ofertas.OfertasClass;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
@@ -60,9 +91,16 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     public static int pendingNotifications;
     private static final String USERS = "Users";
+    private static ImageView perfil;
     private String email;
+
+    private static final int PICK_IMAGE_REQUEST = 1;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
+    private Bitmap original, mask;
+    Bitmap resultado, maskbitmap;
+    private String ID ;
+    private Uri mImageUri;
 
 
     // badge text view
@@ -128,25 +166,52 @@ public class MainActivity extends AppCompatActivity {
         navHeaderView = navigationView.getHeaderView(0);
         final TextView fnames = (TextView) navHeaderView.findViewById(R.id.TextoNombre);
         final TextView centro = (TextView) navHeaderView.findViewById(R.id.Centro);
+        perfil = (ImageView) navHeaderView.findViewById(R.id.ImagenPerfil);
+        perfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFileChooser();
+            }
+        });
+
+
         mDatabase = FirebaseDatabase.getInstance();
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
         mRef = mDatabase.getReference("Mensajes");
         mRefo = mDatabase.getReference("Ofertas");
         mUsuario = mDatabase.getReference(USERS);
         Log.v("USERID", mUsuario.getKey());
         Log.v("USERGUID", mAuth.getUid());
+
+        if (mUser != null) {
+            Log.d("TAG", "onCreate: " + mUser.getDisplayName());
+
+
+               if (mUser.getPhotoUrl() != null) {
+
+                   Glide.with(getApplicationContext()).load(mUser.getPhotoUrl().toString()).into(perfil);
+               }
+
+
+
+        }
+
         mUsuario.addValueEventListener(new ValueEventListener() {
             String fname;
             String centre;
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 for (DataSnapshot keyId: dataSnapshot.getChildren()) {
                     if(dataSnapshot.exists()){
-
+                        if(Objects.equals(keyId.child("Email").getValue(), email)) {
                            fname = keyId.child("FullName").getValue().toString();
                            centre = keyId.child("Center").getValue().toString();
+                           Log.v("NOMBRE  ", fname+ keyId);
+                           Log.v("CENTRO", centre+ keyId);
 
-
-               }
+                        }
+                    }
             }
                 if (fname != null )
                 fnames.setText(fname);
@@ -298,6 +363,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     private void closeDrawer() {
         drawer.closeDrawer(GravityCompat.START);
     }
@@ -328,5 +395,133 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            mImageUri = data.getData();
+
+            try {
+
+                original = MediaStore.Images.Media.getBitmap(getContentResolver(),mImageUri);
+                mask = BitmapFactory.decodeResource(getResources(),R.drawable.inncoffeelogo);
+                if (original != null){
+                    int iv_wight = original.getWidth();
+                    int iv_height = original.getHeight();
+
+
+                    resultado = Bitmap.createBitmap(iv_wight,iv_height,Bitmap.Config.ARGB_8888);
+                    maskbitmap = Bitmap.createScaledBitmap(mask,iv_wight,iv_height, true);
+                    Canvas canvas = new Canvas(resultado);
+                    Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+                    paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
+                    canvas.drawBitmap(original, 0,0 ,null);
+                    canvas.drawBitmap(maskbitmap,0,0, paint);
+                    paint.setXfermode(null);
+                    paint.setStyle(Paint.Style.STROKE);
+                    perfil.setImageBitmap(resultado);
+                    handleUpload(resultado);
+
+                }
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            super.onActivityResult(requestCode, resultCode, data);
+
+
+
+        }
+
+
+    }
+    private void handleUpload(Bitmap bitmap) {
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final StorageReference reference = FirebaseStorage.getInstance().getReference("Perfiles")
+                .child(uid + ".jpeg");
+
+        reference.putBytes(baos.toByteArray())
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        getDownloadUrl(reference);
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("TAG", "onFailure: ",e.getCause() );
+                    }
+                });
+
+    }
+    private void getDownloadUrl(StorageReference reference) {
+        reference.getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Log.d("TAG", "onSuccess: " + uri);
+
+
+                        setUserProfileUrl(uri);
+                    }
+                });
+    }
+
+    private void setUserProfileUrl(final Uri uri) {
+
+        UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
+                .setPhotoUri(uri)
+                .build();
+
+        mUser.updateProfile(request)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+
+                        Toast.makeText(MainActivity.this, "Updated succesfully", Toast.LENGTH_SHORT).show();
+                        mUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+
+                                    String foto = mUser.getPhotoUrl().toString();
+                                    Log.v("QUE FOTO ES " , foto);
+                                    ID = mAuth.getUid();
+                                    mUsuario.child(ID).child("PhotoURL").setValue(foto);
+
+                                }
+                            }
+
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                Log.w("TAG", "Failed to read value.", databaseError.toException());
+                            }
+                        });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MainActivity.this, "Profile image failed...", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        }
 }

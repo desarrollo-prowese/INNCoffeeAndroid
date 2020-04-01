@@ -79,7 +79,6 @@
         android:id="@+id/constraintLayout"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/trazado_52_ek6"
         android:contentDescription="@string/nav_header_desc"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,13 +88,15 @@
         app:layout_constraintVertical_bias="0.25">
 
         <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:id="@+id/ImagenPerfil"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="center"
-            android:background="@drawable/com_facebook_profile_picture_blank_portrait"
+            android:adjustViewBounds="true"
             android:contentDescription="@string/nav_header_desc"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
+            android:scaleType="centerCrop"
+            android:src="@drawable/com_facebook_profile_picture_blank_portrait"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.52"
