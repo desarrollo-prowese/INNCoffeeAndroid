@@ -129,7 +129,7 @@ de hacer tu pedido</string>
     <string name="x_ek1_string">X</string>
     <string name="quiero___nuevo_pedido_ek7_string">QUIERO / NUEVO PEDIDO</string>
     <string name="carta_comidas_ek4_string">Carta comidas</string>
-    <string name="tostadas___cl_sicas_string">TOSTADAS / CLSICAS</string>
+    <string name="tostadas___cl_sicas_string">Tostadas Clásicas</string>
     <string name="aceite_de_oliva_string">Aceite\
 de Oliva</string>
     <string name="el_cl_sico_que_nunca_falla__con_aove__string">El clsico que nunca\
@@ -144,8 +144,7 @@ falla, con AOVE.</string>
     <string name="seleccionar_tipo_de_pan_string">Seleccionar tipo de pan</string>
     <string name="quiero___nuevo_pedido_ek8_string">QUIERO / NUEVO PEDIDO</string>
     <string name="caf_s_string">Cafs</string>
-    <string name="t__e_infusiones_string">T e\
-infusiones</string>
+    <string name="t__e_infusiones_string">Té e Infusiones </string>
     <string name="bebidas_ek4_string">Bebidas</string>
     <string name="zumos_string">Zumos</string>
     <string name="quiero___nuevo_pedido_ek9_string">QUIERO / NUEVO PEDIDO</string>
@@ -180,7 +179,7 @@ falla, con AOVE.</string>
     <string name="media_ek1_string">Media</string>
     <string name="chapata__cambiar__string">Chapata (cambiar)</string>
     <string name="tostadas_ek1_string">TOSTADAS</string>
-    <string name="bebidas_ek5_string">BEBIDAS</string>
+    <string name="bebidas_ek5_string">Bebidas</string>
     <string name="total__1_20__string">Total: 1,20</string>
     <string name="finalizar_pedido_string">FINALIZAR PEDIDO</string>
     <string name="quiero___nuevo_pedido_ek12_string">QUIERO / NUEVO PEDIDO</string>
@@ -242,8 +241,8 @@ de enviarte por mail\
 DEL PAGO</string>
     <string name="quiero___nuevo_pedido_ek14_string">QUIERO / NUEVO PEDIDO</string>
     <string name="carta_comidas_ek7_string">Carta comidas</string>
-    <string name="caf_s_ek1_string">CAFS</string>
-    <string name="caf__solo_string">Caf solo</string>
+    <string name="caf_s_ek1_string">Cafés</string>
+    <string name="caf__solo_string">Cafe solo</string>
     <string name="tueste_natural____string">Tueste natural...</string>
     <string name="___ek6_string">+</string>
     <string name="___ek7_string">-</string>
@@ -284,7 +283,7 @@ mineral 50 cl.</string>
     <string name="a_adir_ek5_string">AADIR</string>
     <string name="quiero___nuevo_pedido_ek18_string">QUIERO / NUEVO PEDIDO</string>
     <string name="carta_comidas_ek11_string">Carta comidas</string>
-    <string name="tostadas___originales_string">TOSTADAS / ORIGINALES</string>
+    <string name="tostadas___originales_string">Tostadas Originales</string>
     <string name="aguacate_y_pavo_string">Aguacate\
 y pavo</string>
     <string name="texto_ek1_string">texto</string>
@@ -298,7 +297,7 @@ y pavo</string>
     <string name="seleccionar_tipo_de_pan_ek1_string">Seleccionar tipo de pan</string>
     <string name="quiero___nuevo_pedido_ek19_string">QUIERO / NUEVO PEDIDO</string>
     <string name="carta_comidas_ek12_string">Carta comidas</string>
-    <string name="tostadas___extraordinarias_string">TOSTADAS / EXTRAORDINARIAS</string>
+    <string name="tostadas___extraordinarias_string">Tostadas Extraordinarias</string>
     <string name="tostada_de_pera_string">Tostada\
 de pera</string>
     <string name="este_producto_no_est__disponible_para_ti_porque_contiene_al_rgenos_que_no_puedes_consumir__string">Este producto no est\

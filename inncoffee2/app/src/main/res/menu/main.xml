@@ -12,9 +12,6 @@
         android:id="@+id/tOfertas"
         android:title="Ofertas" />
     <item
-        android:id="@+id/tPagos"
-        android:title="Pagos" />
-    <item
         android:id="@+id/tPedidos"
         android:title="Pedidos" />
     <item

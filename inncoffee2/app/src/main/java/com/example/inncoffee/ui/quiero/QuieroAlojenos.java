@@ -93,6 +93,29 @@ public class QuieroAlojenos extends Fragment {
         altramuces = (ImageView) root.findViewById(R.id.altramuzes) ;
 
 
+        cartadesayuno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CartaDesayunos fragment = new CartaDesayunos();
+                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                ftEs.replace(R.id.nav_host_fragment, fragment);
+                ftEs.addToBackStack(null);
+                ftEs.commit();
+
+            }
+        });
+
+        cartacomida.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CartaComidas fragment = new CartaComidas();
+                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                ftEs.replace(R.id.nav_host_fragment, fragment);
+                ftEs.addToBackStack(null);
+                ftEs.commit();
+            }
+        });
+
         trigo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

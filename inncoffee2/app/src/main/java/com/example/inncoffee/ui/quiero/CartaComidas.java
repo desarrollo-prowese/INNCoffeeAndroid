@@ -6,8 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
@@ -16,13 +15,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
-public class QuieroFragment extends Fragment {
-
-    private Button Nuevopedido;
+public class CartaComidas extends Fragment {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
+    private TextView combos,sandwiches,platosytapas,postres,bebidas;
+
     private void inicialize() {
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -60,20 +58,47 @@ public class QuieroFragment extends Fragment {
         };
 
     }
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.quierofragment, container, false);
-        MainActivity.mensajeToolbar.setText("QUIERO");
-        Nuevopedido = (Button) root.findViewById(R.id.buttonNuevoPedido);
-        Nuevopedido.setOnClickListener(new View.OnClickListener() {
+        View root = inflater.inflate(R.layout.cartacomidas, container, false);
+        MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
+
+       combos = (TextView) root.findViewById(R.id.combos);
+       sandwiches = (TextView) root.findViewById(R.id.sandwiches);
+       platosytapas = (TextView) root.findViewById(R.id.platosytapas);
+       postres = (TextView) root.findViewById(R.id.postres);
+       bebidas = (TextView) root.findViewById(R.id.bebidas);
+
+       combos.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+
+           }
+       });
+        sandwiches.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                QuieroNuevoPedido fragment = new QuieroNuevoPedido();
-                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
-                ftEs.replace(R.id.nav_host_fragment, fragment);
-                ftEs.addToBackStack(null);
-                ftEs.commit();
+
+            }
+        });
+        platosytapas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        postres.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        bebidas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });
@@ -83,5 +108,4 @@ public class QuieroFragment extends Fragment {
         inicialize();
         return root;
     }
-
 }

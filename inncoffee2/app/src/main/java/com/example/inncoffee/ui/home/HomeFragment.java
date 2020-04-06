@@ -1,13 +1,17 @@
 package com.example.inncoffee.ui.home;
 
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -80,7 +84,6 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-
     private void createAdapter(RecyclerView recyclerView) {
         final List<String> content = new ArrayList<>();
         for (int i = 0; i < 25; i++) {
@@ -125,7 +128,7 @@ public class HomeFragment extends Fragment {
 
         final ParallaxRecyclerAdapter<String> adapter = new ParallaxRecyclerAdapter<String>(content) {
             @Override
-            public void onBindViewHolderImpl(RecyclerView.ViewHolder viewHolder, ParallaxRecyclerAdapter<String> adapter, int i) {
+            public void onBindViewHolderImpl(final RecyclerView.ViewHolder viewHolder, ParallaxRecyclerAdapter<String> adapter, int i) {
                 ((ViewHolder) viewHolder).textView.setText(adapter.getData().get(i));
                 ((ViewHolder) viewHolder).imgViewIcon.setImageResource(imageIds[i]);
                 if (i == 0 ){

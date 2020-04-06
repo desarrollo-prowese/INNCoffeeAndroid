@@ -145,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -272,9 +273,6 @@ public class MainActivity extends AppCompatActivity {
 
                         Toast.makeText(MainActivity.this, "Proximamente", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.tPagos:
-                        Toast.makeText(MainActivity.this, "Proximamente", Toast.LENGTH_SHORT).show();
-                        break;
                     case R.id.tPedidos:
                         Toast.makeText(MainActivity.this, "Proximamente", Toast.LENGTH_SHORT).show();
                         break;
@@ -362,7 +360,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(getIntent());
+    }
 
 
     private void closeDrawer() {
