@@ -30,10 +30,10 @@ public class PagerSettings {
     }
 
     public static void setSettings7cards(Context context) {
-        translateY = Dimensions.convertDpToPixelInt(100f, context);
+        translateY = Dimensions.convertDpToPixelInt(70f, context);
         cardWidth = Dimensions.convertDpToPixelInt(360f, context);
-        cardHeight = Dimensions.convertDpToPixelInt(200f, context);
-        skew = 4f;
+        cardHeight = Dimensions.convertDpToPixelInt(70f, context);
+        skew = 0f;
     }
 
 }

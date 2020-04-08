@@ -93,7 +93,6 @@ public class MensajesFragment extends Fragment {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         inicialize();
-
         getMensajesFromFirebase();
 
       return root;

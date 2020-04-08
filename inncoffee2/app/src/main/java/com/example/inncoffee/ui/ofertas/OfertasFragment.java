@@ -92,7 +92,6 @@ public class OfertasFragment extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         inicialize();
-
         getOfertasFromFirebase();
         return root;
     }

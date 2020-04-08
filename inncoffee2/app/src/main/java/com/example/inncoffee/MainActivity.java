@@ -36,6 +36,7 @@ import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.inncoffee.RegistroLogin.Login;
 import com.example.inncoffee.ui.home.HomeFragment;
+import com.example.inncoffee.ui.home.HomeFragment1;
 import com.example.inncoffee.ui.mensajes.AdapterMensaje;
 import com.example.inncoffee.ui.mensajes.MensajesClass;
 import com.example.inncoffee.ui.mensajes.MensajesFragment;
@@ -93,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String USERS = "Users";
     private static ImageView perfil;
     private String email;
+    public static boolean back= false;
 
     private static final int PICK_IMAGE_REQUEST = 1;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -187,7 +189,6 @@ public class MainActivity extends AppCompatActivity {
         if (mUser != null) {
             Log.d("TAG", "onCreate: " + mUser.getDisplayName());
 
-
                if (mUser.getPhotoUrl() != null) {
 
                    Glide.with(getApplicationContext()).load(mUser.getPhotoUrl().toString()).into(perfil);
@@ -240,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.tInicio:
-                        HomeFragment fragment = new HomeFragment();
+                        HomeFragment1 fragment = new HomeFragment1();
                         FragmentTransaction ftEs = getSupportFragmentManager().beginTransaction();
                         ftEs.replace(R.id.nav_host_fragment, fragment);
                         ftEs.addToBackStack(null);
@@ -257,8 +258,8 @@ public class MainActivity extends AppCompatActivity {
                         mRef.child(key).setValue(user);
 
 
-                        Toast.makeText(MainActivity.this, "Data inserted...", Toast.LENGTH_SHORT).show();
-                    //    Toast.makeText(MainActivity.this, "Proximamente", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "Data inserted...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Proximamente", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.tOfertas:
 
@@ -304,7 +305,7 @@ public class MainActivity extends AppCompatActivity {
         bIncio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HomeFragment fragment = new HomeFragment();
+                HomeFragment1 fragment = new HomeFragment1();
                 FragmentTransaction ftEs = getSupportFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);

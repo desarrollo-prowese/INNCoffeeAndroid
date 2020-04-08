@@ -108,11 +108,12 @@ public class QuieroAlojenos extends Fragment {
         cartacomida.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CartaComidas fragment = new CartaComidas();
+                Toast.makeText(getActivity(),"Proximamente", Toast.LENGTH_SHORT).show();
+               /* CartaComidas fragment = new CartaComidas();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);
-                ftEs.commit();
+                ftEs.commit();*/
             }
         });
 

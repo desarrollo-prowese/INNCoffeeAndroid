@@ -56,7 +56,7 @@ public class CardPagerAdapter<T extends Parcelable> extends FragmentPagerAdapter
 
         pagesCount = this.items.size();
 
-        firstPosition = pagesCount * 1000 / 2; //Start in the middle when opening app
+        firstPosition = pagesCount * 500 / 2 * 3; //Start in the middle when opening app
 
     }
 
@@ -86,7 +86,7 @@ public class CardPagerAdapter<T extends Parcelable> extends FragmentPagerAdapter
 
     @Override
     public int getCount() {
-        return pagesCount * 1000; //pageCount * Loop
+        return pagesCount * 500; //pageCount * Loop
     }
 
     @Override
@@ -95,14 +95,14 @@ public class CardPagerAdapter<T extends Parcelable> extends FragmentPagerAdapter
 
         PageLayout current = getPageView(position);
 
-        PageLayout next = getPageView(position + 1);
+        PageLayout next = getPageView(position + 3);
         PageLayout nextnext = getPageView(position + 2);
-        PageLayout nextnextnext = getPageView(position + 3);
+        PageLayout nextnextnext = getPageView(position + 1);
 
-        PageLayout prev = getPageView(position - 1);
-        PageLayout prevprev = getPageView(position - 2);
-        PageLayout prevprevprev = getPageView(position - 3);
-        PageLayout prevprevprevprev = getPageView(position - 4);
+        PageLayout prev = getPageView(position - 4);
+        PageLayout prevprev = getPageView(position - 3);
+        PageLayout prevprevprev = getPageView(position - 2);
+        PageLayout prevprevprevprev = getPageView(position - 1);
 
         /*if (positionOffset >= 0.5f) { //Example on how to play around with the cards current offset
             next.bringToFront();
@@ -135,22 +135,25 @@ public class CardPagerAdapter<T extends Parcelable> extends FragmentPagerAdapter
 
         if (prev != null) {
             prev.setTranslated(PagerSettings.getTranslateY());
-            prev.setSkew(4f);
+            prev.setSkew(0f);
         }
 
         if (prevprev != null) {
             prevprev.setTranslated(PagerSettings.getTranslateY());
-            prevprev.setSkew(4f);
+            prevprev.setSkew(1f);
+            prevprev.setHeight(PagerSettings.getCardHeight());
         }
 
         if (prevprevprev != null) {
             prevprevprev.setTranslated(PagerSettings.getTranslateY());
-            prevprevprev.setSkew(4f);
+            prevprevprev.setSkew(0f);
+            prevprevprev.setHeight(PagerSettings.getCardHeight());
         }
 
         if (prevprevprevprev != null) {
             prevprevprevprev.setTranslated(PagerSettings.getTranslateY());
-            prevprevprevprev.setSkew(4f);
+            prevprevprevprev.setSkew(0f);
+            prevprevprevprev.setHeight(PagerSettings.getCardHeight());
         }
 
     }
@@ -169,7 +172,7 @@ public class CardPagerAdapter<T extends Parcelable> extends FragmentPagerAdapter
 
     @Override
     public float getPageWidth(int position) {
-        return 1.17f;
+        return 1.07f;
     }
 
     public int getFirstPosition() {

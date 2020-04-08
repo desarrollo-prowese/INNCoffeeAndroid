@@ -36,31 +36,14 @@ public class HomeFragment1 extends Fragment {
         MainActivity.mensajeToolbar.setText("");
         if (savedInstanceState == null) {
 
-            String colors[] = new String[7];
-            String colors2[] = new String[7];
-
-            colors[0] = "#2D4CB4";
-            colors[1] = "#D147B6";
-            colors[2] = "#F9441F";
-            colors[3] = "#F9F5F4";
-            colors[4] = "#3CDD4C";
-            colors[5] = "#ffff0a";
-            colors[6] = "#F19CBB";
-
-            colors2[0] = "#40569E";
-            colors2[1] = "#B861A6";
-            colors2[2] = "#F94E2F";
-            colors2[3] = "#f9C2C2";
-            colors2[4] = "#5ABC63";
-            colors2[5] = "#ffffaa";
-            colors2[6] = "#F19CBB";
 
             items = new ArrayList<>();
 
-                items.add(new Card(R.drawable.mis_puntos_menu2,"MIS PUNTOS ","MISPUNTOS"));
-                items.add(new Card(R.drawable.mis_ofertas_menu2,"MIS OFERTAS ","MISOFERTAS"));
-                items.add(new Card(R.drawable.pago_y_gano_menu_2,"PAGO Y GANO ","PAGOYGANO"));
-                items.add(new Card(R.drawable.menu_quiero2,"QUIERO ","QUIERO"));
+
+            items.add(new Card(R.drawable.mis_puntos,"MIS PUNTOS ","MISPUNTOS"));
+            items.add(new Card(R.drawable.mis_ofertas,"MIS OFERTAS ","MISOFERTAS"));
+            items.add(new Card(R.drawable.pago_y_gano,"PAGO Y GANO ","PAGOYGANO"));
+            items.add(new Card(R.drawable.quiero,"QUIERO ","QUIERO"));
 
 
             if (items.size() == 4) {
@@ -78,7 +61,7 @@ public class HomeFragment1 extends Fragment {
                 PageFragment.class,
                 R.layout.page_layout,
                 items,
-                getContext());
+                getActivity());
 
         viewPager.setAdapter(pagerAdapter);
 
@@ -117,10 +100,10 @@ public class HomeFragment1 extends Fragment {
         return viewPager.getPageLimit();
     }
 
-    @Override
+   /* @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList("items", items);
-    }
+    }*/
 
 }

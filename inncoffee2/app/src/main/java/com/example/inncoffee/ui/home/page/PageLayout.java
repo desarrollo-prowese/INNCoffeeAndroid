@@ -14,6 +14,7 @@ public class PageLayout extends RelativeLayout {
 
     private float skew = 0;
     private float translate = 0;
+    private float height= 0;
 
     private Camera camera;
 
@@ -39,6 +40,10 @@ public class PageLayout extends RelativeLayout {
 
     public void setTranslated(float translate) {
         this.translate = translate;
+        invalidate();
+    }
+    public void setHeight(float height) {
+        this.height = height;
         invalidate();
     }
 

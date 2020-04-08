@@ -9,9 +9,6 @@
         android:id="@+id/nav_home"
         android:name="com.example.inncoffee.ui.home.HomeFragment1">
         <action
-            android:id="@+id/action_nav_home_self"
-            app:destination="@id/nav_home" />
-        <action
             android:id="@+id/action_nav_home_to_nav_misoffertas3"
             app:destination="@id/nav_misoffertas" />
         <action
@@ -28,27 +25,19 @@
     <fragment
         android:id="@+id/nav_mensaje"
         android:name="com.example.inncoffee.ui.mensajes.MensajesFragment"
-        tools:layout="@layout/fragment_mensajes" >
-        <action
-            android:id="@+id/action_nav_mensaje_to_nav_home3"
-            app:destination="@id/nav_home" />
-    </fragment>
+        tools:layout="@layout/fragment_mensajes" />
 
     <fragment
         android:id="@+id/nav_puntos"
         android:name="com.example.inncoffee.ui.mispuntos.MisPuntosFragment"
-        tools:layout="@layout/fragment_puntos" >
-        <action
-            android:id="@+id/action_nav_puntos_to_nav_home3"
-            app:destination="@id/nav_home" />
-    </fragment>
+        tools:layout="@layout/fragment_puntos" />
     <fragment
         android:id="@+id/nav_quiero"
         android:name="com.example.inncoffee.ui.quiero.QuieroFragment"
         tools:layout="@layout/quierofragment" >
         <action
-            android:id="@+id/action_nav_quiero_to_nav_home2"
-            app:destination="@id/nav_home" />
+            android:id="@+id/action_nav_quiero_to_nav_quieronuevopedido"
+            app:destination="@id/nav_quieronuevopedido" />
     </fragment>
     <fragment
         android:id="@+id/nav_quieronuevopedido"
@@ -68,6 +57,9 @@
         <action
             android:id="@+id/action_nav_quieronuevopedido2_to_nav_quieroalojenos2"
             app:destination="@id/nav_quieroalojenos" />
+        <action
+            android:id="@+id/action_nav_quieronuevopedido2_to_nav_quieroestablecimiento"
+            app:destination="@id/nav_quieroestablecimiento" />
     </fragment>
     <fragment
         android:id="@+id/nav_quieroestablecimiento"
@@ -76,6 +68,9 @@
         <action
             android:id="@+id/action_nav_quieroestablecimiento_to_nav_quieronuevopedido22"
             app:destination="@id/nav_quieronuevopedido2" />
+        <action
+            android:id="@+id/action_nav_quieroestablecimiento_to_nav_quieronuevopedido"
+            app:destination="@id/nav_quieronuevopedido" />
     </fragment>
     <fragment
         android:id="@+id/nav_quieroalojenos"
@@ -87,11 +82,24 @@
         <action
             android:id="@+id/action_nav_quieroalojenos_to_nav_quierocartacomidas2"
             app:destination="@id/nav_quierocartacomidas" />
+        <action
+            android:id="@+id/action_nav_quieroalojenos_to_nav_quieronuevopedido2"
+            app:destination="@id/nav_quieronuevopedido2" />
     </fragment>
     <fragment
         android:id="@+id/nav_quierocartadesayunos"
         android:name="com.example.inncoffee.ui.quiero.CartaDesayunos"
-        tools:layout="@layout/cartadesayunos" />
+        tools:layout="@layout/cartadesayunos" >
+        <action
+            android:id="@+id/action_nav_quierocartadesayunos_to_nav_quierotostadas"
+            app:destination="@id/nav_quierotostadas" />
+        <action
+            android:id="@+id/action_nav_quierocartadesayunos_to_nav_quierobebidas"
+            app:destination="@id/nav_quierobebidas" />
+        <action
+            android:id="@+id/action_nav_quierocartadesayunos_to_nav_quieroalojenos"
+            app:destination="@id/nav_quieroalojenos" />
+    </fragment>
     <fragment
         android:id="@+id/nav_quierocartacomidas"
         android:name="com.example.inncoffee.ui.quiero.CartaComidas"
@@ -107,6 +115,50 @@
         <action
             android:id="@+id/action_nav_quierobebidas_to_nav_quierocartadesayunos2"
             app:destination="@id/nav_quierocartadesayunos" />
+        <action
+            android:id="@+id/action_nav_quierobebidas_to_nav_cafes"
+            app:destination="@id/nav_cafes" />
+        <action
+            android:id="@+id/action_nav_quierobebidas_to_nav_bebidas"
+            app:destination="@id/nav_bebidas" />
+        <action
+            android:id="@+id/action_nav_quierobebidas_to_nav_tes"
+            app:destination="@id/nav_tes" />
+        <action
+            android:id="@+id/action_nav_quierobebidas_to_nav_zumos"
+            app:destination="@id/nav_zumos" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_bebidas"
+        android:name="com.example.inncoffee.ui.bebidas.Bebidas1"
+        tools:layout="@layout/bebidas1" >
+        <action
+            android:id="@+id/action_nav_bebidas_to_nav_quierobebidas"
+            app:destination="@id/nav_quierobebidas" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_zumos"
+        android:name="com.example.inncoffee.ui.bebidas.Zumos"
+        tools:layout="@layout/zumos" >
+        <action
+            android:id="@+id/action_nav_zumos_to_nav_quierobebidas"
+            app:destination="@id/nav_quierobebidas" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_tes"
+        android:name="com.example.inncoffee.ui.bebidas.Tes"
+        tools:layout="@layout/tes" >
+        <action
+            android:id="@+id/action_nav_tes_to_nav_quierobebidas"
+            app:destination="@id/nav_quierobebidas" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_cafes"
+        android:name="com.example.inncoffee.ui.bebidas.Cafes"
+        tools:layout="@layout/cafes" >
+        <action
+            android:id="@+id/action_nav_cafes_to_nav_quierobebidas"
+            app:destination="@id/nav_quierobebidas" />
     </fragment>
     <fragment
         android:id="@+id/nav_quierotostadas"
@@ -115,14 +167,44 @@
         <action
             android:id="@+id/action_nav_quierotostadas_to_nav_quierocartadesayunos2"
             app:destination="@id/nav_quierocartadesayunos" />
+        <action
+            android:id="@+id/action_nav_quierotostadas_to_nav_Tostadasclasicas"
+            app:destination="@id/nav_Tostadasclasicas" />
+        <action
+            android:id="@+id/action_nav_quierotostadas_to_nav_TostadasExtraordinarias"
+            app:destination="@id/nav_TostadasExtraordinarias" />
+        <action
+            android:id="@+id/action_nav_quierotostadas_to_nav_TostadasOriginales"
+            app:destination="@id/nav_TostadasOriginales" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_Tostadasclasicas"
+        android:name="com.example.inncoffee.ui.tostadas.TostadasClasicas"
+        tools:layout="@layout/tostadasclasicas" >
+        <action
+            android:id="@+id/action_nav_Tostadasclasicas_to_nav_quierotostadas"
+            app:destination="@id/nav_quierotostadas" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_TostadasOriginales"
+        android:name="com.example.inncoffee.ui.tostadas.TostadasOriginales"
+        tools:layout="@layout/tostadasoriginales" >
+        <action
+            android:id="@+id/action_nav_TostadasOriginales_to_nav_quierotostadas"
+            app:destination="@id/nav_quierotostadas" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_TostadasExtraordinarias"
+        android:name="com.example.inncoffee.ui.tostadas.TostadasExtraordinarias"
+        tools:layout="@layout/tostadasextraordinarias" >
+        <action
+            android:id="@+id/action_nav_TostadasExtraordinarias_to_nav_quierotostadas"
+            app:destination="@id/nav_quierotostadas" />
+    </fragment>
+
     <fragment
         android:id="@+id/nav_misoffertas"
         android:name="com.example.inncoffee.ui.ofertas.OfertasFragment"
-        tools:layout="@layout/ofertas_fragment" >
-        <action
-            android:id="@+id/action_nav_misoffertas_to_nav_home2"
-            app:destination="@id/nav_home" />
-    </fragment>
+        tools:layout="@layout/ofertas_fragment" />
 
 </navigation>
