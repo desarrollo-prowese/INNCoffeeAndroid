@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.example.inncoffee.R;
 import com.example.inncoffee.ui.mensajes.MensajesClass;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -26,6 +28,10 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.ViewHold
     private int resource;
     private ArrayList<String> keys;
     private ArrayList<MisPedidosClass> mensajeslist;
+    private OnItemClickListener mListener;
+    private String ID ;
+    private FirebaseUser mUser;
+    private FirebaseAuth mAuth;
 
 
     public AdapterPedidos(Context mContext, ArrayList<MisPedidosClass> mensajeslist, ArrayList<String> keys, int resource){
@@ -41,7 +47,7 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(resource,parent,false);
-        return new ViewHolder(view);
+        return new ViewHolder(view,mListener);
     }
 
 
@@ -53,6 +59,25 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.ViewHold
         holder.textViewmensaje.setText(mensajes.getTexto());
         holder.precio.setText(mensajes.getPrecio());
 
+    }
+
+    public interface OnItemClickListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(AdapterPedidos.OnItemClickListener listener) {
+        mListener = listener;
+    }
+
+
+    public void deleteItem(int position) {
+
+        String key = keys.get(position);
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+        ID = mAuth.getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosSinFinalizar").child(ID);
+        ref.child(key).removeValue();
     }
 
 
@@ -69,12 +94,22 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.ViewHold
 
         public View view;
 
-        public ViewHolder(View view) {
+        public ViewHolder(View view,final AdapterPedidos.OnItemClickListener listener) {
             super(view);
             this.view = view;
             this.textViewmensaje = (TextView) view.findViewById(R.id.textomensaje);
             this.precio = (TextView) view.findViewById(R.id.precioTotal);
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
 
         }
     }

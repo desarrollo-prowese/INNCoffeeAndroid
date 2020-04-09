@@ -1,5 +1,6 @@
 package com.example.inncoffee.ui.mispedidos;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import com.example.inncoffee.R;
 import com.example.inncoffee.ui.mensajes.AdapterMensaje;
 import com.example.inncoffee.ui.mensajes.MensajesClass;
 import com.example.inncoffee.ui.mensajes.MensajesFragment;
+import com.example.inncoffee.ui.ofertas.AdapterOfertas;
 import com.example.inncoffee.ui.quiero.Bebidas;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
 import com.example.inncoffee.ui.quiero.Tostadas;
@@ -29,6 +31,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -49,6 +52,7 @@ public class MisPedidosSinFinalizar extends Fragment {
     private FirebaseAuth mAuth;
     private DatabaseReference mUsuario;
     private static final String USERS = "MisPedidos";
+    private String texto,precio;
 
     private TextView tostadas,bebidas;
 
@@ -136,6 +140,18 @@ public class MisPedidosSinFinalizar extends Fragment {
      return root;
     }
 
+
+    public void removeItem(int position) {
+        mAdapter.deleteItem(position);
+        MisPedidosSinFinalizar fragment = new MisPedidosSinFinalizar();
+        FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+        ftEs.replace(R.id.nav_host_fragment, fragment);
+        ftEs.addToBackStack(null);
+        ftEs.commit();
+
+
+    }
+
     private void getMensajesFromFirebase() {
 
         ID = mAuth.getUid();
@@ -161,8 +177,8 @@ public class MisPedidosSinFinalizar extends Fragment {
 
                         sumatotal.setText(processed);
 
-                        String texto = ds.child("texto").getValue().toString();
-                        String precio = ds.child("precio").getValue().toString();
+                        texto = ds.child("texto").getValue().toString();
+                        precio = ds.child("precio").getValue().toString();
 
                         mMensaje.add(new MisPedidosClass(texto,precio));
                         keys.add(ds.getKey());
@@ -172,6 +188,29 @@ public class MisPedidosSinFinalizar extends Fragment {
 
                     mAdapter = new AdapterPedidos(getContext(), mMensaje, keys, R.layout.contenido_mispedidos);
                     mPedidos.setAdapter(mAdapter);
+                    mAdapter.setOnItemClickListener(new AdapterPedidos.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(final int position) {
+
+                            AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getActivity(), position);
+                            dialogo1.setMessage("Desear Borrar esta Linea: "+" con Cantidad :"+ texto +" con precio: "+ precio);
+                            dialogo1.setCancelable(false);
+                            dialogo1.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialogo1, int id) {
+                                    removeItem(position);
+                                }
+                            });
+                            dialogo1.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialogo1, int id) {
+                                    dialogo1.cancel();
+                                }
+                            });
+                            dialogo1.show();
+
+                        }
+
+                    });
                     mAdapter.notifyDataSetChanged();
 
                 }
