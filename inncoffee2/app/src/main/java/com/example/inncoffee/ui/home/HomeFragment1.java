@@ -2,6 +2,7 @@ package com.example.inncoffee.ui.home;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -47,10 +48,10 @@ public class HomeFragment1 extends Fragment {
 
             items = new ArrayList<>();
 
-            items.add(new Card(R.drawable.mis_puntos,"MIS PUNTOS ","MISPUNTOS"));
-            items.add(new Card(R.drawable.mis_ofertas,"MIS OFERTAS ","MISOFERTAS"));
-            items.add(new Card(R.drawable.pago_y_gano,"PAGO Y GANO ","PAGOYGANO"));
-            items.add(new Card(R.drawable.quiero,"QUIERO ","QUIERO"));
+            items.add(new Card(R.drawable.mis_puntos,"MIS PUNTOS ","MISPUNTOS", Color.WHITE));
+            items.add(new Card(R.drawable.mis_ofertas,"MIS OFERTAS ","MISOFERTAS", Color.WHITE));
+            items.add(new Card(R.drawable.pago_y_gano,"PAGO Y GANO ","PAGOYGANO", Color.WHITE));
+            items.add(new Card(R.drawable.quiero,"QUIERO ","QUIERO", Color.BLACK));
 
 
             if (items.size() == 4) {

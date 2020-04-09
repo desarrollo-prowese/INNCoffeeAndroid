@@ -2,6 +2,7 @@ package com.example.inncoffee.ui.bebidas;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.ui.mispedidos.MisPedidosClass;
+import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizar;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
 import com.example.inncoffee.ui.tostadas.TostadasDB;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,11 +27,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 public class Bebidas1 extends Fragment {
 
@@ -42,11 +49,14 @@ public class Bebidas1 extends Fragment {
     private Button boton,next;
     private ImageView Imagen;
     private int contador2 = 1;
+    private String ID ;
+    private DatabaseReference mUsuario;
+    private static final String USERS = "MisPedidos";
     private TextView contador;
     private ImageView menos,plus;
-    private TextView nombreArticulo,precio,descarticulo;
+    private TextView nombreArticulo,precio,descarticulo,añadir;
     private ArrayList<TostadasDB> mtos = new ArrayList<>();
-    private String nombre,nombrer,nombrepan,nombrerpan,imagen,imagenpan,imagenpans,imagens,precios,precioss, barra;
+    private String nombre,imagen,precios;
 
 
 
@@ -101,7 +111,10 @@ public class Bebidas1 extends Fragment {
         Imagen = (ImageView) root.findViewById(R.id.imagencafes);
         nombreArticulo = (TextView) root.findViewById(R.id.nombrearticulo);
         precio = (TextView) root.findViewById(R.id.precio);
-
+        añadir= (TextView)root.findViewById(R.id.añadir);
+        mUsuario = mDatabase.getReference(USERS);
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
         contador = (TextView) root.findViewById(R.id.textView5);
         menos = (ImageView)root.findViewById(R.id.imagecontador2);
         plus = (ImageView)root.findViewById(R.id.imagecontador1);
@@ -141,6 +154,58 @@ public class Bebidas1 extends Fragment {
                 }
 
             }
+        });
+
+
+
+        añadir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    ID = mAuth.getUid();
+                    final String key3 = mUsuario.push().getKey();
+                    mUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            double total = 0;
+                            String processed = "";
+                                if (contador2 == 1){
+                                    String texto = contador2 + " /" + nombre;
+                                    String precio = precios;
+                                    MisPedidosClass user2 = new MisPedidosClass(texto, precio);
+                                    mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
+
+                                }else if (contador2 > 1){
+                                    String texto = contador2 + " /" + nombre;
+                                    double number = Double.valueOf(precios.replaceAll("[,.€]", ""));
+                                    total = total + number * contador2;
+                                    NumberFormat formatter = new DecimalFormat("###,##€");
+
+                                    processed = formatter.format(total);
+
+                                    String precio = processed;
+                                    MisPedidosClass user2 = new MisPedidosClass(texto, precio);
+                                    mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
+                                }
+
+
+
+                            MisPedidosSinFinalizar fragment = new MisPedidosSinFinalizar();
+                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                            ftEs.replace(R.id.nav_host_fragment, fragment);
+                            ftEs.addToBackStack(null);
+                            ftEs.commit();
+                        }
+
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.w("TAG", "Failed to read value.", databaseError.toException());
+                        }
+                    });
+
+
+                }
+
         });
 
 
@@ -202,12 +267,12 @@ public class Bebidas1 extends Fragment {
 
                           if (id == 6) {
                               id = 1;
-                              nombrer = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
-                              precioss = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
-                              imagens = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
-                              Glide.with(Objects.requireNonNull(getContext())).load(imagens).into(Imagen);
-                              nombreArticulo.setText(nombrer);
-                              precio.setText(precioss);
+                              nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
+                              precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
+                              imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
+                              Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                              nombreArticulo.setText(nombre);
+                              precio.setText(precios);
                           }
                           Log.v("MI ID ", String.valueOf(id));
                           Log.v("NONBRE ARTICULO ", nombre);
@@ -243,12 +308,12 @@ public class Bebidas1 extends Fragment {
 
                         if (id == 0) {
                             id = 5;
-                            nombrer = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
-                            precioss = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
-                            imagens = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
-                            Glide.with(Objects.requireNonNull(getContext())).load(imagens).into(Imagen);
-                            nombreArticulo.setText(nombrer);
-                            precio.setText(precioss);
+                            nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
+                            precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
+                            imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
+                            Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                            nombreArticulo.setText(nombre);
+                            precio.setText(precios);
                         }
                         Log.v("MI ID ", String.valueOf(id));
                         Log.v("NONBRE ARTICULO ", nombre);

@@ -515,6 +515,7 @@ segn la hora?</string>
 
     <string name="trigoOriginal">original</string>
     <string name="trigox">marcado</string>
+    <string name="total">TOTAL: </string>
 
 
 </resources>

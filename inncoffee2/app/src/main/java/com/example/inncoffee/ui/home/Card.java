@@ -8,7 +8,7 @@ import android.os.Parcelable;
  */
 public class Card implements Parcelable {
     private String title;
-    private String color;
+    private int color;
 
 
     public int getImage() {
@@ -24,10 +24,11 @@ public class Card implements Parcelable {
 
     private String name;
 
-    public Card(int image, String title,String name) {
+    public Card(int image, String title,String name,int color) {
         this.image = image;
         this.title = title;
         this.name = name;
+        this.color = color;
     }
 
     private Card(Parcel in) {
@@ -61,11 +62,11 @@ public class Card implements Parcelable {
         out.writeString(title);
     }
 
-    public String getColor() {
+    public int getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(int color) {
         this.color = color;
     }
 

@@ -93,7 +93,6 @@ public class PageFragment extends Fragment {
 
         //pageLayout.setBackgroundColor(Color.parseColor("#00" + item.getLayoutColor())); //00 transparent
         //pageContent.getBackground().setColorFilter(Color.parseColor("#" + item.getColor()), PorterDuff.Mode.SRC_ATOP);
-
         pageContent.setBackgroundResource((item.getImage()));
         pageContent.setTag(item.getName());
       /*  LayerDrawable bgDrawable = (LayerDrawable) pageContent.getBackground();
@@ -102,6 +101,7 @@ public class PageFragment extends Fragment {
 
         TextView title = (TextView) pageContent.findViewById(R.id.card_name_text_view);
         title.setText(item.getTitle());
+        title.setTextColor(item.getColor());
 
         if (pageContent != null) {
             pageContent.setOnTouchListener((CardViewPager) container);

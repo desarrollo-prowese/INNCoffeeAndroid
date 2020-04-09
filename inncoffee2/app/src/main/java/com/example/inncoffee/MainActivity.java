@@ -40,6 +40,8 @@ import com.example.inncoffee.ui.home.HomeFragment1;
 import com.example.inncoffee.ui.mensajes.AdapterMensaje;
 import com.example.inncoffee.ui.mensajes.MensajesClass;
 import com.example.inncoffee.ui.mensajes.MensajesFragment;
+import com.example.inncoffee.ui.mispedidos.MisPedidosClass;
+import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizar;
 import com.example.inncoffee.ui.mispuntos.MisPuntosFragment;
 import com.example.inncoffee.ui.ofertas.OfertasClass;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -87,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mRef;
     private DatabaseReference mRefo;
+    private DatabaseReference mRefos;
     private DatabaseReference mUsuario;
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
@@ -182,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mRef = mDatabase.getReference("Mensajes");
         mRefo = mDatabase.getReference("Ofertas");
+        mRefos = mDatabase.getReference("MisPedidos");
         mUsuario = mDatabase.getReference(USERS);
         Log.v("USERID", mUsuario.getKey());
         Log.v("USERGUID", mAuth.getUid());
@@ -275,6 +279,18 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Proximamente", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.tPedidos:
+
+                        String textos = "Entera/Aceite/Mollete";
+                        String precio = "5.00€";
+
+                        MisPedidosClass user2=new MisPedidosClass(textos,precio);
+
+                        ID = mAuth.getUid();
+                        String key3=mRefos.push().getKey();
+                        mRefos.child(ID).child("PedidosSinFinalizar").child(key3).setValue(user2);
+
+
+
                         Toast.makeText(MainActivity.this, "Proximamente", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.tIra:
