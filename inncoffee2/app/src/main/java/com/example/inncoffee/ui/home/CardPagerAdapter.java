@@ -89,6 +89,7 @@ public class CardPagerAdapter<T extends Parcelable> extends FragmentPagerAdapter
         return pagesCount * 500; //pageCount * Loop
     }
 
+
     @Override
     public void onPageScrolled(int position, float positionOffset,
                                int positionOffsetPixels) {

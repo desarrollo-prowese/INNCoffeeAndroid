@@ -1,5 +1,6 @@
 package com.example.inncoffee.ui.home;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,6 +28,7 @@ public class HomeFragment1 extends Fragment {
     private static CardViewPager viewPager;
     private ArrayList<Card> items;
     private FixedSpeedScroller scroller;
+    public static int num = 0;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -34,11 +36,16 @@ public class HomeFragment1 extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_home1, container, false);
         MainActivity.mensajeToolbar.setText("");
+
+        if (num == 1){
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
+            num = 0;
+        }
         if (savedInstanceState == null) {
 
 
             items = new ArrayList<>();
-
 
             items.add(new Card(R.drawable.mis_puntos,"MIS PUNTOS ","MISPUNTOS"));
             items.add(new Card(R.drawable.mis_ofertas,"MIS OFERTAS ","MISOFERTAS"));
@@ -100,10 +107,10 @@ public class HomeFragment1 extends Fragment {
         return viewPager.getPageLimit();
     }
 
-   /* @Override
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList("items", items);
-    }*/
+    }
 
 }

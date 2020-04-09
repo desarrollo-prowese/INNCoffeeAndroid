@@ -9,28 +9,36 @@
         android:id="@+id/nav_home"
         android:name="com.example.inncoffee.ui.home.HomeFragment1">
         <action
-            android:id="@+id/action_nav_home_to_nav_misoffertas3"
-            app:destination="@id/nav_misoffertas" />
+            android:id="@+id/action_nav_home_to_nav_quiero"
+            app:destination="@id/nav_quiero" />
         <action
-            android:id="@+id/action_nav_home_to_nav_puntos4"
-            app:destination="@id/nav_puntos" />
-        <action
-            android:id="@+id/action_nav_home_to_nav_mensaje3"
+            android:id="@+id/action_nav_home_to_nav_mensaje"
             app:destination="@id/nav_mensaje" />
         <action
-            android:id="@+id/action_nav_home_to_nav_quiero2"
-            app:destination="@id/nav_quiero" />
+            android:id="@+id/action_nav_home_to_nav_misoffertas"
+            app:destination="@id/nav_misoffertas" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_puntos"
+            app:destination="@id/nav_puntos" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_mensaje"
         android:name="com.example.inncoffee.ui.mensajes.MensajesFragment"
-        tools:layout="@layout/fragment_mensajes" />
+        tools:layout="@layout/fragment_mensajes" >
+        <action
+            android:id="@+id/action_nav_mensaje_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_puntos"
         android:name="com.example.inncoffee.ui.mispuntos.MisPuntosFragment"
-        tools:layout="@layout/fragment_puntos" />
+        tools:layout="@layout/fragment_puntos" >
+        <action
+            android:id="@+id/action_nav_puntos_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
     <fragment
         android:id="@+id/nav_quiero"
         android:name="com.example.inncoffee.ui.quiero.QuieroFragment"
@@ -38,6 +46,9 @@
         <action
             android:id="@+id/action_nav_quiero_to_nav_quieronuevopedido"
             app:destination="@id/nav_quieronuevopedido" />
+        <action
+            android:id="@+id/action_nav_quiero_to_nav_home"
+            app:destination="@id/nav_home" />
     </fragment>
     <fragment
         android:id="@+id/nav_quieronuevopedido"
@@ -205,6 +216,10 @@
     <fragment
         android:id="@+id/nav_misoffertas"
         android:name="com.example.inncoffee.ui.ofertas.OfertasFragment"
-        tools:layout="@layout/ofertas_fragment" />
+        tools:layout="@layout/ofertas_fragment" >
+        <action
+            android:id="@+id/action_nav_misoffertas_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
 
 </navigation>

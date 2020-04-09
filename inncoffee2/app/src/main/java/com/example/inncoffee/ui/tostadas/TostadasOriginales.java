@@ -39,6 +39,9 @@ public class TostadasOriginales extends Fragment {
     private long id= 0;
     private long idpanes = 0;
     TostadasDB tostadasdb;
+    private int contador2 = 1;
+    private TextView contador;
+    private ImageView menos,plus;
     private Button boton,next, media, entera, selecionarpan, selecionarpan1;
     private boolean MediaoEntera = true;
     private boolean SelecionaPan = true;
@@ -103,6 +106,46 @@ public class TostadasOriginales extends Fragment {
         selecionarpan = (Button) root.findViewById(R.id.selecionarpan);
         selecionarpan1 = (Button) root.findViewById(R.id.selecionarpan1);
 
+        contador = (TextView) root.findViewById(R.id.textView5);
+        menos = (ImageView)root.findViewById(R.id.imagecontador2);
+        plus = (ImageView)root.findViewById(R.id.imagecontador1);
+        contador.setText(String.valueOf(contador2));
+        if (contador2 == 1){
+            menos.setVisibility(View.INVISIBLE);
+        }
+        menos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("que pasa", String.valueOf(contador2));
+                contador2--;
+                contador.setText(String.valueOf(contador2));
+                if (contador2 == 1){
+                    menos.setVisibility(View.INVISIBLE);
+                }
+                else if (contador2 < 99 ){
+
+                    plus.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("que pasa", String.valueOf(contador2));
+                contador2++;
+                contador.setText(String.valueOf(contador2));
+                if (contador2 == 99){
+                    plus.setVisibility(View.INVISIBLE);
+                    menos.setVisibility(View.VISIBLE);
+                }
+                else if (contador2 > 1){
+                    menos.setVisibility(View.VISIBLE);
+
+                }
+
+            }
+        });
 
 
 

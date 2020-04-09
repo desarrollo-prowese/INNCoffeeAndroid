@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.ui.home.HomeFragment1;
 import com.example.inncoffee.ui.quiero.QuieroNuevoPedido;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -94,6 +95,7 @@ public class MensajesFragment extends Fragment {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         inicialize();
         getMensajesFromFirebase();
+        HomeFragment1.num = 1;
 
       return root;
     }

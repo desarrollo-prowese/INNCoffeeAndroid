@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.ui.home.HomeFragment1;
 import com.example.inncoffee.ui.mensajes.AdapterMensaje;
 import com.example.inncoffee.ui.mensajes.MensajesClass;
 import com.example.inncoffee.ui.mensajes.MensajesFragment;
@@ -90,7 +91,7 @@ public class OfertasFragment extends Fragment {
         mRecycle.setLayoutManager(new LinearLayoutManager(getContext()));
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
+        HomeFragment1.num = 1;
         inicialize();
         getOfertasFromFirebase();
         return root;

@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.ui.home.HomeFragment1;
 
 public class MisPuntosFragment extends Fragment {
 
@@ -21,7 +22,7 @@ public class MisPuntosFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_puntos, container, false);
         MainActivity.mensajeToolbar.setText("MIS PUNTOS");
-
+        HomeFragment1.num = 1;
 
 
 

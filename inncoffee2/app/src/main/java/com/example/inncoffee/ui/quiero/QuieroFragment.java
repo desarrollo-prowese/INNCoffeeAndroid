@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.ui.home.HomeFragment1;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -78,7 +79,7 @@ public class QuieroFragment extends Fragment {
             }
         });
 
-
+        HomeFragment1.num = 1;
 
         inicialize();
         return root;

@@ -38,12 +38,13 @@ public class TostadasExtraordinarias extends Fragment {
     private FirebaseAuth mAuth;
     private long id= 0;
     private long idpanes = 0;
+    private int contador2 = 1;
     TostadasDB tostadasdb;
     private Button boton,next, media, entera, selecionarpan, selecionarpan1;
     private boolean MediaoEntera = true;
     private boolean SelecionaPan = true;
-    private ImageView Imagen;
-    private TextView nombreArticulo,precio,descarticulo;
+    private ImageView Imagen,menos,plus;
+    private TextView nombreArticulo,precio,descarticulo,contador;
     private ArrayList<TostadasDB> mtos = new ArrayList<>();
     private String nombre,nombrer,nombrepan,nombrerpan,imagen,imagenpan,imagenpans,imagens,precios,precioss, barra;
 
@@ -104,6 +105,47 @@ public class TostadasExtraordinarias extends Fragment {
         selecionarpan1 = (Button) root.findViewById(R.id.selecionarpan1);
 
 
+
+        contador = (TextView) root.findViewById(R.id.textView5);
+        menos = (ImageView)root.findViewById(R.id.imagecontador2);
+        plus = (ImageView)root.findViewById(R.id.imagecontador1);
+        contador.setText(String.valueOf(contador2));
+        if (contador2 == 1){
+            menos.setVisibility(View.INVISIBLE);
+        }
+        menos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("que pasa", String.valueOf(contador2));
+                contador2--;
+                contador.setText(String.valueOf(contador2));
+                if (contador2 == 1){
+                    menos.setVisibility(View.INVISIBLE);
+                }
+                else if (contador2 < 99 ){
+
+                    plus.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.v("que pasa", String.valueOf(contador2));
+                contador2++;
+                contador.setText(String.valueOf(contador2));
+                if (contador2 == 99){
+                    plus.setVisibility(View.INVISIBLE);
+                    menos.setVisibility(View.VISIBLE);
+                }
+                else if (contador2 > 1){
+                    menos.setVisibility(View.VISIBLE);
+
+                }
+
+            }
+        });
 
 
         selecionarpan.setOnClickListener(new View.OnClickListener() {

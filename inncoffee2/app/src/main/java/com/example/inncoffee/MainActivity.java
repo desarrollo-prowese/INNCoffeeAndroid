@@ -361,11 +361,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    @Override
+  /*  @Override
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(getIntent());
-    }
+    }*/
 
 
     private void closeDrawer() {
