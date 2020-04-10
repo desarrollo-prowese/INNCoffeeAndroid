@@ -200,7 +200,6 @@ public class MisPedidosSinFinalizarComidas extends Fragment {
                         double number = Double.valueOf(ds.child("precio").getValue(String.class).replaceAll("[,.€]", ""));
                         total = total + number;
 
-                        Log.d("TAG",  "total= " + total);
 
                         NumberFormat formatter = new DecimalFormat("###,##");
 
