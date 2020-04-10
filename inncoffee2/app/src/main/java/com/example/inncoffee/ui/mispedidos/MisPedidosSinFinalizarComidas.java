@@ -7,16 +7,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
-import com.example.inncoffee.ui.mensajes.AdapterMensaje;
-import com.example.inncoffee.ui.mensajes.MensajesClass;
-import com.example.inncoffee.ui.mensajes.MensajesFragment;
-import com.example.inncoffee.ui.ofertas.AdapterOfertas;
+import com.example.inncoffee.ui.comidas.Platos;
+import com.example.inncoffee.ui.comidas.Postres;
+import com.example.inncoffee.ui.comidas.Sandwiches;
 import com.example.inncoffee.ui.quiero.Bebidas;
+import com.example.inncoffee.ui.quiero.BebidasComi;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
 import com.example.inncoffee.ui.quiero.Tostadas;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,7 +38,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MisPedidosSinFinalizar extends Fragment {
+public class MisPedidosSinFinalizarComidas extends Fragment {
 
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -55,7 +55,7 @@ public class MisPedidosSinFinalizar extends Fragment {
     private static final String USERS = "MisPedidos";
     private String texto,precio;
 
-    private TextView tostadas,bebidas;
+    private TextView combos,sandwiches,platosytapas,postres,bebidas;
 
     private void inicialize() {
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -99,7 +99,7 @@ public class MisPedidosSinFinalizar extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.mispedidossinfinalizar, container, false);
+        View root = inflater.inflate(R.layout.mispedidossinfinalizarcomidas, container, false);
         MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
         mPedidos = (RecyclerView) root.findViewById(R.id.mispedidossinfinalizar);
 
@@ -107,16 +107,28 @@ public class MisPedidosSinFinalizar extends Fragment {
         mDatabase = FirebaseDatabase.getInstance();
         sumatotal = (TextView) root.findViewById(R.id.total2) ;
 
-        tostadas = (TextView) root.findViewById(R.id.tostadas);
-        bebidas = (TextView) root.findViewById(R.id.bebidas);
+
         mUsuario = mDatabase.getReference(USERS);
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
 
-        tostadas.setOnClickListener(new View.OnClickListener() {
+        combos = (TextView) root.findViewById(R.id.combos);
+        sandwiches = (TextView) root.findViewById(R.id.sandwiches);
+        platosytapas = (TextView) root.findViewById(R.id.platosytapas);
+        postres = (TextView) root.findViewById(R.id.postres);
+        bebidas = (TextView) root.findViewById(R.id.bebidas);
+
+        combos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Tostadas fragment = new Tostadas();
+                Toast.makeText(getContext(),"Proximamente",Toast.LENGTH_SHORT).show();
+            }
+        });
+        sandwiches.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Sandwiches fragment = new Sandwiches();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);
@@ -124,16 +136,34 @@ public class MisPedidosSinFinalizar extends Fragment {
 
             }
         });
-
-        bebidas.setOnClickListener(new View.OnClickListener() {
+        platosytapas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bebidas fragment = new Bebidas();
+                Platos fragment = new Platos();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);
                 ftEs.commit();
-
+            }
+        });
+        postres.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Postres fragment = new Postres();
+                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                ftEs.replace(R.id.nav_host_fragment, fragment);
+                ftEs.addToBackStack(null);
+                ftEs.commit();
+            }
+        });
+        bebidas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BebidasComi fragment = new BebidasComi();
+                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                ftEs.replace(R.id.nav_host_fragment, fragment);
+                ftEs.addToBackStack(null);
+                ftEs.commit();
             }
         });
         getMensajesFromFirebase();
@@ -143,8 +173,8 @@ public class MisPedidosSinFinalizar extends Fragment {
 
 
     public void removeItem(int position) {
-        mAdapter.deleteItem(position);
-        MisPedidosSinFinalizar fragment = new MisPedidosSinFinalizar();
+        mAdapter.deleteItemComidas(position);
+        MisPedidosSinFinalizarComidas fragment = new MisPedidosSinFinalizarComidas();
         FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
         ftEs.replace(R.id.nav_host_fragment, fragment);
         ftEs.addToBackStack(null);
@@ -156,7 +186,7 @@ public class MisPedidosSinFinalizar extends Fragment {
     private void getMensajesFromFirebase() {
 
         ID = mAuth.getUid();
-        mUsuario.child("PedidosSinFinalizar").child(ID).addValueEventListener(new ValueEventListener() {
+        mUsuario.child("PedidosSinFinalizarComidas").child(ID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 double total = 0;
@@ -193,6 +223,7 @@ public class MisPedidosSinFinalizar extends Fragment {
 
                         @Override
                         public void onItemClick(final int position) {
+
                             AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getContext(), position);
                             dialogo1.setMessage("Desear Borrar esta Linea");
                             dialogo1.setCancelable(false);

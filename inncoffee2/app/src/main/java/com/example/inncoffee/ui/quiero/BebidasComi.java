@@ -7,13 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
-import com.example.inncoffee.ui.comidas.Platos;
-import com.example.inncoffee.ui.comidas.Postres;
-import com.example.inncoffee.ui.comidas.Sandwiches;
+import com.example.inncoffee.ui.bebidas.Bebidas1;
+import com.example.inncoffee.ui.bebidas.Cafes;
+import com.example.inncoffee.ui.bebidas.Tes;
+import com.example.inncoffee.ui.bebidas.Zumos;
+import com.example.inncoffee.ui.bebidasComidas.bebidas.BebidasComidas;
+import com.example.inncoffee.ui.bebidasComidas.bebidas.CafesComidas;
+import com.example.inncoffee.ui.bebidasComidas.bebidas.TesComidas;
+import com.example.inncoffee.ui.bebidasComidas.bebidas.ZumosComidas;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -21,10 +25,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class CartaComidas extends Fragment {
+public class BebidasComi extends Fragment {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
-    private TextView combos,sandwiches,platosytapas,postres,bebidas;
+    private TextView Cafe,te,bebidas,zumos;
+
 
     private void inicialize() {
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -68,63 +73,61 @@ public class CartaComidas extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.cartacomidas, container, false);
+        View root = inflater.inflate(R.layout.bebidas, container, false);
         MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
+        Cafe = (TextView) root.findViewById(R.id.cafes);
+        te = (TextView) root.findViewById(R.id.teeinfusiones);
+        bebidas = (TextView) root.findViewById(R.id.bebidas);
+        zumos = (TextView) root.findViewById(R.id.zumos);
 
-       combos = (TextView) root.findViewById(R.id.combos);
-       sandwiches = (TextView) root.findViewById(R.id.sandwiches);
-       platosytapas = (TextView) root.findViewById(R.id.platosytapas);
-       postres = (TextView) root.findViewById(R.id.postres);
-       bebidas = (TextView) root.findViewById(R.id.bebidas);
-
-       combos.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               Toast.makeText(getContext(),"Proximamente",Toast.LENGTH_SHORT).show();
-           }
-       });
-        sandwiches.setOnClickListener(new View.OnClickListener() {
+        te.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Sandwiches fragment = new Sandwiches();
-                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
-                ftEs.replace(R.id.nav_host_fragment, fragment);
-                ftEs.addToBackStack(null);
-                ftEs.commit();
-
-            }
-        });
-        platosytapas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Platos fragment = new Platos();
+                TesComidas fragment = new TesComidas();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);
                 ftEs.commit();
             }
         });
-        postres.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Postres fragment = new Postres();
-                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
-                ftEs.replace(R.id.nav_host_fragment, fragment);
-                ftEs.addToBackStack(null);
-                ftEs.commit();
-            }
-        });
+
         bebidas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BebidasComi fragment = new BebidasComi();
+
+                BebidasComidas fragment = new BebidasComidas();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);
                 ftEs.commit();
             }
         });
+
+
+        zumos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ZumosComidas fragment = new ZumosComidas();
+                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                ftEs.replace(R.id.nav_host_fragment, fragment);
+                ftEs.addToBackStack(null);
+                ftEs.commit();
+
+            }
+        });
+
+
+        Cafe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CafesComidas fragment = new CafesComidas();
+                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                ftEs.replace(R.id.nav_host_fragment, fragment);
+                ftEs.addToBackStack(null);
+                ftEs.commit();
+            }
+        });
+
 
 
 

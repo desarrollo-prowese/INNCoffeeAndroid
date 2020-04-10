@@ -115,6 +115,7 @@ public class Bebidas1 extends Fragment {
         mUsuario = mDatabase.getReference(USERS);
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
+        contador = (TextView) root.findViewById(R.id.textView5) ;
         contador = (TextView) root.findViewById(R.id.textView5);
         menos = (ImageView)root.findViewById(R.id.imagecontador2);
         plus = (ImageView)root.findViewById(R.id.imagecontador1);

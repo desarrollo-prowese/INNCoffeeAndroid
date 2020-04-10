@@ -1,4 +1,4 @@
-package com.example.inncoffee.ui.bebidas;
+package com.example.inncoffee.ui.bebidasComidas.bebidas;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,8 +13,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.ui.bebidas.BebidasDB;
 import com.example.inncoffee.ui.mispedidos.MisPedidosClass;
 import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizar;
+import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizarComidas;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
 import com.example.inncoffee.ui.tostadas.TostadasDB;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,7 +36,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class Zumos extends Fragment {
+public class CafesComidas extends Fragment {
 
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -53,6 +55,7 @@ public class Zumos extends Fragment {
     private ImageView menos,plus;
     private ImageView Imagen;
     private TextView nombreArticulo,precio,descarticulo,añadir;
+    private ArrayList<TostadasDB> mtos = new ArrayList<>();
     private String nombre,imagen,precios;
 
 
@@ -99,24 +102,23 @@ public class Zumos extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.zumos, container, false);
+        View root = inflater.inflate(R.layout.cafes, container, false);
         MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
         mDatabase = FirebaseDatabase.getInstance();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
-        mTosta = mDatabase.getReference("Zumos");
+        mTosta = mDatabase.getReference("Cafes");
+        bebidasDB = new BebidasDB();
         mUsuario = mDatabase.getReference(USERS);
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
-        añadir= (TextView)root.findViewById(R.id.añadir);
-        bebidasDB = new BebidasDB();
         Imagen = (ImageView) root.findViewById(R.id.imagencafes);
         nombreArticulo = (TextView) root.findViewById(R.id.nombrearticulo);
         precio = (TextView) root.findViewById(R.id.precio);
-        contador = (TextView) root.findViewById(R.id.textView5) ;
-
+        añadir= (TextView)root.findViewById(R.id.añadir);
         contador = (TextView) root.findViewById(R.id.textView5);
         menos = (ImageView)root.findViewById(R.id.imagecontador2);
         plus = (ImageView)root.findViewById(R.id.imagecontador1);
+        contador = (TextView) root.findViewById(R.id.textView5) ;
         contador.setText(String.valueOf(contador2));
         if (contador2 == 1){
             menos.setVisibility(View.INVISIBLE);
@@ -155,7 +157,6 @@ public class Zumos extends Fragment {
             }
         });
 
-
         añadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,7 +171,7 @@ public class Zumos extends Fragment {
                             String texto = contador2 + " /" + nombre;
                             String precio = precios;
                             MisPedidosClass user2 = new MisPedidosClass(texto, precio);
-                            mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
+                            mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
 
                         }else if (contador2 > 1){
                             String texto = contador2 + " /" + nombre;
@@ -182,12 +183,12 @@ public class Zumos extends Fragment {
 
                             String precio = processed;
                             MisPedidosClass user2 = new MisPedidosClass(texto, precio);
-                            mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
+                            mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
                         }
 
 
 
-                        MisPedidosSinFinalizar fragment = new MisPedidosSinFinalizar();
+                        MisPedidosSinFinalizarComidas fragment = new MisPedidosSinFinalizarComidas();
                         FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                         ftEs.replace(R.id.nav_host_fragment, fragment);
                         ftEs.addToBackStack(null);
@@ -262,7 +263,7 @@ public class Zumos extends Fragment {
                           nombreArticulo.setText(nombre);
                           precio.setText(precios);
 
-                          if (id == 13) {
+                          if (id == 9) {
                               id = 1;
                               nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                               precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
@@ -304,7 +305,7 @@ public class Zumos extends Fragment {
                         precio.setText(precios);
 
                         if (id == 0) {
-                            id = 12;
+                            id = 8;
                             nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                             precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
                             imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();

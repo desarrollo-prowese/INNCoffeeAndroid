@@ -116,6 +116,7 @@ public class Cafes extends Fragment {
         contador = (TextView) root.findViewById(R.id.textView5);
         menos = (ImageView)root.findViewById(R.id.imagecontador2);
         plus = (ImageView)root.findViewById(R.id.imagecontador1);
+        contador = (TextView) root.findViewById(R.id.textView5) ;
         contador.setText(String.valueOf(contador2));
         if (contador2 == 1){
             menos.setVisibility(View.INVISIBLE);

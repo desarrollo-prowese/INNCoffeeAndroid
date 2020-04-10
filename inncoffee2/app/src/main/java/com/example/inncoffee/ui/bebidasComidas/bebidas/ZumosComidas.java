@@ -1,4 +1,4 @@
-package com.example.inncoffee.ui.bebidas;
+package com.example.inncoffee.ui.bebidasComidas.bebidas;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,10 +13,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.ui.bebidas.BebidasDB;
 import com.example.inncoffee.ui.mispedidos.MisPedidosClass;
 import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizar;
+import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizarComidas;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
-import com.example.inncoffee.ui.tostadas.TostadasDB;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,14 +28,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class Zumos extends Fragment {
+public class ZumosComidas extends Fragment {
 
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -170,7 +170,7 @@ public class Zumos extends Fragment {
                             String texto = contador2 + " /" + nombre;
                             String precio = precios;
                             MisPedidosClass user2 = new MisPedidosClass(texto, precio);
-                            mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
+                            mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
 
                         }else if (contador2 > 1){
                             String texto = contador2 + " /" + nombre;
@@ -182,12 +182,12 @@ public class Zumos extends Fragment {
 
                             String precio = processed;
                             MisPedidosClass user2 = new MisPedidosClass(texto, precio);
-                            mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
+                            mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
                         }
 
 
 
-                        MisPedidosSinFinalizar fragment = new MisPedidosSinFinalizar();
+                        MisPedidosSinFinalizarComidas fragment = new MisPedidosSinFinalizarComidas();
                         FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                         ftEs.replace(R.id.nav_host_fragment, fragment);
                         ftEs.addToBackStack(null);
