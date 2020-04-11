@@ -116,7 +116,7 @@ public class QuieroAlojenos extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
 
-        if (TengoComandaDesayuno == true){
+        if (TengoComandaDesayuno){
             cartadesayuno.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -130,7 +130,7 @@ public class QuieroAlojenos extends Fragment {
             });
 
         }
-        else if (TengoComandaDesayuno == false){
+         else{
 
             cartadesayuno.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -144,7 +144,7 @@ public class QuieroAlojenos extends Fragment {
                 }
             });
         }
-        if (TengoComandaComidas == true){
+        if (TengoComandaComidas){
             cartacomida.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -159,7 +159,7 @@ public class QuieroAlojenos extends Fragment {
 
 
         }
-        else if (TengoComandaComidas == false){
+        else {
 
             cartacomida.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -174,20 +174,6 @@ public class QuieroAlojenos extends Fragment {
             });
         }
 
-
-
-
-        cartacomida.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Toast.makeText(getActivity(),"Proximamente", Toast.LENGTH_SHORT).show();
-                CartaComidas fragment = new CartaComidas();
-                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
-                ftEs.replace(R.id.nav_host_fragment, fragment);
-                ftEs.addToBackStack(null);
-                ftEs.commit();
-            }
-        });
 
         trigo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -458,13 +444,7 @@ public class QuieroAlojenos extends Fragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    if (dataSnapshot.exists()) {
-
-                        TengoComandaDesayuno = true;
-                    }
-                    else{
-                        TengoComandaDesayuno = false;
-                    }
+                    TengoComandaDesayuno = dataSnapshot.exists();
 
                 }
 
@@ -482,13 +462,7 @@ public class QuieroAlojenos extends Fragment {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    if (dataSnapshot.exists()) {
-                        TengoComandaComidas = true;
-
-                    }else{
-
-                        TengoComandaComidas = false;
-                    }
+                    TengoComandaComidas = dataSnapshot.exists();
 
 
                 }

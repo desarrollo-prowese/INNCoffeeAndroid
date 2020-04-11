@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.ui.combos.Combos;
 import com.example.inncoffee.ui.comidas.Platos;
 import com.example.inncoffee.ui.comidas.Postres;
 import com.example.inncoffee.ui.comidas.Sandwiches;
@@ -121,7 +122,11 @@ public class MisPedidosSinFinalizarComidas extends Fragment {
         combos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),"Proximamente",Toast.LENGTH_SHORT).show();
+                Combos fragment = new Combos();
+                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                ftEs.replace(R.id.nav_host_fragment, fragment);
+                ftEs.addToBackStack(null);
+                ftEs.commit();
             }
         });
         sandwiches.setOnClickListener(new View.OnClickListener() {
