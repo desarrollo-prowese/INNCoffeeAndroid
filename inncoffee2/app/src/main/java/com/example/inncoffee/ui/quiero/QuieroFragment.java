@@ -108,7 +108,7 @@ public class QuieroFragment extends Fragment {
 
                 dialogo1.setPositiveButton("Finalizar Comanda", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogo1, int id) {
-                        FinalizarPedido fragment = new FinalizarPedido();
+                        FinalizarPedidoComidas fragment = new FinalizarPedidoComidas();
                         FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                         ftEs.replace(R.id.nav_host_fragment, fragment);
                         ftEs.addToBackStack(null);
@@ -134,7 +134,7 @@ public class QuieroFragment extends Fragment {
                 dialogo1.setPositiveButton("Finalizar Comanda", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        FinalizarPedidoComidas fragment = new FinalizarPedidoComidas();
+                        FinalizarPedido fragment = new FinalizarPedido();
                         FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                         ftEs.replace(R.id.nav_host_fragment, fragment);
                         ftEs.addToBackStack(null);

@@ -95,7 +95,7 @@ public class FinalizarPedido extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.finalizarpedido, container, false);
         MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
-        mPedidos = (RecyclerView) root.findViewById(R.id.Verpedido);
+        mPedidos = (RecyclerView) root.findViewById(R.id.VerpedidoComidas);
         mPedidos.setLayoutManager(new LinearLayoutManager(getContext()));
         sumatotal = (TextView) root.findViewById(R.id.total5) ;
         mDatabase = FirebaseDatabase.getInstance();
@@ -150,12 +150,10 @@ public class FinalizarPedido extends Fragment {
                 double total = 0;
                 String processed = "";
                 if (dataSnapshot.exists()) {
-
-
                     mMensaje.clear();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                        double number = Double.valueOf(ds.child("precio").getValue(String.class).replaceAll("[,.€]", ""));
+                        double number = Double.parseDouble(ds.child("precio").getValue(String.class).replaceAll("[,.€]", ""));
                         total = total + number;
 
                         NumberFormat formatter = new DecimalFormat("###,##");

@@ -54,7 +54,7 @@ public class MisPedidosSinFinalizar extends Fragment {
     private FirebaseAuth mAuth;
     private DatabaseReference mUsuario;
     private static final String USERS = "MisPedidos";
-    private String texto,precio;
+    private String texto,precios;
 
     private TextView tostadas,bebidas;
 
@@ -185,7 +185,7 @@ public class MisPedidosSinFinalizar extends Fragment {
                     mMensaje.clear();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                        double number = Double.valueOf(ds.child("precio").getValue(String.class).replaceAll("[,.€]", ""));
+                        double number = Double.parseDouble(ds.child("precio").getValue(String.class).replaceAll("[,.€]", ""));
                         total = total + number;
 
                         NumberFormat formatter = new DecimalFormat("###,##");
@@ -195,9 +195,9 @@ public class MisPedidosSinFinalizar extends Fragment {
                         sumatotal.setText(processed);
 
                         texto = ds.child("texto").getValue().toString();
-                        precio = ds.child("precio").getValue().toString();
+                        precios = ds.child("precio").getValue().toString();
 
-                        mMensaje.add(new MisPedidosClass(texto,precio));
+                        mMensaje.add(new MisPedidosClass(texto,precios));
                         keys.add(ds.getKey());
 
                     }

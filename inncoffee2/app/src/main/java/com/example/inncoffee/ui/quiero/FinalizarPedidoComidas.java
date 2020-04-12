@@ -93,9 +93,9 @@ public class FinalizarPedidoComidas extends Fragment {
     }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.finalizarpedido, container, false);
+        View root = inflater.inflate(R.layout.finalizarpedidocomidas, container, false);
         MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
-        mPedidos = (RecyclerView) root.findViewById(R.id.Verpedido);
+        mPedidos = (RecyclerView) root.findViewById(R.id.VerpedidoComidas);
         mPedidos.setLayoutManager(new LinearLayoutManager(getContext()));
         sumatotal = (TextView) root.findViewById(R.id.total5) ;
         mDatabase = FirebaseDatabase.getInstance();
@@ -105,7 +105,7 @@ public class FinalizarPedidoComidas extends Fragment {
         Cancelar = (Button) root.findViewById(R.id.cancelar);
         Cancelar();
         inicialize();
-        getMensajesFromFirebase();
+        getMensajesFromFirebases();
         return root;
     }
     private void Cancelar(){
@@ -141,8 +141,7 @@ public class FinalizarPedidoComidas extends Fragment {
         });
 
     }
-    private void getMensajesFromFirebase() {
-
+    private void getMensajesFromFirebases() {
         ID = mAuth.getUid();
         mUsuario.child("PedidosFinalizadosComidas").child(ID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -151,12 +150,12 @@ public class FinalizarPedidoComidas extends Fragment {
                 String processed = "";
                 if (dataSnapshot.exists()) {
 
-
                     mMensaje.clear();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                        double number = Double.valueOf(ds.child("precio").getValue(String.class).replaceAll("[,.€]", ""));
+                        double number = Double.parseDouble(ds.child("precio").getValue(String.class).replaceAll("[,.€]", ""));
                         total = total + number;
+
 
                         NumberFormat formatter = new DecimalFormat("###,##");
 
@@ -175,28 +174,6 @@ public class FinalizarPedidoComidas extends Fragment {
 
                     mAdapter = new AdapterPedidos(getContext(), mMensaje, keys, R.layout.contenido_mispedidos);
                     mPedidos.setAdapter(mAdapter);
-                  /*  mAdapter.setOnItemClickListener(new AdapterPedidos.OnItemClickListener() {
-
-                        @Override
-                        public void onItemClick(final int position) {
-                            AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getContext(), position);
-                            dialogo1.setMessage("Desear Borrar esta Linea");
-                            dialogo1.setCancelable(false);
-                            dialogo1.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialogo1, int id) {
-                                    removeItem(position);
-                                }
-                            });
-                            dialogo1.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialogo1, int id) {
-                                    dialogo1.cancel();
-                                }
-                            });
-                            dialogo1.show();
-
-                        }
-
-                    });*/
                     mAdapter.notifyDataSetChanged();
 
                 }

@@ -19,6 +19,7 @@ import com.example.inncoffee.ui.comidas.Sandwiches;
 import com.example.inncoffee.ui.quiero.Bebidas;
 import com.example.inncoffee.ui.quiero.BebidasComi;
 import com.example.inncoffee.ui.quiero.FinalizarPedido;
+import com.example.inncoffee.ui.quiero.FinalizarPedidoComidas;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
 import com.example.inncoffee.ui.quiero.Tostadas;
 import com.google.firebase.auth.FirebaseAuth;
@@ -55,7 +56,7 @@ public class MisPedidosSinFinalizarComidas extends Fragment {
     private FirebaseAuth mAuth;
     private DatabaseReference mUsuario;
     private static final String USERS = "MisPedidos";
-    private String texto,precio;
+    private String texto,precios;
 
     private TextView combos,sandwiches,platosytapas,postres,bebidas;
 
@@ -177,7 +178,7 @@ public class MisPedidosSinFinalizarComidas extends Fragment {
             @Override
             public void onClick(View v) {
 
-                FinalizarPedido fragment = new FinalizarPedido();
+                FinalizarPedidoComidas fragment = new FinalizarPedidoComidas();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);
@@ -207,7 +208,6 @@ public class MisPedidosSinFinalizarComidas extends Fragment {
     }
 
     private void getMensajesFromFirebase() {
-
         ID = mAuth.getUid();
         mUsuario.child("PedidosSinFinalizarComidas").child(ID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -220,7 +220,7 @@ public class MisPedidosSinFinalizarComidas extends Fragment {
                     mMensaje.clear();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                        double number = Double.valueOf(ds.child("precio").getValue(String.class).replaceAll("[,.€]", ""));
+                        double number = Double.parseDouble(ds.child("precio").getValue(String.class).replaceAll("[,.€]", ""));
                         total = total + number;
 
 
@@ -231,9 +231,9 @@ public class MisPedidosSinFinalizarComidas extends Fragment {
                         sumatotal.setText(processed);
 
                         texto = ds.child("texto").getValue().toString();
-                        precio = ds.child("precio").getValue().toString();
+                        precios = ds.child("precio").getValue().toString();
 
-                        mMensaje.add(new MisPedidosClass(texto,precio));
+                        mMensaje.add(new MisPedidosClass(texto,precios));
                         keys.add(ds.getKey());
 
                     }
