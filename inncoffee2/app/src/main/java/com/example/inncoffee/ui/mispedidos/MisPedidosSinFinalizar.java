@@ -17,6 +17,7 @@ import com.example.inncoffee.ui.mensajes.MensajesClass;
 import com.example.inncoffee.ui.mensajes.MensajesFragment;
 import com.example.inncoffee.ui.ofertas.AdapterOfertas;
 import com.example.inncoffee.ui.quiero.Bebidas;
+import com.example.inncoffee.ui.quiero.FinalizarPedido;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
 import com.example.inncoffee.ui.quiero.Tostadas;
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,7 +48,7 @@ public class MisPedidosSinFinalizar extends Fragment {
     private ArrayList<String> keys = new ArrayList<>();
     private AdapterPedidos mAdapter;
     private RecyclerView mPedidos;
-    private TextView sumatotal;
+    private TextView sumatotal,finalizar;
     private String ID ;
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
@@ -106,7 +107,7 @@ public class MisPedidosSinFinalizar extends Fragment {
         mPedidos.setLayoutManager(new LinearLayoutManager(getContext()));
         mDatabase = FirebaseDatabase.getInstance();
         sumatotal = (TextView) root.findViewById(R.id.total2) ;
-
+        finalizar = (TextView) root.findViewById(R.id.finalizar);
         tostadas = (TextView) root.findViewById(R.id.tostadas);
         bebidas = (TextView) root.findViewById(R.id.bebidas);
         mUsuario = mDatabase.getReference(USERS);
@@ -138,6 +139,23 @@ public class MisPedidosSinFinalizar extends Fragment {
         });
         getMensajesFromFirebase();
         inicialize();
+
+        finalizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                FinalizarPedido fragment = new FinalizarPedido();
+                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                ftEs.replace(R.id.nav_host_fragment, fragment);
+                ftEs.addToBackStack(null);
+                ftEs.commit();
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosSinFinalizar").child(ID);
+                ref.removeValue();
+
+            }
+        });
+
      return root;
     }
 

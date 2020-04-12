@@ -76,6 +76,8 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.ViewHold
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
         ID = mAuth.getUid();
+        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosFinalizados").child(ID);
+        ref1.child(key).removeValue();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosSinFinalizar").child(ID);
         ref.child(key).removeValue();
     }
@@ -85,6 +87,8 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.ViewHold
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
         ID = mAuth.getUid();
+        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosFinalizados").child(ID);
+        ref1.child(key).removeValue();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosSinFinalizarComidas").child(ID);
         ref.child(key).removeValue();
     }
