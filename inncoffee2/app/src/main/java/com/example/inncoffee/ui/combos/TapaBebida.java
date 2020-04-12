@@ -141,7 +141,7 @@ public class TapaBebida extends Fragment {
                                 String precios = precio;
                                 MisPedidosClass user2 = new MisPedidosClass(texto, precios);
                                 mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
-                                mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
+                                mUsuario.child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
 
                             } else if (contador2 > 1) {
                                 String texto = contador2 + " /" + primero.getText() + "/" + bebida.getText();
@@ -154,7 +154,7 @@ public class TapaBebida extends Fragment {
                                 String precio = processed;
                                 MisPedidosClass user2 = new MisPedidosClass(texto, precio);
                                 mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
-                                mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
+                                mUsuario.child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
 
 
                             }

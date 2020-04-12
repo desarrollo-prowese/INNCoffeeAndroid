@@ -172,7 +172,7 @@ public class Postres extends Fragment {
                                     String precio = precios;
                                     MisPedidosClass user2 = new MisPedidosClass(texto, precio);
                                     mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
-                                    mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
+                                    mUsuario.child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
 
                                 }else if (contador2 > 1){
                                     String texto = contador2 + " /" + nombre;
@@ -185,7 +185,7 @@ public class Postres extends Fragment {
                                     String precio = processed;
                                     MisPedidosClass user2 = new MisPedidosClass(texto, precio);
                                     mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
-                                    mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
+                                    mUsuario.child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
                                 }
 
 

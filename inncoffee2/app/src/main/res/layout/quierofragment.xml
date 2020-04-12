@@ -10,20 +10,6 @@
 
 
     <Button
-        android:id="@+id/buttonNuevoPedido"
-        android:layout_width="253dp"
-        android:layout_height="50dp"
-        android:background="@drawable/rect_ngulo_1471_shape"
-        android:text="@string/nuevo_pedido_string"
-        android:textColor="@android:color/background_light"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonMisPedidos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView6"
-        app:layout_constraintVertical_bias="0.653" />
-
-    <Button
         android:id="@+id/buttonMisPedidos"
         android:layout_width="253dp"
         android:layout_height="50dp"
@@ -35,7 +21,49 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6"
-        app:layout_constraintVertical_bias="0.533" />
+        app:layout_constraintVertical_bias="0.383" />
+
+    <Button
+        android:id="@+id/buttonNuevoPedido"
+        android:layout_width="253dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rect_ngulo_1471_shape"
+        android:text="@string/nuevo_pedido_string"
+        android:textColor="@android:color/background_light"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonMisPedidos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:layout_constraintVertical_bias="0.638" />
+
+    <Button
+        android:id="@+id/pedidocomida"
+        android:layout_width="253dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rect_ngulo_1471_shape"
+        android:text="Pedido De Comida"
+        android:textColor="@android:color/background_light"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:layout_constraintVertical_bias="0.636" />
+
+    <Button
+        android:id="@+id/pedidodesayuno"
+        android:layout_width="253dp"
+        android:layout_height="50dp"
+        android:background="@drawable/rect_ngulo_1471_shape"
+        android:text="Pedido Desayuno"
+        android:textColor="@android:color/background_light"
+        android:textSize="23sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView6"
+        app:layout_constraintVertical_bias="0.861" />
 
     <ImageView
         android:id="@+id/imageView6"

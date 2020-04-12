@@ -1,5 +1,6 @@
 package com.example.inncoffee.ui.quiero;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,12 +22,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 public class QuieroFragment extends Fragment {
 
-    private Button Nuevopedido;
+    private Button Nuevopedido,pedidofinalizado,pedidofinalizado2;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private String ID ;
@@ -35,6 +37,9 @@ public class QuieroFragment extends Fragment {
     private FirebaseAuth mAuth;
     private DatabaseReference mUsuario;
     public static boolean TengoPedidoSinFinalizar = false;
+    public static boolean TengoPedidoSinFinalizarComidas = false;
+    public static boolean TengoPedidoSin = false;
+    public static boolean TengoPedidoSinComidas = false;
     private void inicialize() {
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -81,25 +86,9 @@ public class QuieroFragment extends Fragment {
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
-
-        if (TengoPedidoSinFinalizar){
-            Nuevopedido.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    FinalizarPedido fragment = new FinalizarPedido();
-                    FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
-                    ftEs.replace(R.id.nav_host_fragment, fragment);
-                    ftEs.addToBackStack(null);
-                    ftEs.commit();
-
-                }
-            });
-
-
-        }
-        else {
-
-            Nuevopedido.setOnClickListener(new View.OnClickListener() {
+        pedidofinalizado = (Button) root.findViewById(R.id.pedidocomida);
+        pedidofinalizado2 = (Button) root.findViewById(R.id.pedidodesayuno);
+        Nuevopedido.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //Toast.makeText(getActivity(),"Proximamente", Toast.LENGTH_SHORT).show();
@@ -107,26 +96,95 @@ public class QuieroFragment extends Fragment {
                     FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                     ftEs.replace(R.id.nav_host_fragment, fragment);
                     ftEs.addToBackStack(null);
-                    ftEs.commit();
-                }
+                    ftEs.commit(); }
             });
+
+        pedidofinalizado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getContext());
+                dialogo1.setMessage("Deseas Borrar La Comanda Pendiente y Finalizar La Comanda Pendiente");
+                dialogo1.setCancelable(false);
+
+                dialogo1.setPositiveButton("Finalizar Comanda", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        FinalizarPedido fragment = new FinalizarPedido();
+                        FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                        ftEs.replace(R.id.nav_host_fragment, fragment);
+                        ftEs.addToBackStack(null);
+                        ftEs.commit();
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosSinFinalizar").child(ID);
+                        ref.removeValue();
+                    }
+                });
+                dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        dialogo1.cancel();
+                    }
+                });
+                dialogo1.show();
+            }
+        });
+        pedidofinalizado2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getContext());
+                dialogo1.setMessage("Deseas Borrar La Comanda Pendiente y Finalizar La Comanda Pendiente");
+                dialogo1.setCancelable(false);
+                dialogo1.setPositiveButton("Finalizar Comanda", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FinalizarPedidoComidas fragment = new FinalizarPedidoComidas();
+                        FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                        ftEs.replace(R.id.nav_host_fragment, fragment);
+                        ftEs.addToBackStack(null);
+                        ftEs.commit();
+                        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosSinFinalizarComidas").child(ID);
+                        ref1.removeValue();
+                    }
+                });
+
+                dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        dialogo1.cancel();
+                    }
+                });
+                dialogo1.show();
+            }
+        });
+
+        if (TengoPedidoSinFinalizar){
+            pedidofinalizado2.setVisibility(View.VISIBLE);
+        }else {
+            pedidofinalizado2.setVisibility(View.INVISIBLE);
+        }
+
+        if (TengoPedidoSinFinalizarComidas){
+            pedidofinalizado.setVisibility(View.VISIBLE);
+        }else {
+            pedidofinalizado.setVisibility(View.INVISIBLE);
         }
 
 
+
+
+        Finalizado1();
+        Finalizado();
         HomeFragment1.num = 1;
-        Pedidos();
         inicialize();
         return root;
     }
 
-    private void Pedidos() {
+    private void Finalizado(){
+
         ID = mAuth.getUid();
-        Log.v("QUE es Pedido :  ", String.valueOf(TengoPedidoSinFinalizar));
+        Log.v("QUE es Desayuno :  ", String.valueOf(TengoPedidoSinFinalizar));
         mDatabase.getReference("MisPedidos").child("PedidosFinalizados").child(ID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 TengoPedidoSinFinalizar = dataSnapshot.exists();
+
 
             }
 
@@ -136,6 +194,26 @@ public class QuieroFragment extends Fragment {
             }
         });
 
+
     }
+    private void Finalizado1(){
+        ID = mAuth.getUid();
+        Log.v("QUE es Comidas :  ", String.valueOf(TengoPedidoSinFinalizarComidas));
+        mDatabase.getReference("MisPedidos").child("PedidosFinalizadosComidas").child(ID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                TengoPedidoSinFinalizarComidas = dataSnapshot.exists();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
 
 }

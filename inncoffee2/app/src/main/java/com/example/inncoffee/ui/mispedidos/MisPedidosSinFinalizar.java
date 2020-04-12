@@ -210,7 +210,7 @@ public class MisPedidosSinFinalizar extends Fragment {
                         @Override
                         public void onItemClick(final int position) {
                             AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getContext(), position);
-                            dialogo1.setMessage("Desear Borrar esta Linea");
+                            dialogo1.setMessage("Deseas Borrar esta Linea");
                             dialogo1.setCancelable(false);
                             dialogo1.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialogo1, int id) {
