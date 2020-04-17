@@ -65,7 +65,7 @@ public class QuieroNuevoPedido2 extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.quieronuevopedido2_fragment, container, false);
-        MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
+        MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
 
         alojenos = (Button) root.findViewById(R.id.alojenos);
         cartacomidas = (Button) root.findViewById(R.id.cartacomidas);

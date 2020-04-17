@@ -103,7 +103,7 @@ public class MisPedidosSinFinalizarComidas extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.mispedidossinfinalizarcomidas, container, false);
-        MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
+        MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
         mPedidos = (RecyclerView) root.findViewById(R.id.mispedidossinfinalizar);
 
         mPedidos.setLayoutManager(new LinearLayoutManager(getContext()));

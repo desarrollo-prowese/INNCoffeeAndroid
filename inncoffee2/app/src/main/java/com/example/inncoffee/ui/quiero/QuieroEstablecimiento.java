@@ -1,6 +1,7 @@
 package com.example.inncoffee.ui.quiero;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
 import com.example.inncoffee.ui.home.HomeFragment;
+import com.example.inncoffee.ui.quiero.libreriamap.FloatingMarkerTitlesOverlay;
+import com.example.inncoffee.ui.quiero.libreriamap.MarkerInfo;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -30,6 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
@@ -45,8 +49,7 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
     private FirebaseAuth mAuth;
     private static final String USERS = "Users";
     private String ID ;
-
-
+    private FloatingMarkerTitlesOverlay floatingMarkersOverlay;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private void inicialize() {
@@ -90,7 +93,7 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.quieroestablecimiento_fragment, container, false);
-        MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
+        MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
         SupportMapFragment supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         supportMapFragment.getMapAsync(this);
         mAuth = FirebaseAuth.getInstance();
@@ -103,24 +106,38 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
         Log.v("USERGUID", mAuth.getUid());
 
 
+        floatingMarkersOverlay = root.findViewById(R.id.map_floating_markers_overlay);
+
+
 
         return root;
     }
 
 
     public void onMapReady(final GoogleMap googleMap) {
+
+
+
+
         LatLng Centro = new LatLng(37.4038783 , -5.9789261);
         LatLng SevillaCartuja = new LatLng(37.4086401, -6.0077992);
+        final String title = "INN COFFEE SEVILLA CARTUJA";
+        final int color = Color.BLACK;
+        final MarkerInfo mi = new MarkerInfo(SevillaCartuja, title, color);
         googleMap.addMarker(new MarkerOptions().position(SevillaCartuja).title("INN COFFEE SEVILLA CARTUJA"));
 
-
         LatLng SevillaNervion = new LatLng(37.3792235, -5.976995);
+        final String title2 = "INN COFFEE SEVILLA NERVION";
+        final int color2 = Color.BLACK;
+        final MarkerInfo mi2 = new MarkerInfo(SevillaNervion, title2, color2);
         googleMap.addMarker(new MarkerOptions().position(SevillaNervion).title("INN COFFEE SEVILLA NERVION"));
 
-
-
         LatLng SevillaEste = new LatLng(37.4087005, -5.946891);
+        final String title3 = "INN COFFEE SEVILLA ESTE";
+        final int color3 = Color.BLACK;
+        final MarkerInfo mi3 = new MarkerInfo(SevillaEste, title3, color3);
         googleMap.addMarker(new MarkerOptions().position(SevillaEste).title("INN COFFEE SEVILLA ESTE"));
+
 
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -227,7 +244,11 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
                 .build();                   // Creates a CameraPosition from the builder
 
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
+        floatingMarkersOverlay.setSource(googleMap);
+        floatingMarkersOverlay.setMaxFloatingTitlesCount(3);
+        floatingMarkersOverlay.addMarker(0,mi);
+        floatingMarkersOverlay.addMarker(1,mi2);
+        floatingMarkersOverlay.addMarker(2,mi3);
     }
 
 }

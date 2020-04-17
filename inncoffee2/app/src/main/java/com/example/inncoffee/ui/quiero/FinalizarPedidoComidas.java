@@ -94,7 +94,7 @@ public class FinalizarPedidoComidas extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.finalizarpedidocomidas, container, false);
-        MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
+        MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
         mPedidos = (RecyclerView) root.findViewById(R.id.VerpedidoComidas);
         mPedidos.setLayoutManager(new LinearLayoutManager(getContext()));
         sumatotal = (TextView) root.findViewById(R.id.total5) ;

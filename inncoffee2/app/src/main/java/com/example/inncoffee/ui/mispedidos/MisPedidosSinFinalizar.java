@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -101,7 +102,7 @@ public class MisPedidosSinFinalizar extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.mispedidossinfinalizar, container, false);
-        MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
+        MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
         mPedidos = (RecyclerView) root.findViewById(R.id.mispedidossinfinalizar);
 
         mPedidos.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -143,7 +144,6 @@ public class MisPedidosSinFinalizar extends Fragment {
         finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 FinalizarPedido fragment = new FinalizarPedido();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();

@@ -99,7 +99,7 @@ public class PostresCombo extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.postrescombo, container, false);
-        MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
+        MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
         mDatabase = FirebaseDatabase.getInstance();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mTosta = mDatabase.getReference("Postres");

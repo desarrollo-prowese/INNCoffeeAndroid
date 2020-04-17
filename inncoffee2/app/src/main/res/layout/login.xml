@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/principalactivitybackground"
     android:gravity="center_vertical"
     android:orientation="vertical"
@@ -45,10 +46,23 @@
         android:inputType="textPassword"
         android:padding="10dp" />
 
-    <TextView
+    <CheckBox
+        android:id="@+id/checkBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/menu_registronew1"
+        android:buttonTint="#FFFFFF"
+        android:gravity="center"
+        android:text="Mantener Logueado"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/restablecer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:background="@drawable/menu_registronew1"
         android:gravity="center"
         android:text="@string/__has_olvidado_tu_contrase_a__string"
@@ -64,5 +78,6 @@
         android:padding="5dp"
         android:text="@string/log_in"
         android:textColor="@android:color/white" />
+
 
 </LinearLayout>

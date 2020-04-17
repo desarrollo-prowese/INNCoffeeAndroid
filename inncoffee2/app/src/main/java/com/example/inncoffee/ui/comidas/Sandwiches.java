@@ -103,7 +103,7 @@ public class Sandwiches extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.sanwiches, container, false);
-        MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
+        MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
         mDatabase = FirebaseDatabase.getInstance();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mTosta = mDatabase.getReference("Sandwiches");

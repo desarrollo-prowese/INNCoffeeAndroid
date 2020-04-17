@@ -41,6 +41,7 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+import io.paperdb.Paper;
 
 
 public class PrincipalActivity extends AppCompatActivity {
@@ -105,7 +106,6 @@ public class PrincipalActivity extends AppCompatActivity {
         inicialize();
 
 
-
         //Launch Registration screen when Register Button is clicked
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,6 +152,4 @@ public class PrincipalActivity extends AppCompatActivity {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-
-
 }

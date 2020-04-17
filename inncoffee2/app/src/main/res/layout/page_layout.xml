@@ -23,8 +23,8 @@
 
         <TextView
             android:id="@+id/card_name_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="120dp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:gravity="center"
             android:textAllCaps="true"

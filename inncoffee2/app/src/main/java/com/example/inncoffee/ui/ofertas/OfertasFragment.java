@@ -84,7 +84,7 @@ public class OfertasFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.ofertas_fragment, container, false);
-        MainActivity.mensajeToolbar.setText("MIS OFERTAS");
+        MainActivity.mensajeToolbar.setText("PROMOCIONES");
 
         mRecycle = (RecyclerView) root.findViewById(R.id.listaofertas);
 

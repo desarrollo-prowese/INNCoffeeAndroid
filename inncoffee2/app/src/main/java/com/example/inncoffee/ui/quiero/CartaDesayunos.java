@@ -68,7 +68,7 @@ public class CartaDesayunos extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.cartadesayunos, container, false);
-        MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
+        MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
 
         tostadas = (TextView) root.findViewById(R.id.tostadas);
         bebidas = (TextView) root.findViewById(R.id.bebidas);

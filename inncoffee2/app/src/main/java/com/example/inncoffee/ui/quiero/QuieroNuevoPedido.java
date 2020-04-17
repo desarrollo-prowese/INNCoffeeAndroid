@@ -64,7 +64,7 @@ public class QuieroNuevoPedido extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.quieronuevopedido_fragment, container, false);
-        MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
+        MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
         Entrar = (ImageView) root.findViewById(R.id.EntrarMapa);
         Entrar.setOnClickListener(new View.OnClickListener() {
             @Override

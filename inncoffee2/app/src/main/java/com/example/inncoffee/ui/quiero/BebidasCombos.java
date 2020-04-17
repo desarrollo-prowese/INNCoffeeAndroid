@@ -74,7 +74,7 @@ public class BebidasCombos extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.bebidas, container, false);
-        MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
+        MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
         Cafe = (TextView) root.findViewById(R.id.cafes);
         te = (TextView) root.findViewById(R.id.teeinfusiones);
         bebidas = (TextView) root.findViewById(R.id.bebidas);

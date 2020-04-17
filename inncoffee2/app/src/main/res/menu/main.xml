@@ -10,7 +10,7 @@
         android:title="Invita a tus amigos" />
     <item
         android:id="@+id/tOfertas"
-        android:title="Ofertas" />
+        android:title="Promociones" />
     <item
         android:id="@+id/tPedidos"
         android:title="Pedidos" />

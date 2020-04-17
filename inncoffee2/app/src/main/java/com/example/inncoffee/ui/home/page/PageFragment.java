@@ -61,7 +61,7 @@ public class PageFragment extends Fragment {
         pageContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (pageContent.getTag().equals("QUIERO")) {
+                if (pageContent.getTag().equals("PEDIDO")) {
                     QuieroFragment fragment = new QuieroFragment();
                     FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                     ftEs.replace(R.id.nav_host_fragment, fragment);
@@ -72,15 +72,15 @@ public class PageFragment extends Fragment {
                     Toast.makeText(getActivity(), " PAGO Y GANO 1", Toast.LENGTH_SHORT).show();
                 }
 
-                else if (PageFragment.pageContent.getTag().equals("MISOFERTAS")){
-                    Toast.makeText(getActivity(), " MIS OFFERTAS ", Toast.LENGTH_SHORT).show();
+                else if (PageFragment.pageContent.getTag().equals("PROMOCIONES")){
+                    Toast.makeText(getActivity(), " PROMOCIONES ", Toast.LENGTH_SHORT).show();
                     OfertasFragment fragment = new OfertasFragment();
                     FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                     ftEs.replace(R.id.nav_host_fragment, fragment);
                     ftEs.addToBackStack(null);
                     ftEs.commit();
                 }
-                else if (PageFragment.pageContent.getTag().equals("MISPUNTOS")){
+                else if (PageFragment.pageContent.getTag().equals("COFFEEcoins")){
                     MisPuntosFragment fragment = new MisPuntosFragment();
                     FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                     ftEs.replace(R.id.nav_host_fragment, fragment);
@@ -102,6 +102,7 @@ public class PageFragment extends Fragment {
         TextView title = (TextView) pageContent.findViewById(R.id.card_name_text_view);
         title.setText(item.getTitle());
         title.setTextColor(item.getColor());
+        title.setBackgroundResource(item.getFondo());
 
         if (pageContent != null) {
             pageContent.setOnTouchListener((CardViewPager) container);

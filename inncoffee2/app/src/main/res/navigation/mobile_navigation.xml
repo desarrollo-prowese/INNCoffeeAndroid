@@ -182,9 +182,6 @@
             android:id="@+id/action_nav_quierotostadas_to_nav_Tostadasclasicas"
             app:destination="@id/nav_Tostadasclasicas" />
         <action
-            android:id="@+id/action_nav_quierotostadas_to_nav_TostadasExtraordinarias"
-            app:destination="@id/nav_TostadasExtraordinarias" />
-        <action
             android:id="@+id/action_nav_quierotostadas_to_nav_TostadasOriginales"
             app:destination="@id/nav_TostadasOriginales" />
     </fragment>
@@ -204,14 +201,7 @@
             android:id="@+id/action_nav_TostadasOriginales_to_nav_quierotostadas"
             app:destination="@id/nav_quierotostadas" />
     </fragment>
-    <fragment
-        android:id="@+id/nav_TostadasExtraordinarias"
-        android:name="com.example.inncoffee.ui.tostadas.TostadasExtraordinarias"
-        tools:layout="@layout/tostadasextraordinarias" >
-        <action
-            android:id="@+id/action_nav_TostadasExtraordinarias_to_nav_quierotostadas"
-            app:destination="@id/nav_quierotostadas" />
-    </fragment>
+
 
     <fragment
         android:id="@+id/nav_misoffertas"

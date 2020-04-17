@@ -55,15 +55,15 @@ public class HomeFragment extends Fragment {
 
     private String[] label= {
 
-            "QUIERO ",
+            "PEDIDO ",
             "PAGO Y GANO",
             "MIS OFFERTAS",
             "MIS PUNTOS",
-            "QUIERO ",
+            "PEDIDO ",
             "PAGO Y GANO",
             "MIS OFFERTAS",
             "MIS PUNTOS",
-            "QUIERO ",
+            "PEDIDO ",
             "PAGO Y GANO",
             "MIS OFFERTAS",
             "MIS PUNTOS",
@@ -88,7 +88,7 @@ public class HomeFragment extends Fragment {
         final List<String> content = new ArrayList<>();
         for (int i = 0; i < 25; i++) {
             if (i == 0){
-                content.add("QUIERO");
+                content.add("PEDIDO");
             }
             if (i == 1){
                 content.add(" PAGO Y GANO ");
@@ -100,7 +100,7 @@ public class HomeFragment extends Fragment {
                 content.add(" MIS PUNTOS ");
             }
             if (i == 4){
-                content.add(" QUIERO " );
+                content.add(" PEDIDO " );
             }
             if (i == 5){
                 content.add(" PAGO Y GANO ");
@@ -112,7 +112,7 @@ public class HomeFragment extends Fragment {
                 content.add(" MIS PUNTOS ");
             }
             if (i == 8){
-                content.add(" QUIERO " );
+                content.add(" PEDIDO " );
             }
             if (i == 9){
                 content.add(" PAGO Y GANO ");
@@ -193,7 +193,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v, int position) {
                 if (position == 0){
-                    Toast.makeText(getActivity(), " Quiero ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), " PEDIDO ", Toast.LENGTH_SHORT).show();
                     QuieroFragment fragment = new QuieroFragment();
                     FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                     ftEs.replace(R.id.nav_host_fragment, fragment);
@@ -212,7 +212,7 @@ public class HomeFragment extends Fragment {
                     ftEs.commit();
                 }
                 else if (position == 3){
-                    Toast.makeText(getActivity(), " MIS PUNTOS ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), " COFFEEcoins ", Toast.LENGTH_SHORT).show();
                     MisPuntosFragment fragment = new MisPuntosFragment();
                     FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                     ftEs.replace(R.id.nav_host_fragment, fragment);
@@ -220,7 +220,7 @@ public class HomeFragment extends Fragment {
                     ftEs.commit();
                 }
                 else if (position == 4){
-                    Toast.makeText(getActivity(), " Quiero ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), " PEDIDO ", Toast.LENGTH_SHORT).show();
                     QuieroFragment fragment = new QuieroFragment();
                     FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                     ftEs.replace(R.id.nav_host_fragment, fragment);
@@ -247,7 +247,7 @@ public class HomeFragment extends Fragment {
                     ftEs.commit();
                 }
                 else if (position == 8){
-                    Toast.makeText(getActivity(), " Quiero ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), " PEDIDO ", Toast.LENGTH_SHORT).show();
                     QuieroFragment fragment = new QuieroFragment();
                     FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                     ftEs.replace(R.id.nav_host_fragment, fragment);

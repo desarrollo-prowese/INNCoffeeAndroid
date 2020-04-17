@@ -10,6 +10,16 @@ public class Card implements Parcelable {
     private String title;
     private int color;
 
+    public int getFondo () {
+        return fondo;
+    }
+
+    public void setFondo (int fondo) {
+        this.fondo = fondo;
+    }
+
+    private int fondo;
+
 
     public int getImage() {
         return image;
@@ -24,11 +34,12 @@ public class Card implements Parcelable {
 
     private String name;
 
-    public Card(int image, String title,String name,int color) {
+    public Card(int image, String title,String name,int color, int fondo) {
         this.image = image;
         this.title = title;
         this.name = name;
         this.color = color;
+        this.fondo = fondo;
     }
 
     private Card(Parcel in) {

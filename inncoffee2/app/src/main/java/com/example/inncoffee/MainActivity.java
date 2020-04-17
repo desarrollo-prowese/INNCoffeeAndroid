@@ -34,6 +34,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
+import com.example.inncoffee.RegistroLogin.Carga;
 import com.example.inncoffee.RegistroLogin.Login;
 import com.example.inncoffee.ui.home.HomeFragment;
 import com.example.inncoffee.ui.home.HomeFragment1;
@@ -44,6 +45,12 @@ import com.example.inncoffee.ui.mispedidos.MisPedidosClass;
 import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizar;
 import com.example.inncoffee.ui.mispuntos.MisPuntosFragment;
 import com.example.inncoffee.ui.ofertas.OfertasClass;
+import com.example.inncoffee.ui.ofertas.OfertasFragment;
+import com.example.inncoffee.ui.pago.tpvvinapplibrary.TPVVConfiguration;
+import com.example.inncoffee.ui.pago.tpvvinapplibrary.TPVVConstants;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.security.ProviderInstaller;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -79,6 +86,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import io.paperdb.Paper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -96,9 +104,9 @@ public class MainActivity extends AppCompatActivity {
     public static int pendingNotifications;
     private static final String USERS = "Users";
     private static ImageView perfil;
-    private String email;
+    public  String email,fname,centre;
     public static boolean back= false;
-
+    public  TextView fnames,centro;
     private static final int PICK_IMAGE_REQUEST = 1;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -151,17 +159,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
+        getApplicationContext().getCacheDir();
         Toolbar toolbar = findViewById(R.id.toolbar);
         inicialize();
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
         drawer.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
@@ -170,15 +182,20 @@ public class MainActivity extends AppCompatActivity {
         Bundle extra = intent.getExtras();
         View navHeaderView = navigationView.inflateHeaderView(R.layout.nav_header_main);
         navHeaderView = navigationView.getHeaderView(0);
-        final TextView fnames = (TextView) navHeaderView.findViewById(R.id.TextoNombre);
-        final TextView centro = (TextView) navHeaderView.findViewById(R.id.Centro);
+
+        fnames = (TextView) navHeaderView.findViewById(R.id.TextoNombre);
+        centro = (TextView) navHeaderView.findViewById(R.id.Centro);
         perfil = (ImageView) navHeaderView.findViewById(R.id.ImagenPerfil);
+
         perfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openFileChooser();
             }
         });
+
+
+
 
 
         mDatabase = FirebaseDatabase.getInstance();
@@ -189,51 +206,16 @@ public class MainActivity extends AppCompatActivity {
         mUsuario = mDatabase.getReference(USERS);
         Log.v("USERID", mUsuario.getKey());
         Log.v("USERGUID", mAuth.getUid());
+        UpdateBarra();
 
         if (mUser != null) {
-            Log.d("TAG", "onCreate: " + mUser.getDisplayName());
-
                if (mUser.getPhotoUrl() != null) {
 
                    Glide.with(getApplicationContext()).load(mUser.getPhotoUrl().toString()).into(perfil);
                }
 
-
-
         }
 
-        mUsuario.addValueEventListener(new ValueEventListener() {
-            String fname;
-            String centre;
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot keyId: dataSnapshot.getChildren()) {
-                    if(dataSnapshot.exists()){
-                        if(Objects.equals(keyId.child("Email").getValue(), email)) {
-                           fname = keyId.child("FullName").getValue().toString();
-                           centre = keyId.child("Center").getValue().toString();
-                           Log.v("NOMBRE  ", fname+ keyId);
-                           Log.v("CENTRO", centre+ keyId);
-
-                        }
-                    }
-            }
-                if (fname != null )
-                fnames.setText(fname);
-                if (centre != null){
-                centro.setText(centre);
-                }
-
-        }
-
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w("TAG", "Failed to read value.", databaseError.toException());
-            }
-        });
 
 
         mensajeToolbar = (TextView) findViewById(R.id.mesajestolbar);
@@ -253,6 +235,22 @@ public class MainActivity extends AppCompatActivity {
                         mensajeToolbar.setText("");
                         break;
                     case R.id.tInvita:
+                        Intent sendIntent = new Intent();
+                        sendIntent.setAction(Intent.ACTION_SEND);
+                        sendIntent.setType("text/plain");
+                        sendIntent.putExtra(Intent.EXTRA_TEXT, "Crecemos juntos");
+                        Intent shareIntent = Intent.createChooser(sendIntent, null);
+                        startActivity(shareIntent);
+                        break;
+                    case R.id.tOfertas:
+
+                        OfertasFragment fragments = new OfertasFragment();
+                        FragmentTransaction ftEss = getSupportFragmentManager().beginTransaction();
+                        ftEss.replace(R.id.nav_host_fragment, fragments);
+                        ftEss.addToBackStack(null);
+                        ftEss.commit();
+                        break;
+                    case R.id.tPedidos:
 
                         String texto = "Probando INN COFFEE";
 
@@ -261,40 +259,10 @@ public class MainActivity extends AppCompatActivity {
                         String key=mRef.push().getKey();
                         mRef.child(key).setValue(user);
 
-
-                        //Toast.makeText(MainActivity.this, "Data inserted...", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(MainActivity.this, "Proximamente", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.tOfertas:
-
-                        String ofertas = "NUEVO TAZON CON CEREALES";
-                        String porcentaje = "-20%";
-
-                        OfertasClass user1=new OfertasClass(ofertas,porcentaje);
-
-                        String key1=mRefo.push().getKey();
-                        mRefo.child(key1).setValue(user1);
-
-
-                        Toast.makeText(MainActivity.this, "Proximamente", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.tPedidos:
-
-                        String textos = "Entera/Aceite/Mollete";
-                        String precio = "5.00€";
-
-                        MisPedidosClass user2=new MisPedidosClass(textos,precio);
-
-                        ID = mAuth.getUid();
-                        String key3=mRefos.push().getKey();
-                        mRefos.child(ID).child("PedidosSinFinalizar").child(key3).setValue(user2);
-
-
-
                         Toast.makeText(MainActivity.this, "Proximamente", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.tIra:
-                        Intent intent = new Intent();
+
                         intent.setAction(Intent.ACTION_VIEW);
                         intent.addCategory(Intent.CATEGORY_BROWSABLE);
                         intent.setData(Uri.parse("https://innoffices.es/"));
@@ -302,6 +270,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.tCerrar:
                         mAuth.signOut();
+                        Paper.book().destroy();
                         startActivity(new Intent(MainActivity.this, Pagina_Inicial.class));
                         Toast.makeText(MainActivity.this, "Cerrar sesion", Toast.LENGTH_SHORT).show();
                         finish();
@@ -383,10 +352,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(getIntent());
     }*/
 
-
-    private void closeDrawer() {
-        drawer.closeDrawer(GravityCompat.START);
-    }
 
 
    /* @Override
@@ -543,4 +508,33 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         }
+        private void UpdateBarra(){
+            mUsuario.addValueEventListener(new ValueEventListener() {
+
+                @Override
+                public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                    ID = mAuth.getUid();
+                    assert ID != null;
+                    fname = dataSnapshot.child(ID).child("FullName").getValue().toString();
+                    centre = dataSnapshot.child(ID).child("Center").getValue().toString();
+                    Log.v("NOMBRE :  " , fname);
+                    Log.v("CENTRO :   " , centre);
+
+                 }
+                    if (fname != null)
+                        fnames.setText(fname);
+                    if (centre != null) {
+                        centro.setText(centre);
+                    }
+                }
+
+
+                @Override
+                public void onCancelled (@NonNull DatabaseError databaseError) {
+                    Log.w("TAG", "Failed to read value.", databaseError.toException());
+                }
+            });
+
+    }
 }

@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +13,17 @@ import android.view.ViewGroup;
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
 import com.example.inncoffee.ui.home.page.PageFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -30,14 +39,12 @@ public class HomeFragment1 extends Fragment {
     private ArrayList<Card> items;
     private FixedSpeedScroller scroller;
     public static int num = 0;
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_home1, container, false);
         MainActivity.mensajeToolbar.setText("");
-
         if (num == 1){
             Intent intent = new Intent(getActivity(), MainActivity.class);
             startActivity(intent);
@@ -48,10 +55,10 @@ public class HomeFragment1 extends Fragment {
 
             items = new ArrayList<>();
 
-            items.add(new Card(R.drawable.mis_puntos,"MIS PUNTOS ","MISPUNTOS", Color.WHITE));
-            items.add(new Card(R.drawable.mis_ofertas,"MIS OFERTAS ","MISOFERTAS", Color.WHITE));
-            items.add(new Card(R.drawable.pago_y_gano,"PAGO Y GANO ","PAGOYGANO", Color.WHITE));
-            items.add(new Card(R.drawable.quiero,"QUIERO ","QUIERO", Color.BLACK));
+            items.add(new Card(R.drawable.mis_puntos,"COFFEEcoins ","COFFEEcoins", Color.WHITE,R.drawable.menu_registronew1));
+            items.add(new Card(R.drawable.mis_ofertas,"PROMOCIONES ","PROMOCIONES", Color.WHITE,R.drawable.menu_registronew1));
+            items.add(new Card(R.drawable.pago_y_gano,"PAGO Y GANO ","PAGOYGANO", Color.WHITE,R.drawable.menu_registronew1));
+            items.add(new Card(R.drawable.quiero,"PEDIDO ","PEDIDO", Color.WHITE, R.drawable.menu_registronew1));
 
 
             if (items.size() == 4) {

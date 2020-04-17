@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,7 +82,7 @@ public class QuieroFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.quierofragment, container, false);
-        MainActivity.mensajeToolbar.setText("QUIERO");
+        MainActivity.mensajeToolbar.setText("PEDIDO");
         Nuevopedido = (Button) root.findViewById(R.id.buttonNuevoPedido);
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
@@ -134,6 +135,7 @@ public class QuieroFragment extends Fragment {
                 dialogo1.setPositiveButton("Finalizar Comanda", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         FinalizarPedido fragment = new FinalizarPedido();
                         FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                         ftEs.replace(R.id.nav_host_fragment, fragment);
@@ -176,14 +178,15 @@ public class QuieroFragment extends Fragment {
     }
 
     private void Finalizado(){
-
         ID = mAuth.getUid();
         Log.v("QUE es Desayuno :  ", String.valueOf(TengoPedidoSinFinalizar));
         mDatabase.getReference("MisPedidos").child("PedidosFinalizados").child(ID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                TengoPedidoSinFinalizar = dataSnapshot.exists();
+                    TengoPedidoSinFinalizar = dataSnapshot.exists();
+
+
 
 
             }
@@ -203,7 +206,8 @@ public class QuieroFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                TengoPedidoSinFinalizarComidas = dataSnapshot.exists();
+
+                    TengoPedidoSinFinalizarComidas = dataSnapshot.exists();
 
             }
 

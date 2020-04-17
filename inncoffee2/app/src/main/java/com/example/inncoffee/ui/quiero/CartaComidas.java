@@ -70,7 +70,7 @@ public class CartaComidas extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.cartacomidas, container, false);
-        MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
+        MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
 
        combos = (TextView) root.findViewById(R.id.combos);
        sandwiches = (TextView) root.findViewById(R.id.sandwiches);

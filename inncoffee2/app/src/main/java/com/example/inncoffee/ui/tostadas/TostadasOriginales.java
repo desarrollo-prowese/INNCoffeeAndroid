@@ -49,6 +49,7 @@ public class TostadasOriginales extends Fragment {
     private int contador2 = 1;
     private String ID ;
     private DatabaseReference mUsuario;
+    private DatabaseReference mCompare;
     private static final String USERS = "MisPedidos";
     private TextView contador;
     private ImageView menos,plus;
@@ -104,10 +105,11 @@ public class TostadasOriginales extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.tostadasoriginales, container, false);
-        MainActivity.mensajeToolbar.setText("QUIERO / NUEVO PEDIDO");
+        MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
         mDatabase = FirebaseDatabase.getInstance();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mTosta = mDatabase.getReference("TostadasOriginales");
+        mCompare = mDatabase.getReference();
         tostadasdb = new TostadasDB();
         Imagen = (ImageView) root.findViewById(R.id.imagentostada);
         nombreArticulo = (TextView) root.findViewById(R.id.nombrearticulo);
@@ -250,6 +252,7 @@ public class TostadasOriginales extends Fragment {
                 selecionarpan.setVisibility(View.INVISIBLE);
                 selecionarpan1.setVisibility(View.VISIBLE);
                 SelecionaPan = false;
+                añadir.setVisibility(View.INVISIBLE);
                 mTosta.child("TipoPanes").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -272,6 +275,29 @@ public class TostadasOriginales extends Fragment {
 
                     }
                 });
+                ID = mAuth.getUid();
+                mCompare.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                        Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue() +" // "+ dataSnapshot.child("TostadasOriginales").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue() );
+                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                    dataSnapshot.child("TostadasOriginales").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue()))
+                            {
+
+                                selecionarpan1.setVisibility(View.INVISIBLE);
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                            else
+                                selecionarpan1.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 
@@ -285,6 +311,8 @@ public class TostadasOriginales extends Fragment {
                 selecionarpan1.setVisibility(View.INVISIBLE);
                 selecionarpan.setText(barra);
                 SelecionaPan = true;
+                añadir.setVisibility(View.VISIBLE);
+
                 if (SelecionaPan == true) {
                     if (MediaoEntera == false) {
                         mTosta.child("Media").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -306,6 +334,29 @@ public class TostadasOriginales extends Fragment {
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        ID = mAuth.getUid();
+                        mCompare.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasOriginales").child("Media").child(String.valueOf(id)).child("Alergia").getValue() );
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                            dataSnapshot.child("TostadasOriginales").child("Media").child(String.valueOf(id)).child("Alergia").getValue()))
+                                    {
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                    else{
+                                        añadir.setVisibility(View.VISIBLE);
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled (@NonNull DatabaseError databaseError) {
 
                             }
                         });
@@ -331,6 +382,29 @@ public class TostadasOriginales extends Fragment {
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        ID = mAuth.getUid();
+                        mCompare.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasOriginales").child("Entera").child(String.valueOf(id)).child("Alergia").getValue() );
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                            dataSnapshot.child("TostadasOriginales").child("Entera").child(String.valueOf(id)).child("Alergia").getValue()))
+                                    {
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                    else{
+                                        añadir.setVisibility(View.VISIBLE);
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled (@NonNull DatabaseError databaseError) {
 
                             }
                         });
@@ -381,6 +455,29 @@ public class TostadasOriginales extends Fragment {
 
                    }
                });
+               ID = mAuth.getUid();
+               mCompare.addValueEventListener(new ValueEventListener() {
+                   @Override
+                   public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                       Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasOriginales").child("Media").child(String.valueOf(id)).child("Alergia").getValue() );
+                       if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                           if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                   dataSnapshot.child("TostadasOriginales").child("Media").child(String.valueOf(id)).child("Alergia").getValue()))
+                           {
+                               añadir.setVisibility(View.INVISIBLE);
+                           }
+                           else{
+                               añadir.setVisibility(View.VISIBLE);
+                           }
+                       }
+
+                   }
+
+                   @Override
+                   public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                   }
+               });
            } else if (MediaoEntera == true) {
 
                mTosta.child("Entera").addValueEventListener(new ValueEventListener() {
@@ -417,6 +514,29 @@ public class TostadasOriginales extends Fragment {
 
                    @Override
                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                   }
+               });
+               ID = mAuth.getUid();
+               mCompare.addValueEventListener(new ValueEventListener() {
+                   @Override
+                   public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                       Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasOriginales").child("Entera").child(String.valueOf(id)).child("Alergia").getValue() );
+                       if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                           if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                   dataSnapshot.child("TostadasOriginales").child("Entera").child(String.valueOf(id)).child("Alergia").getValue()))
+                           {
+                               añadir.setVisibility(View.INVISIBLE);
+                           }
+                           else{
+                               añadir.setVisibility(View.VISIBLE);
+                           }
+                       }
+
+                   }
+
+                   @Override
+                   public void onCancelled (@NonNull DatabaseError databaseError) {
 
                    }
                });
@@ -461,6 +581,29 @@ public class TostadasOriginales extends Fragment {
 
                }
            });
+           ID = mAuth.getUid();
+           mCompare.addValueEventListener(new ValueEventListener() {
+               @Override
+               public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                   Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue() +" // "+ dataSnapshot.child("TostadasOriginales").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue() );
+                   if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                       if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                               dataSnapshot.child("TostadasOriginales").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue()))
+                       {
+
+                           selecionarpan1.setVisibility(View.INVISIBLE);
+                           añadir.setVisibility(View.INVISIBLE);
+                       }
+                       else
+                           selecionarpan1.setVisibility(View.VISIBLE);
+                   }
+               }
+
+               @Override
+               public void onCancelled (@NonNull DatabaseError databaseError) {
+
+               }
+           });
 
 
        }
@@ -493,6 +636,29 @@ public class TostadasOriginales extends Fragment {
 
                     }
                 });
+                ID = mAuth.getUid();
+                mCompare.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                        Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasOriginales").child("Media").child(String.valueOf(id)).child("Alergia").getValue() );
+                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                    dataSnapshot.child("TostadasOriginales").child("Media").child(String.valueOf(id)).child("Alergia").getValue()))
+                            {
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                            else{
+                                añadir.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
             }
         });
@@ -522,6 +688,29 @@ public class TostadasOriginales extends Fragment {
 
                     }
                 });
+                ID = mAuth.getUid();
+                mCompare.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                        Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasOriginales").child("Entera").child(String.valueOf(id)).child("Alergia").getValue() );
+                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                    dataSnapshot.child("TostadasOriginales").child("Entera").child(String.valueOf(id)).child("Alergia").getValue()))
+                            {
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                            else{
+                                añadir.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
 
@@ -547,7 +736,7 @@ public class TostadasOriginales extends Fragment {
                                      nombreArticulo.setText(nombre);
                                      precio.setText(precios);
 
-                                     if (id == 9) {
+                                     if (id == 6) {
                                          id = 1;
                                          nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                                          precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
@@ -567,6 +756,29 @@ public class TostadasOriginales extends Fragment {
 
                              }
                          });
+                         ID = mAuth.getUid();
+                         mCompare.addValueEventListener(new ValueEventListener() {
+                             @Override
+                             public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                                 Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasOriginales").child("Media").child(String.valueOf(id)).child("Alergia").getValue() );
+                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                             dataSnapshot.child("TostadasOriginales").child("Media").child(String.valueOf(id)).child("Alergia").getValue()))
+                                     {
+                                         añadir.setVisibility(View.INVISIBLE);
+                                     }
+                                     else{
+                                         añadir.setVisibility(View.VISIBLE);
+                                     }
+                                 }
+
+                             }
+
+                             @Override
+                             public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                             }
+                         });
 
                      }else if (MediaoEntera == true) {
 
@@ -582,7 +794,7 @@ public class TostadasOriginales extends Fragment {
                                      nombreArticulo.setText(nombre);
                                      precio.setText(precios);
 
-                                     if (id == 9) {
+                                     if (id == 6) {
                                          id = 1;
                                          nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                                          precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
@@ -599,6 +811,29 @@ public class TostadasOriginales extends Fragment {
 
                              @Override
                              public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                             }
+                         });
+                         ID = mAuth.getUid();
+                         mCompare.addValueEventListener(new ValueEventListener() {
+                             @Override
+                             public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                                 Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasOriginales").child("Entera").child(String.valueOf(id)).child("Alergia").getValue() );
+                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                             dataSnapshot.child("TostadasOriginales").child("Entera").child(String.valueOf(id)).child("Alergia").getValue()))
+                                     {
+                                         añadir.setVisibility(View.INVISIBLE);
+                                     }
+                                     else{
+                                         añadir.setVisibility(View.VISIBLE);
+                                     }
+                                 }
+
+                             }
+
+                             @Override
+                             public void onCancelled (@NonNull DatabaseError databaseError) {
 
                              }
                          });
@@ -618,7 +853,7 @@ public class TostadasOriginales extends Fragment {
                                  Glide.with(Objects.requireNonNull(getContext())).load(imagenpan).into(Imagen);
                                  nombreArticulo.setText(nombrepan);
 
-                                 if (idpanes == 8) {
+                                 if (idpanes == 9) {
                                      idpanes = 1;
                                       nombrepan = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
                                       barra = dataSnapshot.child(String.valueOf(idpanes)).child("barra").getValue().toString();
@@ -634,6 +869,29 @@ public class TostadasOriginales extends Fragment {
 
                          @Override
                          public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                         }
+                     });
+                     ID = mAuth.getUid();
+                     mCompare.addValueEventListener(new ValueEventListener() {
+                         @Override
+                         public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                             Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue() +" // "+ dataSnapshot.child("TostadasOriginales").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue() );
+                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                         dataSnapshot.child("TostadasOriginales").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue()))
+                                 {
+
+                                     selecionarpan1.setVisibility(View.INVISIBLE);
+                                     añadir.setVisibility(View.INVISIBLE);
+                                 }
+                                 else
+                                     selecionarpan1.setVisibility(View.VISIBLE);
+                             }
+                         }
+
+                         @Override
+                         public void onCancelled (@NonNull DatabaseError databaseError) {
 
                          }
                      });
@@ -664,7 +922,7 @@ public class TostadasOriginales extends Fragment {
                                     precio.setText(precios);
 
                                     if (id == 0) {
-                                        id = 7;
+                                        id = 5;
                                         nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                                         precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
                                         imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
@@ -680,6 +938,29 @@ public class TostadasOriginales extends Fragment {
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        ID = mAuth.getUid();
+                        mCompare.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasOriginales").child("Media").child(String.valueOf(id)).child("Alergia").getValue() );
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                            dataSnapshot.child("TostadasOriginales").child("Media").child(String.valueOf(id)).child("Alergia").getValue()))
+                                    {
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                    else{
+                                        añadir.setVisibility(View.VISIBLE);
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled (@NonNull DatabaseError databaseError) {
 
                             }
                         });
@@ -699,7 +980,7 @@ public class TostadasOriginales extends Fragment {
                                     precio.setText(precios);
 
                                     if (id == 0) {
-                                        id = 8;
+                                        id = 5;
                                         nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                                         precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
                                         imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
@@ -715,6 +996,29 @@ public class TostadasOriginales extends Fragment {
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        ID = mAuth.getUid();
+                        mCompare.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasOriginales").child("Entera").child(String.valueOf(id)).child("Alergia").getValue() );
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                            dataSnapshot.child("TostadasOriginales").child("Entera").child(String.valueOf(id)).child("Alergia").getValue()))
+                                    {
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                    else{
+                                        añadir.setVisibility(View.VISIBLE);
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled (@NonNull DatabaseError databaseError) {
 
                             }
                         });
@@ -735,7 +1039,7 @@ public class TostadasOriginales extends Fragment {
                                 nombreArticulo.setText(nombrepan);
 
                                 if (idpanes == 0) {
-                                    idpanes = 7;
+                                    idpanes = 8;
                                      nombrepan = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
                                      barra = dataSnapshot.child(String.valueOf(idpanes)).child("barra").getValue().toString();
                                      imagenpan = dataSnapshot.child(String.valueOf(idpanes)).child("imagen").getValue().toString();
@@ -750,6 +1054,29 @@ public class TostadasOriginales extends Fragment {
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                    ID = mAuth.getUid();
+                    mCompare.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                            Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue() +" // "+ dataSnapshot.child("TostadasOriginales").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue() );
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                        dataSnapshot.child("TostadasOriginales").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue()))
+                                {
+
+                                    selecionarpan1.setVisibility(View.INVISIBLE);
+                                    añadir.setVisibility(View.INVISIBLE);
+                                }
+                                else
+                                    selecionarpan1.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled (@NonNull DatabaseError databaseError) {
 
                         }
                     });

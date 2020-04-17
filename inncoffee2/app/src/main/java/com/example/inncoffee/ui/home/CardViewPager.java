@@ -73,14 +73,14 @@ public class CardViewPager extends ViewPager implements OnTouchListener {
                 case MotionEvent.ACTION_UP:
                     Log.v("Probando" , String.valueOf(PageFragment.pageContent.getTag()));
                     if (System.currentTimeMillis() - lastTouchDown < CLICK_ACTION_THRESHHOLD) {
-                        if (PageFragment.pageContent.getTag().equals("QUIERO")){
-                            Toast.makeText(getContext(), "QUIERO", Toast.LENGTH_SHORT).show();}
+                        if (PageFragment.pageContent.getTag().equals("PEDIDO")){
+                            Toast.makeText(getContext(), "PEDIDO", Toast.LENGTH_SHORT).show();}
                         else if (PageFragment.pageContent.getTag().equals("PAGOYGANO")){
                             Toast.makeText(getContext(), "PAGO Y GANO", Toast.LENGTH_SHORT).show();}
-                        else if (PageFragment.pageContent.getTag().equals("MISOFERTAS")){
-                            Toast.makeText(getContext(), "MIS OFERTAS", Toast.LENGTH_SHORT).show();}
-                        else if (PageFragment.pageContent.getTag().equals("MISPUNTOS")){
-                            Toast.makeText(getContext(), "MIS PUNTOS", Toast.LENGTH_SHORT).show();}
+                        else if (PageFragment.pageContent.getTag().equals("PROMOCIONES")){
+                            Toast.makeText(getContext(), "PROMOCIONES", Toast.LENGTH_SHORT).show();}
+                        else if (PageFragment.pageContent.getTag().equals("COFFEEcoins")){
+                            Toast.makeText(getContext(), "COFFEEcoins", Toast.LENGTH_SHORT).show();}
 
                         else{
                             Toast.makeText(getContext(), "Open settings for card!", Toast.LENGTH_SHORT).show();
