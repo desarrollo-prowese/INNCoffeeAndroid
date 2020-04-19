@@ -7,43 +7,12 @@
     android:background="@drawable/bebidas">
 
     <TextView
-        android:id="@+id/cafes"
-        android:layout_width="165dp"
-        android:layout_height="97dp"
+        android:id="@+id/Cafesolo"
+        android:layout_width="178dp"
+        android:layout_height="86dp"
         android:gravity="center"
-        android:text="@string/caf_s_ek1_string"
+        android:text="Café Solo"
         android:textColor="@color/aceite_de_oliva_color"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.172" />
-
-    <TextView
-        android:id="@+id/bebidas"
-        android:layout_width="239dp"
-        android:layout_height="109dp"
-        android:gravity="center"
-        android:text="@string/bebidas_ek5_string"
-        android:textColor="@color/aceite_de_oliva_color"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.522" />
-
-    <TextView
-        android:id="@+id/teeinfusiones"
-        android:layout_width="167dp"
-        android:layout_height="104dp"
-        android:gravity="center"
-        android:text="@string/t__e_infusiones_string"
-        android:textColor="#ffffff"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -51,15 +20,46 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.345"
-        tools:textAlignment="center" />
+        app:layout_constraintVertical_bias="0.184" />
 
     <TextView
-        android:id="@+id/zumos"
-        android:layout_width="311dp"
-        android:layout_height="161dp"
-        android:gravity="center|top"
-        android:text="@string/zumos_string"
+        android:id="@+id/Cafeconleche"
+        android:layout_width="215dp"
+        android:layout_height="111dp"
+        android:gravity="center"
+        android:text=" Café con Leche"
+        android:textColor="#ffffff"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.335" />
+
+    <TextView
+        android:id="@+id/Cafeespecial"
+        android:layout_width="229dp"
+        android:layout_height="96dp"
+        android:gravity="center"
+        android:text="Café Especiales"
+        android:textColor="@color/aceite_de_oliva_color"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.505" />
+
+    <TextView
+        android:id="@+id/Leches"
+        android:layout_width="225dp"
+        android:layout_height="82dp"
+        android:gravity="center"
+        android:text="Leches"
         android:textColor="@color/aceite_de_oliva_color"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -67,6 +67,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.832"
-        tools:textAlignment="center" />
+        app:layout_constraintVertical_bias="0.648" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -262,9 +262,10 @@ public class Platos extends Fragment {
                            precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
                            imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
                            desc = dataSnapshot.child(String.valueOf(id)).child("descarticulo").getValue().toString();
+                           desca.setText(desc);
                            Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
                            nombreArticulo.setText(nombre);
-                           desca.setText(desc);
+
                            precio.setText(precios);
 
                            Log.v("NONBRE ARTICULO ", nombre);

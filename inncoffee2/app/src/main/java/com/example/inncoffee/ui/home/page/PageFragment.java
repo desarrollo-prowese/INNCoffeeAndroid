@@ -17,6 +17,7 @@ import com.example.inncoffee.ui.home.CardViewPager;
 import com.example.inncoffee.ui.home.PagerSettings;
 import com.example.inncoffee.ui.mispuntos.MisPuntosFragment;
 import com.example.inncoffee.ui.ofertas.OfertasFragment;
+import com.example.inncoffee.ui.pagoygano.Pagoygano;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
 
 import androidx.fragment.app.Fragment;
@@ -69,7 +70,11 @@ public class PageFragment extends Fragment {
                     ftEs.commit();
                 }
                 else if (pageContent.getTag().equals("PAGOYGANO")){
-                    Toast.makeText(getActivity(), " PAGO Y GANO 1", Toast.LENGTH_SHORT).show();
+                    Pagoygano fragment = new Pagoygano();
+                    FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                    ftEs.replace(R.id.nav_host_fragment, fragment);
+                    ftEs.addToBackStack(null);
+                    ftEs.commit();
                 }
 
                 else if (PageFragment.pageContent.getTag().equals("PROMOCIONES")){

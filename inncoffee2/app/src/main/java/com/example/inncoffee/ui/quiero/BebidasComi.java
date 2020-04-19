@@ -10,10 +10,6 @@ import android.widget.TextView;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
-import com.example.inncoffee.ui.bebidas.Bebidas1;
-import com.example.inncoffee.ui.bebidas.Cafes;
-import com.example.inncoffee.ui.bebidas.Tes;
-import com.example.inncoffee.ui.bebidas.Zumos;
 import com.example.inncoffee.ui.bebidasComidas.bebidas.BebidasComidas;
 import com.example.inncoffee.ui.bebidasComidas.bebidas.CafesComidas;
 import com.example.inncoffee.ui.bebidasComidas.bebidas.TesComidas;

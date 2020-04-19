@@ -268,7 +268,7 @@ public class Bebidas1 extends Fragment {
                           nombreArticulo.setText(nombre);
                           precio.setText(precios);
 
-                          if (id == 6) {
+                          if (id == 9) {
                               id = 1;
                               nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                               precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
@@ -310,7 +310,7 @@ public class Bebidas1 extends Fragment {
                         precio.setText(precios);
 
                         if (id == 0) {
-                            id = 5;
+                            id = 8;
                             nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                             precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
                             imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();

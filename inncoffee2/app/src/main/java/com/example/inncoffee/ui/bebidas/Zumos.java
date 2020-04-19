@@ -264,7 +264,7 @@ public class Zumos extends Fragment {
                           nombreArticulo.setText(nombre);
                           precio.setText(precios);
 
-                          if (id == 13) {
+                          if (id == 4) {
                               id = 1;
                               nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                               precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
@@ -306,7 +306,7 @@ public class Zumos extends Fragment {
                         precio.setText(precios);
 
                         if (id == 0) {
-                            id = 12;
+                            id = 3;
                             nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                             precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
                             imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();

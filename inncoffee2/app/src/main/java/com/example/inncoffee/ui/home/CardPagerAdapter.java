@@ -1,6 +1,8 @@
 package com.example.inncoffee.ui.home;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.os.Parcelable;
 
 import android.util.Log;
@@ -8,6 +10,7 @@ import android.view.ViewGroup;
 
 
 import com.example.inncoffee.MainActivity;
+import com.example.inncoffee.R;
 import com.example.inncoffee.ui.home.page.PageFragment;
 import com.example.inncoffee.ui.home.page.PageLayout;
 

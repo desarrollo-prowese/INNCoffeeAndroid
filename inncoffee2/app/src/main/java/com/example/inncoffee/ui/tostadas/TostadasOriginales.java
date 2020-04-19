@@ -200,14 +200,14 @@ public class TostadasOriginales extends Fragment {
                             } else if (MediaoEntera == true) {
 
                                 if (contador2 == 1){
-                                    String texto = contador2 + " /" + media.getText() + "/" + nombre + "/" + nombrepan;
+                                    String texto = contador2 + " /" + entera.getText() + "/" + nombre + "/" + nombrepan;
                                     String precio = precios;
                                     MisPedidosClass user2 = new MisPedidosClass(texto, precio);
                                     mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
                                     mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
 
                                 }else if (contador2 > 1){
-                                    String texto = contador2 + " /" + media.getText() + "/" + nombre + "/" + nombrepan;
+                                    String texto = contador2 + " /" + entera.getText() + "/" + nombre + "/" + nombrepan;
                                     double number = Double.valueOf(precios.replaceAll("[,.€]", ""));
                                     total = total + number * contador2;
                                     NumberFormat formatter = new DecimalFormat("###,##€");

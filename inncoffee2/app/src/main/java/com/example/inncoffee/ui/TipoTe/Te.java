@@ -1,4 +1,4 @@
-package com.example.inncoffee.ui.tostadas;
+package com.example.inncoffee.ui.TipoTe;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,8 +17,8 @@ import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
 import com.example.inncoffee.ui.mispedidos.MisPedidosClass;
 import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizar;
-import com.example.inncoffee.ui.quiero.QuieroAlojenos;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
+import com.example.inncoffee.ui.tostadas.TostadasDB;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,7 +36,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-public class TostadasClasicas extends Fragment {
+public class Te extends Fragment {
 
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -47,7 +47,7 @@ public class TostadasClasicas extends Fragment {
     public static long id= 0;
     private long idpanes = 0;
     TostadasDB tostadasdb;
-    private Button boton,next, media, entera, selecionarpan, selecionarpan1;
+    private Button boton,next, selecionarpan, selecionarpan1;
     private boolean MediaoEntera = true;
     private boolean SelecionaPan = true;
     private ImageView Imagen;
@@ -58,9 +58,9 @@ public class TostadasClasicas extends Fragment {
     private DatabaseReference mCompare;
     private static final String USERS = "MisPedidos";
     private ImageView menos,plus;
-    public static TextView nombreArticulo,precio,descarticulo,añadir;
+    public static TextView nombreArticulo,precio,desca,añadir;
     private ArrayList<TostadasDB> mtos = new ArrayList<>();
-    private String nombre,nombrepan,imagen,imagenpan,precios,barra;
+    private String nombre,nombreleche,imagen,imagenpan,precios,barra,precioLeche,desc;
 
 
 
@@ -106,13 +106,14 @@ public class TostadasClasicas extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.tostadasclasicas, container, false);
+        View root = inflater.inflate(R.layout.te_nuevo, container, false);
         MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
         mDatabase = FirebaseDatabase.getInstance();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
-        mTosta = mDatabase.getReference("TostadasClasicas");
+        mTosta = mDatabase.getReference("Te");
         mCompare = mDatabase.getReference();
         tostadasdb = new TostadasDB();
+        desca = (TextView) root.findViewById(R.id.descripcionarticulo);
         Imagen = (ImageView) root.findViewById(R.id.imagentostada);
         nombreArticulo = (TextView) root.findViewById(R.id.nombrearticulo);
         precio = (TextView) root.findViewById(R.id.precio);
@@ -166,8 +167,8 @@ public class TostadasClasicas extends Fragment {
         añadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                if (TextUtils.isEmpty(nombrepan)) {
-                    Toast.makeText(getContext(), "Selecione Algun Pan", Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(nombreleche)) {
+                    Toast.makeText(getContext(), "Selecione Una Leche", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     ID = mAuth.getUid();
@@ -177,18 +178,24 @@ public class TostadasClasicas extends Fragment {
                         public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
                             double total = 0;
                             String processed = "";
-                            if (MediaoEntera == false) {
                                 if (contador2 == 1) {
-                                    String texto = contador2 + " /" + media.getText() + "/" + nombre + "/" + nombrepan;
-                                    String precio = precios;
+                                    String texto = contador2 + " /"  + nombre + "/" + nombreleche;
+                                    double number = Double.valueOf(precios.replaceAll("[,.€]", ""));
+                                    double number2 = Double.valueOf(precioLeche.replaceAll("[,.€]", ""));
+                                    total = total + number + number2;
+                                    NumberFormat formatter = new DecimalFormat("###,##€");
+
+                                    processed = formatter.format(total);
+                                    String precio = processed;
                                     MisPedidosClass user2 = new MisPedidosClass(texto, precio);
                                     mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
                                     mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
 
                                 } else if (contador2 > 1) {
-                                    String texto = contador2 + " /" + media.getText() + "/" + nombre + "/" + nombrepan;
+                                    String texto = contador2 + " /" + nombre + "/" + nombreleche;
                                     double number = Double.valueOf(precios.replaceAll("[,.€]", ""));
-                                    total = total + number * contador2;
+                                    double number2 = Double.valueOf(precioLeche.replaceAll("[,.€]", ""));
+                                    total = total + number + number2 * contador2;
                                     NumberFormat formatter = new DecimalFormat("###,##€");
 
                                     processed = formatter.format(total);
@@ -197,30 +204,7 @@ public class TostadasClasicas extends Fragment {
                                     MisPedidosClass user2 = new MisPedidosClass(texto, precio);
                                     mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
                                     mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
-                                }
 
-                            } else if (MediaoEntera == true) {
-
-                                if (contador2 == 1) {
-                                    String texto = contador2 + " /" + entera.getText() + "/" + nombre + "/" + nombrepan;
-                                    String precio = precios;
-                                    MisPedidosClass user2 = new MisPedidosClass(texto, precio);
-                                    mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
-                                    mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
-
-                                } else if (contador2 > 1) {
-                                    String texto = contador2 + " /" + entera.getText() + "/" + nombre + "/" + nombrepan;
-                                    double number = Double.valueOf(precios.replaceAll("[,.€]", ""));
-                                    total = total + number * contador2;
-                                    NumberFormat formatter = new DecimalFormat("###,##€");
-
-                                    processed = formatter.format(total);
-
-                                    String precio = processed;
-                                    MisPedidosClass user2 = new MisPedidosClass(texto, precio);
-                                    mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
-                                    mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
-                                }
 
                             }
 
@@ -246,31 +230,28 @@ public class TostadasClasicas extends Fragment {
 
 
 
-
-
         selecionarpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                media.setVisibility(View.INVISIBLE);
-                entera.setVisibility(View.INVISIBLE);
-                precio.setVisibility(View.INVISIBLE);
                 selecionarpan.setVisibility(View.INVISIBLE);
                 selecionarpan1.setVisibility(View.VISIBLE);
                 SelecionaPan = false;
                 añadir.setVisibility(View.INVISIBLE);
 
-                mTosta.child("TipoPanes").addListenerForSingleValueEvent(new ValueEventListener() {
+                mTosta.child("TipoLeches").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
                             idpanes = 1;
-                            nombrepan = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
+                            nombreleche = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
                             barra = dataSnapshot.child(String.valueOf(idpanes)).child("barra").getValue().toString();
+                            precioLeche = dataSnapshot.child(String.valueOf(idpanes)).child("precio").getValue().toString();
                             imagenpan = dataSnapshot.child(String.valueOf(idpanes)).child("imagen").getValue().toString();
                             Glide.with(Objects.requireNonNull(getContext())).load(imagenpan).into(Imagen);
-                            nombreArticulo.setText(nombrepan);
+                            nombreArticulo.setText(nombreleche);
+                            precio.setText(precioLeche);
 
-                            Log.v("NONBRE ARTICULO ", nombrepan);
+                            Log.v("NONBRE ARTICULO ", nombreleche);
                             Log.v("MI ID ", String.valueOf(idpanes));
 
                         }
@@ -285,10 +266,10 @@ public class TostadasClasicas extends Fragment {
                 mCompare.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                        Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue() +" // "+ dataSnapshot.child("TostadasClasicas").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue() );
+                        Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Leches").getValue() +" // "+ dataSnapshot.child("Te").child("TipoLeches").child(String.valueOf(idpanes)).child("Alergia").getValue() );
                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                                dataSnapshot.child("TostadasClasicas").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue()))
+                                dataSnapshot.child("Te").child("TipoLeches").child(String.valueOf(idpanes)).child("Alergia").getValue()))
                         {
                             selecionarpan1.setVisibility(View.INVISIBLE);
                             añadir.setVisibility(View.INVISIBLE);
@@ -310,9 +291,6 @@ public class TostadasClasicas extends Fragment {
         selecionarpan1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                media.setVisibility(View.VISIBLE);
-                entera.setVisibility(View.VISIBLE);
-                precio.setVisibility(View.VISIBLE);
                 selecionarpan.setVisibility(View.VISIBLE);
                 selecionarpan1.setVisibility(View.INVISIBLE);
                 selecionarpan.setText(barra);
@@ -320,8 +298,8 @@ public class TostadasClasicas extends Fragment {
                 añadir.setVisibility(View.VISIBLE);
 
                 if (SelecionaPan == true) {
-                    if (MediaoEntera == false) {
-                        mTosta.child("Media").addListenerForSingleValueEvent(new ValueEventListener() {
+
+                        mTosta.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()) {
@@ -329,56 +307,8 @@ public class TostadasClasicas extends Fragment {
                                     precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
                                     imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
                                     Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
-                                    nombreArticulo.setText(nombre);
-                                    precio.setText(precios);
-
-                                    Log.v("NONBRE ARTICULO ", nombre);
-                                    Log.v("MI ID ", String.valueOf(id));
-
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-
-                        ID = mAuth.getUid();
-                        mCompare.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasClasicas").child("Media").child(String.valueOf(id)).child("Alergia").getValue() );
-                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
-                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                            dataSnapshot.child("TostadasClasicas").child("Media").child(String.valueOf(id)).child("Alergia").getValue()))
-                                    {
-                                        añadir.setVisibility(View.INVISIBLE);
-                                    }
-                                    else{
-                                        añadir.setVisibility(View.VISIBLE);
-                                    }
-                                }
-
-                            }
-
-                            @Override
-                            public void onCancelled (@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-
-                    } else if (MediaoEntera == true) {
-
-
-                        mTosta.child("Entera").addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
-                                    precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
-                                    imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
-                                    Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                    desc = dataSnapshot.child(String.valueOf(id)).child("descarticulo").getValue().toString();
+                                    desca.setText(desc);
                                     nombreArticulo.setText(nombre);
                                     precio.setText(precios);
 
@@ -397,10 +327,10 @@ public class TostadasClasicas extends Fragment {
                         mCompare.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasClasicas").child("Entera").child(String.valueOf(id)).child("Alergia").getValue() );
+                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Te").child(String.valueOf(id)).child("Alergia").getValue() );
                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                            dataSnapshot.child("TostadasClasicas").child("Entera").child(String.valueOf(id)).child("Alergia").getValue()))
+                                            dataSnapshot.child("Te").child(String.valueOf(id)).child("Alergia").getValue()))
                                     {
                                         añadir.setVisibility(View.INVISIBLE);
                                     }
@@ -419,15 +349,13 @@ public class TostadasClasicas extends Fragment {
 
                     }
                 }
-            }
+
         });
 
 
-
        if (SelecionaPan == true) {
-           if (MediaoEntera == false) {
 
-               mTosta.child("Media").addValueEventListener(new ValueEventListener() {
+           mTosta.addValueEventListener(new ValueEventListener() {
                    @Override
                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                        if (dataSnapshot.exists()) {
@@ -441,7 +369,7 @@ public class TostadasClasicas extends Fragment {
 
                    }
                });
-               mTosta.child("Media").addListenerForSingleValueEvent(new ValueEventListener() {
+           mTosta.addListenerForSingleValueEvent(new ValueEventListener() {
                    @Override
                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                        if (dataSnapshot.exists()) {
@@ -450,69 +378,8 @@ public class TostadasClasicas extends Fragment {
                            precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
                            imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
                            Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
-                           nombreArticulo.setText(nombre);
-                           precio.setText(precios);
-
-                           Log.v("NONBRE ARTICULO ", nombre);
-                           Log.v("MI ID ", String.valueOf(id));
-
-                       }
-                   }
-
-                   @Override
-                   public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                   }
-               });
-
-               ID = mAuth.getUid();
-               mCompare.addValueEventListener(new ValueEventListener() {
-                   @Override
-                   public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                       Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasClasicas").child("Media").child(String.valueOf(id)).child("Alergia").getValue() );
-                       if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
-                           if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                   dataSnapshot.child("TostadasClasicas").child("Media").child(String.valueOf(id)).child("Alergia").getValue()))
-                           {
-                               añadir.setVisibility(View.INVISIBLE);
-                           }
-                           else{
-                               añadir.setVisibility(View.VISIBLE);
-                           }
-                       }
-
-                   }
-
-                   @Override
-                   public void onCancelled (@NonNull DatabaseError databaseError) {
-
-                   }
-               });
-           } else if (MediaoEntera == true) {
-
-               mTosta.child("Entera").addValueEventListener(new ValueEventListener() {
-                   @Override
-                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                       if (dataSnapshot.exists()) {
-                           id = dataSnapshot.getChildrenCount();
-                           id = 1;
-                       }
-                   }
-
-                   @Override
-                   public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                   }
-               });
-               mTosta.child("Entera").addListenerForSingleValueEvent(new ValueEventListener() {
-                   @Override
-                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                       if (dataSnapshot.exists()) {
-                           id = 1;
-                           nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
-                           precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
-                           imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
-                           Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                           desc = dataSnapshot.child(String.valueOf(id)).child("descarticulo").getValue().toString();
+                           desca.setText(desc);
                            nombreArticulo.setText(nombre);
                            precio.setText(precios);
 
@@ -531,10 +398,10 @@ public class TostadasClasicas extends Fragment {
                mCompare.addValueEventListener(new ValueEventListener() {
                    @Override
                    public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                       Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasClasicas").child("Entera").child(String.valueOf(id)).child("Alergia").getValue() );
+                       Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Te").child(String.valueOf(id)).child("Alergia").getValue() );
                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                   dataSnapshot.child("TostadasClasicas").child("Entera").child(String.valueOf(id)).child("Alergia").getValue()))
+                                   dataSnapshot.child("Te").child(String.valueOf(id)).child("Alergia").getValue()))
                            {
                                añadir.setVisibility(View.INVISIBLE);
                            }
@@ -551,10 +418,9 @@ public class TostadasClasicas extends Fragment {
                    }
                });
 
-           }
        }
        else if (SelecionaPan == false){
-           mTosta.child("TipoPanes").addValueEventListener(new ValueEventListener() {
+           mTosta.child("TipoLeches").addValueEventListener(new ValueEventListener() {
                @Override
                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                    if (dataSnapshot.exists()) {
@@ -569,18 +435,20 @@ public class TostadasClasicas extends Fragment {
 
                }
            });
-           mTosta.child("TipoPanes").addListenerForSingleValueEvent(new ValueEventListener() {
+           mTosta.child("TipoLeches").addListenerForSingleValueEvent(new ValueEventListener() {
                @Override
                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                    if (dataSnapshot.exists()) {
                        idpanes = 1;
-                       nombrepan = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
+                       nombreleche = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
                        barra = dataSnapshot.child(String.valueOf(idpanes)).child("barra").getValue().toString();
+                       precioLeche = dataSnapshot.child(String.valueOf(idpanes)).child("precio").getValue().toString();
                        imagenpan = dataSnapshot.child(String.valueOf(idpanes)).child("imagen").getValue().toString();
                        Glide.with(Objects.requireNonNull(getContext())).load(imagenpan).into(Imagen);
-                       nombreArticulo.setText(nombrepan);
+                       nombreArticulo.setText(nombreleche);
+                       precio.setText(precioLeche);
 
-                       Log.v("NONBRE ARTICULO ", nombrepan);
+                       Log.v("NONBRE ARTICULO ", nombreleche);
                        Log.v("MI ID ", String.valueOf(idpanes));
 
                    }
@@ -595,10 +463,10 @@ public class TostadasClasicas extends Fragment {
            mCompare.addValueEventListener(new ValueEventListener() {
                @Override
                public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                   Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue() +" // "+ dataSnapshot.child("TostadasClasicas").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue() );
+                   Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Te").child("TipoLeches").child(String.valueOf(idpanes)).child("Alergia").getValue() );
                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                               dataSnapshot.child("TostadasClasicas").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue()))
+                               dataSnapshot.child("Te").child("TipoLeches").child(String.valueOf(idpanes)).child("Alergia").getValue()))
                        {
                            selecionarpan1.setVisibility(View.INVISIBLE);
                            añadir.setVisibility(View.INVISIBLE);
@@ -620,125 +488,13 @@ public class TostadasClasicas extends Fragment {
 
 
 
-        media = (Button) root.findViewById(R.id.media);
-        media.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                media.setBackgroundResource(R.drawable.media);
-                entera.setBackgroundResource(R.drawable.entera);
-                MediaoEntera = false;
-                mTosta.child("Media").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()){
-                            nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
-                            precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
-                            imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
-                            Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
-                            nombreArticulo.setText(nombre);
-                            precio.setText(precios);
-                            Log.v("NONBRE ARTICULO ", nombre);
-                            Log.v("MI ID " , String.valueOf(id));
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                ID = mAuth.getUid();
-                mCompare.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                        Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasClasicas").child("Media").child(String.valueOf(id)).child("Alergia").getValue() );
-                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
-                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                    dataSnapshot.child("TostadasClasicas").child("Media").child(String.valueOf(id)).child("Alergia").getValue()))
-                            {
-                                añadir.setVisibility(View.INVISIBLE);
-                            }
-                            else{
-                                añadir.setVisibility(View.VISIBLE);
-                            }
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled (@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-            }
-        });
-        entera = (Button) root.findViewById(R.id.entera);
-        entera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                media.setBackgroundResource(R.drawable.entera);
-                entera.setBackgroundResource(R.drawable.media);
-                MediaoEntera = true;
-                mTosta.child("Entera").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()){
-                            nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
-                            precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
-                            imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
-                            Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
-                            nombreArticulo.setText(nombre);
-                            precio.setText(precios);
-                            Log.v("NONBRE ARTICULO ", nombre);
-                            Log.v("MI ID " , String.valueOf(id));
-
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                ID = mAuth.getUid();
-                mCompare.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                        Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasClasicas").child("Entera").child(String.valueOf(id)).child("Alergia").getValue() );
-                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
-                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                    dataSnapshot.child("TostadasClasicas").child("Entera").child(String.valueOf(id)).child("Alergia").getValue()))
-                            {
-                                añadir.setVisibility(View.INVISIBLE);
-                            }
-                            else{
-                                añadir.setVisibility(View.VISIBLE);
-                            }
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled (@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-            }
-        });
-
-
-
-
-         next = (Button) root.findViewById(R.id.test);
+        next = (Button) root.findViewById(R.id.test);
 
          next.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
                  if (SelecionaPan == true) {
-                     if (MediaoEntera == false) {
-                         mTosta.child("Media").addListenerForSingleValueEvent(new ValueEventListener() {
+                     mTosta.addListenerForSingleValueEvent(new ValueEventListener() {
                              @Override
                              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                  if (dataSnapshot.exists()) {
@@ -747,15 +503,19 @@ public class TostadasClasicas extends Fragment {
                                      precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
                                      imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
                                      Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                     desc = dataSnapshot.child(String.valueOf(id)).child("descarticulo").getValue().toString();
+                                     desca.setText(desc);
                                      nombreArticulo.setText(nombre);
                                      precio.setText(precios);
 
-                                     if (id == 13) {
+                                     if (id == 19) {
                                          id = 1;
                                          nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                                          precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
                                          imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
                                          Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                         desc = dataSnapshot.child(String.valueOf(id)).child("descarticulo").getValue().toString();
+                                         desca.setText(desc);
                                          nombreArticulo.setText(nombre);
                                          precio.setText(precios);
                                      }
@@ -774,10 +534,10 @@ public class TostadasClasicas extends Fragment {
                          mCompare.addValueEventListener(new ValueEventListener() {
                              @Override
                              public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                                 Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasClasicas").child("Media").child(String.valueOf(id)).child("Alergia").getValue() );
+                                 Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Te").child(String.valueOf(id)).child("Alergia").getValue() );
                                  if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
                                      if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                             dataSnapshot.child("TostadasClasicas").child("Media").child(String.valueOf(id)).child("Alergia").getValue()))
+                                             dataSnapshot.child("Te").child(String.valueOf(id)).child("Alergia").getValue()))
                                      {
                                          añadir.setVisibility(View.INVISIBLE);
                                      }
@@ -794,89 +554,35 @@ public class TostadasClasicas extends Fragment {
                              }
                          });
 
-                     }else if (MediaoEntera == true) {
-
-                         mTosta.child("Entera").addListenerForSingleValueEvent(new ValueEventListener() {
-                             @Override
-                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                 if (dataSnapshot.exists()) {
-                                     id++;
-                                     nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
-                                     precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
-                                     imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
-                                     Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
-                                     nombreArticulo.setText(nombre);
-                                     precio.setText(precios);
-
-                                     if (id == 13) {
-                                         id = 1;
-                                         nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
-                                         precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
-                                         imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
-                                         Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
-                                         nombreArticulo.setText(nombre);
-                                         precio.setText(precios);
-                                     }
-                                     Log.v("MI ID ", String.valueOf(id));
-                                     Log.v("NONBRE ARTICULO ", nombre);
-
-                                 }
-                             }
-
-                             @Override
-                             public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                             }
-                         });
-                         ID = mAuth.getUid();
-                         mCompare.addValueEventListener(new ValueEventListener() {
-                             @Override
-                             public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                                 Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasClasicas").child("Entera").child(String.valueOf(id)).child("Alergia").getValue() );
-                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
-                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                             dataSnapshot.child("TostadasClasicas").child("Entera").child(String.valueOf(id)).child("Alergia").getValue()))
-                                     {
-                                         añadir.setVisibility(View.INVISIBLE);
-                                     }
-                                     else{
-                                         añadir.setVisibility(View.VISIBLE);
-                                     }
-                                 }
-
-                             }
-
-                             @Override
-                             public void onCancelled (@NonNull DatabaseError databaseError) {
-
-                             }
-                         });
-                     }
 
                  }
                  else if (SelecionaPan == false){
 
-                     mTosta.child("TipoPanes").addListenerForSingleValueEvent(new ValueEventListener() {
+                     mTosta.child("TipoLeches").addListenerForSingleValueEvent(new ValueEventListener() {
                          @Override
                          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                              if (dataSnapshot.exists()) {
                                  idpanes++;
-                                 nombrepan = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
+                                 nombreleche = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
                                  barra = dataSnapshot.child(String.valueOf(idpanes)).child("barra").getValue().toString();
+                                 precioLeche = dataSnapshot.child(String.valueOf(idpanes)).child("precio").getValue().toString();
                                  imagenpan = dataSnapshot.child(String.valueOf(idpanes)).child("imagen").getValue().toString();
                                  Glide.with(Objects.requireNonNull(getContext())).load(imagenpan).into(Imagen);
-                                 nombreArticulo.setText(nombrepan);
+                                 nombreArticulo.setText(nombreleche);
+                                 precio.setText(precioLeche);
 
-                                 if (idpanes == 9) {
+                                 if (idpanes == 7) {
                                      idpanes = 1;
-                                      nombrepan = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
+                                      nombreleche = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
                                       barra = dataSnapshot.child(String.valueOf(idpanes)).child("barra").getValue().toString();
+                                      precioLeche = dataSnapshot.child(String.valueOf(idpanes)).child("precio").getValue().toString();
                                       imagenpan = dataSnapshot.child(String.valueOf(idpanes)).child("imagen").getValue().toString();
                                      Glide.with(Objects.requireNonNull(getContext())).load(imagenpan).into(Imagen);
-                                     nombreArticulo.setText(nombrepan);
+                                     nombreArticulo.setText(nombreleche);
+                                     precio.setText(precioLeche);
                                  }
                                  Log.v("MI ID ", String.valueOf(idpanes));
-                                 Log.v("NONBRE ARTICULO ", nombrepan);
+                                 Log.v("NONBRE ARTICULO ", nombreleche);
 
                              }
                          }
@@ -890,10 +596,10 @@ public class TostadasClasicas extends Fragment {
                      mCompare.addValueEventListener(new ValueEventListener() {
                          @Override
                          public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                             Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue() +" // "+ dataSnapshot.child("TostadasClasicas").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue() );
+                             Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Te").child("TipoLeches").child(String.valueOf(idpanes)).child("Alergia").getValue() );
                              if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
                                  if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                                         dataSnapshot.child("TostadasClasicas").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue()))
+                                         dataSnapshot.child("Te").child("TipoLeches").child(String.valueOf(idpanes)).child("Alergia").getValue()))
                                  {
                                      selecionarpan1.setVisibility(View.INVISIBLE);
                                      añadir.setVisibility(View.INVISIBLE);
@@ -921,8 +627,8 @@ public class TostadasClasicas extends Fragment {
             @Override
             public void onClick(View v) {
                 if (SelecionaPan == true) {
-                    if (MediaoEntera == false) {
-                        mTosta.child("Media").addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    mTosta.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()) {
@@ -931,15 +637,19 @@ public class TostadasClasicas extends Fragment {
                                     precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
                                     imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
                                     Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                    desc = dataSnapshot.child(String.valueOf(id)).child("descarticulo").getValue().toString();
+                                    desca.setText(desc);
                                     nombreArticulo.setText(nombre);
                                     precio.setText(precios);
 
                                     if (id == 0) {
-                                        id = 12;
+                                        id = 18;
                                         nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                                         precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
                                         imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
                                         Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                        desc = dataSnapshot.child(String.valueOf(id)).child("descarticulo").getValue().toString();
+                                        desca.setText(desc);
                                         nombreArticulo.setText(nombre);
                                         precio.setText(precios);
                                     }
@@ -958,10 +668,10 @@ public class TostadasClasicas extends Fragment {
                         mCompare.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasClasicas").child("Media").child(String.valueOf(id)).child("Alergia").getValue() );
+                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Te").child(String.valueOf(id)).child("Alergia").getValue() );
                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                            dataSnapshot.child("TostadasClasicas").child("Media").child(String.valueOf(id)).child("Alergia").getValue()))
+                                            dataSnapshot.child("Te").child(String.valueOf(id)).child("Alergia").getValue()))
                                     {
                                         añadir.setVisibility(View.INVISIBLE);
                                     }
@@ -978,89 +688,35 @@ public class TostadasClasicas extends Fragment {
                             }
                         });
 
-                    } else if (MediaoEntera == true) {
-
-                        mTosta.child("Entera").addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if (dataSnapshot.exists()) {
-                                    id--;
-                                    nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
-                                    precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
-                                    imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
-                                    Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
-                                    nombreArticulo.setText(nombre);
-                                    precio.setText(precios);
-
-                                    if (id == 0) {
-                                        id = 12;
-                                        nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
-                                        precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
-                                        imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
-                                        Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
-                                        nombreArticulo.setText(nombre);
-                                        precio.setText(precios);
-                                    }
-                                    Log.v("MI ID ", String.valueOf(id));
-                                    Log.v("NONBRE ARTICULO ", nombre);
-
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-                        ID = mAuth.getUid();
-                        mCompare.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("TostadasClasicas").child("Entera").child(String.valueOf(id)).child("Alergia").getValue() );
-                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
-                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                            dataSnapshot.child("TostadasClasicas").child("Entera").child(String.valueOf(id)).child("Alergia").getValue()))
-                                    {
-                                        añadir.setVisibility(View.INVISIBLE);
-                                    }
-                                    else{
-                                        añadir.setVisibility(View.VISIBLE);
-                                    }
-                                }
-
-                            }
-
-                            @Override
-                            public void onCancelled (@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-                    }
 
                 }
                 else if (SelecionaPan == false ){
 
-                    mTosta.child("TipoPanes").addListenerForSingleValueEvent(new ValueEventListener() {
+                    mTosta.child("TipoLeches").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
                                 idpanes--;
-                                nombrepan = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
+                                nombreleche = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
                                 barra = dataSnapshot.child(String.valueOf(idpanes)).child("barra").getValue().toString();
+                                precioLeche = dataSnapshot.child(String.valueOf(idpanes)).child("precio").getValue().toString();
                                 imagenpan = dataSnapshot.child(String.valueOf(idpanes)).child("imagen").getValue().toString();
                                 Glide.with(Objects.requireNonNull(getContext())).load(imagenpan).into(Imagen);
-                                nombreArticulo.setText(nombrepan);
+                                nombreArticulo.setText(nombreleche);
+                                precio.setText(precioLeche);
 
                                 if (idpanes == 0) {
-                                    idpanes = 8;
-                                     nombrepan = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
+                                    idpanes = 6;
+                                    nombreleche = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
                                      barra = dataSnapshot.child(String.valueOf(idpanes)).child("barra").getValue().toString();
+                                    precioLeche = dataSnapshot.child(String.valueOf(idpanes)).child("precio").getValue().toString();
                                     imagenpan = dataSnapshot.child(String.valueOf(idpanes)).child("imagen").getValue().toString();
                                     Glide.with(Objects.requireNonNull(getContext())).load(imagenpan).into(Imagen);
-                                    nombreArticulo.setText(nombrepan);
+                                    nombreArticulo.setText(nombreleche);
+                                    precio.setText(precioLeche);
                                 }
                                 Log.v("MI ID ", String.valueOf(idpanes));
-                                Log.v("NONBRE ARTICULO ", nombrepan);
+                                Log.v("NONBRE ARTICULO ", nombreleche);
 
                             }
                         }
@@ -1075,10 +731,10 @@ public class TostadasClasicas extends Fragment {
                     mCompare.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                            Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue() +" // "+ dataSnapshot.child("TostadasClasicas").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue() );
+                            Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Te").child("TipoLeches").child(String.valueOf(idpanes)).child("Alergia").getValue() );
                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                                        dataSnapshot.child("TostadasClasicas").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue()))
+                                        dataSnapshot.child("Te").child("TipoLeches").child(String.valueOf(idpanes)).child("Alergia").getValue()))
                                 {
 
                                     selecionarpan1.setVisibility(View.INVISIBLE);
