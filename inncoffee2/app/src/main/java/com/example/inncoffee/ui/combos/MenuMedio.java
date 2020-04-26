@@ -14,9 +14,10 @@ import android.widget.Toast;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.ui.bebidas.Bebidas1;
 import com.example.inncoffee.ui.mispedidos.MisPedidosClass;
 import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizarComidas;
-import com.example.inncoffee.ui.quiero.BebidasCombos;
+import com.example.inncoffee.ui.quiero.Bebidas;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -118,10 +119,8 @@ public class MenuMedio extends Fragment {
         post = "";
         MenuCompleto.completo = false;
         medio = true;
-        TapaBebida.tapas = false;
         Log.v("Que Menus COMPLETO  ", String.valueOf(MenuCompleto.completo));
         Log.v("Que Menus MEDIO  ", String.valueOf(medio));
-        Log.v("Que Menus TAPAS  ", String.valueOf(TapaBebida.tapas));
 
 
         añadir.setOnClickListener(new View.OnClickListener() {
@@ -197,7 +196,7 @@ public class MenuMedio extends Fragment {
          primero.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
-                 CombosPlatos fragment = new CombosPlatos();
+                 CombosPlatosMedio fragment = new CombosPlatosMedio();
                  FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                  ftEs.replace(R.id.nav_host_fragment, fragment);
                  ftEs.addToBackStack(null);
@@ -208,7 +207,7 @@ public class MenuMedio extends Fragment {
         bebida.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BebidasCombos fragment = new BebidasCombos();
+                Bebidas fragment = new Bebidas();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);
@@ -218,7 +217,7 @@ public class MenuMedio extends Fragment {
         postre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PostresCombo fragment = new PostresCombo();
+                CombosPostre fragment = new CombosPostre();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);
@@ -230,7 +229,7 @@ public class MenuMedio extends Fragment {
     private void ElimirBarra(){
 
         ID = mAuth.getUid();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Combos").child("Primero").child(ID);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Combos").child("MedioMenu").child(ID);
         ref.child("Texto").removeValue();
         DatabaseReference ref2 = FirebaseDatabase.getInstance().getReference().child("Combos").child("Bebida").child(ID);
         ref2.child("Texto").removeValue();
@@ -240,7 +239,7 @@ public class MenuMedio extends Fragment {
     }
     private void Cambiodebarra(){
         ID = mAuth.getUid();
-        mBarra.child("Primero").child(ID).addValueEventListener(new ValueEventListener() {
+        mBarra.child("MedioMenu").child(ID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){

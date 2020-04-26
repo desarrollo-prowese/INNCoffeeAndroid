@@ -1,8 +1,7 @@
-package com.example.inncoffee.ui.TipoCafes;
+package com.example.inncoffee.ui.bebidas.TipoCafes;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,13 +9,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.ui.combos.Combos;
+import com.example.inncoffee.ui.combos.MenuCompleto;
+import com.example.inncoffee.ui.combos.MenuMedio;
 import com.example.inncoffee.ui.mispedidos.MisPedidosClass;
 import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizar;
+import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizarComidas;
+import com.example.inncoffee.ui.quiero.QuieroAlojenos;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
 import com.example.inncoffee.ui.tostadas.TostadasDB;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,6 +61,8 @@ public class Leche extends Fragment {
     private DatabaseReference mCompare;
     private static final String USERS = "MisPedidos";
     private ImageView menos,plus;
+    private final String COMBOS = "Combos";
+    private DatabaseReference mCombos;
     public static TextView nombreArticulo,precio,desca,añadir;
     private ArrayList<TostadasDB> mtos = new ArrayList<>();
     private String nombre,nombreleche,imagen,imagenpan,precios,barra,precioLeche,desc;
@@ -118,6 +123,7 @@ public class Leche extends Fragment {
         nombreArticulo = (TextView) root.findViewById(R.id.nombrearticulo);
         precio = (TextView) root.findViewById(R.id.precio);
         contador = (TextView) root.findViewById(R.id.textView5);
+        mCombos = mDatabase.getReference(COMBOS);
         menos = (ImageView) root.findViewById(R.id.imagecontador2);
         plus = (ImageView) root.findViewById(R.id.imagecontador1);
         añadir = (TextView) root.findViewById(R.id.añadir);
@@ -174,15 +180,46 @@ public class Leche extends Fragment {
                             String processed = "";
                                 if (contador2 == 1) {
                                     String texto = contador2 + " /"  + nombre ;
-                                    double number = Double.valueOf(precios.replaceAll("[,.€]", ""));
-                                    total = total + number ;
-                                    NumberFormat formatter = new DecimalFormat("###,##€");
-
-                                    processed = formatter.format(total);
-                                    String precio = processed;
+                                    String precio = precios;
                                     MisPedidosClass user2 = new MisPedidosClass(texto, precio);
-                                    mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
-                                    mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
+                                    if (Combos.menua == 1){
+
+                                        mCombos.child("Bebida").child(ID).child("Texto").setValue(nombre);
+                                        if (MenuCompleto.completo){
+                                            MenuCompleto fragment = new MenuCompleto();
+                                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                                            ftEs.replace(R.id.nav_host_fragment, fragment);
+                                            ftEs.addToBackStack(null);
+                                            ftEs.commit();
+                                        }
+                                        else  if (MenuMedio.medio){
+                                            MenuMedio fragment = new MenuMedio ();
+                                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                                            ftEs.replace(R.id.nav_host_fragment, fragment);
+                                            ftEs.addToBackStack(null);
+                                            ftEs.commit();
+                                        }
+                                    }
+                                    else{
+                                        if (QuieroAlojenos.ComidaoDesayuno == 1){
+                                            mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
+                                            mUsuario.child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
+                                            MisPedidosSinFinalizarComidas fragment = new MisPedidosSinFinalizarComidas();
+                                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                                            ftEs.replace(R.id.nav_host_fragment, fragment);
+                                            ftEs.addToBackStack(null);
+                                            ftEs.commit();
+                                        }else if (QuieroAlojenos.ComidaoDesayuno == 0){
+                                            mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
+                                            mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
+                                            MisPedidosSinFinalizar fragment = new MisPedidosSinFinalizar();
+                                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                                            ftEs.replace(R.id.nav_host_fragment, fragment);
+                                            ftEs.addToBackStack(null);
+                                            ftEs.commit();
+
+                                        }
+                                    }
 
                                 } else if (contador2 > 1) {
                                     String texto = contador2 + " /" + nombre ;
@@ -194,17 +231,47 @@ public class Leche extends Fragment {
 
                                     String precio = processed;
                                     MisPedidosClass user2 = new MisPedidosClass(texto, precio);
-                                    mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
-                                    mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
+                                    if (Combos.menua == 1){
 
+                                        mCombos.child("Bebida").child(ID).child("Texto").setValue(nombre);
+                                        if (MenuCompleto.completo){
+                                            MenuCompleto fragment = new MenuCompleto();
+                                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                                            ftEs.replace(R.id.nav_host_fragment, fragment);
+                                            ftEs.addToBackStack(null);
+                                            ftEs.commit();
+                                        }
+                                        else  if (MenuMedio.medio){
+                                            MenuMedio fragment = new MenuMedio ();
+                                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                                            ftEs.replace(R.id.nav_host_fragment, fragment);
+                                            ftEs.addToBackStack(null);
+                                            ftEs.commit();
+                                        }
+                                    }
+                                    else{
+                                        if (QuieroAlojenos.ComidaoDesayuno == 1){
+                                            mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
+                                            mUsuario.child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
+                                            MisPedidosSinFinalizarComidas fragment = new MisPedidosSinFinalizarComidas();
+                                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                                            ftEs.replace(R.id.nav_host_fragment, fragment);
+                                            ftEs.addToBackStack(null);
+                                            ftEs.commit();
+                                        }else if (QuieroAlojenos.ComidaoDesayuno == 0){
+                                            mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
+                                            mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
+                                            MisPedidosSinFinalizar fragment = new MisPedidosSinFinalizar();
+                                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                                            ftEs.replace(R.id.nav_host_fragment, fragment);
+                                            ftEs.addToBackStack(null);
+                                            ftEs.commit();
+
+                                        }
+                                    }
 
                             }
 
-                            MisPedidosSinFinalizar fragment = new MisPedidosSinFinalizar();
-                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
-                            ftEs.replace(R.id.nav_host_fragment, fragment);
-                            ftEs.addToBackStack(null);
-                            ftEs.commit();
                         }
 
 
@@ -263,10 +330,10 @@ public class Leche extends Fragment {
                mCompare.addValueEventListener(new ValueEventListener() {
                    @Override
                    public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                       Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Cafes").child(String.valueOf(id)).child("Alergia").getValue() );
+                       Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Cafes").child("Leches").child(String.valueOf(id)).child("Alergia").getValue() );
                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                   dataSnapshot.child("Cafes").child(String.valueOf(id)).child("Alergia").getValue()))
+                                   dataSnapshot.child("Cafes").child("Leches").child(String.valueOf(id)).child("Alergia").getValue()))
                            {
                                añadir.setVisibility(View.INVISIBLE);
                            }
@@ -328,10 +395,10 @@ public class Leche extends Fragment {
                  mCompare.addValueEventListener(new ValueEventListener() {
                      @Override
                      public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                         Log.v("Es Lacteos", dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() + " // " + dataSnapshot.child("Cafes").child(String.valueOf(id)).child("Alergia").getValue());
+                         Log.v("Es Lacteos", dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() + " // " + dataSnapshot.child("Cafes").child("Leches").child(String.valueOf(id)).child("Alergia").getValue());
                          if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()) {
                              if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                     dataSnapshot.child("Cafes").child(String.valueOf(id)).child("Alergia").getValue())) {
+                                     dataSnapshot.child("Cafes").child("Leches").child(String.valueOf(id)).child("Alergia").getValue())) {
                                  añadir.setVisibility(View.INVISIBLE);
                              } else {
                                  añadir.setVisibility(View.VISIBLE);
@@ -390,10 +457,10 @@ public class Leche extends Fragment {
                         mCompare.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Cafes").child(String.valueOf(id)).child("Alergia").getValue() );
+                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Cafes").child("Leches").child(String.valueOf(id)).child("Alergia").getValue() );
                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                            dataSnapshot.child("Cafes").child(String.valueOf(id)).child("Alergia").getValue()))
+                                            dataSnapshot.child("Cafes").child("Leches").child(String.valueOf(id)).child("Alergia").getValue()))
                                     {
                                         añadir.setVisibility(View.INVISIBLE);
                                     }

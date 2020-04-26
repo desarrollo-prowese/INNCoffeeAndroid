@@ -14,9 +14,10 @@ import android.widget.Toast;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.ui.bebidas.Bebidas1;
 import com.example.inncoffee.ui.mispedidos.MisPedidosClass;
 import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizarComidas;
-import com.example.inncoffee.ui.quiero.BebidasCombos;
+import com.example.inncoffee.ui.quiero.Bebidas;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,7 +31,6 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -102,6 +102,7 @@ public class MenuCompleto extends Fragment {
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mPrecio = mDatabase.getReference("CombosPrecios");
         mBarra = mDatabase.getReference("Combos");
+        Combos.menua = 1;
         mUsuario = mDatabase.getReference(USERS);
         menos = (ImageView)root.findViewById(R.id.menos);
         mUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -121,10 +122,8 @@ public class MenuCompleto extends Fragment {
         post = "";
         completo = true;
         MenuMedio.medio = false;
-        TapaBebida.tapas = false;
         Log.v("Que Menus COMPLETO  ", String.valueOf(completo));
         Log.v("Que Menus MEDIO  ", String.valueOf(MenuMedio.medio));
-        Log.v("Que Menus TAPAS  ", String.valueOf(TapaBebida.tapas));
 
 
             añadir.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +151,7 @@ public class MenuCompleto extends Fragment {
                                 String texto = contador2 + " /" + primero.getText() + "/" + segundo.getText() + "/" + bebida.getText() + "/" + postre.getText();
                                 double number = Double.valueOf(precio.replaceAll("[,.€]", ""));
                                 total = total + number * contador2;
-                                NumberFormat formatter = new DecimalFormat("###,##€");
+                                NumberFormat formatter = new DecimalFormat("##,##€");
 
                                 processed = formatter.format(total);
 
@@ -220,17 +219,18 @@ public class MenuCompleto extends Fragment {
         bebida.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BebidasCombos fragment = new BebidasCombos();
+                Bebidas fragment = new Bebidas();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);
                 ftEs.commit();
+
             }
         });
         postre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PostresCombo fragment = new PostresCombo();
+                CombosPostre fragment = new CombosPostre();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);

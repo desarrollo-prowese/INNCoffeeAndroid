@@ -37,6 +37,7 @@ public class Combos extends Fragment {
     private DatabaseReference mPrecio;
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
+    public static int menua = 0;
     private void inicialize() {
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -85,30 +86,17 @@ public class Combos extends Fragment {
         mDatabase = FirebaseDatabase.getInstance();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mPrecio = mDatabase.getReference("CombosPrecios");
-        tapa = (ConstraintLayout) root.findViewById(R.id.tapa);
         mediomenu = (ConstraintLayout) root.findViewById(R.id.mediomenu);
         menucompleto = (ConstraintLayout) root.findViewById(R.id.menucompleto);
         preciomenu1 = (TextView) root.findViewById(R.id.preciomenu1);
         preciomenu2 = (TextView) root.findViewById(R.id.preciomenu2);
-        preciomenu3 = (TextView) root.findViewById(R.id.preciomenu3);
+        menua = 1;
         MenuCompleto.completo = false;
         MenuMedio.medio = false;
-        TapaBebida.tapas = false;
         Log.v("Que Menus COMPLETO ", String.valueOf(MenuCompleto.completo));
         Log.v("Que Menus MEDIO ", String.valueOf(MenuMedio.medio));
-        Log.v("Que Menus TAPAS ", String.valueOf(TapaBebida.tapas));
 
 
-        tapa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TapaBebida fragment = new TapaBebida();
-                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
-                ftEs.replace(R.id.nav_host_fragment, fragment);
-                ftEs.addToBackStack(null);
-                ftEs.commit();
-            }
-        });
 
         mediomenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,10 +127,8 @@ public class Combos extends Fragment {
                 if (dataSnapshot.exists()){
                     String precio = dataSnapshot.child("mediomenu").getValue().toString();
                     String precio2 = dataSnapshot.child("menucompleto").getValue().toString();
-                    String precio3 = dataSnapshot.child("tapa").getValue().toString();
                     preciomenu1.setText(precio2);
                     preciomenu2.setText(precio);
-                    preciomenu3.setText(precio3);
 
                 }
 

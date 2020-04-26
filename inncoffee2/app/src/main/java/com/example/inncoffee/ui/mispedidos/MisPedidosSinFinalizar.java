@@ -12,12 +12,14 @@ import android.widget.TextView;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.ui.combos.Combos;
 import com.example.inncoffee.ui.mensajes.AdapterMensaje;
 import com.example.inncoffee.ui.mensajes.MensajesClass;
 import com.example.inncoffee.ui.mensajes.MensajesFragment;
 import com.example.inncoffee.ui.ofertas.AdapterOfertas;
 import com.example.inncoffee.ui.quiero.Bebidas;
 import com.example.inncoffee.ui.quiero.FinalizarPedido;
+import com.example.inncoffee.ui.quiero.QuieroAlojenos;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
 import com.example.inncoffee.ui.quiero.Tostadas;
 import com.google.firebase.auth.FirebaseAuth;
@@ -104,7 +106,7 @@ public class MisPedidosSinFinalizar extends Fragment {
         View root = inflater.inflate(R.layout.mispedidossinfinalizar, container, false);
         MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
         mPedidos = (RecyclerView) root.findViewById(R.id.mispedidossinfinalizar);
-
+        QuieroAlojenos.ComidaoDesayuno = 0;
         mPedidos.setLayoutManager(new LinearLayoutManager(getContext()));
         mDatabase = FirebaseDatabase.getInstance();
         sumatotal = (TextView) root.findViewById(R.id.total2) ;
@@ -185,15 +187,15 @@ public class MisPedidosSinFinalizar extends Fragment {
                     mMensaje.clear();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                        double number = Double.parseDouble(ds.child("precio").getValue(String.class).replaceAll("[,.€]", ""));
+                        double number = Double.parseDouble(ds.child("precio").getValue(String.class).replaceAll("[.,€]", ""));
                         total = total + number;
 
-                        NumberFormat formatter = new DecimalFormat("###,##");
+                        NumberFormat formatter = new DecimalFormat("0,00");
 
                         processed = formatter.format(total);
 
                         sumatotal.setText(processed);
-
+                        Log.v("PRecio ", processed + " ///"+ total );
                         texto = ds.child("texto").getValue().toString();
                         precios = ds.child("precio").getValue().toString();
 

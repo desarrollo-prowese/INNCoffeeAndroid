@@ -8,20 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
 import com.example.inncoffee.ui.combos.Combos;
+import com.example.inncoffee.ui.comidas.Hamburgesa;
 import com.example.inncoffee.ui.comidas.Platos;
-import com.example.inncoffee.ui.comidas.Postres;
+import com.example.inncoffee.ui.comidas.PlatosElejir;
 import com.example.inncoffee.ui.comidas.Sandwiches;
 import com.example.inncoffee.ui.quiero.Bebidas;
-import com.example.inncoffee.ui.quiero.BebidasComi;
-import com.example.inncoffee.ui.quiero.FinalizarPedido;
 import com.example.inncoffee.ui.quiero.FinalizarPedidoComidas;
+import com.example.inncoffee.ui.quiero.QuieroAlojenos;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
-import com.example.inncoffee.ui.quiero.Tostadas;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -58,7 +56,7 @@ public class MisPedidosSinFinalizarComidas extends Fragment {
     private static final String USERS = "MisPedidos";
     private String texto,precios;
 
-    private TextView combos,sandwiches,platosytapas,postres,bebidas;
+    private TextView combos,sandwiches,platosytapas,hamburgesa,bebidas;
 
     private void inicialize() {
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -115,10 +113,12 @@ public class MisPedidosSinFinalizarComidas extends Fragment {
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
 
-        combos = (TextView) root.findViewById(R.id.combos);
+        QuieroAlojenos.ComidaoDesayuno = 1;
+        Combos.menua = 0;
+        combos = (TextView) root.findViewById(R.id.menus);
         sandwiches = (TextView) root.findViewById(R.id.sandwiches);
         platosytapas = (TextView) root.findViewById(R.id.platosytapas);
-        postres = (TextView) root.findViewById(R.id.postres);
+        hamburgesa = (TextView) root.findViewById(R.id.hamburgesa);
         bebidas = (TextView) root.findViewById(R.id.bebidas);
 
         combos.setOnClickListener(new View.OnClickListener() {
@@ -146,17 +146,17 @@ public class MisPedidosSinFinalizarComidas extends Fragment {
         platosytapas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Platos fragment = new Platos();
+                PlatosElejir fragment = new PlatosElejir();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);
                 ftEs.commit();
             }
         });
-        postres.setOnClickListener(new View.OnClickListener() {
+        hamburgesa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Postres fragment = new Postres();
+                Hamburgesa fragment = new Hamburgesa();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);
@@ -166,7 +166,7 @@ public class MisPedidosSinFinalizarComidas extends Fragment {
         bebidas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BebidasComi fragment = new BebidasComi();
+                Bebidas fragment = new Bebidas();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);
@@ -224,7 +224,7 @@ public class MisPedidosSinFinalizarComidas extends Fragment {
                         total = total + number;
 
 
-                        NumberFormat formatter = new DecimalFormat("###,##");
+                        NumberFormat formatter = new DecimalFormat("0,00");
 
                         processed = formatter.format(total);
 

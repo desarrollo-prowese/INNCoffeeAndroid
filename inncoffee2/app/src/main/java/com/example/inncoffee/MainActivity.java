@@ -48,6 +48,7 @@ import com.example.inncoffee.ui.ofertas.OfertasClass;
 import com.example.inncoffee.ui.ofertas.OfertasFragment;
 import com.example.inncoffee.ui.pago.tpvvinapplibrary.TPVVConfiguration;
 import com.example.inncoffee.ui.pago.tpvvinapplibrary.TPVVConstants;
+import com.example.inncoffee.ui.quiero.QuieroFragment;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.security.ProviderInstaller;
@@ -193,10 +194,6 @@ public class MainActivity extends AppCompatActivity {
                 openFileChooser();
             }
         });
-
-
-
-
 
         mDatabase = FirebaseDatabase.getInstance();
         mUser = FirebaseAuth.getInstance().getCurrentUser();

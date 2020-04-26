@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
-import com.example.inncoffee.ui.TipoCafes.CafeFragment;
-import com.example.inncoffee.ui.TipoTe.TeFragment;
+import com.example.inncoffee.ui.bebidas.TipoCafes.CafeFragment;
+import com.example.inncoffee.ui.bebidas.TipoTe.TeFragment;
 import com.example.inncoffee.ui.bebidas.Bebidas1;
 import com.example.inncoffee.ui.bebidas.Zumos;
 import com.google.firebase.auth.FirebaseAuth;

@@ -42,12 +42,13 @@ public class CombosPlatos2 extends Fragment {
     TostadasDB tostadasdb;
     private Button boton,next;
     private ImageView Imagen;
+    private DatabaseReference mCompare;
     private TextView contador;
     private String ID ;
     private DatabaseReference mUsuario;
     private static final String USERS = "Combos";
     private ImageView menos,plus;
-    private TextView nombreArticulo,precio,desca,añadir;
+    private TextView nombreArticulo,precio,desca,añadir,titulo;
     private String nombre,imagen,precios,desc;
 
 
@@ -97,6 +98,9 @@ public class CombosPlatos2 extends Fragment {
         View root = inflater.inflate(R.layout.platoscombos, container, false);
         MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
         mDatabase = FirebaseDatabase.getInstance();
+        titulo = root.findViewById(R.id.Titulo);
+        titulo.setText("SEGUNDO PLATO");
+        mCompare = mDatabase.getReference();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mTosta = mDatabase.getReference("Comidas");
         tostadasdb = new TostadasDB();
@@ -140,13 +144,6 @@ public class CombosPlatos2 extends Fragment {
                                 ftEs.addToBackStack(null);
                                 ftEs.commit();
                             }
-                            else if (TapaBebida.tapas){
-                                TapaBebida fragment = new TapaBebida ();
-                                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
-                                ftEs.replace(R.id.nav_host_fragment, fragment);
-                                ftEs.addToBackStack(null);
-                                ftEs.commit();
-                            }
                         }
 
 
@@ -162,7 +159,7 @@ public class CombosPlatos2 extends Fragment {
         });
 
 
-               mTosta.child("Plato").addValueEventListener(new ValueEventListener() {
+               mTosta.child("MenuSegundo").addValueEventListener(new ValueEventListener() {
                    @Override
                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                        if (dataSnapshot.exists()) {
@@ -176,7 +173,7 @@ public class CombosPlatos2 extends Fragment {
 
                    }
                });
-               mTosta.child("Plato").addListenerForSingleValueEvent(new ValueEventListener() {
+               mTosta.child("MenuSegundo").addListenerForSingleValueEvent(new ValueEventListener() {
                    @Override
                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                        if (dataSnapshot.exists()) {
@@ -185,8 +182,6 @@ public class CombosPlatos2 extends Fragment {
                            imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
                            Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
                            nombreArticulo.setText(nombre);
-                           desc = dataSnapshot.child(String.valueOf(id)).child("descarticulo").getValue().toString();
-                           desca.setText(desc);
 
                            Log.v("NONBRE ARTICULO ", nombre);
                            Log.v("MI ID ", String.valueOf(id));
@@ -199,6 +194,98 @@ public class CombosPlatos2 extends Fragment {
 
                    }
                });
+        ID = mAuth.getUid();
+        mCompare.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                Log.v("Lo que sea" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Comidas").child("Ensaladas").child(String.valueOf(id)).child("Alergia").getValue() );
+                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                            dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+
+                        añadir.setVisibility(View.INVISIBLE);
+                    }
+                }
+                else{
+                    añadir.setVisibility(View.VISIBLE);
+                }
+                if( dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                            dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
+
+                        añadir.setVisibility(View.INVISIBLE);
+                    }
+                }
+                else{
+                    añadir.setVisibility(View.VISIBLE);
+                }
+                if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
+                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
+                            dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+
+                        añadir.setVisibility(View.INVISIBLE);
+                    }
+                }
+                else{
+                    añadir.setVisibility(View.VISIBLE);
+                }
+                if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Dioxido").exists()){
+                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Dioxido").getValue().equals(
+                            dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Dioxido").getValue())){
+
+                        añadir.setVisibility(View.INVISIBLE);
+                    }
+                }
+                else{
+                    añadir.setVisibility(View.VISIBLE);
+                }
+                if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Soja").exists()){
+                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Soja").getValue().equals(
+                            dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Soja").getValue())){
+
+                        añadir.setVisibility(View.INVISIBLE);
+                    }
+                }
+                else{
+                    añadir.setVisibility(View.VISIBLE);
+                }
+                if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").exists()){
+                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").getValue().equals(
+                            dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())){
+
+                        añadir.setVisibility(View.INVISIBLE);
+                    }
+                }
+                else{
+                    añadir.setVisibility(View.VISIBLE);
+                }
+                if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Moluscos").exists()){
+                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moluscos").getValue().equals(
+                            dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Moluscos").getValue())){
+
+                        añadir.setVisibility(View.INVISIBLE);
+                    }
+                }
+                else{
+                    añadir.setVisibility(View.VISIBLE);
+                }
+                if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Cangrejo").exists()){
+                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Cangrejo").getValue().equals(
+                            dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Cangrejo").getValue())){
+
+                        añadir.setVisibility(View.INVISIBLE);
+                    }
+                }
+                else{
+                    añadir.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onCancelled (@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
 
@@ -212,7 +299,7 @@ public class CombosPlatos2 extends Fragment {
              @Override
              public void onClick(View v) {
 
-                         mTosta.child("Plato").addListenerForSingleValueEvent(new ValueEventListener() {
+                         mTosta.child("MenuSegundo").addListenerForSingleValueEvent(new ValueEventListener() {
                              @Override
                              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                  if (dataSnapshot.exists()) {
@@ -220,17 +307,13 @@ public class CombosPlatos2 extends Fragment {
                                      nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                                      imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
                                      Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
-                                     desc = dataSnapshot.child(String.valueOf(id)).child("descarticulo").getValue().toString();
-                                     desca.setText(desc);
                                      nombreArticulo.setText(nombre);
 
-                                     if (id == 18) {
+                                     if (id == 7) {
                                          id = 1;
                                          nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                                          imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
                                          Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
-                                         desc = dataSnapshot.child(String.valueOf(id)).child("descarticulo").getValue().toString();
-                                         desca.setText(desc);
                                          nombreArticulo.setText(nombre);
                                      }
                                      Log.v("MI ID ", String.valueOf(id));
@@ -244,6 +327,98 @@ public class CombosPlatos2 extends Fragment {
 
                              }
                          });
+                 ID = mAuth.getUid();
+                 mCompare.addValueEventListener(new ValueEventListener() {
+                     @Override
+                     public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                         Log.v("Lo que sea" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Comidas").child("Ensaladas").child(String.valueOf(id)).child("Alergia").getValue() );
+                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                     dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+
+                                 añadir.setVisibility(View.INVISIBLE);
+                             }
+                         }
+                         else{
+                             añadir.setVisibility(View.VISIBLE);
+                         }
+                         if( dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                     dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
+
+                                 añadir.setVisibility(View.INVISIBLE);
+                             }
+                         }
+                         else{
+                             añadir.setVisibility(View.VISIBLE);
+                         }
+                         if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
+                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
+                                     dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+
+                                 añadir.setVisibility(View.INVISIBLE);
+                             }
+                         }
+                         else{
+                             añadir.setVisibility(View.VISIBLE);
+                         }
+                         if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Dioxido").exists()){
+                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Dioxido").getValue().equals(
+                                     dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Dioxido").getValue())){
+
+                                 añadir.setVisibility(View.INVISIBLE);
+                             }
+                         }
+                         else{
+                             añadir.setVisibility(View.VISIBLE);
+                         }
+                         if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Soja").exists()){
+                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Soja").getValue().equals(
+                                     dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Soja").getValue())){
+
+                                 añadir.setVisibility(View.INVISIBLE);
+                             }
+                         }
+                         else{
+                             añadir.setVisibility(View.VISIBLE);
+                         }
+                         if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").exists()){
+                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").getValue().equals(
+                                     dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())){
+
+                                 añadir.setVisibility(View.INVISIBLE);
+                             }
+                         }
+                         else{
+                             añadir.setVisibility(View.VISIBLE);
+                         }
+                         if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Moluscos").exists()){
+                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moluscos").getValue().equals(
+                                     dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Moluscos").getValue())){
+
+                                 añadir.setVisibility(View.INVISIBLE);
+                             }
+                         }
+                         else{
+                             añadir.setVisibility(View.VISIBLE);
+                         }
+                         if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Cangrejo").exists()){
+                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Cangrejo").getValue().equals(
+                                     dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Cangrejo").getValue())){
+
+                                 añadir.setVisibility(View.INVISIBLE);
+                             }
+                         }
+                         else{
+                             añadir.setVisibility(View.VISIBLE);
+                         }
+                     }
+
+                     @Override
+                     public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                     }
+                 });
                      }
 
 
@@ -256,7 +431,7 @@ public class CombosPlatos2 extends Fragment {
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                        mTosta.child("Plato").addListenerForSingleValueEvent(new ValueEventListener() {
+                        mTosta.child("MenuSegundo").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()) {
@@ -264,17 +439,15 @@ public class CombosPlatos2 extends Fragment {
                                     nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                                     imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
                                     Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
-                                    desc = dataSnapshot.child(String.valueOf(id)).child("descarticulo").getValue().toString();
-                                    desca.setText(desc);
+
                                     nombreArticulo.setText(nombre);
 
                                     if (id == 0) {
-                                        id = 17;
+                                        id = 6;
                                         nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                                         imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
                                         Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
-                                        desc = dataSnapshot.child(String.valueOf(id)).child("descarticulo").getValue().toString();
-                                        desca.setText(desc);
+
                                         nombreArticulo.setText(nombre);
                                     }
                                     Log.v("MI ID ", String.valueOf(id));
@@ -288,6 +461,98 @@ public class CombosPlatos2 extends Fragment {
 
                             }
                         });
+                ID = mAuth.getUid();
+                mCompare.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                        Log.v("Lo que sea" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Comidas").child("Ensaladas").child(String.valueOf(id)).child("Alergia").getValue() );
+                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                    dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+                        if( dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                    dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+                        if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
+                                    dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+                        if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Dioxido").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Dioxido").getValue().equals(
+                                    dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Dioxido").getValue())){
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+                        if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Soja").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Soja").getValue().equals(
+                                    dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Soja").getValue())){
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+                        if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").getValue().equals(
+                                    dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())){
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+                        if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Moluscos").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moluscos").getValue().equals(
+                                    dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Moluscos").getValue())){
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+                        if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Cangrejo").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Cangrejo").getValue().equals(
+                                    dataSnapshot.child("Comidas").child("MenuSegundo").child(String.valueOf(id)).child("Alergia").child("Cangrejo").getValue())){
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
 
         });

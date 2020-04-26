@@ -4,12 +4,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
@@ -29,7 +27,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class QuieroFragment extends Fragment {
 
-    private Button Nuevopedido,pedidofinalizado,pedidofinalizado2;
+    private Button Nuevopedido,pedidofinalizado,pedidofinalizado2,mispedidos;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private String ID ;
@@ -87,8 +85,21 @@ public class QuieroFragment extends Fragment {
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
+        mispedidos = (Button) root.findViewById(R.id.buttonMisPedidos);
         pedidofinalizado = (Button) root.findViewById(R.id.pedidocomida);
         pedidofinalizado2 = (Button) root.findViewById(R.id.pedidodesayuno);
+        mispedidos.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(getActivity(),"Proximamente", Toast.LENGTH_SHORT).show();
+             /*   MisPedidos fragment = new MisPedidos();
+                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                ftEs.replace(R.id.nav_host_fragment, fragment);
+                ftEs.addToBackStack(null);
+                ftEs.commit();*/
+            }
+
+        });
         Nuevopedido.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

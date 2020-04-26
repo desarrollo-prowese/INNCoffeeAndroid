@@ -2,6 +2,7 @@ package com.example.inncoffee.ui.comidas;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,14 +10,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
-import com.example.inncoffee.ui.bebidas.BebidasDB;
 import com.example.inncoffee.ui.mispedidos.MisPedidosClass;
 import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizar;
 import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizarComidas;
+import com.example.inncoffee.ui.quiero.QuieroAlojenos;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
 import com.example.inncoffee.ui.tostadas.TostadasDB;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,19 +46,23 @@ public class Sandwiches extends Fragment {
     private DatabaseReference mTosta;
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
-    private long id= 0;
-    BebidasDB bebidasDB;
-    private Button boton,next;
+    public static long id= 0;
+    private long idpanes = 0;
+    TostadasDB tostadasdb;
+    private Button boton,next, media, entera, selecionarpan, selecionarpan1;
+    private boolean MediaoEntera = true;
+    private boolean SelecionaPan = true;
     private ImageView Imagen;
     private int contador2 = 1;
+    private TextView contador;
     private String ID ;
     private DatabaseReference mUsuario;
+    private DatabaseReference mCompare;
     private static final String USERS = "MisPedidos";
-    private TextView contador;
     private ImageView menos,plus;
-    private TextView nombreArticulo,precio,desc,añadir;
+    public static TextView nombreArticulo,precio,descarticulo,añadir;
     private ArrayList<TostadasDB> mtos = new ArrayList<>();
-    private String nombre,imagen,precios,descarticulos;
+    private String nombre,nombrepan,imagen,imagenpan,precios,barra;
 
 
 
@@ -102,37 +108,39 @@ public class Sandwiches extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.sanwiches, container, false);
+        View root = inflater.inflate(R.layout.tostadasclasicas, container, false);
         MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
         mDatabase = FirebaseDatabase.getInstance();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
-        mTosta = mDatabase.getReference("Sandwiches");
-        bebidasDB = new BebidasDB();
-        Imagen = (ImageView) root.findViewById(R.id.imagencafes);
+        mTosta = mDatabase.getReference("SandwichesyBocadillos");
+        mCompare = mDatabase.getReference();
+        tostadasdb = new TostadasDB();
+        Imagen = (ImageView) root.findViewById(R.id.imagentostada);
         nombreArticulo = (TextView) root.findViewById(R.id.nombrearticulo);
-        desc = (TextView) root.findViewById(R.id.descripcionarticulo);
         precio = (TextView) root.findViewById(R.id.precio);
-        añadir= (TextView)root.findViewById(R.id.añadir);
+        selecionarpan = (Button) root.findViewById(R.id.selecionarpan);
+        selecionarpan1 = (Button) root.findViewById(R.id.selecionarpan1);
+        contador = (TextView) root.findViewById(R.id.textView5);
+        menos = (ImageView) root.findViewById(R.id.imagecontador2);
+        plus = (ImageView) root.findViewById(R.id.imagecontador1);
+        añadir = (TextView) root.findViewById(R.id.añadir);
         mUsuario = mDatabase.getReference(USERS);
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
-        contador = (TextView) root.findViewById(R.id.textView5);
-        menos = (ImageView)root.findViewById(R.id.imagecontador2);
-        plus = (ImageView)root.findViewById(R.id.imagecontador1);
         contador.setText(String.valueOf(contador2));
-        if (contador2 == 1){
+
+        if (contador2 == 1) {
             menos.setVisibility(View.INVISIBLE);
         }
         menos.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v) {
                 Log.v("que pasa", String.valueOf(contador2));
                 contador2--;
                 contador.setText(String.valueOf(contador2));
-                if (contador2 == 1){
+                if (contador2 == 1) {
                     menos.setVisibility(View.INVISIBLE);
-                }
-                else if (contador2 < 99 ){
+                } else if (contador2 < 99) {
 
                     plus.setVisibility(View.VISIBLE);
                 }
@@ -141,15 +149,14 @@ public class Sandwiches extends Fragment {
         });
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v) {
                 Log.v("que pasa", String.valueOf(contador2));
                 contador2++;
                 contador.setText(String.valueOf(contador2));
-                if (contador2 == 99){
+                if (contador2 == 99) {
                     plus.setVisibility(View.INVISIBLE);
                     menos.setVisibility(View.VISIBLE);
-                }
-                else if (contador2 > 1){
+                } else if (contador2 > 1) {
                     menos.setVisibility(View.VISIBLE);
 
                 }
@@ -158,26 +165,30 @@ public class Sandwiches extends Fragment {
         });
 
 
-
         añadir.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v) {
+                if (TextUtils.isEmpty(nombrepan)) {
+                    Toast.makeText(getContext(), "Selecione Algun Pan", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
                     ID = mAuth.getUid();
                     final String key3 = mUsuario.push().getKey();
                     mUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
                             double total = 0;
                             String processed = "";
-                                if (contador2 == 1){
-                                    String texto = contador2 + " /" + nombre;
+                            if (MediaoEntera == false) {
+                                if (contador2 == 1) {
+                                    String texto = contador2 + " /" + media.getText() + "/" + nombre + "/" + nombrepan;
                                     String precio = precios;
                                     MisPedidosClass user2 = new MisPedidosClass(texto, precio);
                                     mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
                                     mUsuario.child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
 
-                                }else if (contador2 > 1){
-                                    String texto = contador2 + " /" + nombre;
+                                } else if (contador2 > 1) {
+                                    String texto = contador2 + " /" + media.getText() + "/" + nombre + "/" + nombrepan;
                                     double number = Double.valueOf(precios.replaceAll("[,.€]", ""));
                                     total = total + number * contador2;
                                     NumberFormat formatter = new DecimalFormat("###,##€");
@@ -190,7 +201,30 @@ public class Sandwiches extends Fragment {
                                     mUsuario.child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
                                 }
 
+                            } else if (MediaoEntera == true) {
 
+                                if (contador2 == 1) {
+                                    String texto = contador2 + " /" + entera.getText() + "/" + nombre + "/" + nombrepan;
+                                    String precio = precios;
+                                    MisPedidosClass user2 = new MisPedidosClass(texto, precio);
+                                    mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
+                                    mUsuario.child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
+
+                                } else if (contador2 > 1) {
+                                    String texto = contador2 + " /" + entera.getText() + "/" + nombre + "/" + nombrepan;
+                                    double number = Double.valueOf(precios.replaceAll("[,.€]", ""));
+                                    total = total + number * contador2;
+                                    NumberFormat formatter = new DecimalFormat("###,##€");
+
+                                    processed = formatter.format(total);
+
+                                    String precio = processed;
+                                    MisPedidosClass user2 = new MisPedidosClass(texto, precio);
+                                    mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
+                                    mUsuario.child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
+                                }
+
+                            }
 
                             MisPedidosSinFinalizarComidas fragment = new MisPedidosSinFinalizarComidas();
                             FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
@@ -201,7 +235,7 @@ public class Sandwiches extends Fragment {
 
 
                         @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        public void onCancelled (@NonNull DatabaseError databaseError) {
                             Log.w("TAG", "Failed to read value.", databaseError.toException());
                         }
                     });
@@ -209,127 +243,470 @@ public class Sandwiches extends Fragment {
 
                 }
 
+            }
         });
 
 
-        mTosta.addValueEventListener(new ValueEventListener() {
-                   @Override
-                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                       if (dataSnapshot.exists()) {
-                           id = dataSnapshot.getChildrenCount();
-                           id = 1;
-                       }
-                   }
-
-                   @Override
-                   public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                   }
-               });
-               mTosta.addListenerForSingleValueEvent(new ValueEventListener() {
-                   @Override
-                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                       if (dataSnapshot.exists()) {
-                           id = 1;
-                           nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
-                           precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
-                           imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
-                           descarticulos = dataSnapshot.child(String.valueOf(id)).child("desc").getValue().toString();
-                           Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
-                           nombreArticulo.setText(nombre);
-                           desc.setText(descarticulos);
-                           precio.setText(precios);
-
-                           Log.v("NONBRE ARTICULO ", nombre);
-                           Log.v("MI ID ", String.valueOf(id));
-
-                       }
-                   }
-
-                   @Override
-                   public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                   }
-               });
 
 
-         next = (Button) root.findViewById(R.id.test);
 
-         next.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-              mTosta.addListenerForSingleValueEvent(new ValueEventListener() {
-                  @Override
-                  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                      if (dataSnapshot.exists()) {
-                          id++;
-                          nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
-                          precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
-                          imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
-                          descarticulos = dataSnapshot.child(String.valueOf(id)).child("desc").getValue().toString();
-                          Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
-                          nombreArticulo.setText(nombre);
-                          desc.setText(descarticulos);
-                          precio.setText(precios);
-
-                          if (id == 6) {
-                              id = 1;
-                              nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
-                              precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
-                              descarticulos = dataSnapshot.child(String.valueOf(id)).child("desc").getValue().toString();
-                              imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
-                              Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
-                              nombreArticulo.setText(nombre);
-                              desc.setText(descarticulos);
-                              precio.setText(precios);
-                          }
-                          Log.v("MI ID ", String.valueOf(id));
-                          Log.v("NONBRE ARTICULO ", nombre);
-
-                      }
-                  }
-
-                  @Override
-                  public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                  }
-              });
-             }
-         });
-
-
-        boton = (Button) root.findViewById(R.id.button5);
-
-        boton.setOnClickListener(new View.OnClickListener() {
+        selecionarpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            mTosta.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        id--;
-                        nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
-                        precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
-                        imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
-                        descarticulos = dataSnapshot.child(String.valueOf(id)).child("desc").getValue().toString();
-                        Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
-                        nombreArticulo.setText(nombre);
-                        desc.setText(descarticulos);
-                        precio.setText(precios);
+                media.setVisibility(View.INVISIBLE);
+                entera.setVisibility(View.INVISIBLE);
+                precio.setVisibility(View.INVISIBLE);
+                selecionarpan.setVisibility(View.INVISIBLE);
+                selecionarpan1.setVisibility(View.VISIBLE);
+                SelecionaPan = false;
+                añadir.setVisibility(View.INVISIBLE);
 
-                        if (id == 0) {
-                            id = 5;
+                mTosta.child("TipoPanes").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            idpanes = 1;
+                            nombrepan = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
+                            barra = dataSnapshot.child(String.valueOf(idpanes)).child("barra").getValue().toString();
+                            imagenpan = dataSnapshot.child(String.valueOf(idpanes)).child("imagen").getValue().toString();
+                            Glide.with(Objects.requireNonNull(getContext())).load(imagenpan).into(Imagen);
+                            nombreArticulo.setText(nombrepan);
+
+                            Log.v("NONBRE ARTICULO ", nombrepan);
+                            Log.v("MI ID ", String.valueOf(idpanes));
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                ID = mAuth.getUid();
+                mCompare.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                        Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue() +" // "+ dataSnapshot.child("SandwichesyBocadillos").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue() );
+                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                    dataSnapshot.child("SandwichesyBocadillos").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue()))
+                            {
+                                selecionarpan1.setVisibility(View.INVISIBLE);
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                            else
+                                selecionarpan1.setVisibility(View.VISIBLE);
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+        selecionarpan1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                media.setVisibility(View.VISIBLE);
+                entera.setVisibility(View.VISIBLE);
+                precio.setVisibility(View.VISIBLE);
+                selecionarpan.setVisibility(View.VISIBLE);
+                selecionarpan1.setVisibility(View.INVISIBLE);
+                selecionarpan.setText(barra);
+                SelecionaPan = true;
+                añadir.setVisibility(View.VISIBLE);
+
+                if (SelecionaPan == true) {
+                    if (MediaoEntera == false) {
+                        mTosta.child("Sandwiches").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
+                                    precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
+                                    imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
+                                    Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                    nombreArticulo.setText(nombre);
+                                    precio.setText(precios);
+
+                                    Log.v("NONBRE ARTICULO ", nombre);
+                                    Log.v("MI ID ", String.valueOf(id));
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                        ID = mAuth.getUid();
+                        mCompare.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").getValue() );
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+
+                                            añadir.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                    else{
+                                        añadir.setVisibility(View.VISIBLE);
+                                    }
+                                    if( dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
+
+                                            añadir.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                    else{
+                                        añadir.setVisibility(View.VISIBLE);
+                                    }
+                                    if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
+                                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
+                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+
+                                            añadir.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                    else{
+                                        añadir.setVisibility(View.VISIBLE);
+                                    }
+                                    if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()){
+                                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
+                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
+
+                                            añadir.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                    else{
+                                        añadir.setVisibility(View.VISIBLE);
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                    } else if (MediaoEntera == true) {
+
+
+                        mTosta.child("Bocadillos").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
+                                    precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
+                                    imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
+                                    Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                    nombreArticulo.setText(nombre);
+                                    precio.setText(precios);
+
+                                    Log.v("NONBRE ARTICULO ", nombre);
+                                    Log.v("MI ID ", String.valueOf(id));
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        ID = mAuth.getUid();
+                        mCompare.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").getValue() );
+
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                }
+                                else{
+                                    añadir.setVisibility(View.VISIBLE);
+                                }
+                                if( dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
+
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                }
+                                else{
+                                    añadir.setVisibility(View.VISIBLE);
+                                }
+                                if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
+                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                }
+                                else{
+                                    añadir.setVisibility(View.VISIBLE);
+                                }
+                                if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
+                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
+
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                }
+                                else{
+                                    añadir.setVisibility(View.VISIBLE);
+                                }
+                                if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").getValue().equals(
+                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())){
+
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                }
+                                else{
+                                    añadir.setVisibility(View.VISIBLE);
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                    }
+                }
+            }
+        });
+
+
+
+        if (SelecionaPan == true) {
+            if (MediaoEntera == false) {
+
+                mTosta.child("Sandwiches").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            id = dataSnapshot.getChildrenCount();
+                            id = 1;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                mTosta.child("Sandwiches").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            id = 1;
                             nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                             precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
-                            descarticulos = dataSnapshot.child(String.valueOf(id)).child("desc").getValue().toString();
                             imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
                             Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
                             nombreArticulo.setText(nombre);
-                            desc.setText(descarticulos);
                             precio.setText(precios);
+
+                            Log.v("NONBRE ARTICULO ", nombre);
+                            Log.v("MI ID ", String.valueOf(id));
+
                         }
-                        Log.v("MI ID ", String.valueOf(id));
-                        Log.v("NONBRE ARTICULO ", nombre);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                ID = mAuth.getUid();
+                mCompare.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                        Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").getValue() );
+                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                        dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+
+                                    añadir.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                            else{
+                                añadir.setVisibility(View.VISIBLE);
+                            }
+                            if( dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                        dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
+
+                                    añadir.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                            else{
+                                añadir.setVisibility(View.VISIBLE);
+                            }
+                            if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
+                                        dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+
+                                    añadir.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                            else{
+                                añadir.setVisibility(View.VISIBLE);
+                            }
+                            if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()){
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
+                                        dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
+
+                                    añadir.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                            else{
+                                añadir.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            } else if (MediaoEntera == true) {
+
+                mTosta.child("Bocadillos").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            id = dataSnapshot.getChildrenCount();
+                            id = 1;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                mTosta.child("Bocadillos").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            id = 1;
+                            nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
+                            precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
+                            imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
+                            Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                            nombreArticulo.setText(nombre);
+                            precio.setText(precios);
+
+                            Log.v("NONBRE ARTICULO ", nombre);
+                            Log.v("MI ID ", String.valueOf(id));
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                ID = mAuth.getUid();
+                mCompare.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                        Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").getValue() );
+                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                    dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+                        if( dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                    dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+                        if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
+                                    dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+                        if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
+                                    dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+                        if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").getValue().equals(
+                                    dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())){
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+        }
+        else if (SelecionaPan == false){
+            mTosta.child("TipoPanes").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        idpanes = dataSnapshot.getChildrenCount();
+                        idpanes = 1;
 
                     }
                 }
@@ -339,6 +716,767 @@ public class Sandwiches extends Fragment {
 
                 }
             });
+            mTosta.child("TipoPanes").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        idpanes = 1;
+                        nombrepan = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
+                        barra = dataSnapshot.child(String.valueOf(idpanes)).child("barra").getValue().toString();
+                        imagenpan = dataSnapshot.child(String.valueOf(idpanes)).child("imagen").getValue().toString();
+                        Glide.with(Objects.requireNonNull(getContext())).load(imagenpan).into(Imagen);
+                        nombreArticulo.setText(nombrepan);
+
+                        Log.v("NONBRE ARTICULO ", nombrepan);
+                        Log.v("MI ID ", String.valueOf(idpanes));
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+            ID = mAuth.getUid();
+            mCompare.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                    Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue() +" // "+ dataSnapshot.child("SandwichesyBocadillos").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue() );
+                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                dataSnapshot.child("SandwichesyBocadillos").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue()))
+                        {
+                            selecionarpan1.setVisibility(View.INVISIBLE);
+                            añadir.setVisibility(View.INVISIBLE);
+                        }
+                        else
+                            selecionarpan1.setVisibility(View.VISIBLE);
+                    }
+
+                }
+
+                @Override
+                public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+
+        }
+
+
+
+        media = (Button) root.findViewById(R.id.media);
+        media.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                media.setBackgroundResource(R.drawable.media);
+                entera.setBackgroundResource(R.drawable.entera);
+                MediaoEntera = false;
+                mTosta.child("Sandwiches").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()){
+                            if (id >= 3 ){
+                                id = 1;
+                                nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
+                                precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
+                                imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
+                                Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                nombreArticulo.setText(nombre);
+                                precio.setText(precios);
+                                Log.v("NONBRE ARTICULO ", nombre);
+                                Log.v("MI ID ", String.valueOf(id));
+
+                            }else if (id == 1 || id == 2) {
+
+                                nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
+                                precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
+                                imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
+                                Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                nombreArticulo.setText(nombre);
+                                precio.setText(precios);
+                                Log.v("NONBRE ARTICULO ", nombre);
+                                Log.v("MI ID ", String.valueOf(id));
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                ID = mAuth.getUid();
+                mCompare.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                        Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").getValue() );
+                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                        dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+
+                                    añadir.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                            else{
+                                añadir.setVisibility(View.VISIBLE);
+                            }
+                            if( dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                        dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
+
+                                    añadir.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                            else{
+                                añadir.setVisibility(View.VISIBLE);
+                            }
+                            if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
+                                        dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+
+                                    añadir.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                            else{
+                                añadir.setVisibility(View.VISIBLE);
+                            }
+                            if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()){
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
+                                        dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
+
+                                    añadir.setVisibility(View.INVISIBLE);
+                                }
+                            }
+                            else{
+                                añadir.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+        });
+        entera = (Button) root.findViewById(R.id.entera);
+        entera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                media.setBackgroundResource(R.drawable.entera);
+                entera.setBackgroundResource(R.drawable.media);
+                MediaoEntera = true;
+                mTosta.child("Bocadillos").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()){
+                            nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
+                            precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
+                            imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
+                            Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                            nombreArticulo.setText(nombre);
+                            precio.setText(precios);
+                            Log.v("NONBRE ARTICULO ", nombre);
+                            Log.v("MI ID " , String.valueOf(id));
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                ID = mAuth.getUid();
+                mCompare.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                        Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").getValue() );
+
+                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                    dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+                        if( dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                    dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+                        if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
+                                    dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+                        if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
+                                    dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+                        if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").exists()){
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").getValue().equals(
+                                    dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())){
+
+                                añadir.setVisibility(View.INVISIBLE);
+                            }
+                        }
+                        else{
+                            añadir.setVisibility(View.VISIBLE);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+
+
+
+        next = (Button) root.findViewById(R.id.test);
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (SelecionaPan == true) {
+                    if (MediaoEntera == false) {
+                        mTosta.child("Sandwiches").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    id++;
+                                    nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
+                                    precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
+                                    imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
+                                    Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                    nombreArticulo.setText(nombre);
+                                    precio.setText(precios);
+
+                                    if (id == 3) {
+                                        id = 1;
+                                        nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
+                                        precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
+                                        imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
+                                        Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                        nombreArticulo.setText(nombre);
+                                        precio.setText(precios);
+                                    }
+                                    Log.v("MI ID ", String.valueOf(id));
+                                    Log.v("NONBRE ARTICULO ", nombre);
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        ID = mAuth.getUid();
+                        mCompare.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").getValue() );
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+
+                                            añadir.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                    else{
+                                        añadir.setVisibility(View.VISIBLE);
+                                    }
+                                    if( dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
+
+                                            añadir.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                    else{
+                                        añadir.setVisibility(View.VISIBLE);
+                                    }
+                                    if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
+                                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
+                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+
+                                            añadir.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                    else{
+                                        añadir.setVisibility(View.VISIBLE);
+                                    }
+                                    if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()){
+                                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
+                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
+
+                                            añadir.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                    else{
+                                        añadir.setVisibility(View.VISIBLE);
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                    }else if (MediaoEntera == true) {
+
+                        mTosta.child("Bocadillos").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    id++;
+                                    nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
+                                    precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
+                                    imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
+                                    Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                    nombreArticulo.setText(nombre);
+                                    precio.setText(precios);
+
+                                    if (id == 11) {
+                                        id = 1;
+                                        nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
+                                        precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
+                                        imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
+                                        Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                        nombreArticulo.setText(nombre);
+                                        precio.setText(precios);
+                                    }
+                                    Log.v("MI ID ", String.valueOf(id));
+                                    Log.v("NONBRE ARTICULO ", nombre);
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        ID = mAuth.getUid();
+                        mCompare.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").getValue() );
+
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                }
+                                else{
+                                    añadir.setVisibility(View.VISIBLE);
+                                }
+                                if( dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
+
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                }
+                                else{
+                                    añadir.setVisibility(View.VISIBLE);
+                                }
+                                if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
+                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                }
+                                else{
+                                    añadir.setVisibility(View.VISIBLE);
+                                }
+                                if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
+                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
+
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                }
+                                else{
+                                    añadir.setVisibility(View.VISIBLE);
+                                }
+                                if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").getValue().equals(
+                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())){
+
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                }
+                                else{
+                                    añadir.setVisibility(View.VISIBLE);
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+
+                }
+                else if (SelecionaPan == false){
+
+                    mTosta.child("TipoPanes").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                idpanes++;
+                                nombrepan = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
+                                barra = dataSnapshot.child(String.valueOf(idpanes)).child("barra").getValue().toString();
+                                imagenpan = dataSnapshot.child(String.valueOf(idpanes)).child("imagen").getValue().toString();
+                                Glide.with(Objects.requireNonNull(getContext())).load(imagenpan).into(Imagen);
+                                nombreArticulo.setText(nombrepan);
+
+                                if (idpanes == 9) {
+                                    idpanes = 1;
+                                    nombrepan = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
+                                    barra = dataSnapshot.child(String.valueOf(idpanes)).child("barra").getValue().toString();
+                                    imagenpan = dataSnapshot.child(String.valueOf(idpanes)).child("imagen").getValue().toString();
+                                    Glide.with(Objects.requireNonNull(getContext())).load(imagenpan).into(Imagen);
+                                    nombreArticulo.setText(nombrepan);
+                                }
+                                Log.v("MI ID ", String.valueOf(idpanes));
+                                Log.v("NONBRE ARTICULO ", nombrepan);
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                    ID = mAuth.getUid();
+                    mCompare.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                            Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue() +" // "+ dataSnapshot.child("SandwichesyBocadillos").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue() );
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                        dataSnapshot.child("SandwichesyBocadillos").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue()))
+                                {
+                                    selecionarpan1.setVisibility(View.INVISIBLE);
+                                    añadir.setVisibility(View.INVISIBLE);
+                                }
+                                else
+                                    selecionarpan1.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                }
+
+            }
+        });
+
+
+        boton = (Button) root.findViewById(R.id.button5);
+
+        boton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (SelecionaPan == true) {
+                    if (MediaoEntera == false) {
+                        mTosta.child("Sandwiches").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    id--;
+                                    nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
+                                    precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
+                                    imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
+                                    Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                    nombreArticulo.setText(nombre);
+                                    precio.setText(precios);
+
+                                    if (id == 0) {
+                                        id = 2;
+                                        nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
+                                        precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
+                                        imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
+                                        Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                        nombreArticulo.setText(nombre);
+                                        precio.setText(precios);
+                                    }
+                                    Log.v("MI ID ", String.valueOf(id));
+                                    Log.v("NONBRE ARTICULO ", nombre);
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        ID = mAuth.getUid();
+                        mCompare.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").getValue() );
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+
+                                            añadir.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                    else{
+                                        añadir.setVisibility(View.VISIBLE);
+                                    }
+                                    if( dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
+
+                                            añadir.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                    else{
+                                        añadir.setVisibility(View.VISIBLE);
+                                    }
+                                    if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
+                                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
+                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+
+                                            añadir.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                    else{
+                                        añadir.setVisibility(View.VISIBLE);
+                                    }
+                                    if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()){
+                                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
+                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
+
+                                            añadir.setVisibility(View.INVISIBLE);
+                                        }
+                                    }
+                                    else{
+                                        añadir.setVisibility(View.VISIBLE);
+                                    }
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                    } else if (MediaoEntera == true) {
+
+                        mTosta.child("Bocadillos").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    id--;
+                                    nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
+                                    precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
+                                    imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
+                                    Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                    nombreArticulo.setText(nombre);
+                                    precio.setText(precios);
+
+                                    if (id == 0) {
+                                        id = 10;
+                                        nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
+                                        precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
+                                        imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
+                                        Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                        nombreArticulo.setText(nombre);
+                                        precio.setText(precios);
+                                    }
+                                    Log.v("MI ID ", String.valueOf(id));
+                                    Log.v("NONBRE ARTICULO ", nombre);
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                        ID = mAuth.getUid();
+                        mCompare.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").getValue() );
+
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
+                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                }
+                                else{
+                                    añadir.setVisibility(View.VISIBLE);
+                                }
+                                if( dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
+
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                }
+                                else{
+                                    añadir.setVisibility(View.VISIBLE);
+                                }
+                                if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
+                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                }
+                                else{
+                                    añadir.setVisibility(View.VISIBLE);
+                                }
+                                if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
+                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
+
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                }
+                                else{
+                                    añadir.setVisibility(View.VISIBLE);
+                                }
+                                if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").exists()){
+                                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").getValue().equals(
+                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())){
+
+                                        añadir.setVisibility(View.INVISIBLE);
+                                    }
+                                }
+                                else{
+                                    añadir.setVisibility(View.VISIBLE);
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+
+                }
+                else if (SelecionaPan == false ){
+
+                    mTosta.child("TipoPanes").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                idpanes--;
+                                nombrepan = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
+                                barra = dataSnapshot.child(String.valueOf(idpanes)).child("barra").getValue().toString();
+                                imagenpan = dataSnapshot.child(String.valueOf(idpanes)).child("imagen").getValue().toString();
+                                Glide.with(Objects.requireNonNull(getContext())).load(imagenpan).into(Imagen);
+                                nombreArticulo.setText(nombrepan);
+
+                                if (idpanes == 0) {
+                                    idpanes = 8;
+                                    nombrepan = dataSnapshot.child(String.valueOf(idpanes)).child("tipo").getValue().toString();
+                                    barra = dataSnapshot.child(String.valueOf(idpanes)).child("barra").getValue().toString();
+                                    imagenpan = dataSnapshot.child(String.valueOf(idpanes)).child("imagen").getValue().toString();
+                                    Glide.with(Objects.requireNonNull(getContext())).load(imagenpan).into(Imagen);
+                                    nombreArticulo.setText(nombrepan);
+                                }
+                                Log.v("MI ID ", String.valueOf(idpanes));
+                                Log.v("NONBRE ARTICULO ", nombrepan);
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    ID = mAuth.getUid();
+                    mCompare.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                            Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue() +" // "+ dataSnapshot.child("SandwichesyBocadillos").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue() );
+                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
+                                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
+                                        dataSnapshot.child("SandwichesyBocadillos").child("TipoPanes").child(String.valueOf(idpanes)).child("Alergia").getValue()))
+                                {
+
+                                    selecionarpan1.setVisibility(View.INVISIBLE);
+                                    añadir.setVisibility(View.INVISIBLE);
+                                }
+                                else
+                                    selecionarpan1.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled (@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+                }
+
             }
         });
 

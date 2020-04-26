@@ -57,6 +57,7 @@ public class QuieroAlojenos extends Fragment {
     public  String alojeno;
     private DatabaseReference mUsuario;
     private DatabaseReference mUsu;
+    public static int ComidaoDesayuno = 0;
 
     private void inicialize() {
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -182,12 +183,11 @@ public class QuieroAlojenos extends Fragment {
             cartacomida.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getActivity(),"En Mantenimiento", Toast.LENGTH_SHORT).show();
-                   /* CartaComidas fragment = new CartaComidas();
+                    CartaComidas fragment = new CartaComidas();
                     FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                     ftEs.replace(R.id.nav_host_fragment, fragment);
                     ftEs.addToBackStack(null);
-                    ftEs.commit();*/
+                    ftEs.commit();
                 }
             });
         }

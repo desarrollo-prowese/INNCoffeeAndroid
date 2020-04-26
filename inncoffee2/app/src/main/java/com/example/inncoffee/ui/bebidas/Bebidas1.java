@@ -15,8 +15,13 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.ui.combos.Combos;
+import com.example.inncoffee.ui.combos.MenuCompleto;
+import com.example.inncoffee.ui.combos.MenuMedio;
 import com.example.inncoffee.ui.mispedidos.MisPedidosClass;
 import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizar;
+import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizarComidas;
+import com.example.inncoffee.ui.quiero.QuieroAlojenos;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
 import com.example.inncoffee.ui.tostadas.TostadasDB;
 import com.google.firebase.auth.FirebaseAuth;
@@ -52,6 +57,8 @@ public class Bebidas1 extends Fragment {
     private String ID ;
     private DatabaseReference mUsuario;
     private static final String USERS = "MisPedidos";
+    private final String COMBOS = "Combos";
+    private DatabaseReference mCombos;
     private TextView contador;
     private ImageView menos,plus;
     private TextView nombreArticulo,precio,descarticulo,añadir;
@@ -113,6 +120,7 @@ public class Bebidas1 extends Fragment {
         precio = (TextView) root.findViewById(R.id.precio);
         añadir= (TextView)root.findViewById(R.id.añadir);
         mUsuario = mDatabase.getReference(USERS);
+        mCombos = mDatabase.getReference(COMBOS);
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
         contador = (TextView) root.findViewById(R.id.textView5) ;
@@ -173,8 +181,44 @@ public class Bebidas1 extends Fragment {
                                     String texto = contador2 + " /" + nombre;
                                     String precio = precios;
                                     MisPedidosClass user2 = new MisPedidosClass(texto, precio);
-                                    mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
-                                    mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
+                                    if (Combos.menua == 1){
+
+                                        mCombos.child("Bebida").child(ID).child("Texto").setValue(nombre);
+                                        if (MenuCompleto.completo){
+                                            MenuCompleto fragment = new MenuCompleto();
+                                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                                            ftEs.replace(R.id.nav_host_fragment, fragment);
+                                            ftEs.addToBackStack(null);
+                                            ftEs.commit();
+                                        }
+                                        else  if (MenuMedio.medio){
+                                            MenuMedio fragment = new MenuMedio ();
+                                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                                            ftEs.replace(R.id.nav_host_fragment, fragment);
+                                            ftEs.addToBackStack(null);
+                                            ftEs.commit();
+                                        }
+                                    }
+                                    else{
+                                        if (QuieroAlojenos.ComidaoDesayuno == 1){
+                                            mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
+                                            mUsuario.child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
+                                            MisPedidosSinFinalizarComidas fragment = new MisPedidosSinFinalizarComidas();
+                                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                                            ftEs.replace(R.id.nav_host_fragment, fragment);
+                                            ftEs.addToBackStack(null);
+                                            ftEs.commit();
+                                        }else if (QuieroAlojenos.ComidaoDesayuno == 0){
+                                            mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
+                                            mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
+                                            MisPedidosSinFinalizar fragment = new MisPedidosSinFinalizar();
+                                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                                            ftEs.replace(R.id.nav_host_fragment, fragment);
+                                            ftEs.addToBackStack(null);
+                                            ftEs.commit();
+
+                                        }
+                                    }
 
                                 }else if (contador2 > 1){
                                     String texto = contador2 + " /" + nombre;
@@ -186,17 +230,47 @@ public class Bebidas1 extends Fragment {
 
                                     String precio = processed;
                                     MisPedidosClass user2 = new MisPedidosClass(texto, precio);
-                                    mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
-                                    mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
+                                    if (Combos.menua == 1){
+
+                                        mCombos.child("Bebida").child(ID).child("Texto").setValue(nombre);
+                                        if (MenuCompleto.completo){
+                                            MenuCompleto fragment = new MenuCompleto();
+                                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                                            ftEs.replace(R.id.nav_host_fragment, fragment);
+                                            ftEs.addToBackStack(null);
+                                            ftEs.commit();
+                                        }
+                                        else  if (MenuMedio.medio){
+                                            MenuMedio fragment = new MenuMedio ();
+                                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                                            ftEs.replace(R.id.nav_host_fragment, fragment);
+                                            ftEs.addToBackStack(null);
+                                            ftEs.commit();
+                                        }
+                                    }
+                                    else{
+                                        if (QuieroAlojenos.ComidaoDesayuno == 1){
+                                            mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
+                                            mUsuario.child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
+                                            MisPedidosSinFinalizarComidas fragment = new MisPedidosSinFinalizarComidas();
+                                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                                            ftEs.replace(R.id.nav_host_fragment, fragment);
+                                            ftEs.addToBackStack(null);
+                                            ftEs.commit();
+                                        }else if (QuieroAlojenos.ComidaoDesayuno == 0){
+                                            mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
+                                            mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
+                                            MisPedidosSinFinalizar fragment = new MisPedidosSinFinalizar();
+                                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                                            ftEs.replace(R.id.nav_host_fragment, fragment);
+                                            ftEs.addToBackStack(null);
+                                            ftEs.commit();
+
+                                        }
+                                    }
                                 }
 
 
-
-                            MisPedidosSinFinalizar fragment = new MisPedidosSinFinalizar();
-                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
-                            ftEs.replace(R.id.nav_host_fragment, fragment);
-                            ftEs.addToBackStack(null);
-                            ftEs.commit();
                         }
 
 

@@ -19,7 +19,7 @@ public class Pagina_Inicial extends AppCompatActivity {
 
 
         private ImageView imageView13;
-        private LinearLayout imageView18;
+        private ImageView imageView18;
 
         @Override
         public void onCreate(Bundle savedInstanceState) {

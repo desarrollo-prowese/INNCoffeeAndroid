@@ -69,7 +69,7 @@ public class CartaDesayunos extends Fragment {
 
         View root = inflater.inflate(R.layout.cartadesayunos, container, false);
         MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
-
+        QuieroAlojenos.ComidaoDesayuno = 0;
         tostadas = (TextView) root.findViewById(R.id.tostadas);
         bebidas = (TextView) root.findViewById(R.id.bebidas);
 

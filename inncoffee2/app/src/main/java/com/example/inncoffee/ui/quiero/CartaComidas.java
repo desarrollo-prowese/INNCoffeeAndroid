@@ -7,13 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
 import com.example.inncoffee.ui.combos.Combos;
+import com.example.inncoffee.ui.comidas.Hamburgesa;
 import com.example.inncoffee.ui.comidas.Platos;
-import com.example.inncoffee.ui.comidas.Postres;
+import com.example.inncoffee.ui.comidas.PlatosElejir;
 import com.example.inncoffee.ui.comidas.Sandwiches;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,7 +25,7 @@ import androidx.fragment.app.FragmentTransaction;
 public class CartaComidas extends Fragment {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
-    private TextView combos,sandwiches,platosytapas,postres,bebidas;
+    private TextView combos,sandwiches,platosytapas,hamburgesa,bebidas;
 
     private void inicialize() {
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -69,13 +69,14 @@ public class CartaComidas extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.cartacomidas, container, false);
-        MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
-
-       combos = (TextView) root.findViewById(R.id.combos);
+       View root = inflater.inflate(R.layout.cartacomidas, container, false);
+       MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
+       QuieroAlojenos.ComidaoDesayuno = 1;
+       Combos.menua = 0;
+       combos = (TextView) root.findViewById(R.id.menus);
        sandwiches = (TextView) root.findViewById(R.id.sandwiches);
        platosytapas = (TextView) root.findViewById(R.id.platosytapas);
-       postres = (TextView) root.findViewById(R.id.postres);
+       hamburgesa = (TextView) root.findViewById(R.id.hamburgesa);
        bebidas = (TextView) root.findViewById(R.id.bebidas);
 
        combos.setOnClickListener(new View.OnClickListener() {
@@ -103,17 +104,17 @@ public class CartaComidas extends Fragment {
         platosytapas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Platos fragment = new Platos();
+                PlatosElejir fragment = new PlatosElejir();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);
                 ftEs.commit();
             }
         });
-        postres.setOnClickListener(new View.OnClickListener() {
+        hamburgesa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Postres fragment = new Postres();
+                Hamburgesa fragment = new Hamburgesa();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);
@@ -123,7 +124,7 @@ public class CartaComidas extends Fragment {
         bebidas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BebidasComi fragment = new BebidasComi();
+                Bebidas fragment = new Bebidas();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);
