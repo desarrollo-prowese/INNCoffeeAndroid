@@ -108,7 +108,7 @@ public class Sandwiches extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.tostadasclasicas, container, false);
+        View root = inflater.inflate(R.layout.sanwiches, container, false);
         MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
         mDatabase = FirebaseDatabase.getInstance();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -168,10 +168,7 @@ public class Sandwiches extends Fragment {
         añadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                if (TextUtils.isEmpty(nombrepan)) {
-                    Toast.makeText(getContext(), "Selecione Algun Pan", Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
+
                     ID = mAuth.getUid();
                     final String key3 = mUsuario.push().getKey();
                     mUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -181,14 +178,14 @@ public class Sandwiches extends Fragment {
                             String processed = "";
                             if (MediaoEntera == false) {
                                 if (contador2 == 1) {
-                                    String texto = contador2 + " /" + media.getText() + "/" + nombre + "/" + nombrepan;
+                                    String texto = contador2 + " /" + media.getText() + "/" + nombre;
                                     String precio = precios;
                                     MisPedidosClass user2 = new MisPedidosClass(texto, precio);
                                     mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
                                     mUsuario.child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
 
                                 } else if (contador2 > 1) {
-                                    String texto = contador2 + " /" + media.getText() + "/" + nombre + "/" + nombrepan;
+                                    String texto = contador2 + " /" + media.getText() + "/" + nombre;
                                     double number = Double.valueOf(precios.replaceAll("[,.€]", ""));
                                     total = total + number * contador2;
                                     NumberFormat formatter = new DecimalFormat("###,##€");
@@ -202,37 +199,41 @@ public class Sandwiches extends Fragment {
                                 }
 
                             } else if (MediaoEntera == true) {
+                                if (TextUtils.isEmpty(nombrepan)) {
+                                    Toast.makeText(getContext(), "Selecione Algun Pan", Toast.LENGTH_SHORT).show();
+                                    return;
+                                } else {
+                                    if (contador2 == 1) {
+                                        String texto = contador2 + " /" + entera.getText() + "/" + nombre + "/" + nombrepan;
+                                        String precio = precios;
+                                        MisPedidosClass user2 = new MisPedidosClass(texto, precio);
+                                        mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
+                                        mUsuario.child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
 
-                                if (contador2 == 1) {
-                                    String texto = contador2 + " /" + entera.getText() + "/" + nombre + "/" + nombrepan;
-                                    String precio = precios;
-                                    MisPedidosClass user2 = new MisPedidosClass(texto, precio);
-                                    mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
-                                    mUsuario.child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
+                                    } else if (contador2 > 1) {
+                                        String texto = contador2 + " /" + entera.getText() + "/" + nombre + "/" + nombrepan;
+                                        double number = Double.valueOf(precios.replaceAll("[,.€]", ""));
+                                        total = total + number * contador2;
+                                        NumberFormat formatter = new DecimalFormat("###,##€");
 
-                                } else if (contador2 > 1) {
-                                    String texto = contador2 + " /" + entera.getText() + "/" + nombre + "/" + nombrepan;
-                                    double number = Double.valueOf(precios.replaceAll("[,.€]", ""));
-                                    total = total + number * contador2;
-                                    NumberFormat formatter = new DecimalFormat("###,##€");
+                                        processed = formatter.format(total);
 
-                                    processed = formatter.format(total);
+                                        String precio = processed;
+                                        MisPedidosClass user2 = new MisPedidosClass(texto, precio);
+                                        mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
+                                        mUsuario.child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
+                                    }
 
-                                    String precio = processed;
-                                    MisPedidosClass user2 = new MisPedidosClass(texto, precio);
-                                    mUsuario.child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
-                                    mUsuario.child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
                                 }
 
-                            }
 
+                            }
                             MisPedidosSinFinalizarComidas fragment = new MisPedidosSinFinalizarComidas();
                             FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                             ftEs.replace(R.id.nav_host_fragment, fragment);
                             ftEs.addToBackStack(null);
                             ftEs.commit();
                         }
-
 
                         @Override
                         public void onCancelled (@NonNull DatabaseError databaseError) {
@@ -241,7 +242,6 @@ public class Sandwiches extends Fragment {
                     });
 
 
-                }
 
             }
         });
@@ -771,6 +771,7 @@ public class Sandwiches extends Fragment {
         media.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selecionarpan.setVisibility(View.INVISIBLE);
                 media.setBackgroundResource(R.drawable.media);
                 entera.setBackgroundResource(R.drawable.entera);
                 MediaoEntera = false;
@@ -871,6 +872,7 @@ public class Sandwiches extends Fragment {
             @Override
             public void onClick(View v) {
                 media.setBackgroundResource(R.drawable.entera);
+                selecionarpan.setVisibility(View.VISIBLE);
                 entera.setBackgroundResource(R.drawable.media);
                 MediaoEntera = true;
                 mTosta.child("Bocadillos").addListenerForSingleValueEvent(new ValueEventListener() {
