@@ -322,7 +322,7 @@ public class FinalizarPedido extends Fragment {
             public void onClick (View v) {
                 Log.v("QUE CUANTOS PUNTOS", puntoss + " // "+ number);
                 AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getActivity());
-                dialogo1.setMessage("Deseas Utilizar Los COFFEEcoins Acumulados que Tienes: " + processedss );
+                dialogo1.setMessage("Deseas Utilizar Los CoINNs Acumulados que Tienes: " + processedss );
                 dialogo1.setCancelable(false);
                 dialogo1.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogo1, int id) {
@@ -355,7 +355,7 @@ public class FinalizarPedido extends Fragment {
                         });
 
                      /*   String key=mPedido.push().getKey();
-                        mPedido.child(ID).child(key).child("texto2").setValue("// Pagado Con INNCOFFEEcoins"+" //  Precio Total: "+ processed + " //");
+                        mPedido.child(ID).child(key).child("texto2").setValue("// Pagado Con CoINNs"+" //  Precio Total: "+ processed + " //");
                         mPedido.child(ID).child(key).child("orden").setValue(getRandomOrderCode());*/
                         DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosFinalizados").child(ID);
                         ref1.removeValue();

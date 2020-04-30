@@ -151,7 +151,7 @@
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 carga.startCarga();
-                                if (mAuth.getCurrentUser().isEmailVerified()) {
+                                if (mAuth.getCurrentUser() != null && mAuth.getCurrentUser().isEmailVerified()){
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     updateUI(user);
 
@@ -179,7 +179,7 @@
                 public void onComplete (@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         carga.startCarga();
-                        if (mAuth.getCurrentUser().isEmailVerified()) {
+                        if (mAuth.getCurrentUser() != null && mAuth.getCurrentUser().isEmailVerified()){
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
 

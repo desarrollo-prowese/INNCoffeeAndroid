@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.ui.home.HomeFragment1;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -62,6 +63,7 @@ public class Pagoygano extends Fragment {
 
         View root = inflater.inflate(R.layout.pagoygano, container, false);
         MainActivity.mensajeToolbar.setText("PAGO Y GANO");
+        HomeFragment1.num = 1;
         inicialize();
         return root;
     }

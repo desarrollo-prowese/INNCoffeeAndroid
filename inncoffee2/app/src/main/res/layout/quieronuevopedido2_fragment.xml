@@ -18,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.666" />
+        app:layout_constraintVertical_bias="0.624" />
 
     <Button
         android:id="@+id/cartacomidas"
@@ -32,7 +32,21 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cartadesayuno"
-        app:layout_constraintVertical_bias="0.181" />
+        app:layout_constraintVertical_bias="0.086" />
+
+    <Button
+        android:id="@+id/cartamerienda"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:background="@drawable/rect_ngulo_1484_shape"
+        android:text="Carta Merienda"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/alojenos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cartacomidas"
+        app:layout_constraintVertical_bias="0.39" />
 
     <Button
         android:id="@+id/alojenos"

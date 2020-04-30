@@ -80,6 +80,7 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.ViewHold
         ref1.child(key).removeValue();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosSinFinalizar").child(ID);
         ref.child(key).removeValue();
+
     }
     public void deleteItemComidas(int position) {
 
@@ -92,6 +93,18 @@ public class AdapterPedidos extends RecyclerView.Adapter<AdapterPedidos.ViewHold
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosSinFinalizarComidas").child(ID);
         ref.child(key).removeValue();
     }
+    public void deleteItemMerienda(int position) {
+
+        String key = keys.get(position);
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+        ID = mAuth.getUid();
+        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosFinalizadosMerienda").child(ID);
+        ref1.child(key).removeValue();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosSinFinalizarMerienda").child(ID);
+        ref.child(key).removeValue();
+    }
+
 
 
     @Override

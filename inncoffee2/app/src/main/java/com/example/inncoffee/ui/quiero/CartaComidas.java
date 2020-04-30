@@ -12,7 +12,6 @@ import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
 import com.example.inncoffee.ui.combos.Combos;
 import com.example.inncoffee.ui.comidas.Hamburgesa;
-import com.example.inncoffee.ui.comidas.Platos;
 import com.example.inncoffee.ui.comidas.PlatosElejir;
 import com.example.inncoffee.ui.comidas.Sandwiches;
 import com.google.firebase.auth.FirebaseAuth;
@@ -73,7 +72,7 @@ public class CartaComidas extends Fragment {
        MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
        QuieroAlojenos.ComidaoDesayuno = 1;
        Combos.menua = 0;
-       combos = (TextView) root.findViewById(R.id.menus);
+       combos = (TextView) root.findViewById(R.id.merienda);
        sandwiches = (TextView) root.findViewById(R.id.sandwiches);
        platosytapas = (TextView) root.findViewById(R.id.platosytapas);
        hamburgesa = (TextView) root.findViewById(R.id.hamburgesa);

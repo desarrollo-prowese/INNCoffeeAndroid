@@ -49,7 +49,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class FinalizarPedidoComidas extends Fragment {
+public class FinalizarPedidoMerienda extends Fragment {
 
 
     private Button Cancelar,Pagar,MisPuntos;
@@ -125,20 +125,22 @@ public class FinalizarPedidoComidas extends Fragment {
     }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.finalizarpedidocomidas, container, false);
+        View root = inflater.inflate(R.layout.finalizarpedidomerienda, container, false);
         MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
         mPedidos = (RecyclerView) root.findViewById(R.id.VerpedidoComidas);
         mPedidos.setLayoutManager(new LinearLayoutManager(getContext()));
         sumatotal = (TextView) root.findViewById(R.id.total5) ;
         mDatabase = FirebaseDatabase.getInstance();
-        mUsuario = mDatabase.getReference(USERS);
         configuracionLibreria();
+        mUsuario = mDatabase.getReference(USERS);
         mUsuarios = mDatabase.getReference("Users");
+        mPedido = mDatabase.getReference("PedidoPagado");
         TPVVRequestQueue.mContext = getActivity().getApplicationContext();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
         Cancelar = (Button) root.findViewById(R.id.cancelar);
         Cancelare();
+        inicialize();
         inicialize();
         MisPuntos();
         PuntosAcumulado();
@@ -147,7 +149,6 @@ public class FinalizarPedidoComidas extends Fragment {
         getMensajesFromFirebases();
         return root;
     }
-
     private String getRandomOrderCode() {
         char[] charArray = "abcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
         StringBuilder sb = new StringBuilder();
@@ -189,38 +190,6 @@ public class FinalizarPedidoComidas extends Fragment {
             }
         });
 
-    }
-    private void setDefaultConfig() {
-        if (TPVVConfiguration.getCurrency() == null) {
-            TPVVConfiguration.setCurrency("978");
-        }
-    }
-    private void configLicenses() {
-        TPVVConfiguration.setFuc("351003009");
-        TPVVConfiguration.setTerminal("1");
-        TPVVConfiguration.setEnvironment(TPVVConstants.ENVIRONMENT_REAL) ;
-        TPVVConfiguration.setLicense("862CQBjeHi7ZwpyNcq2Q");
-
-    }
-
-
-    private void configuracionLibreria() {
-        setDefaultConfig();
-        configLicenses();
-        try {
-            ProviderInstaller.installIfNeeded(getContext());
-        } catch (GooglePlayServicesRepairableException e) {
-            e.printStackTrace();
-        } catch (GooglePlayServicesNotAvailableException e2) {
-            e2.printStackTrace();
-        }
-        TPVVConfiguration.setProgressBarColor("#AC1C43");
-        TPVVConfiguration.setEnableResultAlert(true);
-        TPVVConfiguration.setResultAlertTextButtonOk("Continuar");
-        TPVVConfiguration.setResultAlertTextButtonKo("Continuar");
-        TPVVConfiguration.setResultAlertTextOk("Operación realizada correctamente.");
-        TPVVConfiguration.setResultAlertTextKo("Se ha producido un error al intentar realizar la operación.");
-        TPVVConfiguration.setProgressBarColor("#FE9A2E");
     }
 
     private void Puntos(){
@@ -401,16 +370,38 @@ public class FinalizarPedidoComidas extends Fragment {
         });
 
     }
+    private void setDefaultConfig() {
+        if (TPVVConfiguration.getCurrency() == null) {
+            TPVVConfiguration.setCurrency("978");
+        }
+    }
+    private void configLicenses() {
+        TPVVConfiguration.setFuc("351003009");
+        TPVVConfiguration.setTerminal("1");
+        TPVVConfiguration.setEnvironment(TPVVConstants.ENVIRONMENT_REAL) ;
+        TPVVConfiguration.setLicense("862CQBjeHi7ZwpyNcq2Q");
+
+    }
 
 
-
-
-
-
-
-
-
-
+    private void configuracionLibreria() {
+        setDefaultConfig();
+        configLicenses();
+        try {
+            ProviderInstaller.installIfNeeded(getContext());
+        } catch (GooglePlayServicesRepairableException e) {
+            e.printStackTrace();
+        } catch (GooglePlayServicesNotAvailableException e2) {
+            e2.printStackTrace();
+        }
+        TPVVConfiguration.setProgressBarColor("#AC1C43");
+        TPVVConfiguration.setEnableResultAlert(true);
+        TPVVConfiguration.setResultAlertTextButtonOk("Continuar");
+        TPVVConfiguration.setResultAlertTextButtonKo("Continuar");
+        TPVVConfiguration.setResultAlertTextOk("Operación realizada correctamente.");
+        TPVVConfiguration.setResultAlertTextKo("Se ha producido un error al intentar realizar la operación.");
+        TPVVConfiguration.setProgressBarColor("#FE9A2E");
+    }
     private void Cancelare(){
 
         Cancelar.setOnClickListener(new View.OnClickListener() {
@@ -424,7 +415,7 @@ public class FinalizarPedidoComidas extends Fragment {
                         mUser = FirebaseAuth.getInstance().getCurrentUser();
                         mAuth = FirebaseAuth.getInstance();
                         ID = mAuth.getUid();
-                        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosFinalizadosComidas").child(ID);
+                        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosFinalizadosMerienda").child(ID);
                         ref1.removeValue();
                         HomeFragment1 fragment = new HomeFragment1();
                         FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
@@ -446,7 +437,7 @@ public class FinalizarPedidoComidas extends Fragment {
     }
     private void getMensajesFromFirebases() {
         ID = mAuth.getUid();
-        mUsuario.child("PedidosFinalizadosComidas").child(ID).addValueEventListener(new ValueEventListener() {
+        mUsuario.child("PedidosFinalizadosMerienda").child(ID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 double total = 0;

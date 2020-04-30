@@ -17,6 +17,7 @@ import com.example.inncoffee.ui.mispedidos.AdapterPedidos;
 import com.example.inncoffee.ui.mispedidos.MisPedidosClass;
 import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizar;
 import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizarComidas;
+import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizarMerienda;
 import com.example.inncoffee.ui.tostadas.TostadasClasicas;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,7 +43,7 @@ public class QuieroAlojenos extends Fragment {
             ,apio,soja,lacteos,frutosecos,
             dioxido,mostaza,semillas,moluscos,altramuces;
 
-    private Button cartacomida, cartadesayuno;
+    private Button cartacomida, cartadesayuno,cartamerienda;
 
 
 
@@ -50,6 +51,7 @@ public class QuieroAlojenos extends Fragment {
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     public static boolean TengoComandaComidas = false;
     public static boolean TengoComandaDesayuno = false;
+    public static boolean TengoComandaMerienda = false;
     private String ID ;
     private FirebaseDatabase mDatabase;
     private FirebaseUser mUser;
@@ -102,6 +104,7 @@ public class QuieroAlojenos extends Fragment {
         View root = inflater.inflate(R.layout.quieroalojenos, container, false);
         MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
         cartacomida = (Button) root.findViewById(R.id.alojenoscomidas);
+        cartamerienda = (Button) root.findViewById(R.id.alojenomerienda);
         cartadesayuno = (Button) root.findViewById(R.id.alojernosdesayuno);
         trigo = (ImageView) root.findViewById(R.id.trigo) ;
         cangrejo = (ImageView) root.findViewById(R.id.cangrejo) ;
@@ -135,6 +138,37 @@ public class QuieroAlojenos extends Fragment {
         Semillas();
         Moluscos();
         Altramuces();
+        if (TengoComandaMerienda){
+            cartamerienda.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MisPedidosSinFinalizarMerienda fragment = new MisPedidosSinFinalizarMerienda();
+                    FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                    ftEs.replace(R.id.nav_host_fragment, fragment);
+                    ftEs.addToBackStack(null);
+                    ftEs.commit();
+
+                }
+            });
+
+        }else {
+            cartamerienda.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CartaMerienda fragment = new CartaMerienda();
+                    FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                    ftEs.replace(R.id.nav_host_fragment, fragment);
+                    ftEs.addToBackStack(null);
+                    ftEs.commit();
+
+                }
+            });
+
+        }
+
+
+
+
         if (TengoComandaDesayuno){
             cartadesayuno.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -196,7 +230,7 @@ public class QuieroAlojenos extends Fragment {
 
         Desayunos();
         Comidas();
-
+        Merienda();
         inicialize();
         return root;
     }
@@ -218,6 +252,24 @@ public class QuieroAlojenos extends Fragment {
             });
 
         }
+    private void Merienda() {
+        ID = mAuth.getUid();
+        Log.v("QUE es Desayuno :  ", String.valueOf(TengoComandaDesayuno));
+        mDatabase.getReference("MisPedidos").child("PedidosSinFinalizarMerienda").child(ID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                TengoComandaMerienda = dataSnapshot.exists();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
     private void Comidas() {
             ID = mAuth.getUid();
             Log.v("QUE es Comidas :  ", String.valueOf(TengoComandaComidas));

@@ -417,11 +417,10 @@ public class Hamburgesa extends Fragment {
                     mCompare.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                            Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").getValue() );
                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                            dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+                                            dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
 
                                         añadir.setVisibility(View.INVISIBLE);
                                     }
@@ -431,7 +430,7 @@ public class Hamburgesa extends Fragment {
                                 }
                                 if( dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                                            dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
+                                            dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
 
                                         añadir.setVisibility(View.INVISIBLE);
                                     }
@@ -441,7 +440,7 @@ public class Hamburgesa extends Fragment {
                                 }
                                 if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
-                                            dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+                                            dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
 
                                         añadir.setVisibility(View.INVISIBLE);
                                     }
@@ -451,7 +450,7 @@ public class Hamburgesa extends Fragment {
                                 }
                                 if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()){
                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
-                                            dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
+                                            dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
 
                                         añadir.setVisibility(View.INVISIBLE);
                                     }
@@ -514,7 +513,7 @@ public class Hamburgesa extends Fragment {
                             Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").getValue() );
                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                        dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+                                        dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
 
                                     añadir.setVisibility(View.INVISIBLE);
                                 }
@@ -524,7 +523,7 @@ public class Hamburgesa extends Fragment {
                             }
                             if( dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                                        dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
+                                        dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
 
                                     añadir.setVisibility(View.INVISIBLE);
                                 }
@@ -534,7 +533,7 @@ public class Hamburgesa extends Fragment {
                             }
                             if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
-                                        dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+                                        dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
 
                                     añadir.setVisibility(View.INVISIBLE);
                                 }
@@ -544,7 +543,7 @@ public class Hamburgesa extends Fragment {
                             }
                             if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()){
                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
-                                        dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
+                                        dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
 
                                     añadir.setVisibility(View.INVISIBLE);
                                 }
@@ -554,7 +553,7 @@ public class Hamburgesa extends Fragment {
                             }
                             if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").exists()){
                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").getValue().equals(
-                                        dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())){
+                                        dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())){
 
                                     añadir.setVisibility(View.INVISIBLE);
                                 }
@@ -725,7 +724,7 @@ public class Hamburgesa extends Fragment {
                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()) {
                                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()) {
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                                        dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+                                                        dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
 
                                                     añadir.setVisibility(View.INVISIBLE);
                                                 }
@@ -734,7 +733,7 @@ public class Hamburgesa extends Fragment {
                                             }
                                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()) {
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                                                        dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
+                                                        dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
 
                                                     añadir.setVisibility(View.INVISIBLE);
                                                 }
@@ -743,7 +742,7 @@ public class Hamburgesa extends Fragment {
                                             }
                                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()) {
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
-                                                        dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+                                                        dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
 
                                                     añadir.setVisibility(View.INVISIBLE);
                                                 }
@@ -752,7 +751,7 @@ public class Hamburgesa extends Fragment {
                                             }
                                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()) {
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
-                                                        dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
+                                                        dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
 
                                                     añadir.setVisibility(View.INVISIBLE);
                                                 }
@@ -802,7 +801,7 @@ public class Hamburgesa extends Fragment {
 
                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()) {
                                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                                    dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+                                                    dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
 
                                                 añadir.setVisibility(View.INVISIBLE);
                                             }
@@ -811,7 +810,7 @@ public class Hamburgesa extends Fragment {
                                         }
                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()) {
                                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                                                    dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
+                                                    dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
 
                                                 añadir.setVisibility(View.INVISIBLE);
                                             }
@@ -820,7 +819,7 @@ public class Hamburgesa extends Fragment {
                                         }
                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()) {
                                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
-                                                    dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+                                                    dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
 
                                                 añadir.setVisibility(View.INVISIBLE);
                                             }
@@ -829,7 +828,7 @@ public class Hamburgesa extends Fragment {
                                         }
                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()) {
                                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
-                                                    dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
+                                                    dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
 
                                                 añadir.setVisibility(View.INVISIBLE);
                                             }
@@ -838,7 +837,7 @@ public class Hamburgesa extends Fragment {
                                         }
                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").exists()) {
                                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").getValue().equals(
-                                                    dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())) {
+                                                    dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())) {
 
                                                 añadir.setVisibility(View.INVISIBLE);
                                             }
@@ -888,7 +887,7 @@ public class Hamburgesa extends Fragment {
 
                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()) {
                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                                dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+                                                dataSnapshot.child("Hamburgesas").child("CIA").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
 
                                             añadir.setVisibility(View.INVISIBLE);
                                         }
@@ -897,7 +896,7 @@ public class Hamburgesa extends Fragment {
                                     }
                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()) {
                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                                                dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
+                                                dataSnapshot.child("Hamburgesas").child("CIA").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
 
                                             añadir.setVisibility(View.INVISIBLE);
                                         }
@@ -906,7 +905,7 @@ public class Hamburgesa extends Fragment {
                                     }
                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()) {
                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
-                                                dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+                                                dataSnapshot.child("Hamburgesas").child("CIA").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
 
                                             añadir.setVisibility(View.INVISIBLE);
                                         }
@@ -915,7 +914,7 @@ public class Hamburgesa extends Fragment {
                                     }
                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()) {
                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
-                                                dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
+                                                dataSnapshot.child("Hamburgesas").child("CIA").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
 
                                             añadir.setVisibility(View.INVISIBLE);
                                         }
@@ -924,7 +923,7 @@ public class Hamburgesa extends Fragment {
                                     }
                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").exists()) {
                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").getValue().equals(
-                                                dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())) {
+                                                dataSnapshot.child("Hamburgesas").child("CIA").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())) {
 
                                             añadir.setVisibility(View.INVISIBLE);
                                         }
@@ -984,7 +983,7 @@ public class Hamburgesa extends Fragment {
                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
                                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                                    dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+                                                    dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
 
                                                 añadir.setVisibility(View.INVISIBLE);
                                             }
@@ -994,7 +993,7 @@ public class Hamburgesa extends Fragment {
                                         }
                                         if( dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
                                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                                                    dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
+                                                    dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
 
                                                 añadir.setVisibility(View.INVISIBLE);
                                             }
@@ -1004,7 +1003,7 @@ public class Hamburgesa extends Fragment {
                                         }
                                         if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
                                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
-                                                    dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+                                                    dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
 
                                                 añadir.setVisibility(View.INVISIBLE);
                                             }
@@ -1014,7 +1013,7 @@ public class Hamburgesa extends Fragment {
                                         }
                                         if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()){
                                             if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
-                                                    dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
+                                                    dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
 
                                                 añadir.setVisibility(View.INVISIBLE);
                                             }
@@ -1072,7 +1071,7 @@ public class Hamburgesa extends Fragment {
 
                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                                dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+                                                dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
 
                                             añadir.setVisibility(View.INVISIBLE);
                                         }
@@ -1082,7 +1081,7 @@ public class Hamburgesa extends Fragment {
                                     }
                                     if( dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                                                dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
+                                                dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())){
 
                                             añadir.setVisibility(View.INVISIBLE);
                                         }
@@ -1092,7 +1091,7 @@ public class Hamburgesa extends Fragment {
                                     }
                                     if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
-                                                dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+                                                dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
 
                                             añadir.setVisibility(View.INVISIBLE);
                                         }
@@ -1102,7 +1101,7 @@ public class Hamburgesa extends Fragment {
                                     }
                                     if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()){
                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
-                                                dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
+                                                dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())){
 
                                             añadir.setVisibility(View.INVISIBLE);
                                         }
@@ -1112,7 +1111,7 @@ public class Hamburgesa extends Fragment {
                                     }
                                     if(dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").exists()){
                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").getValue().equals(
-                                                dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())){
+                                                dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())){
 
                                             añadir.setVisibility(View.INVISIBLE);
                                         }
@@ -1181,7 +1180,7 @@ public class Hamburgesa extends Fragment {
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()) {
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()) {
                                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+                                                                dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
 
                                                             añadir.setVisibility(View.INVISIBLE);
                                                         }
@@ -1190,7 +1189,7 @@ public class Hamburgesa extends Fragment {
                                                     }
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()) {
                                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
+                                                                dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
 
                                                             añadir.setVisibility(View.INVISIBLE);
                                                         }
@@ -1199,7 +1198,7 @@ public class Hamburgesa extends Fragment {
                                                     }
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()) {
                                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
-                                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+                                                                dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
 
                                                             añadir.setVisibility(View.INVISIBLE);
                                                         }
@@ -1208,7 +1207,7 @@ public class Hamburgesa extends Fragment {
                                                     }
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()) {
                                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
-                                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
+                                                                dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
 
                                                             añadir.setVisibility(View.INVISIBLE);
                                                         }
@@ -1267,7 +1266,7 @@ public class Hamburgesa extends Fragment {
 
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()) {
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+                                                            dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
 
                                                         añadir.setVisibility(View.INVISIBLE);
                                                     }
@@ -1276,7 +1275,7 @@ public class Hamburgesa extends Fragment {
                                                 }
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()) {
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
+                                                            dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
 
                                                         añadir.setVisibility(View.INVISIBLE);
                                                     }
@@ -1285,7 +1284,7 @@ public class Hamburgesa extends Fragment {
                                                 }
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()) {
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
-                                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+                                                            dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
 
                                                         añadir.setVisibility(View.INVISIBLE);
                                                     }
@@ -1294,7 +1293,7 @@ public class Hamburgesa extends Fragment {
                                                 }
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()) {
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
-                                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
+                                                            dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
 
                                                         añadir.setVisibility(View.INVISIBLE);
                                                     }
@@ -1303,7 +1302,7 @@ public class Hamburgesa extends Fragment {
                                                 }
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").exists()) {
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").getValue().equals(
-                                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())) {
+                                                            dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())) {
 
                                                         añadir.setVisibility(View.INVISIBLE);
                                                     }
@@ -1360,7 +1359,7 @@ public class Hamburgesa extends Fragment {
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()) {
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()) {
                                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+                                                                dataSnapshot.child("Hamburgesas").child("CIA").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
 
                                                             añadir.setVisibility(View.INVISIBLE);
                                                         }
@@ -1369,7 +1368,7 @@ public class Hamburgesa extends Fragment {
                                                     }
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()) {
                                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
+                                                                dataSnapshot.child("Hamburgesas").child("CIA").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
 
                                                             añadir.setVisibility(View.INVISIBLE);
                                                         }
@@ -1378,7 +1377,7 @@ public class Hamburgesa extends Fragment {
                                                     }
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()) {
                                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
-                                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+                                                                dataSnapshot.child("Hamburgesas").child("CIA").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
 
                                                             añadir.setVisibility(View.INVISIBLE);
                                                         }
@@ -1387,7 +1386,7 @@ public class Hamburgesa extends Fragment {
                                                     }
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()) {
                                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
-                                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
+                                                                dataSnapshot.child("Hamburgesas").child("CIA").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
 
                                                             añadir.setVisibility(View.INVISIBLE);
                                                         }
@@ -1490,7 +1489,7 @@ public class Hamburgesa extends Fragment {
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()) {
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()) {
                                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+                                                                dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
 
                                                             añadir.setVisibility(View.INVISIBLE);
                                                         }
@@ -1499,7 +1498,7 @@ public class Hamburgesa extends Fragment {
                                                     }
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()) {
                                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
+                                                                dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
 
                                                             añadir.setVisibility(View.INVISIBLE);
                                                         }
@@ -1508,7 +1507,7 @@ public class Hamburgesa extends Fragment {
                                                     }
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()) {
                                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
-                                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+                                                                dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
 
                                                             añadir.setVisibility(View.INVISIBLE);
                                                         }
@@ -1517,7 +1516,7 @@ public class Hamburgesa extends Fragment {
                                                     }
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()) {
                                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
-                                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
+                                                                dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
 
                                                             añadir.setVisibility(View.INVISIBLE);
                                                         }
@@ -1576,7 +1575,7 @@ public class Hamburgesa extends Fragment {
 
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()) {
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+                                                            dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
 
                                                         añadir.setVisibility(View.INVISIBLE);
                                                     }
@@ -1585,7 +1584,7 @@ public class Hamburgesa extends Fragment {
                                                 }
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()) {
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
+                                                            dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
 
                                                         añadir.setVisibility(View.INVISIBLE);
                                                     }
@@ -1594,7 +1593,7 @@ public class Hamburgesa extends Fragment {
                                                 }
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()) {
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
-                                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+                                                            dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
 
                                                         añadir.setVisibility(View.INVISIBLE);
                                                     }
@@ -1603,7 +1602,7 @@ public class Hamburgesa extends Fragment {
                                                 }
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()) {
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
-                                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
+                                                            dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
 
                                                         añadir.setVisibility(View.INVISIBLE);
                                                     }
@@ -1612,7 +1611,7 @@ public class Hamburgesa extends Fragment {
                                                 }
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").exists()) {
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Pescado").getValue().equals(
-                                                            dataSnapshot.child("SandwichesyBocadillos").child("Bocadillos").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())) {
+                                                            dataSnapshot.child("Hamburgesas").child("Burger").child(String.valueOf(id)).child("Alergia").child("Pescado").getValue())) {
 
                                                         añadir.setVisibility(View.INVISIBLE);
                                                     }
@@ -1671,7 +1670,7 @@ public class Hamburgesa extends Fragment {
                                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()) {
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()) {
                                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
+                                                                dataSnapshot.child("Hamburgesas").child("CIA").child(String.valueOf(id)).child("Alergia").child("Lacteos").getValue())) {
 
                                                             añadir.setVisibility(View.INVISIBLE);
                                                         }
@@ -1680,7 +1679,7 @@ public class Hamburgesa extends Fragment {
                                                     }
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()) {
                                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
+                                                                dataSnapshot.child("Hamburgesas").child("CIA").child(String.valueOf(id)).child("Alergia").child("Trigo").getValue())) {
 
                                                             añadir.setVisibility(View.INVISIBLE);
                                                         }
@@ -1689,7 +1688,7 @@ public class Hamburgesa extends Fragment {
                                                     }
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()) {
                                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
-                                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
+                                                                dataSnapshot.child("Hamburgesas").child("CIA").child(String.valueOf(id)).child("Alergia").child("Huevo").getValue())) {
 
                                                             añadir.setVisibility(View.INVISIBLE);
                                                         }
@@ -1698,7 +1697,7 @@ public class Hamburgesa extends Fragment {
                                                     }
                                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").exists()) {
                                                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Moztaza").getValue().equals(
-                                                                dataSnapshot.child("SandwichesyBocadillos").child("Sandwiches").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
+                                                                dataSnapshot.child("Hamburgesas").child("CIA").child(String.valueOf(id)).child("Alergia").child("Moztaza").getValue())) {
 
                                                             añadir.setVisibility(View.INVISIBLE);
                                                         }

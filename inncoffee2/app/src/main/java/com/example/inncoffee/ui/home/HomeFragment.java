@@ -212,7 +212,7 @@ public class HomeFragment extends Fragment {
                     ftEs.commit();
                 }
                 else if (position == 3){
-                    Toast.makeText(getActivity(), " COFFEEcoins ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), " CoINNs ", Toast.LENGTH_SHORT).show();
                     MisPuntosFragment fragment = new MisPuntosFragment();
                     FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                     ftEs.replace(R.id.nav_host_fragment, fragment);

@@ -206,19 +206,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/alojernosdesayuno"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:background="@drawable/rect_ngulo_1461_ek2_shape"
-        android:text="@string/carta_desayunos_ek1_string"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.82" />
-
-    <Button
         android:id="@+id/alojenoscomidas"
         android:layout_width="200dp"
         android:layout_height="40dp"
@@ -227,7 +214,36 @@
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/alojernosdesayuno"
-        app:layout_constraintVertical_bias="0.19" />
+        app:layout_constraintVertical_bias="0.08" />
+
+    <Button
+        android:id="@+id/alojernosdesayuno"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rect_ngulo_1461_ek2_shape"
+        android:text="@string/carta_desayunos_ek1_string"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.794" />
+
+    <Button
+        android:id="@+id/alojenomerienda"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:background="@drawable/rect_ngulo_1461_ek2_shape"
+        android:text="Carta Merienda"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/alojernosdesayuno"
+        app:layout_constraintVertical_bias="0.666" />
 </androidx.constraintlayout.widget.ConstraintLayout>

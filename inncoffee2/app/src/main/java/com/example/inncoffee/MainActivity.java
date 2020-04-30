@@ -201,8 +201,6 @@ public class MainActivity extends AppCompatActivity {
         mRefo = mDatabase.getReference("Ofertas");
         mRefos = mDatabase.getReference("MisPedidos");
         mUsuario = mDatabase.getReference(USERS);
-        Log.v("USERID", mUsuario.getKey());
-        Log.v("USERGUID", mAuth.getUid());
         UpdateBarra();
 
         if (mUser != null) {
@@ -515,8 +513,6 @@ public class MainActivity extends AppCompatActivity {
                     assert ID != null;
                     fname = dataSnapshot.child(ID).child("FullName").getValue().toString();
                     centre = dataSnapshot.child(ID).child("Center").getValue().toString();
-                    Log.v("NOMBRE :  " , fname);
-                    Log.v("CENTRO :   " , centre);
 
                  }
                     if (fname != null)

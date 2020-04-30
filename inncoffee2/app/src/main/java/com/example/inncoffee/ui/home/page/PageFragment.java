@@ -85,7 +85,7 @@ public class PageFragment extends Fragment {
                     ftEs.addToBackStack(null);
                     ftEs.commit();
                 }
-                else if (PageFragment.pageContent.getTag().equals("COFFEEcoins")){
+                else if (PageFragment.pageContent.getTag().equals("CoINNs")){
                     MisPuntosFragment fragment = new MisPuntosFragment();
                     FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                     ftEs.replace(R.id.nav_host_fragment, fragment);

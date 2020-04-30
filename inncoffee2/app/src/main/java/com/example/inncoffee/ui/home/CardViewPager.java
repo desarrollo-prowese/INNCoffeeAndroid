@@ -79,8 +79,8 @@ public class CardViewPager extends ViewPager implements OnTouchListener {
                             Toast.makeText(getContext(), "PAGO Y GANO", Toast.LENGTH_SHORT).show();}
                         else if (PageFragment.pageContent.getTag().equals("PROMOCIONES")){
                             Toast.makeText(getContext(), "PROMOCIONES", Toast.LENGTH_SHORT).show();}
-                        else if (PageFragment.pageContent.getTag().equals("COFFEEcoins")){
-                            Toast.makeText(getContext(), "COFFEEcoins", Toast.LENGTH_SHORT).show();}
+                        else if (PageFragment.pageContent.getTag().equals("CoINNs")){
+                            Toast.makeText(getContext(), "CoINNs", Toast.LENGTH_SHORT).show();}
 
                         else{
                             Toast.makeText(getContext(), "Open settings for card!", Toast.LENGTH_SHORT).show();

@@ -20,7 +20,7 @@ import androidx.fragment.app.FragmentTransaction;
 public class QuieroNuevoPedido2 extends Fragment {
 
 
-    private Button alojenos,cartacomidas,cartadesayunos;
+    private Button alojenos,cartacomidas,cartadesayunos,cartamerienda;
 
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -70,6 +70,7 @@ public class QuieroNuevoPedido2 extends Fragment {
         alojenos = (Button) root.findViewById(R.id.alojenos);
         cartacomidas = (Button) root.findViewById(R.id.cartacomidas);
         cartadesayunos = (Button) root.findViewById(R.id.cartadesayuno);
+        cartamerienda = (Button) root.findViewById(R.id.cartamerienda);
 
 
         alojenos.setOnClickListener(new View.OnClickListener() {
@@ -104,6 +105,17 @@ public class QuieroNuevoPedido2 extends Fragment {
                 ftEs.commit();
             }
         });
+        cartamerienda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                QuieroAlojenos fragment = new QuieroAlojenos();
+                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                ftEs.replace(R.id.nav_host_fragment, fragment);
+                ftEs.addToBackStack(null);
+                ftEs.commit();
+            }
+        });
+
 
 
 

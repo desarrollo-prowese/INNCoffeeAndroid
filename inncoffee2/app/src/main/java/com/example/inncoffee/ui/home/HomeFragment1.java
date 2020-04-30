@@ -55,7 +55,7 @@ public class HomeFragment1 extends Fragment {
 
             items = new ArrayList<>();
 
-            items.add(new Card(R.drawable.mis_puntos,"COFFEEcoins ","COFFEEcoins", Color.WHITE,R.drawable.menu_registronew1));
+            items.add(new Card(R.drawable.mis_puntos,"CoINNs ","CoINNs", Color.WHITE,R.drawable.menu_registronew1));
             items.add(new Card(R.drawable.mis_ofertas,"PROMOCIONES ","PROMOCIONES", Color.WHITE,R.drawable.menu_registronew1));
             items.add(new Card(R.drawable.pago_y_gano,"PAGO Y GANO ","PAGOYGANO", Color.WHITE,R.drawable.menu_registronew1));
             items.add(new Card(R.drawable.quiero,"PEDIDO ","PEDIDO", Color.WHITE, R.drawable.menu_registronew1));
