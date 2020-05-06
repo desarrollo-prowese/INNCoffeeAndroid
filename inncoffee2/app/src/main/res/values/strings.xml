@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">INN COFFEE</string>
     <string name="email">Correo Electronico</string>
-    <string name="facebook_app_id">2318764478221653</string>
-    <string name="fb_login_protocol_scheme">fb2318764478221653</string>
+    <string name="facebook_app_id">686505875173586</string>
+    <string name="fb_login_protocol_scheme">fb686505875173586</string>
     <string name="password">Contraseña</string>
     <string name="sign_in">Iniciar Sesion</string>
     <string name="register">Registrarse Por Correo</string>

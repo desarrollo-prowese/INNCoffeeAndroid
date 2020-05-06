@@ -61,6 +61,7 @@ public class CardPagerAdapter<T extends Parcelable> extends FragmentPagerAdapter
 
         firstPosition = pagesCount * 500 / 2 * 3; //Start in the middle when opening app
 
+
     }
 
     @Override

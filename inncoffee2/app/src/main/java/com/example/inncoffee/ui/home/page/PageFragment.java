@@ -98,6 +98,7 @@ public class PageFragment extends Fragment {
 
         //pageLayout.setBackgroundColor(Color.parseColor("#00" + item.getLayoutColor())); //00 transparent
         //pageContent.getBackground().setColorFilter(Color.parseColor("#" + item.getColor()), PorterDuff.Mode.SRC_ATOP);
+
         pageContent.setBackgroundResource((item.getImage()));
         pageContent.setTag(item.getName());
       /*  LayerDrawable bgDrawable = (LayerDrawable) pageContent.getBackground();

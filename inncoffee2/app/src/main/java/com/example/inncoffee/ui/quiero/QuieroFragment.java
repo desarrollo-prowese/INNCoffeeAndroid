@@ -27,7 +27,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 public class QuieroFragment extends Fragment {
 
-    private Button Nuevopedido,pedidofinalizado,pedidofinalizado2,mispedidos;
+    private Button Nuevopedido,pedidofinalizado,pedidofinalizado2,pedidofinalizado3,mispedidos;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private String ID ;
@@ -37,8 +37,10 @@ public class QuieroFragment extends Fragment {
     private DatabaseReference mUsuario;
     public static boolean TengoPedidoSinFinalizar = false;
     public static boolean TengoPedidoSinFinalizarComidas = false;
+    public static boolean TengoPedidoSinFinalizarMerienda = false;
     public static boolean TengoPedidoSin = false;
     public static boolean TengoPedidoSinComidas = false;
+    public static boolean TengoPedidoSinMerienda = false;
     private void inicialize() {
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -46,27 +48,6 @@ public class QuieroFragment extends Fragment {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                 if (user != null) {
-                    Intent intent = new Intent(getActivity(), QuieroFragment.class);
-                    startActivity(intent);
-                    Log.w("TAG", "onAuthStateChanged - Logueado");
-
-                } else {
-                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
-                }
-            }
-        };
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null) {
-
-
-                    Intent intent = new Intent(getActivity(), QuieroFragment.class);
-                    startActivity(intent);
-
-
                     Log.w("TAG", "onAuthStateChanged - Logueado");
 
                 } else {
@@ -84,10 +65,12 @@ public class QuieroFragment extends Fragment {
         Nuevopedido = (Button) root.findViewById(R.id.buttonNuevoPedido);
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
+        ID = mAuth.getUid();
         mDatabase = FirebaseDatabase.getInstance();
         mispedidos = (Button) root.findViewById(R.id.buttonMisPedidos);
         pedidofinalizado = (Button) root.findViewById(R.id.pedidocomida);
         pedidofinalizado2 = (Button) root.findViewById(R.id.pedidodesayuno);
+        pedidofinalizado3 = (Button) root.findViewById(R.id.pedidomerienda);
         mispedidos.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -166,6 +149,35 @@ public class QuieroFragment extends Fragment {
             }
         });
 
+        pedidofinalizado3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getContext());
+                dialogo1.setMessage("Deseas Borrar La Comanda Pendiente y Finalizar La Comanda Pendiente");
+                dialogo1.setCancelable(false);
+                dialogo1.setPositiveButton("Finalizar Comanda", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        FinalizarPedido fragment = new FinalizarPedido();
+                        FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                        ftEs.replace(R.id.nav_host_fragment, fragment);
+                        ftEs.addToBackStack(null);
+                        ftEs.commit();
+                        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosSinFinalizarMerienda").child(ID);
+                        ref1.removeValue();
+                    }
+                });
+
+                dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        dialogo1.cancel();
+                    }
+                });
+                dialogo1.show();
+            }
+        });
+
         if (TengoPedidoSinFinalizar){
             pedidofinalizado2.setVisibility(View.VISIBLE);
         }else {
@@ -177,19 +189,25 @@ public class QuieroFragment extends Fragment {
         }else {
             pedidofinalizado.setVisibility(View.INVISIBLE);
         }
+        if (TengoPedidoSinFinalizarMerienda){
+            pedidofinalizado3.setVisibility(View.VISIBLE);
+        }else {
+            pedidofinalizado3.setVisibility(View.INVISIBLE);
+        }
 
 
 
 
         Finalizado1();
         Finalizado();
+        Finalizado3();
         HomeFragment1.num = 1;
         inicialize();
         return root;
     }
 
     private void Finalizado(){
-        ID = mAuth.getUid();
+
         Log.v("QUE es Desayuno :  ", String.valueOf(TengoPedidoSinFinalizar));
         mDatabase.getReference("MisPedidos").child("PedidosFinalizados").child(ID).addValueEventListener(new ValueEventListener() {
             @Override
@@ -210,8 +228,30 @@ public class QuieroFragment extends Fragment {
 
 
     }
+
+    private void Finalizado3(){
+
+        Log.v("QUE es Desayuno :  ", String.valueOf(TengoPedidoSinFinalizarMerienda));
+        mDatabase.getReference("MisPedidos").child("PedidosFinalizadosMerienda").child(ID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                TengoPedidoSinFinalizarMerienda = dataSnapshot.exists();
+
+
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+    }
     private void Finalizado1(){
-        ID = mAuth.getUid();
         Log.v("QUE es Comidas :  ", String.valueOf(TengoPedidoSinFinalizarComidas));
         mDatabase.getReference("MisPedidos").child("PedidosFinalizadosComidas").child(ID).addValueEventListener(new ValueEventListener() {
             @Override

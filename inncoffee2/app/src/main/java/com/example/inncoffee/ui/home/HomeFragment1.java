@@ -61,6 +61,7 @@ public class HomeFragment1 extends Fragment {
             items.add(new Card(R.drawable.quiero,"PEDIDO ","PEDIDO", Color.WHITE, R.drawable.menu_registronew1));
 
 
+
             if (items.size() == 4) {
                 PagerSettings.setSettings7cards(getContext());
             }

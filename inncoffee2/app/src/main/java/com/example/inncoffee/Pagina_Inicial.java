@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,6 +47,7 @@ public class Pagina_Inicial extends AppCompatActivity {
                 public void onClick(View view) {
                     startActivity(new Intent(Pagina_Inicial.this, PrincipalActivity.class));
                     FirebaseAuth.getInstance().signOut();
+                    LoginManager.getInstance().logOut();
                 }
             });
         }

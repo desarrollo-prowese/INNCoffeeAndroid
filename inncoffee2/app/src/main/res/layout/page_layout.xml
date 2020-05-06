@@ -8,6 +8,7 @@
     android:background="@android:color/transparent">
 
         <!-- Add this for highlights on cards. Currently not working properly because page layouts are overlapping: android:foreground="@drawable/item_selector"-->
+
     <RelativeLayout
         android:id="@+id/page_content"
         android:layout_width="360dp"
@@ -32,4 +33,5 @@
             android:textStyle="bold" />
 
     </RelativeLayout>
+
 </com.example.inncoffee.ui.home.page.PageLayout>

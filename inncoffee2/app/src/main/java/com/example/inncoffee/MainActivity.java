@@ -49,8 +49,15 @@ import com.example.inncoffee.ui.ofertas.OfertasFragment;
 import com.example.inncoffee.ui.pago.tpvvinapplibrary.TPVVConfiguration;
 import com.example.inncoffee.ui.pago.tpvvinapplibrary.TPVVConstants;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
+import com.facebook.AccessTokenTracker;
+import com.facebook.ProfileTracker;
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.security.ProviderInstaller;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -102,19 +109,22 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference mUsuario;
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
+    private AccessTokenTracker accessTokenTracker;
+    private ProfileTracker profileTracker;
     public static int pendingNotifications;
     private static final String USERS = "Users";
     private static ImageView perfil;
+    private GoogleSignInClient google;
     public  String email,fname,centre;
     public static boolean back= false;
     public  TextView fnames,centro;
     private static final int PICK_IMAGE_REQUEST = 1;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private Bitmap original, mask;
     Bitmap resultado, maskbitmap;
     private String ID ;
     private Uri mImageUri;
+
 
 
     // badge text view
@@ -124,34 +134,22 @@ public class MainActivity extends AppCompatActivity {
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+               // FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                FirebaseUser mUser = mAuth.getCurrentUser();
+                if (mUser != null) {
+                    // User is signed in
 
-                if (user != null) {
-                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                    Log.d("TAG", "onAuthStateChanged:signed_in:" + mUser.getUid());
+                }
+              /*  if (user != null) {
+                   Intent intent = new Intent(MainActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
+                    String userid = user.getUid();
                     Log.w("TAG", "onAuthStateChanged - Logueado");
+                    Log.w("ARR", userid );
 
-                } else {
-                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
-                }
-            }
-        };
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                if (user != null) {
-
-
-                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                    startActivity(intent);
-
-
-                    Log.w("TAG", "onAuthStateChanged - Logueado");
-
-                } else {
+                } */else {
                     Log.w("TAG", "onAuthStateChanged - Cerro sesion");
                 }
             }
@@ -194,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
                 openFileChooser();
             }
         });
-
+        ID = mAuth.getUid();
         mDatabase = FirebaseDatabase.getInstance();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mRef = mDatabase.getReference("Mensajes");
@@ -202,17 +200,8 @@ public class MainActivity extends AppCompatActivity {
         mRefos = mDatabase.getReference("MisPedidos");
         mUsuario = mDatabase.getReference(USERS);
         UpdateBarra();
-
-        if (mUser != null) {
-               if (mUser.getPhotoUrl() != null) {
-
-                   Glide.with(getApplicationContext()).load(mUser.getPhotoUrl().toString()).into(perfil);
-               }
-
-        }
-
-
-
+        Log.v("USERID", mUser.getUid());
+        Log.v("USERGUID", mAuth.getUid());
         mensajeToolbar = (TextView) findViewById(R.id.mesajestolbar);
 
 
@@ -246,26 +235,31 @@ public class MainActivity extends AppCompatActivity {
                         ftEss.commit();
                         break;
                     case R.id.tPedidos:
-
-                        String texto = "Probando INN COFFEE";
-
-                        MensajesClass user=new MensajesClass(texto);
-
-                        String key=mRef.push().getKey();
-                        mRef.child(key).setValue(user);
-
-                        Toast.makeText(MainActivity.this, "Proximamente", Toast.LENGTH_SHORT).show();
+                        QuieroFragment fragmentss = new QuieroFragment();
+                        FragmentTransaction ftEsss = getSupportFragmentManager().beginTransaction();
+                        ftEsss.replace(R.id.nav_host_fragment, fragmentss);
+                        ftEsss.addToBackStack(null);
+                        ftEsss.commit();
                         break;
                     case R.id.tIra:
-
-                        intent.setAction(Intent.ACTION_VIEW);
-                        intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                        intent.setData(Uri.parse("https://innoffices.es/"));
-                        startActivity(intent);
+                        Intent web = new Intent();
+                        web.setAction(Intent.ACTION_VIEW);
+                        web.addCategory(Intent.CATEGORY_BROWSABLE);
+                        web.setData(Uri.parse("https://innoffices.es/"));
+                        startActivity(web);
                         break;
                     case R.id.tCerrar:
                         mAuth.signOut();
-                        Paper.book().destroy();
+                        if (google != null) {
+                            google.signOut();
+
+                        }
+                        LoginManager.getInstance().logOut();
+                        mAuth.removeAuthStateListener(firebaseAuthListener);
+                        if (Paper.book().contains("UserEmail")){
+                            Paper.book().destroy();
+                        }
+
                         startActivity(new Intent(MainActivity.this, Pagina_Inicial.class));
                         Toast.makeText(MainActivity.this, "Cerrar sesion", Toast.LENGTH_SHORT).show();
                         finish();
@@ -429,27 +423,26 @@ public class MainActivity extends AppCompatActivity {
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            String uid = mUser.getUid();
+            Log.v("UID : ", uid);
+            final StorageReference reference = FirebaseStorage.getInstance().getReference("Perfiles")
+                    .child(uid + ".jpeg");
 
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        final StorageReference reference = FirebaseStorage.getInstance().getReference("Perfiles")
-                .child(uid + ".jpeg");
+            reference.putBytes(baos.toByteArray())
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess (UploadTask.TaskSnapshot taskSnapshot) {
+                            getDownloadUrl(reference);
 
-        reference.putBytes(baos.toByteArray())
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        getDownloadUrl(reference);
-
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("TAG", "onFailure: ",e.getCause() );
-                    }
-                });
-
-    }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure (@NonNull Exception e) {
+                            Log.e("TAG", "onFailure: ", e.getCause());
+                        }
+                    });
+        }
     private void getDownloadUrl(StorageReference reference) {
         reference.getDownloadUrl()
                 .addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -483,6 +476,7 @@ public class MainActivity extends AppCompatActivity {
                                     String foto = mUser.getPhotoUrl().toString();
                                     Log.v("QUE FOTO ES " , foto);
                                     ID = mAuth.getUid();
+                                    assert ID != null;
                                     mUsuario.child(ID).child("PhotoURL").setValue(foto);
 
                                 }
@@ -503,20 +497,39 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         }
-        private void UpdateBarra(){
-            mUsuario.addValueEventListener(new ValueEventListener() {
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(firebaseAuthListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+       /* if (firebaseAuthListener != null) {
+            mAuth.signOut();
+            LoginManager.getInstance().logOut();
+            mAuth.removeAuthStateListener(firebaseAuthListener);
+        }*/
+    }
+
+    private void UpdateBarra(){
+
+            mUsuario.child(ID).addValueEventListener(new ValueEventListener() {
 
                 @Override
                 public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                    ID = mAuth.getUid();
-                    assert ID != null;
-                    fname = dataSnapshot.child(ID).child("FullName").getValue().toString();
-                    centre = dataSnapshot.child(ID).child("Center").getValue().toString();
 
-                 }
-                    if (fname != null)
+                    fname = dataSnapshot.child("FullName").getValue().toString();
+                    centre = dataSnapshot.child("Center").getValue().toString();
+                    Glide.with(getApplicationContext()).load(dataSnapshot.child("PhotoURL").getValue().toString()).into(perfil);
+                    }
+                    if (fname != null){
                         fnames.setText(fname);
+                    }
                     if (centre != null) {
                         centro.setText(centre);
                     }

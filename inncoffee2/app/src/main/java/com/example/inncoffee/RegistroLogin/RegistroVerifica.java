@@ -134,57 +134,8 @@
             final StorageReference reference = FirebaseStorage.getInstance().getReference("Perfiles")
                     .child(uid + ".jpeg");
 
-
-
-            reference.putBytes(baos.toByteArray())
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                           // getDownloadUrl(reference);
-
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.e("TAG", "onFailure: ",e.getCause() );
-                        }
-                    });
-
-        }
-        private void getDownloadUrl(StorageReference reference) {
-            reference.getDownloadUrl()
-                    .addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            Log.d("TAG", "onSuccess: " + uri);
-
-                            //setUserProfileUrl(uri);
-                        }
-                    });
         }
 
-        private void setUserProfileUrl(final Uri uri) {
-
-            UserProfileChangeRequest request = new UserProfileChangeRequest.Builder()
-                    .setPhotoUri(uri)
-                    .build();
-
-            mUser.updateProfile(request)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-
-                            Toast.makeText(RegistroVerifica.this, "Updated succesfully", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(RegistroVerifica.this, "Profile image failed...", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        }
     }
 	
 	

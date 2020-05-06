@@ -134,6 +134,7 @@ public class Registro extends Activity{
                                     Object obj2 = new Object();String Center = "";obj2 = Center;
                                     Object obj3 = new Object();String PhotoURL = "";obj3 = PhotoURL;
                                     Object obj4 = new Object();String FechaNac = "";obj4 = FechaNac;
+                                    Object obj5 = new Object();String DineroAcumulados = "0.00€";obj5 = DineroAcumulados;
                                     newPost.put("FullName", FullName);
                                     newPost.put("Alergias", obj);
                                     newPost.put("Phone", obj1);
@@ -141,6 +142,7 @@ public class Registro extends Activity{
                                     newPost.put("PhotoURL", obj3);
                                     newPost.put("FechaNac", obj4);
                                     newPost.put("Email", email);
+                                    newPost.put("DineroAcumulados", obj5);
                                     sendEmailVerification();
                                     mDatabase.child("Users").child(user_id).setValue(newPost).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override

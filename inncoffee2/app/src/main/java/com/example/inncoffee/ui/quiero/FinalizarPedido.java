@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.RegistroLogin.Registro;
 import com.example.inncoffee.ui.home.HomeFragment1;
 import com.example.inncoffee.ui.mispedidos.AdapterPedidos;
 import com.example.inncoffee.ui.mispedidos.MisPedidosClass;
@@ -29,6 +31,8 @@ import com.example.inncoffee.ui.pago.tpvvinapplibrary.data.remote.volley.TPVVReq
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.security.ProviderInstaller;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,8 +43,15 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 
 
@@ -88,6 +99,7 @@ public class FinalizarPedido extends Fragment {
     private String processeds = "";
     private String processedss = "";
     private String processed = "";
+    private String Comanda;
 
 
 
@@ -140,12 +152,12 @@ public class FinalizarPedido extends Fragment {
         sumatotal = (TextView) root.findViewById(R.id.total5) ;
         mDatabase = FirebaseDatabase.getInstance();
         MisPuntos = (Button) root.findViewById(R.id.mispuntos);
+        Pagar = (Button) root.findViewById(R.id.pagar);
         configuracionLibreria();
         mUsuario = mDatabase.getReference(USERS);
         mUsuarios = mDatabase.getReference("Users");
         mPedido = mDatabase.getReference("PedidoPagado");
         TPVVRequestQueue.mContext = getActivity().getApplicationContext();
-        Pagar = (Button) root.findViewById(R.id.pagar);
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
         Cancelar = (Button) root.findViewById(R.id.cancelar);
@@ -155,7 +167,7 @@ public class FinalizarPedido extends Fragment {
         PuntosAcumulado();
         Puntos();
         Pagare();
-
+        Comanda = getRandomOrderCode();
         getMensajesFromFirebase();
 
 
@@ -171,11 +183,6 @@ public class FinalizarPedido extends Fragment {
         return sb.toString();
     }
     private void PuntosAcumulado(){
-
-
-        Log.v("Lista de Datos :  ", String.valueOf(que));
-
-
 
         ID = mAuth.getUid();
         assert ID != null;
@@ -207,7 +214,6 @@ public class FinalizarPedido extends Fragment {
     private void Puntos(){
         ID = mAuth.getUid();
         assert ID != null;
-
         mUsuarios.child(ID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
 
@@ -255,11 +261,13 @@ public class FinalizarPedido extends Fragment {
             public void onClick(View v) {
 
 
-                TPVV.doWebViewPayment(getContext(),  getRandomOrderCode(), Double.valueOf(importe), TPVVConstants.PAYMENT_TYPE_NORMAL, null, "Desayuno InnCoffee" , new IPaymentResult() {
+                TPVV.doWebViewPayment(getContext(),  String.valueOf(Comanda), Double.valueOf(importe), TPVVConstants.PAYMENT_TYPE_NORMAL, null, "Desayuno InnCoffee" , new IPaymentResult() {
                     @Override
                     public void paymentResultKO(ErrorResponse errorResponse) {
                         showResult(errorResponse.toString(), "Result KO");
                         Toast.makeText(getActivity(), "Fallo En El Pago", Toast.LENGTH_LONG).show();
+                        DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosFinalizados").child(ID);
+                        ref1.removeValue();
                         Intent intent = new Intent(getActivity(), MainActivity.class);
                         startActivity(intent);
                     }
@@ -267,17 +275,25 @@ public class FinalizarPedido extends Fragment {
                     @Override
                     public void paymentResultOK(ResultResponse resultResponse) {
                         showResult(resultResponse.toString(), "Result OK");
-                        double Tengo = (number * Double.parseDouble("5.00") /100);
+                        double Tengo = (number * Double.parseDouble("5") /100);
                         NumberFormat formatter = new DecimalFormat("0,00€");
                         String processedsd = formatter.format(Tengo);
                         Log.v("CUANTOS PUNTOS CONSIGO ",processedsd);
-                        mUsuarios.child(ID).child("DineroAcumulado").child(getRandomOrderCode()).setValue(processedsd);
+                        mUsuarios.child(ID).child("DineroAcumulado").child(Comanda).setValue(processedsd);
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                        Date date = new Date();
+                        Map<String, Object> newPost = new HashMap<>();
+                        newPost.put("Fecha", dateFormat.format(date));
+                        newPost.put("PuntosAcumulado", processedsd);
+                        newPost.put("NumeroComanda", Comanda);
+                        mUsuarios.child(ID).child("Puntos").child(Comanda).setValue(newPost);
+
 
 
                       /*  String key=mPedido.push().getKey();
                         mPedido.child(ID).child(key).child("texto").setValue("// "+texto +" // "+ precios +" // Pagado Con Targeta"+" //  Precio Total: "+ processed + " //");
 
-                        mPedido.child(ID).child(key).child("orden").setValue(getRandomOrderCode());*/
+                        mPedido.child(ID).child(key).child("orden").setValue(Comanda);*/
                         DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosFinalizados").child(ID);
                         ref1.removeValue();
                      /*   MisPedidos fragment = new MisPedidos();
@@ -292,23 +308,6 @@ public class FinalizarPedido extends Fragment {
                         }
                     }
                 });
-              /*  Log.v("LOG:  ",getActivity() +"/"+ getRandomOrderCode()+"/"+ Double.valueOf(importe)+"/"+ TPVVConstants.PAYMENT_TYPE_NORMAL+"/"+ null +"/"+ "PRueba1");
-                TPVV.doWebViewPayment(getActivity(), getRandomOrderCode(), Double.valueOf(importe), TPVVConstants.PAYMENT_TYPE_NORMAL, TPVVConstants.REQUEST_REFERENCE, "descripción", new IPaymentResult() {
-                    @Override
-                    public void paymentResultKO(ErrorResponse errorResponse) {
-                        showResult(errorResponse.toString(), "Result KO");
-                    }
-
-                    @Override
-                    public void paymentResultOK(ResultResponse resultResponse) {
-                        showResult(resultResponse.toString(), "Result OK");
-                        Log.v("QUEPASO ", resultResponse.toString());
-                        if (resultResponse.getIdentifier() != null) {
-                            ((ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("reference", resultResponse.getIdentifier().toString()));
-                            Toast.makeText(getActivity(), "La referencia se ha copiado en el portapapeles", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });*/
             }
 
         });
@@ -356,7 +355,7 @@ public class FinalizarPedido extends Fragment {
 
                      /*   String key=mPedido.push().getKey();
                         mPedido.child(ID).child(key).child("texto2").setValue("// Pagado Con CoINNs"+" //  Precio Total: "+ processed + " //");
-                        mPedido.child(ID).child(key).child("orden").setValue(getRandomOrderCode());*/
+                        mPedido.child(ID).child(key).child("orden").setValue(Comanda);*/
                         DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosFinalizados").child(ID);
                         ref1.removeValue();
                        /* MisPedidos fragment = new MisPedidos();
@@ -369,11 +368,18 @@ public class FinalizarPedido extends Fragment {
                 });
                 dialogo1.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogo1, int id) {
-                      /*  double Tengo = (number * Double.parseDouble("5.00") /100);
+                        double Tengo = (number * Double.parseDouble("5") /100);
                         NumberFormat formatter = new DecimalFormat("0,00€");
                         String processedsd = formatter.format(Tengo);
                         Log.v("CUANTOS PUNTOS CONSIGO ",processedsd);
-                        mUsuarios.child(ID).child("DineroAcumulado").child(getRandomOrderCode()).setValue(processedsd);*/
+                        mUsuarios.child(ID).child("DineroAcumulado").child(Comanda).setValue(processedsd);
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                        Date date = new Date();
+                        Map<String, Object> newPost = new HashMap<>();
+                        newPost.put("Fecha", dateFormat.format(date));
+                        newPost.put("PuntosAcumulado", processedsd);
+                        newPost.put("NumeroComanda", Comanda);
+                        mUsuarios.child(ID).child("Puntos").child(Comanda).setValue(newPost);
                         dialogo1.cancel();
                     }
                 });
@@ -434,7 +440,7 @@ public class FinalizarPedido extends Fragment {
                         processed = formatter.format(total);
                         importe = Double.valueOf(total).toString();
                         Log.v("QUe importe es", importe);
-                        Log.v("LOG CACHE :", String.valueOf(getActivity().getCacheDir()));
+                    //    Log.v("LOG CACHE :", String.valueOf(getActivity().getCacheDir()));
 
                         sumatotal.setText(processed);
 
@@ -455,28 +461,6 @@ public class FinalizarPedido extends Fragment {
 
                     mAdapter = new AdapterPedidos(getActivity(), mMensaje, keys, R.layout.contenido_mispedidos);
                     mPedidos.setAdapter(mAdapter);
-                  /*  mAdapter.setOnItemClickListener(new AdapterPedidos.OnItemClickListener() {
-
-                        @Override
-                        public void onItemClick(final int position) {
-                            AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getContext(), position);
-                            dialogo1.setMessage("Desear Borrar esta Linea");
-                            dialogo1.setCancelable(false);
-                            dialogo1.setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialogo1, int id) {
-                                    removeItem(position);
-                                }
-                            });
-                            dialogo1.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialogo1, int id) {
-                                    dialogo1.cancel();
-                                }
-                            });
-                            dialogo1.show();
-
-                        }
-
-                    });*/
                     mAdapter.notifyDataSetChanged();
 
                 }
