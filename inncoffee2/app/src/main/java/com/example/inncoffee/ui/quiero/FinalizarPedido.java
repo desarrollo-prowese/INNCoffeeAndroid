@@ -33,6 +33,7 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.security.ProviderInstaller;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -56,6 +57,7 @@ import java.util.Random;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -78,6 +80,7 @@ public class FinalizarPedido extends Fragment {
 
     private DatabaseReference mUsuario;
     private DatabaseReference mUsuarios;
+    private DatabaseReference mComanda;
     private DatabaseReference mPedido;
     private static final String USERS = "MisPedidos";
     private AdapterPedidos mAdapter;
@@ -100,6 +103,7 @@ public class FinalizarPedido extends Fragment {
     private String processedss = "";
     private String processed = "";
     private String Comanda;
+    public static int NumeroLista;
 
 
 
@@ -157,6 +161,7 @@ public class FinalizarPedido extends Fragment {
         mUsuario = mDatabase.getReference(USERS);
         mUsuarios = mDatabase.getReference("Users");
         mPedido = mDatabase.getReference("PedidoPagado");
+        mComanda = mDatabase.getReference("Comanda");
         TPVVRequestQueue.mContext = getActivity().getApplicationContext();
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
@@ -286,7 +291,9 @@ public class FinalizarPedido extends Fragment {
                         newPost.put("Fecha", dateFormat.format(date));
                         newPost.put("PuntosAcumulado", processedsd);
                         newPost.put("NumeroComanda", Comanda);
+                        newPost.put("Precio", processed);
                         mUsuarios.child(ID).child("Puntos").child(Comanda).setValue(newPost);
+                        mComanda.child(ID).child("Imprimir").child(Comanda).setValue(newPost);
 
 
 
@@ -379,7 +386,10 @@ public class FinalizarPedido extends Fragment {
                         newPost.put("Fecha", dateFormat.format(date));
                         newPost.put("PuntosAcumulado", processedsd);
                         newPost.put("NumeroComanda", Comanda);
+                        newPost.put("Precio", processed);
+
                         mUsuarios.child(ID).child("Puntos").child(Comanda).setValue(newPost);
+                        mComanda.child(ID).child("Imprimir").child(Comanda).setValue(newPost);
                         dialogo1.cancel();
                     }
                 });
@@ -387,6 +397,28 @@ public class FinalizarPedido extends Fragment {
             }
         });
 
+    }
+
+    private void moveRecord(DatabaseReference fromPath, final DatabaseReference toPath) {
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                toPath.child("Comanda").child(ID).child("Imprimir").child("Lista").child(String.valueOf(NumeroLista++)).setValue(dataSnapshot.getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isComplete()) {
+                            Log.d("TAG", "Success!");
+                        } else {
+                            Log.d("TAG", "Copy failed!");
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        fromPath.child("MisPedidos").child("PedidosFinalizados").child(ID).addListenerForSingleValueEvent(valueEventListener);
     }
 
     private void Cancelare(){
@@ -422,6 +454,7 @@ public class FinalizarPedido extends Fragment {
         });
 
     }
+
     private void getMensajesFromFirebase() {
 
         ID = mAuth.getUid();
@@ -436,7 +469,7 @@ public class FinalizarPedido extends Fragment {
                         number = Double.parseDouble(ds.child("precio").getValue(String.class).replaceAll("[,.€]", ""));
                         total = total + number;
 
-                        NumberFormat formatter = new DecimalFormat("0,00");
+                        NumberFormat formatter = new DecimalFormat("0,00€");
                         processed = formatter.format(total);
                         importe = Double.valueOf(total).toString();
                         Log.v("QUe importe es", importe);

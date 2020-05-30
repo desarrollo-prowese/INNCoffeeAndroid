@@ -23,21 +23,6 @@
         app:layout_constraintVertical_bias="0.364" />
 
     <TextView
-        android:id="@+id/total6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="€"
-        android:textColor="#FFFFFF"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/total5"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.365" />
-
-    <TextView
         android:id="@+id/total5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

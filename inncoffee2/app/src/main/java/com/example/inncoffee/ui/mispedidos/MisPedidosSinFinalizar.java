@@ -36,13 +36,14 @@ import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MisPedidosSinFinalizar extends Fragment {
+public class MisPedidosSinFinalizar extends DialogFragment {
 
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -51,7 +52,7 @@ public class MisPedidosSinFinalizar extends Fragment {
     private ArrayList<String> keys = new ArrayList<>();
     private AdapterPedidos mAdapter;
     private RecyclerView mPedidos;
-    private TextView sumatotal,finalizar;
+    private TextView sumatotal,finalizar,seguir;
     private String ID ;
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
@@ -59,7 +60,6 @@ public class MisPedidosSinFinalizar extends Fragment {
     private static final String USERS = "MisPedidos";
     private String texto,precios;
 
-    private TextView tostadas,bebidas;
 
     private void inicialize() {
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -109,39 +109,22 @@ public class MisPedidosSinFinalizar extends Fragment {
         QuieroAlojenos.ComidaoDesayuno = 0;
         mPedidos.setLayoutManager(new LinearLayoutManager(getContext()));
         mDatabase = FirebaseDatabase.getInstance();
-        sumatotal = (TextView) root.findViewById(R.id.total2) ;
+        sumatotal = (TextView) root.findViewById(R.id.total2);
         finalizar = (TextView) root.findViewById(R.id.finalizar);
-        tostadas = (TextView) root.findViewById(R.id.tostadas);
-        bebidas = (TextView) root.findViewById(R.id.bebidas);
+        seguir = (TextView) root.findViewById(R.id.Seguir);
         mUsuario = mDatabase.getReference(USERS);
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
 
-        tostadas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Tostadas fragment = new Tostadas();
-                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
-                ftEs.replace(R.id.nav_host_fragment, fragment);
-                ftEs.addToBackStack(null);
-                ftEs.commit();
-
-            }
-        });
-
-        bebidas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bebidas fragment = new Bebidas();
-                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
-                ftEs.replace(R.id.nav_host_fragment, fragment);
-                ftEs.addToBackStack(null);
-                ftEs.commit();
-
-            }
-        });
         getMensajesFromFirebase();
         inicialize();
+
+        seguir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                dismiss();
+            }
+        });
 
         finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,12 +147,7 @@ public class MisPedidosSinFinalizar extends Fragment {
 
     public void removeItem(int position) {
         mAdapter.deleteItem(position);
-        MisPedidosSinFinalizar fragment = new MisPedidosSinFinalizar();
-        FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
-        ftEs.replace(R.id.nav_host_fragment, fragment);
-        ftEs.addToBackStack(null);
-        ftEs.commit();
-
+        dismiss();
 
     }
 
@@ -181,10 +159,12 @@ public class MisPedidosSinFinalizar extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 double total = 0;
                 String processed = "";
+                finalizar.setVisibility(View.INVISIBLE);
                 if (dataSnapshot.exists()) {
 
-
+                    finalizar.setVisibility(View.VISIBLE);
                     mMensaje.clear();
+
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                         double number = Double.parseDouble(ds.child("precio").getValue(String.class).replaceAll("[.,€]", ""));

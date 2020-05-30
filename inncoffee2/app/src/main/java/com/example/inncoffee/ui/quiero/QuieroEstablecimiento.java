@@ -1,7 +1,13 @@
 package com.example.inncoffee.ui.quiero;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -38,6 +44,8 @@ import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -48,14 +56,16 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
     private static final String USERS = "Users";
-    private String ID ;
+    private String ID;
+    private Marker mMark;
     private FloatingMarkerTitlesOverlay floatingMarkersOverlay;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
-    private void inicialize() {
+
+    private void inicialize () {
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            public void onAuthStateChanged (@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
                 if (user != null) {
@@ -71,7 +81,7 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            public void onAuthStateChanged (@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 if (user != null) {
 
@@ -89,8 +99,9 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
         };
 
     }
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+
+    public View onCreateView (@NonNull LayoutInflater inflater,
+                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.quieroestablecimiento_fragment, container, false);
         MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
@@ -105,21 +116,29 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
         Log.v("USERID", mUsuario.getKey());
         Log.v("USERGUID", mAuth.getUid());
 
-
         floatingMarkersOverlay = root.findViewById(R.id.map_floating_markers_overlay);
-
 
 
         return root;
     }
 
 
-    public void onMapReady(final GoogleMap googleMap) {
+    public void onMapReady (final GoogleMap googleMap) {
+
+        if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                        PackageManager.PERMISSION_GRANTED) {
+            googleMap.getUiSettings().isZoomControlsEnabled();
+            googleMap.getUiSettings().setZoomControlsEnabled(true);
+
+            googleMap.setMyLocationEnabled(true);
+            googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+            googleMap.getUiSettings().isMyLocationButtonEnabled();
+        }
 
 
-
-
-        LatLng Centro = new LatLng(37.4038783 , -5.9789261);
+        LatLng Centro = new LatLng(37.4038783, -5.9789261);
         LatLng SevillaCartuja = new LatLng(37.4086401, -6.0077992);
         final String title = "INN COFFEE SEVILLA CARTUJA";
         final int color = Color.BLACK;
@@ -141,13 +160,13 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
 
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
-            public boolean onMarkerClick(final Marker marker) {
-                if (marker.getTitle().equals("INN COFFEE SEVILLA NERVION")){
-                    Toast.makeText(getActivity(), " Elegiste  Nervion" , Toast.LENGTH_SHORT).show();
+            public boolean onMarkerClick (final Marker marker) {
+                if (marker.getTitle().equals("INN COFFEE SEVILLA NERVION")) {
+                    Toast.makeText(getActivity(), " Elegiste  Nervion", Toast.LENGTH_SHORT).show();
 
                     mUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
 
                                 mUsuario.child(ID).child("Center").setValue("INN COFFEE SEVILLA NERVION");
@@ -163,7 +182,7 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
 
 
                         @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        public void onCancelled (@NonNull DatabaseError databaseError) {
                             Log.w("TAG", "Failed to read value.", databaseError.toException());
                         }
                     });
@@ -172,12 +191,12 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
                 }
 
 
-                if (marker.getTitle().equals("INN COFFEE SEVILLA ESTE")){
-                    Toast.makeText(getActivity(), " Elegiste  Sevilla Este" , Toast.LENGTH_SHORT).show();
+                if (marker.getTitle().equals("INN COFFEE SEVILLA ESTE")) {
+                    Toast.makeText(getActivity(), " Elegiste  Sevilla Este", Toast.LENGTH_SHORT).show();
 
                     mUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
 
                                 mUsuario.child(ID).child("Center").setValue("INN COFFEE SEVILLA ESTE");
@@ -192,39 +211,36 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
 
 
                         @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        public void onCancelled (@NonNull DatabaseError databaseError) {
                             Log.w("TAG", "Failed to read value.", databaseError.toException());
                         }
                     });
 
 
-
                 }
-                if (marker.getTitle().equals("INN COFFEE SEVILLA CARTUJA")){
+                if (marker.getTitle().equals("INN COFFEE SEVILLA CARTUJA")) {
 
-                    Toast.makeText(getActivity(), " Elegiste  Cartuja" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), " Elegiste  Cartuja", Toast.LENGTH_SHORT).show();
 
 
                     mUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if(dataSnapshot.exists()){
+                        public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
 
-                                    mUsuario.child(ID).child("Center").setValue("INN COFFEE SEVILLA CARTUJA");
+                                mUsuario.child(ID).child("Center").setValue("INN COFFEE SEVILLA CARTUJA");
 
-                                    QuieroNuevoPedido2 fragment = new QuieroNuevoPedido2();
-                                    FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
-                                    ftEs.replace(R.id.nav_host_fragment, fragment);
-                                    ftEs.addToBackStack(null);
-                                    ftEs.commit();
-                                }
+                                QuieroNuevoPedido2 fragment = new QuieroNuevoPedido2();
+                                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                                ftEs.replace(R.id.nav_host_fragment, fragment);
+                                ftEs.addToBackStack(null);
+                                ftEs.commit();
                             }
-
-
+                        }
 
 
                         @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        public void onCancelled (@NonNull DatabaseError databaseError) {
                             Log.w("TAG", "Failed to read value.", databaseError.toException());
                         }
                     });
@@ -246,10 +262,11 @@ public class QuieroEstablecimiento extends Fragment implements OnMapReadyCallbac
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         floatingMarkersOverlay.setSource(googleMap);
         floatingMarkersOverlay.setMaxFloatingTitlesCount(3);
-        floatingMarkersOverlay.addMarker(0,mi);
-        floatingMarkersOverlay.addMarker(1,mi2);
-        floatingMarkersOverlay.addMarker(2,mi3);
+        floatingMarkersOverlay.addMarker(0, mi);
+        floatingMarkersOverlay.addMarker(1, mi2);
+        floatingMarkersOverlay.addMarker(2, mi3);
     }
+
 
 }
 

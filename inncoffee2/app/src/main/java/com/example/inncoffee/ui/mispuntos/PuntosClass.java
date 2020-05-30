@@ -3,12 +3,32 @@ package com.example.inncoffee.ui.mispuntos;
 public class PuntosClass {
 
 
-    public PuntosClass (String texto,String comanda,String fecha) {
+    public PuntosClass (String texto,String comanda,String fecha,String precio) {
         this.texto = texto;
         this.comanda = comanda;
         this.fecha = fecha;
+        this.precio = precio;
     }
 
+    public String getLista () {
+        return lista;
+    }
+
+    public void setLista (String lista) {
+        this.lista = lista;
+    }
+
+    public String lista;
+
+    public String getPrecio () {
+        return precio;
+    }
+
+    public void setPrecio (String precio) {
+        this.precio = precio;
+    }
+
+    public String precio;
 
     public String comanda;
 
@@ -46,8 +66,8 @@ public class PuntosClass {
         this.texto = texto;
     }
 
-    public PuntosClass (String texto) {
-        this.texto = texto;
+    public PuntosClass (String lista) {
+        this.lista = lista;
 
     }
 

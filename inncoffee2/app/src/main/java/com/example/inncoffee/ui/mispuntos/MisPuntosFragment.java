@@ -157,10 +157,11 @@ public class MisPuntosFragment extends Fragment {
                     mMensaje.clear();
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
+                        String precio = ds.child("Precio").getValue().toString();
                         String numco = ds.child("NumeroComanda").getValue().toString();
                         String texto = ds.child("PuntosAcumulado").getValue().toString();
                         String fecha = ds.child("Fecha").getValue().toString();
-                        mMensaje.add(new PuntosClass(texto,numco,fecha));
+                        mMensaje.add(new PuntosClass(texto,numco,fecha,precio));
                         keys.add(ds.getKey());
 
                     }

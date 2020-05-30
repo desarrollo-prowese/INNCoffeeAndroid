@@ -108,8 +108,9 @@ public class TostadasClasicas extends Fragment {
 
         View root = inflater.inflate(R.layout.tostadasclasicas, container, false);
         MainActivity.mensajeToolbar.setText("PEDIDO / NUEVO PEDIDO");
-        mDatabase = FirebaseDatabase.getInstance();
+
         mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mDatabase = FirebaseDatabase.getInstance();
         mTosta = mDatabase.getReference("TostadasClasicas");
         mCompare = mDatabase.getReference();
         tostadasdb = new TostadasDB();
@@ -162,87 +163,6 @@ public class TostadasClasicas extends Fragment {
             }
         });
 
-
-        añadir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                if (TextUtils.isEmpty(nombrepan)) {
-                    Toast.makeText(getContext(), "Selecione Algun Pan", Toast.LENGTH_SHORT).show();
-                    return;
-                } else {
-                    ID = mAuth.getUid();
-                    final String key3 = mUsuario.push().getKey();
-                    mUsuario.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                            double total = 0;
-                            String processed = "";
-                            if (MediaoEntera == false) {
-                                if (contador2 == 1) {
-                                    String texto = contador2 + " /" + media.getText() + "/" + nombre + "/" + nombrepan;
-                                    String precio = precios;
-                                    MisPedidosClass user2 = new MisPedidosClass(texto, precio);
-                                    mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
-                                    mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
-
-                                } else if (contador2 > 1) {
-                                    String texto = contador2 + " /" + media.getText() + "/" + nombre + "/" + nombrepan;
-                                    double number = Double.valueOf(precios.replaceAll("[,.€]", ""));
-                                    total = total + number * contador2;
-                                    NumberFormat formatter = new DecimalFormat("###,##€");
-
-                                    processed = formatter.format(total);
-
-                                    String precio = processed;
-                                    MisPedidosClass user2 = new MisPedidosClass(texto, precio);
-                                    mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
-                                    mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
-                                }
-
-                            } else if (MediaoEntera == true) {
-
-                                if (contador2 == 1) {
-                                    String texto = contador2 + " /" + entera.getText() + "/" + nombre + "/" + nombrepan;
-                                    String precio = precios;
-                                    MisPedidosClass user2 = new MisPedidosClass(texto, precio);
-                                    mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
-                                    mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
-
-                                } else if (contador2 > 1) {
-                                    String texto = contador2 + " /" + entera.getText() + "/" + nombre + "/" + nombrepan;
-                                    double number = Double.valueOf(precios.replaceAll("[,.€]", ""));
-                                    total = total + number * contador2;
-                                    NumberFormat formatter = new DecimalFormat("###,##€");
-
-                                    processed = formatter.format(total);
-
-                                    String precio = processed;
-                                    MisPedidosClass user2 = new MisPedidosClass(texto, precio);
-                                    mUsuario.child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
-                                    mUsuario.child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
-                                }
-
-                            }
-
-                            MisPedidosSinFinalizar fragment = new MisPedidosSinFinalizar();
-                            FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
-                            ftEs.replace(R.id.nav_host_fragment, fragment);
-                            ftEs.addToBackStack(null);
-                            ftEs.commit();
-                        }
-
-
-                        @Override
-                        public void onCancelled (@NonNull DatabaseError databaseError) {
-                            Log.w("TAG", "Failed to read value.", databaseError.toException());
-                        }
-                    });
-
-
-                }
-
-            }
-        });
 
 
 

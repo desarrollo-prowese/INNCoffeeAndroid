@@ -12,6 +12,7 @@ import android.widget.Button;
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
 import com.example.inncoffee.ui.home.HomeFragment1;
+import com.example.inncoffee.ui.mispedidos.MisPedidosFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -75,11 +76,11 @@ public class QuieroFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(getActivity(),"Proximamente", Toast.LENGTH_SHORT).show();
-             /*   MisPedidos fragment = new MisPedidos();
+                MisPedidosFragment fragment = new MisPedidosFragment();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);
-                ftEs.commit();*/
+                ftEs.commit();
             }
 
         });
@@ -159,7 +160,7 @@ public class QuieroFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        FinalizarPedido fragment = new FinalizarPedido();
+                        FinalizarPedidoMerienda fragment = new FinalizarPedidoMerienda();
                         FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                         ftEs.replace(R.id.nav_host_fragment, fragment);
                         ftEs.addToBackStack(null);

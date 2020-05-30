@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView6"
-        app:layout_constraintVertical_bias="0.282" />
+        app:layout_constraintVertical_bias="0.22000003" />
 
     <Button
         android:id="@+id/pedidodesayuno"
@@ -71,7 +71,7 @@
         android:id="@+id/pedidocomida"
         android:layout_width="253dp"
         android:layout_height="50dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rect_ngulo_1471_shape"
         android:text="Pedido De Comida"
         android:textColor="@android:color/background_light"

@@ -235,23 +235,23 @@ public class QuieroAlojenos extends Fragment {
         return root;
     }
     private void Desayunos() {
-            ID = mAuth.getUid();
-            Log.v("QUE es Desayuno :  ", String.valueOf(TengoComandaDesayuno));
-            mDatabase.getReference("MisPedidos").child("PedidosSinFinalizar").child(ID).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        ID = mAuth.getUid();
+        Log.v("QUE es Desayuno :  ", String.valueOf(TengoComandaDesayuno));
+        mDatabase.getReference("MisPedidos").child("PedidosSinFinalizar").child(ID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    TengoComandaDesayuno = dataSnapshot.exists();
+                TengoComandaDesayuno = dataSnapshot.exists();
 
-                }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
+            }
+        });
 
-        }
+    }
     private void Merienda() {
         ID = mAuth.getUid();
         Log.v("QUE es Desayuno :  ", String.valueOf(TengoComandaDesayuno));
@@ -271,24 +271,24 @@ public class QuieroAlojenos extends Fragment {
 
     }
     private void Comidas() {
-            ID = mAuth.getUid();
-            Log.v("QUE es Comidas :  ", String.valueOf(TengoComandaComidas));
-            mDatabase.getReference("MisPedidos").child("PedidosSinFinalizarComidas").child(ID).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        ID = mAuth.getUid();
+        Log.v("QUE es Comidas :  ", String.valueOf(TengoComandaComidas));
+        mDatabase.getReference("MisPedidos").child("PedidosSinFinalizarComidas").child(ID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    TengoComandaComidas = dataSnapshot.exists();
+                TengoComandaComidas = dataSnapshot.exists();
 
 
-                }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
+            }
+        });
 
-        }
+    }
     private void Trigo (){
         ID = mAuth.getUid();
         mUsu.child(ID).child("Alergias").child("Trigo").addValueEventListener(new ValueEventListener() {

@@ -271,6 +271,7 @@ public class FinalizarPedidoMerienda extends Fragment {
                         newPost.put("Fecha", dateFormat.format(date));
                         newPost.put("PuntosAcumulado", processedsd);
                         newPost.put("NumeroComanda", Comanda);
+                        newPost.put("Precio", processed);
                         mUsuarios.child(ID).child("Puntos").child(Comanda).setValue(newPost);
 
 
@@ -436,8 +437,7 @@ public class FinalizarPedidoMerienda extends Fragment {
         mUsuario.child("PedidosFinalizadosMerienda").child(ID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                double total = 0;
-                String processed = "";
+
                 if (dataSnapshot.exists()) {
 
                     mMensaje.clear();
@@ -447,7 +447,7 @@ public class FinalizarPedidoMerienda extends Fragment {
                         total = total + number;
 
 
-                        NumberFormat formatter = new DecimalFormat("###,##");
+                        NumberFormat formatter = new DecimalFormat("0,00€");
 
                         processed = formatter.format(total);
                         importe = Double.valueOf(total).toString();
