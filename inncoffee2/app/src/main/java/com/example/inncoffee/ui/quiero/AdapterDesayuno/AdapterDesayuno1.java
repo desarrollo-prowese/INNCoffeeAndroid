@@ -2,20 +2,17 @@ package com.example.inncoffee.ui.quiero.AdapterDesayuno;
 
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.inncoffee.R;
 import com.example.inncoffee.ui.mispedidos.MisPedidosClass;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,11 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -38,7 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 ;
 
-public class AdapterDesayuno extends RecyclerView.Adapter<AdapterDesayuno.ViewHolder> {
+public class AdapterDesayuno1 extends RecyclerView.Adapter<AdapterDesayuno1.ViewHolder> {
 
     private Context mContext;
     private int resource;
@@ -52,7 +45,7 @@ public class AdapterDesayuno extends RecyclerView.Adapter<AdapterDesayuno.ViewHo
     private DatabaseReference mTosta;
 
 
-    public AdapterDesayuno (Context mContext, ArrayList<MisPedidosClass> mensajeslist, ArrayList<String> keys, int resource){
+    public AdapterDesayuno1 (Context mContext, ArrayList<MisPedidosClass> mensajeslist, ArrayList<String> keys, int resource){
         this.mContext = mContext;
         this.mensajeslist = mensajeslist;
         this.resource = resource;
@@ -85,7 +78,7 @@ public class AdapterDesayuno extends RecyclerView.Adapter<AdapterDesayuno.ViewHo
         mTosta.child("TostadasClasicas").child("TipoPanes").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final ArrayList<String> PAN = new ArrayList<String>();
+                ArrayList<String> PAN = new ArrayList<String>();
                 if (dataSnapshot.exists()) {
                     PAN.clear();
 
@@ -105,19 +98,18 @@ public class AdapterDesayuno extends RecyclerView.Adapter<AdapterDesayuno.ViewHo
                 holder.selecionarpan.setAdapter(adapter);
                 holder.selecionarpan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
-                    public void onItemSelected(final AdapterView<?> arg0, final View arg1, final int position, long id) {
+                    public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
                         mTosta.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").exists()){
                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Trigo").getValue().equals(
-                                            dataSnapshot.child("TostadasClasicas").child("TipoPanes").child(String.valueOf(position)).child("Alergia").getValue()))
+                                            dataSnapshot.child("TostadasClasicas").child("TipoPanes").child(String.valueOf(holder.selecionarpan.getSelectedItemPosition())).child("Alergia").getValue()))
                                     {
                                         holder.añadir1.setVisibility(View.INVISIBLE);
                                         holder.añadir2.setVisibility(View.INVISIBLE);
                                     }
                                     else{
-
                                         holder.añadir1.setVisibility(View.VISIBLE);
                                         holder.añadir2.setVisibility(View.VISIBLE);
                                     }
@@ -147,9 +139,9 @@ public class AdapterDesayuno extends RecyclerView.Adapter<AdapterDesayuno.ViewHo
         mTosta.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
+              if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
-                            dataSnapshot.child("TostadasClasicas").child("Entera").child(String.valueOf(position)).child("Alergia").getValue()))
+                            dataSnapshot.child("TostadasOriginales").child("Entera").child(String.valueOf(position)).child("Alergia").getValue()))
                     {
                         holder.añadir1.setVisibility(View.INVISIBLE);
                         holder.añadir2.setVisibility(View.INVISIBLE);
@@ -161,21 +153,6 @@ public class AdapterDesayuno extends RecyclerView.Adapter<AdapterDesayuno.ViewHo
                         holder.conteiner.setVisibility(View.VISIBLE);
                     }
                 }
-                else if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").exists()){
-                    if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Huevo").getValue().equals(
-                            dataSnapshot.child("TostadasClasicas").child("Entera").child(String.valueOf(position)).child("Alergia").getValue()))
-                    {
-                        holder.añadir1.setVisibility(View.INVISIBLE);
-                        holder.añadir2.setVisibility(View.INVISIBLE);
-                        holder.conteiner.setVisibility(View.INVISIBLE);
-                    }
-                    else{
-                        holder.añadir1.setVisibility(View.VISIBLE);
-                        holder.añadir2.setVisibility(View.VISIBLE);
-                        holder.conteiner.setVisibility(View.VISIBLE);
-                    }
-                }
-
 
             }
 
@@ -190,6 +167,7 @@ public class AdapterDesayuno extends RecyclerView.Adapter<AdapterDesayuno.ViewHo
         holder.conteiner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
+                Log.v("STORNMG: " , String.valueOf(position));
                 if (holder.botonera.getLayoutParams().height == 1){
                     holder.botonera.getLayoutParams().height = 450;
                     holder.cambiomenu2.setBackgroundResource(R.drawable.menornegros);
@@ -277,7 +255,7 @@ public class AdapterDesayuno extends RecyclerView.Adapter<AdapterDesayuno.ViewHo
         void onItemClick (int position);
     }
 
-    public void setOnItemClickListener(AdapterDesayuno.OnItemClickListener listener) {
+    public void setOnItemClickListener(AdapterDesayuno1.OnItemClickListener listener) {
         mListener = listener;
     }
 
@@ -310,7 +288,7 @@ public class AdapterDesayuno extends RecyclerView.Adapter<AdapterDesayuno.ViewHo
         private TextView enteraprecio,mediaprecio;
         private ImageView cambiomenu2,añadir1,añadir2;
 
-        public ViewHolder(View view,final AdapterDesayuno.OnItemClickListener listener) {
+        public ViewHolder(View view,final AdapterDesayuno1.OnItemClickListener listener) {
             super(view);
             this.view = view;
             this.textViewmensaje = (TextView) view.findViewById(R.id.textomensaje);

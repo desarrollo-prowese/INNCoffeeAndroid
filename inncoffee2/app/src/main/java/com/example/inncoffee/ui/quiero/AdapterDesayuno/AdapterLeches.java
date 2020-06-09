@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.inncoffee.R;
 import com.example.inncoffee.ui.mispedidos.MisPedidosClass;
+import com.example.inncoffee.ui.quiero.CartaComidas;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -135,6 +136,15 @@ public class AdapterLeches extends RecyclerView.Adapter<AdapterLeches.ViewHolder
                         MisPedidosClass user2 = new MisPedidosClass(texto, precio);
                         mTosta.child("MisPedidos").child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
                         mTosta.child("MisPedidos").child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
+
+                      /*  else if (CartaComidas.Comid = true){
+                            mTosta.child("MisPedidos").child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
+                            mTosta.child("MisPedidos").child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
+                        }
+                        else if (CartaComidas.Meriendas = true){
+                            mTosta.child("MisPedidos").child("PedidosSinFinalizarMerienda").child(ID).child(key3).setValue(user2);
+                            mTosta.child("MisPedidos").child("PedidosFinalizadosMerienda").child(ID).child(key3).setValue(user2);
+                        }*/
 
                     }
 

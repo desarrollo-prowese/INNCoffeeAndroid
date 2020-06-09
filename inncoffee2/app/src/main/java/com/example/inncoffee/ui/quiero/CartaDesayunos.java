@@ -20,6 +20,7 @@ import com.example.inncoffee.ui.mispedidos.MisPedidosClass;
 import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizar;
 import com.example.inncoffee.ui.quiero.AdapterDesayuno.AdapterBebidas;
 import com.example.inncoffee.ui.quiero.AdapterDesayuno.AdapterDesayuno;
+import com.example.inncoffee.ui.quiero.AdapterDesayuno.AdapterDesayuno1;
 import com.example.inncoffee.ui.quiero.AdapterDesayuno.AdapterLeches;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -46,11 +47,11 @@ public class CartaDesayunos extends Fragment {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
     private ConstraintLayout TostadasClasicas,CartaComida,CartaMerienda, Ventana1,Ventana2,TostadasOriginales,VentanaBebidas,Bebidas,Cafes,Te,Combinados,Zumos,menu,
-            ventanacafe,ventamate,ventanaconbi,ventanazumos,Cafesolo,ventanacafesolo,ventanaconbina,combinad,
+            ventanacafe,ventamate,ventanaconbi,ventanazumos,Cafesolo,ventanacafesolo,ventanaconbina,
             ventanacafeconleche,Cafeconleches,Cafeespecial,ventanacafeespecial,ventanaLeches,Leches,Tes,Desteinados,Infusiones,tescambio,desteinadoscambio,infusionescambio,Refresco,ResfrescoCambio;
     private RecyclerView Lista,Lista1,ListaZumo,ListaBebidas,ListaCafeSolos,ListaCafeconLeches,ListaCafeespecial,ListaLeches,ListaTe,ListaDesteinados,ListaInfusiones,ListaRefresco;
     private FirebaseDatabase mDatabase;
-    private DatabaseReference mTosta,mTosta2,mZumos;
+    private DatabaseReference mTosta,mTosta2,mZumos,mCompare;
     private ArrayList<MisPedidosClass> mMensaje = new ArrayList<>();
     private ArrayList<MisPedidosClass> mMensaje1 = new ArrayList<>();
     private ArrayList<MisPedidosClass> mZumo = new ArrayList<>();
@@ -65,6 +66,7 @@ public class CartaDesayunos extends Fragment {
     private ArrayList<MisPedidosClass> mRefresco = new ArrayList<>();
     private ArrayList<String> keys = new ArrayList<>();
     private AdapterDesayuno mAdapter;
+    private AdapterDesayuno1 mAdapter5;
     private AdapterBebidas mAdapter1;
     private AdapterLeches mAdapter2;
     private Button VerPedido;
@@ -74,7 +76,7 @@ public class CartaDesayunos extends Fragment {
     private FirebaseAuth mAuth;
     private DatabaseReference mUsuario;
     private ImageView Cambiomenu,Cambiomenu2, cambiobebidas,Cafem,Tem,Combinadosm,Zumosm,CafesoloCambio,CafeconLecheCambio,
-            CafeespecialCambio,LecheCambio,cambiote,cambiodesteinados,cambioinfusiones,Refrescocambio,combi;
+            CafeespecialCambio,LecheCambio,cambiote,cambiodesteinados,cambioinfusiones,Refrescocambio;
 
     private void inicialize() {
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -128,6 +130,7 @@ public class CartaDesayunos extends Fragment {
         mTosta = mDatabase.getReference("TostadasClasicas");
         mTosta2 = mDatabase.getReference("TostadasOriginales");
         mZumos = mDatabase.getReference("Bebidas");
+        mCompare= mDatabase.getReference();
         VerPedido = (Button) root.findViewById(R.id.button4);
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
@@ -154,7 +157,6 @@ public class CartaDesayunos extends Fragment {
                 ftEs.commit();
             }
         });
-
         VerPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
@@ -176,11 +178,11 @@ public class CartaDesayunos extends Fragment {
             @Override
             public void onClick (View v) {
                 if (ResfrescoCambio.getLayoutParams().height == 1){
-                    ResfrescoCambio.getLayoutParams().height = 850;
+                    ResfrescoCambio.getLayoutParams().height = 550;
                     ResfrescoCambio.requestLayout();
                     Refrescocambio.setBackgroundResource(R.drawable.menornegros);
                 }
-                else if (ResfrescoCambio.getLayoutParams().height == 850){
+                else if (ResfrescoCambio.getLayoutParams().height == 550){
                     ResfrescoCambio.getLayoutParams().height = 1;
                     ResfrescoCambio.requestLayout();
                     Refrescocambio.setBackgroundResource(R.drawable.plusnegros);
@@ -422,25 +424,7 @@ public class CartaDesayunos extends Fragment {
             }
         });
 
-        combinad = (ConstraintLayout) root.findViewById(R.id.Combinad);
         ventanaconbina = (ConstraintLayout) root.findViewById(R.id.ventanaCombinados);
-        combi = (ImageView) root.findViewById(R.id.Combinadcambio);
-        combinad.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                if (ventanaconbina.getLayoutParams().height == 1){
-                    ventanaconbina.getLayoutParams().height = 550;
-                    ventanaconbina.requestLayout();
-                    combi.setBackgroundResource(R.drawable.menornegros);
-                }
-                else if (ventanaconbina.getLayoutParams().height == 550){
-                    ventanaconbina.getLayoutParams().height = 1;
-                    ventanaconbina.requestLayout();
-                    combi.setBackgroundResource(R.drawable.plusnegros);
-                }
-            }
-
-        });
 
         Combinados = (ConstraintLayout) root.findViewById(R.id.Combinads);
         ventanaconbi = (ConstraintLayout) root.findViewById(R.id.ventanacombi);
@@ -449,16 +433,21 @@ public class CartaDesayunos extends Fragment {
         Combinados.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                if (ventanaconbi.getLayoutParams().height == 1){
+                if (ventanaconbi.getLayoutParams().height == 1 && ventanaconbina.getLayoutParams().height == 1){
                     ventanaconbi.getLayoutParams().height = 1050;
+                    ventanaconbina.getLayoutParams().height = 550;
+                    ventanaconbina.requestLayout();
                     ventanaconbi.requestLayout();
                     Combinadosm.setBackgroundResource(R.drawable.menornegros);
                 }
-                else if (ventanaconbi.getLayoutParams().height == 1050){
+                else if (ventanaconbi.getLayoutParams().height == 1050 && ventanaconbina.getLayoutParams().height == 550){
                     ventanaconbi.getLayoutParams().height = 1;
+                    ventanaconbina.getLayoutParams().height = 1;
+                    ventanaconbina.requestLayout();
                     ventanaconbi.requestLayout();
                     Combinadosm.setBackgroundResource(R.drawable.plusnegros);
                 }
+
             }
 
         });
@@ -579,6 +568,8 @@ public class CartaDesayunos extends Fragment {
 
     }
     private void getMensajesFromFirebase() {
+
+
         mTosta.child("Entera").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -625,9 +616,9 @@ public class CartaDesayunos extends Fragment {
                         keys.add(ds.getKey());
 
                     }
-                    mAdapter = new AdapterDesayuno(getContext(), mMensaje1, keys, R.layout.contenido_listas);
-                    Lista1.setAdapter(mAdapter);
-                    mAdapter.notifyDataSetChanged();
+                    mAdapter5 = new AdapterDesayuno1(getContext(), mMensaje1, keys, R.layout.contenido_listas);
+                    Lista1.setAdapter(mAdapter5);
+                    mAdapter5.notifyDataSetChanged();
 
                 }
 

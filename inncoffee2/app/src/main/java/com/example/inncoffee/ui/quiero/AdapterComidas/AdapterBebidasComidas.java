@@ -1,23 +1,17 @@
-package com.example.inncoffee.ui.quiero.AdapterDesayuno;
+package com.example.inncoffee.ui.quiero.AdapterComidas;
 
 
-import android.app.Activity;
 import android.content.Context;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.inncoffee.R;
 import com.example.inncoffee.ui.mispedidos.MisPedidosClass;
-import com.example.inncoffee.ui.mispedidos.MisPedidosSinFinalizar;
 import com.example.inncoffee.ui.quiero.CartaComidas;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,20 +20,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.internal.$Gson$Preconditions;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 ;
 
-public class AdapterBebidas extends RecyclerView.Adapter<AdapterBebidas.ViewHolder> {
+public class AdapterBebidasComidas extends RecyclerView.Adapter<AdapterBebidasComidas.ViewHolder> {
 
     private Context mContext;
     private int resource;
@@ -53,7 +43,7 @@ public class AdapterBebidas extends RecyclerView.Adapter<AdapterBebidas.ViewHold
     private DatabaseReference mTosta;
 
 
-    public AdapterBebidas (Context mContext, ArrayList<MisPedidosClass> mensajeslist, ArrayList<String> keys, int resource){
+    public AdapterBebidasComidas (Context mContext, ArrayList<MisPedidosClass> mensajeslist, ArrayList<String> keys, int resource){
         this.mContext = mContext;
         this.mensajeslist = mensajeslist;
         this.resource = resource;
@@ -91,18 +81,14 @@ public class AdapterBebidas extends RecyclerView.Adapter<AdapterBebidas.ViewHold
                         String texto = mensajes.getTexto();
                         String precio = mensajes.getPrecio();
                         MisPedidosClass user2 = new MisPedidosClass(texto, precio);
-                        mTosta.child("MisPedidos").child("PedidosSinFinalizar").child(ID).child(key3).setValue(user2);
-                        mTosta.child("MisPedidos").child("PedidosFinalizados").child(ID).child(key3).setValue(user2);
-
-                     /*   else if (CartaComidas.Comid = true){
                         mTosta.child("MisPedidos").child("PedidosSinFinalizarComidas").child(ID).child(key3).setValue(user2);
                         mTosta.child("MisPedidos").child("PedidosFinalizadosComidas").child(ID).child(key3).setValue(user2);
-                        }
-                        else if (CartaComidas.Meriendas = true){
+
+                   /*     else if (CartaComidas.Meriendas = true){
                         mTosta.child("MisPedidos").child("PedidosSinFinalizarMerienda").child(ID).child(key3).setValue(user2);
                         mTosta.child("MisPedidos").child("PedidosFinalizadosMerienda").child(ID).child(key3).setValue(user2);
-                        }*/
-
+                        }
+*/
                     }
 
 
@@ -123,7 +109,7 @@ public class AdapterBebidas extends RecyclerView.Adapter<AdapterBebidas.ViewHold
         void onItemClick (int position);
     }
 
-    public void setOnItemClickListener(AdapterBebidas.OnItemClickListener listener) {
+    public void setOnItemClickListener(AdapterBebidasComidas.OnItemClickListener listener) {
         mListener = listener;
     }
 
@@ -156,7 +142,7 @@ public class AdapterBebidas extends RecyclerView.Adapter<AdapterBebidas.ViewHold
         private TextView enteraprecio,mediaprecio;
         private ImageView cambiomenu2;
 
-        public ViewHolder(View view,final AdapterBebidas.OnItemClickListener listener) {
+        public ViewHolder(View view,final AdapterBebidasComidas.OnItemClickListener listener) {
             super(view);
             this.view = view;
             this.textViewmensaje = (TextView) view.findViewById(R.id.textomensaje);

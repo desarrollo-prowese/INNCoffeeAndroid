@@ -104,7 +104,7 @@ public class QuieroNuevoPedido2 extends Fragment {
             cartamerienda.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MisPedidosSinFinalizarMerienda fragment = new MisPedidosSinFinalizarMerienda();
+                    CartaMerienda fragment = new CartaMerienda();
                     FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                     ftEs.replace(R.id.nav_host_fragment, fragment);
                     ftEs.addToBackStack(null);
@@ -135,7 +135,7 @@ public class QuieroNuevoPedido2 extends Fragment {
             cartadesayunos.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MisPedidosSinFinalizar fragment = new MisPedidosSinFinalizar();
+                    CartaDesayunos fragment = new CartaDesayunos();
                     FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                     ftEs.replace(R.id.nav_host_fragment, fragment);
                     ftEs.addToBackStack(null);
@@ -163,7 +163,7 @@ public class QuieroNuevoPedido2 extends Fragment {
             cartacomidas.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MisPedidosSinFinalizarComidas fragment = new MisPedidosSinFinalizarComidas();
+                    CartaComidas fragment = new CartaComidas();
                     FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                     ftEs.replace(R.id.nav_host_fragment, fragment);
                     ftEs.addToBackStack(null);
