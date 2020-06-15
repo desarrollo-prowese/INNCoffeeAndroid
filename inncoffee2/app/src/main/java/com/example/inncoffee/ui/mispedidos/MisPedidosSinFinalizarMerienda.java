@@ -7,15 +7,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
+import com.example.inncoffee.ui.combos.Combos;
+import com.example.inncoffee.ui.mensajes.AdapterMensaje;
+import com.example.inncoffee.ui.mensajes.MensajesClass;
+import com.example.inncoffee.ui.mensajes.MensajesFragment;
+import com.example.inncoffee.ui.ofertas.AdapterOfertas;
 import com.example.inncoffee.ui.quiero.Bebidas;
-import com.example.inncoffee.ui.quiero.CartaMerienda;
 import com.example.inncoffee.ui.quiero.FinalizarPedido;
-import com.example.inncoffee.ui.quiero.FinalizarPedidoComidas;
-import com.example.inncoffee.ui.quiero.FinalizarPedidoMerienda;
 import com.example.inncoffee.ui.quiero.QuieroAlojenos;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
 import com.example.inncoffee.ui.quiero.Tostadas;
@@ -33,12 +36,14 @@ import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MisPedidosSinFinalizarMerienda extends Fragment {
+public class MisPedidosSinFinalizarMerienda extends DialogFragment {
 
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth.AuthStateListener firebaseAuthListener;
@@ -47,7 +52,7 @@ public class MisPedidosSinFinalizarMerienda extends Fragment {
     private ArrayList<String> keys = new ArrayList<>();
     private AdapterPedidos mAdapter;
     private RecyclerView mPedidos;
-    private TextView sumatotal,finalizar;
+    private TextView sumatotal,finalizar,seguir;
     private String ID ;
     private FirebaseUser mUser;
     private FirebaseAuth mAuth;
@@ -55,7 +60,6 @@ public class MisPedidosSinFinalizarMerienda extends Fragment {
     private static final String USERS = "MisPedidos";
     private String texto,precios;
 
-    private TextView tostadas,bebidas;
 
     private void inicialize() {
         firebaseAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -105,35 +109,28 @@ public class MisPedidosSinFinalizarMerienda extends Fragment {
         QuieroAlojenos.ComidaoDesayuno = 0;
         mPedidos.setLayoutManager(new LinearLayoutManager(getContext()));
         mDatabase = FirebaseDatabase.getInstance();
-        sumatotal = (TextView) root.findViewById(R.id.total2) ;
-        finalizar = (TextView) root.findViewById(R.id.finalizar2);
-        tostadas = (TextView) root.findViewById(R.id.merienda);
-        bebidas = (TextView) root.findViewById(R.id.bebidas);
+        sumatotal = (TextView) root.findViewById(R.id.total2);
+        finalizar = (TextView) root.findViewById(R.id.finalizar);
+        seguir = (TextView) root.findViewById(R.id.Seguir);
         mUsuario = mDatabase.getReference(USERS);
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         mAuth = FirebaseAuth.getInstance();
 
-        tostadas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CartaMerienda fragment = new CartaMerienda();
-                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
-                ftEs.replace(R.id.nav_host_fragment, fragment);
-                ftEs.addToBackStack(null);
-                ftEs.commit();
-
-            }
-        });
-
-
         getMensajesFromFirebase();
         inicialize();
+
+        seguir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View v) {
+                dismiss();
+            }
+        });
 
         finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                FinalizarPedidoMerienda fragment = new FinalizarPedidoMerienda();
+                FinalizarPedido fragment = new FinalizarPedido();
                 FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                 ftEs.replace(R.id.nav_host_fragment, fragment);
                 ftEs.addToBackStack(null);
@@ -144,18 +141,13 @@ public class MisPedidosSinFinalizarMerienda extends Fragment {
             }
         });
 
-     return root;
+        return root;
     }
 
 
     public void removeItem(int position) {
         mAdapter.deleteItemMerienda(position);
-        MisPedidosSinFinalizarMerienda fragment = new MisPedidosSinFinalizarMerienda();
-        FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
-        ftEs.replace(R.id.nav_host_fragment, fragment);
-        ftEs.addToBackStack(null);
-        ftEs.commit();
-
+        dismiss();
 
     }
 
@@ -167,10 +159,12 @@ public class MisPedidosSinFinalizarMerienda extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 double total = 0;
                 String processed = "";
+                finalizar.setVisibility(View.INVISIBLE);
                 if (dataSnapshot.exists()) {
 
-
+                    finalizar.setVisibility(View.VISIBLE);
                     mMensaje.clear();
+
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                         double number = Double.parseDouble(ds.child("precio").getValue(String.class).replaceAll("[.,€]", ""));
