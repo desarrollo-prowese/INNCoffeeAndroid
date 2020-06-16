@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
@@ -129,17 +130,37 @@ public class MisPedidosSinFinalizar extends DialogFragment {
         finalizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getActivity());
+                dialogo1.setMessage("");
+                dialogo1.setCancelable(false);
+                dialogo1.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        FinalizarPedido fragment = new FinalizarPedido();
+                        FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                        ftEs.replace(R.id.nav_host_fragment, fragment);
+                        ftEs.addToBackStack(null);
+                        ftEs.commit();
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosSinFinalizar").child(ID);
+                        ref.removeValue();
 
-                FinalizarPedido fragment = new FinalizarPedido();
-                FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
-                ftEs.replace(R.id.nav_host_fragment, fragment);
-                ftEs.addToBackStack(null);
-                ftEs.commit();
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosSinFinalizar").child(ID);
-                ref.removeValue();
-
+                        }
+                });
+                dialogo1.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        FinalizarPedido fragment = new FinalizarPedido();
+                        FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
+                        ftEs.replace(R.id.nav_host_fragment, fragment);
+                        ftEs.addToBackStack(null);
+                        ftEs.commit();
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("MisPedidos").child("PedidosSinFinalizar").child(ID);
+                        ref.removeValue();
+                        dialogo1.cancel();
+                    }
+                });
+                dialogo1.show();
             }
         });
+
 
      return root;
     }

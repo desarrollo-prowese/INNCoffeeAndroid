@@ -1,6 +1,7 @@
 package com.example.inncoffee.ui.home;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
@@ -26,5 +27,7 @@ public class FixedSpeedScroller extends Scroller {
                             int duration) {
         super.startScroll(startX, startY, dx, dy,
                 (int) (duration * mScrollFactor));
+
     }
+
 }

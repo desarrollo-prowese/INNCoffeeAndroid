@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Scroller;
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.jgabrielfreitas.core.BlurImageView;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -50,6 +52,7 @@ public class HomeFragment1 extends Fragment {
             startActivity(intent);
             num = 0;
         }
+
         if (savedInstanceState == null) {
 
 
@@ -104,6 +107,9 @@ public class HomeFragment1 extends Fragment {
                 }
             }, 100);
         }
+
+
+
 
         return root;
     }

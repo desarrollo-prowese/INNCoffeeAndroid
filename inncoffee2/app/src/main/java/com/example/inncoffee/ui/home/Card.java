@@ -1,7 +1,10 @@
 package com.example.inncoffee.ui.home;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.jgabrielfreitas.core.BlurImageView;
 
 /**
  * Created by Nicklas Nilsson on 18/01/2016.
@@ -30,6 +33,7 @@ public class Card implements Parcelable {
     }
 
     private int image;
+
 
 
     private String name;

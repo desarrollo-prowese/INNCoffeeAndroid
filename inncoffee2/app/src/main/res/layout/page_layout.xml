@@ -7,7 +7,7 @@
     android:gravity="center_horizontal"
     android:background="@android:color/transparent">
 
-        <!-- Add this for highlights on cards. Currently not working properly because page layouts are overlapping: android:foreground="@drawable/item_selector"-->
+    <!-- Add this for highlights on cards. Currently not working properly because page layouts are overlapping: android:foreground="@drawable/item_selector"-->
 
     <RelativeLayout
         android:id="@+id/page_content"
@@ -21,6 +21,14 @@
         android:layout_marginTop="50dp"
         android:background="@drawable/card_background"
         android:clickable="true">
+
+
+        <com.jgabrielfreitas.core.BlurImageView
+            android:id="@+id/ImagenFondo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
 
         <TextView
             android:id="@+id/card_name_text_view"

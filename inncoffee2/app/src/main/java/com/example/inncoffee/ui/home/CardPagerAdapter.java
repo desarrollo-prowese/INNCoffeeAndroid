@@ -3,20 +3,25 @@ package com.example.inncoffee.ui.home;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
+import android.graphics.pdf.PdfDocument;
 import android.os.Parcelable;
 
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 
 import com.example.inncoffee.MainActivity;
 import com.example.inncoffee.R;
 import com.example.inncoffee.ui.home.page.PageFragment;
 import com.example.inncoffee.ui.home.page.PageLayout;
+import com.jgabrielfreitas.core.BlurImageView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -28,7 +33,7 @@ import androidx.viewpager.widget.ViewPager;
 public class CardPagerAdapter<T extends Parcelable> extends FragmentPagerAdapter
         implements ViewPager.OnPageChangeListener {
     private static final String TAG = CardViewPager.class.getSimpleName();
-    private int pagesCount;
+    public static int pagesCount;
     private int firstPosition;
 
     private FragmentManager fragmentManager;
@@ -37,7 +42,8 @@ public class CardPagerAdapter<T extends Parcelable> extends FragmentPagerAdapter
     private Class pageFragmentClass;
     private int pageLayoutId;
 
-    private int createdFragments = 0;
+    public static int createdFragments = 0;
+    private Context context;
 
 
     public CardPagerAdapter(FragmentManager fragmentManager,
@@ -59,8 +65,7 @@ public class CardPagerAdapter<T extends Parcelable> extends FragmentPagerAdapter
 
         pagesCount = this.items.size();
 
-        firstPosition = pagesCount * 500 / 2 * 3; //Start in the middle when opening app
-
+        firstPosition = pagesCount * 100 / 2 * 3; //Start in the middle when opening app
 
     }
 
@@ -72,6 +77,7 @@ public class CardPagerAdapter<T extends Parcelable> extends FragmentPagerAdapter
         try {
             PageFragment pf = (PageFragment) pageFragmentClass.newInstance();
             pf.setArguments(PageFragment.createArgs(pageLayoutId, items.get(position)));
+            Log.w("TAG", "SARASDRA: " + position);
 
             if (createdFragments > 80) {
                 pf.startBottomPosition(true);
@@ -90,7 +96,7 @@ public class CardPagerAdapter<T extends Parcelable> extends FragmentPagerAdapter
 
     @Override
     public int getCount() {
-        return pagesCount * 500; //pageCount * Loop
+        return pagesCount * 100; //pageCount * Loop
     }
 
 
@@ -98,16 +104,18 @@ public class CardPagerAdapter<T extends Parcelable> extends FragmentPagerAdapter
     public void onPageScrolled(int position, float positionOffset,
                                int positionOffsetPixels) {
 
+
+
         PageLayout current = getPageView(position);
 
-        PageLayout next = getPageView(position + 3);
+        PageLayout next = getPageView(position + 1);
         PageLayout nextnext = getPageView(position + 2);
-        PageLayout nextnextnext = getPageView(position + 1);
+        PageLayout nextnextnext = getPageView(position + 3);
 
-        PageLayout prev = getPageView(position - 4);
-        PageLayout prevprev = getPageView(position - 3);
-        PageLayout prevprevprev = getPageView(position - 2);
-        PageLayout prevprevprevprev = getPageView(position - 1);
+        PageLayout prev = getPageView(position - 1);
+        PageLayout prevprev = getPageView(position - 2);
+        PageLayout prevprevprev = getPageView(position - 3);
+        PageLayout prevprevprevprev = getPageView(position - 4);
 
         /*if (positionOffset >= 0.5f) { //Example on how to play around with the cards current offset
             next.bringToFront();
@@ -115,11 +123,22 @@ public class CardPagerAdapter<T extends Parcelable> extends FragmentPagerAdapter
             current.bringToFront();
         }*/
 
-
         if (current != null) {
             current.setSkew(PagerSettings.getSkew() * positionOffset);
             current.setTranslated(PagerSettings.getTranslateY() * positionOffset);
         }
+
+        /*
+        else if (PageFragment.pageContent.getTag().equals("PROMOCIONES")){
+            if(CardPagerAdapter.pagesCount == 387){
+                PageFragment.imagenfondo.setBlur(0);
+            }
+        }
+        else if (PageFragment.pageContent.getTag().equals("CoINNs")){
+            if(CardPagerAdapter.pagesCount == 386){
+                PageFragment.imagenfondo.setBlur(0);
+            }
+        }*/
 
         // Making sure all cards appearing on the screen are correctly skewed and translated - should factor this out
 
@@ -136,11 +155,13 @@ public class CardPagerAdapter<T extends Parcelable> extends FragmentPagerAdapter
         if (nextnextnext != null) {
             nextnextnext.setTranslated(0);
             nextnextnext.setSkew(0);
+
         }
 
         if (prev != null) {
             prev.setTranslated(PagerSettings.getTranslateY());
             prev.setSkew(0f);
+
         }
 
         if (prevprev != null) {
@@ -159,12 +180,16 @@ public class CardPagerAdapter<T extends Parcelable> extends FragmentPagerAdapter
             prevprevprevprev.setTranslated(PagerSettings.getTranslateY());
             prevprevprevprev.setSkew(0f);
             prevprevprevprev.setHeight(PagerSettings.getCardHeight());
+
         }
 
     }
 
+
     @Override
-    public void onPageSelected(int position) {}
+    public void onPageSelected(int position) {
+
+    }
 
     @Override
     public void onPageScrollStateChanged(int state) {

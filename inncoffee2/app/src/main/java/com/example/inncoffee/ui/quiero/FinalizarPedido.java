@@ -261,9 +261,14 @@ public class FinalizarPedido extends Fragment {
     }
 
     private void Pagare(){
+
+
+
         Pagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
 
 
                 TPVV.doWebViewPayment(getContext(),  String.valueOf(Comanda), Double.valueOf(importe), TPVVConstants.PAYMENT_TYPE_NORMAL, null, "Desayuno InnCoffee" , new IPaymentResult() {
@@ -375,7 +380,7 @@ public class FinalizarPedido extends Fragment {
                 });
                 dialogo1.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialogo1, int id) {
-                        double Tengo = (number * Double.parseDouble("5") /100);
+                       /* double Tengo = (number * Double.parseDouble("5") /100);
                         NumberFormat formatter = new DecimalFormat("0,00€");
                         String processedsd = formatter.format(Tengo);
                         Log.v("CUANTOS PUNTOS CONSIGO ",processedsd);
@@ -389,7 +394,7 @@ public class FinalizarPedido extends Fragment {
                         newPost.put("Precio", processed);
 
                         mUsuarios.child(ID).child("Puntos").child(Comanda).setValue(newPost);
-                        mComanda.child(ID).child("Imprimir").child(Comanda).setValue(newPost);
+                        mComanda.child(ID).child("Imprimir").child(Comanda).setValue(newPost);*/
                         dialogo1.cancel();
                     }
                 });

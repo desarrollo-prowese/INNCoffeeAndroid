@@ -5,20 +5,25 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.inncoffee.R;
 import com.example.inncoffee.ui.home.Card;
+import com.example.inncoffee.ui.home.CardPagerAdapter;
 import com.example.inncoffee.ui.home.CardViewPager;
+import com.example.inncoffee.ui.home.HomeFragment1;
 import com.example.inncoffee.ui.home.PagerSettings;
 import com.example.inncoffee.ui.mispuntos.MisPuntosFragment;
 import com.example.inncoffee.ui.ofertas.OfertasFragment;
 import com.example.inncoffee.ui.pagoygano.Pagoygano;
 import com.example.inncoffee.ui.quiero.QuieroFragment;
+import com.jgabrielfreitas.core.BlurImageView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -31,6 +36,8 @@ public class PageFragment extends Fragment {
 
     public PageLayout pageLayout;
     private boolean startBottomPosition;
+    public BlurImageView imagenfondo;
+
     public static View pageContent;
 
     public static Bundle createArgs(int pageLayoutId, Parcelable item) {
@@ -57,6 +64,7 @@ public class PageFragment extends Fragment {
         Card item = getArguments().getParcelable("item");
 
         pageContent = pageLayout.findViewById(R.id.page_content);
+        imagenfondo = pageLayout.findViewById(R.id.ImagenFondo);
 
 
         pageContent.setOnClickListener(new View.OnClickListener() {
@@ -77,7 +85,7 @@ public class PageFragment extends Fragment {
                     ftEs.commit();
                 }
 
-                else if (PageFragment.pageContent.getTag().equals("PROMOCIONES")){
+                else if (pageContent.getTag().equals("PROMOCIONES")){
                     Toast.makeText(getActivity(), " PROMOCIONES ", Toast.LENGTH_SHORT).show();
                     OfertasFragment fragment = new OfertasFragment();
                     FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
@@ -85,7 +93,7 @@ public class PageFragment extends Fragment {
                     ftEs.addToBackStack(null);
                     ftEs.commit();
                 }
-                else if (PageFragment.pageContent.getTag().equals("CoINNs")){
+                else if (pageContent.getTag().equals("CoINNs")){
                     MisPuntosFragment fragment = new MisPuntosFragment();
                     FragmentTransaction ftEs = getParentFragmentManager().beginTransaction();
                     ftEs.replace(R.id.nav_host_fragment, fragment);
@@ -99,8 +107,14 @@ public class PageFragment extends Fragment {
         //pageLayout.setBackgroundColor(Color.parseColor("#00" + item.getLayoutColor())); //00 transparent
         //pageContent.getBackground().setColorFilter(Color.parseColor("#" + item.getColor()), PorterDuff.Mode.SRC_ATOP);
 
-        pageContent.setBackgroundResource((item.getImage()));
+
+       // imagenfondo.setBackgroundResource(item.getImage());
+        imagenfondo.setImageDrawable(getActivity().getDrawable(item.getImage()));
+        imagenfondo.setBlur(0);
         pageContent.setTag(item.getName());
+
+
+
       /*  LayerDrawable bgDrawable = (LayerDrawable) pageContent.getBackground();
         final GradientDrawable shape = (GradientDrawable)   bgDrawable.findDrawableByLayerId(R.id.card_color);
         shape.setColor(Color.parseColor(item.getColor()));*/

@@ -65,7 +65,7 @@ public class CardViewPager extends ViewPager implements OnTouchListener {
         int X = (int) event.getRawX() + X_LEFT_MARGIN;
         int Y = (int) event.getRawY();
 
-        if (X < PagerSettings.getCardWidth() && Y < PagerSettings.getCardHeight()) {
+        if (X < PagerSettings.getCardWidth() && Y > PagerSettings.getCardHeight()) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     lastTouchDown = System.currentTimeMillis();
@@ -74,13 +74,18 @@ public class CardViewPager extends ViewPager implements OnTouchListener {
                     Log.v("Probando" , String.valueOf(PageFragment.pageContent.getTag()));
                     if (System.currentTimeMillis() - lastTouchDown < CLICK_ACTION_THRESHHOLD) {
                         if (PageFragment.pageContent.getTag().equals("PEDIDO")){
-                            Toast.makeText(getContext(), "PEDIDO", Toast.LENGTH_SHORT).show();}
+                            Toast.makeText(getContext(), "PEDIDO", Toast.LENGTH_SHORT).show();
+                        }
                         else if (PageFragment.pageContent.getTag().equals("PAGOYGANO")){
-                            Toast.makeText(getContext(), "PAGO Y GANO", Toast.LENGTH_SHORT).show();}
+                            Toast.makeText(getContext(), "PAGO Y GANO", Toast.LENGTH_SHORT).show();
+                        }
                         else if (PageFragment.pageContent.getTag().equals("PROMOCIONES")){
-                            Toast.makeText(getContext(), "PROMOCIONES", Toast.LENGTH_SHORT).show();}
+                            Toast.makeText(getContext(), "PROMOCIONES", Toast.LENGTH_SHORT).show();
+                          }
                         else if (PageFragment.pageContent.getTag().equals("CoINNs")){
-                            Toast.makeText(getContext(), "CoINNs", Toast.LENGTH_SHORT).show();}
+                            Toast.makeText(getContext(), "CoINNs", Toast.LENGTH_SHORT).show();
+                           }
+
 
                         else{
                             Toast.makeText(getContext(), "Open settings for card!", Toast.LENGTH_SHORT).show();
