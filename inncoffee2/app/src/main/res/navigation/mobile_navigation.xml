@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.inncoffee.ui.home.HomeFragment1">
+        android:name="com.rakshasa.inncoffee.ui.home.HomeFragment1">
         <action
             android:id="@+id/action_nav_home_to_nav_quiero"
             app:destination="@id/nav_quiero" />
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/nav_mensaje"
-        android:name="com.example.inncoffee.ui.mensajes.MensajesFragment"
+        android:name="com.rakshasa.inncoffee.ui.mensajes.MensajesFragment"
         tools:layout="@layout/fragment_mensajes" >
         <action
             android:id="@+id/action_nav_mensaje_to_nav_home"
@@ -33,7 +33,7 @@
 
     <fragment
         android:id="@+id/nav_puntos"
-        android:name="com.example.inncoffee.ui.mispuntos.MisPuntosFragment"
+        android:name="com.rakshasa.inncoffee.ui.mispuntos.MisPuntosFragment"
         tools:layout="@layout/fragment_puntos" >
         <action
             android:id="@+id/action_nav_puntos_to_nav_home"
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_quiero"
-        android:name="com.example.inncoffee.ui.quiero.QuieroFragment"
+        android:name="com.rakshasa.inncoffee.ui.quiero.QuieroFragment"
         tools:layout="@layout/quierofragment" >
         <action
             android:id="@+id/action_nav_quiero_to_nav_quieronuevopedido"
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_quieronuevopedido"
-        android:name="com.example.inncoffee.ui.quiero.QuieroNuevoPedido"
+        android:name="com.rakshasa.inncoffee.ui.quiero.QuieroNuevoPedido"
         tools:layout="@layout/quieronuevopedido_fragment" >
         <action
             android:id="@+id/action_nav_quieronuevopedido_to_nav_quiero2"
@@ -63,7 +63,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_quieronuevopedido2"
-        android:name="com.example.inncoffee.ui.quiero.QuieroNuevoPedido2"
+        android:name="com.rakshasa.inncoffee.ui.quiero.QuieroNuevoPedido2"
         tools:layout="@layout/quieronuevopedido2_fragment" >
         <action
             android:id="@+id/action_nav_quieronuevopedido2_to_nav_quieroalojenos2"
@@ -74,7 +74,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_quieroestablecimiento"
-        android:name="com.example.inncoffee.ui.quiero.QuieroEstablecimiento"
+        android:name="com.rakshasa.inncoffee.ui.quiero.QuieroEstablecimiento"
         tools:layout="@layout/quieroestablecimiento_fragment" >
         <action
             android:id="@+id/action_nav_quieroestablecimiento_to_nav_quieronuevopedido22"
@@ -85,7 +85,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_quieroalojenos"
-        android:name="com.example.inncoffee.ui.quiero.QuieroAlojenos"
+        android:name="com.rakshasa.inncoffee.ui.quiero.QuieroAlojenos"
         tools:layout="@layout/quieroalojenos" >
         <action
             android:id="@+id/action_nav_quieroalojenos_to_nav_quierocartadesayunos2"
@@ -99,7 +99,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_quierocartadesayunos"
-        android:name="com.example.inncoffee.ui.quiero.CartaDesayunos"
+        android:name="com.rakshasa.inncoffee.ui.quiero.CartaDesayunos"
         tools:layout="@layout/cartadesayunos" >
         <action
             android:id="@+id/action_nav_quierocartadesayunos_to_nav_quierotostadas"
@@ -113,7 +113,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_quierocartacomidas"
-        android:name="com.example.inncoffee.ui.quiero.CartaComidas"
+        android:name="com.rakshasa.inncoffee.ui.quiero.CartaComidas"
         tools:layout="@layout/cartacomidas" >
         <action
             android:id="@+id/action_nav_quierocartacomidas_to_nav_quieroalojenos2"
@@ -121,7 +121,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_quierobebidas"
-        android:name="com.example.inncoffee.ui.quiero.Bebidas"
+        android:name="com.rakshasa.inncoffee.ui.quiero.Bebidas"
         tools:layout="@layout/bebidas" >
         <action
             android:id="@+id/action_nav_quierobebidas_to_nav_quierocartadesayunos2"
@@ -141,7 +141,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_bebidas"
-        android:name="com.example.inncoffee.ui.bebidas.Bebidas1"
+        android:name="com.rakshasa.inncoffee.ui.bebidas.Bebidas1"
         tools:layout="@layout/bebidas1" >
         <action
             android:id="@+id/action_nav_bebidas_to_nav_quierobebidas"
@@ -149,7 +149,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_zumos"
-        android:name="com.example.inncoffee.ui.bebidas.Zumos"
+        android:name="com.rakshasa.inncoffee.ui.bebidas.Zumos"
         tools:layout="@layout/zumos" >
         <action
             android:id="@+id/action_nav_zumos_to_nav_quierobebidas"
@@ -157,7 +157,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_tes"
-        android:name="com.example.inncoffee.ui.bebidas.Tes"
+        android:name="com.rakshasa.inncoffee.ui.bebidas.Tes"
         tools:layout="@layout/tes" >
         <action
             android:id="@+id/action_nav_tes_to_nav_quierobebidas"
@@ -165,7 +165,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_cafes"
-        android:name="com.example.inncoffee.ui.bebidas.Cafes"
+        android:name="com.rakshasa.inncoffee.ui.bebidas.Cafes"
         tools:layout="@layout/cafes" >
         <action
             android:id="@+id/action_nav_cafes_to_nav_quierobebidas"
@@ -173,7 +173,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_quierotostadas"
-        android:name="com.example.inncoffee.ui.quiero.Tostadas"
+        android:name="com.rakshasa.inncoffee.ui.quiero.Tostadas"
         tools:layout="@layout/tostadas" >
         <action
             android:id="@+id/action_nav_quierotostadas_to_nav_quierocartadesayunos2"
@@ -187,7 +187,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_Tostadasclasicas"
-        android:name="com.example.inncoffee.ui.tostadas.TostadasClasicas"
+        android:name="com.rakshasa.inncoffee.ui.tostadas.TostadasClasicas"
         tools:layout="@layout/tostadasclasicas" >
         <action
             android:id="@+id/action_nav_Tostadasclasicas_to_nav_quierotostadas"
@@ -195,7 +195,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_TostadasOriginales"
-        android:name="com.example.inncoffee.ui.tostadas.TostadasOriginales"
+        android:name="com.rakshasa.inncoffee.ui.tostadas.TostadasOriginales"
         tools:layout="@layout/tostadasoriginales" >
         <action
             android:id="@+id/action_nav_TostadasOriginales_to_nav_quierotostadas"
@@ -205,7 +205,7 @@
 
     <fragment
         android:id="@+id/nav_misoffertas"
-        android:name="com.example.inncoffee.ui.ofertas.OfertasFragment"
+        android:name="com.rakshasa.inncoffee.ui.ofertas.OfertasFragment"
         tools:layout="@layout/ofertas_fragment" >
         <action
             android:id="@+id/action_nav_misoffertas_to_nav_home"

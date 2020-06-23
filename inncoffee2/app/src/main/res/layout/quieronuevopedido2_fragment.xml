@@ -27,13 +27,13 @@
         android:background="@drawable/rect_ngulo_1484_shape"
         android:text="@string/carta_comidas_ek10_string"
         android:textColor="#000000"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cartadesayuno"
-        app:layout_constraintVertical_bias="0.086"
-        tools:visibility="invisible" />
+        app:layout_constraintVertical_bias="0.086" />
 
     <Button
         android:id="@+id/cartamerienda"

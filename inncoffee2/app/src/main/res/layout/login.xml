@@ -10,7 +10,7 @@
     android:paddingLeft="50dp"
     android:paddingRight="50dp"
     android:paddingBottom="50dp"
-    tools:context="com.example.inncoffee.RegistroLogin.Login">
+    tools:context="com.rakshasa.inncoffee.RegistroLogin.Login">
 
     <ImageView
         android:id="@+id/imageViewTe"

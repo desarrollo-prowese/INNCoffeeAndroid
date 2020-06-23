@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
-        <com.example.inncoffee.ui.home.CardViewPager
+        <com.rakshasa.inncoffee.ui.home.CardViewPager
             android:id="@+id/carousel_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

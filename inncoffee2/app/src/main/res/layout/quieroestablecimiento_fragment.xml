@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         tools:context="com.example.mapwithmarker.MapsMarkerActivity" />
 
-    <com.example.inncoffee.ui.quiero.libreriamap.FloatingMarkerTitlesOverlay
+    <com.rakshasa.inncoffee.ui.quiero.libreriamap.FloatingMarkerTitlesOverlay
         android:id="@+id/map_floating_markers_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
