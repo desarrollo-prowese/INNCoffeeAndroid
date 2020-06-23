@@ -51,10 +51,10 @@ public class MensajesFragment extends Fragment {
                 if (user != null) {
                     Intent intent = new Intent(getActivity(), MensajesFragment.class);
                     startActivity(intent);
-                    Log.w("TAG", "onAuthStateChanged - Logueado");
+                   // Log.w("TAG", "onAuthStateChanged - Logueado");
 
                 } else {
-                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+                    //Log.w("TAG", "onAuthStateChanged - Cerro sesion");
                 }
             }
         };
@@ -70,10 +70,10 @@ public class MensajesFragment extends Fragment {
                     startActivity(intent);
 
 
-                    Log.w("TAG", "onAuthStateChanged - Logueado");
+                   // Log.w("TAG", "onAuthStateChanged - Logueado");
 
                 } else {
-                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+                  //  Log.w("TAG", "onAuthStateChanged - Cerro sesion");
                 }
             }
         };

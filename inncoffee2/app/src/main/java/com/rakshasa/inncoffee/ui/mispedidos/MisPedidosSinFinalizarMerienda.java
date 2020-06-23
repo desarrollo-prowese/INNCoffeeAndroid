@@ -75,10 +75,10 @@ public class MisPedidosSinFinalizarMerienda extends DialogFragment {
                 if (user != null) {
                     Intent intent = new Intent(getActivity(), QuieroFragment.class);
                     startActivity(intent);
-                    Log.w("TAG", "onAuthStateChanged - Logueado");
+                //    Log.w("TAG", "onAuthStateChanged - Logueado");
 
                 } else {
-                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+              //      Log.w("TAG", "onAuthStateChanged - Cerro sesion");
                 }
             }
         };
@@ -94,10 +94,10 @@ public class MisPedidosSinFinalizarMerienda extends DialogFragment {
                     startActivity(intent);
 
 
-                    Log.w("TAG", "onAuthStateChanged - Logueado");
+                //    Log.w("TAG", "onAuthStateChanged - Logueado");
 
                 } else {
-                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+              //      Log.w("TAG", "onAuthStateChanged - Cerro sesion");
                 }
             }
         };
@@ -202,7 +202,7 @@ public class MisPedidosSinFinalizarMerienda extends DialogFragment {
                         processed = formatter.format(total);
 
                         sumatotal.setText(processed);
-                        Log.v("PRecio ", processed + " ///"+ total );
+                    //    Log.v("PRecio ", processed + " ///"+ total );
                         texto = ds.child("texto").getValue().toString();
                         precios = ds.child("precio").getValue().toString();
 

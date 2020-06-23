@@ -127,14 +127,8 @@
             android:id="@+id/action_nav_quierobebidas_to_nav_quierocartadesayunos2"
             app:destination="@id/nav_quierocartadesayunos" />
         <action
-            android:id="@+id/action_nav_quierobebidas_to_nav_cafes"
-            app:destination="@id/nav_cafes" />
-        <action
             android:id="@+id/action_nav_quierobebidas_to_nav_bebidas"
             app:destination="@id/nav_bebidas" />
-        <action
-            android:id="@+id/action_nav_quierobebidas_to_nav_tes"
-            app:destination="@id/nav_tes" />
         <action
             android:id="@+id/action_nav_quierobebidas_to_nav_zumos"
             app:destination="@id/nav_zumos" />
@@ -153,22 +147,6 @@
         tools:layout="@layout/zumos" >
         <action
             android:id="@+id/action_nav_zumos_to_nav_quierobebidas"
-            app:destination="@id/nav_quierobebidas" />
-    </fragment>
-    <fragment
-        android:id="@+id/nav_tes"
-        android:name="com.rakshasa.inncoffee.ui.bebidas.Tes"
-        tools:layout="@layout/tes" >
-        <action
-            android:id="@+id/action_nav_tes_to_nav_quierobebidas"
-            app:destination="@id/nav_quierobebidas" />
-    </fragment>
-    <fragment
-        android:id="@+id/nav_cafes"
-        android:name="com.rakshasa.inncoffee.ui.bebidas.Cafes"
-        tools:layout="@layout/cafes" >
-        <action
-            android:id="@+id/action_nav_cafes_to_nav_quierobebidas"
             app:destination="@id/nav_quierobebidas" />
     </fragment>
     <fragment

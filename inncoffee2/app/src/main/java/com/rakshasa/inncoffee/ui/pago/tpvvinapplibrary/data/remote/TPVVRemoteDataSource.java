@@ -50,11 +50,11 @@ public class TPVVRemoteDataSource implements TPVVDataSource<String, JSONObject, 
     public void sendPetition(String str, JSONObject jSONObject, final TPVVDataSource.SendPetitionRepositoryCallback<SignedResponseDto, ErrorResponse> sendPetitionRepositoryCallback) {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("datoEntrada", jSONObject.toString());
-        Log.d("SDKinApp_log: petition", jSONObject.toString());
+     //   Log.d("SDKinApp_log: petition", jSONObject.toString());
         TPVVRequest tPVVRequest = new TPVVRequest(str, SignedResponseDto.class, (Map<String, String>) null, hashMap, new Response.Listener<SignedResponseDto>() {
             public void onResponse(SignedResponseDto signedResponseDto) {
                 sendPetitionRepositoryCallback.onSendPetitionOK(signedResponseDto);
-                Log.d("SDKinApp_log: response", signedResponseDto.getMensaje().toString());
+               // Log.d("SDKinApp_log: response", signedResponseDto.getMensaje().toString());
             }
         }, new Response.ErrorListener() {
             public void onErrorResponse(VolleyError volleyError) {

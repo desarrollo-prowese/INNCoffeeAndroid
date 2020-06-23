@@ -31,10 +31,10 @@ public class TeFragment extends Fragment {
                 if (user != null) {
                     Intent intent = new Intent(getActivity(), QuieroFragment.class);
                     startActivity(intent);
-                    Log.w("TAG", "onAuthStateChanged - Logueado");
+       //             Log.w("TAG", "onAuthStateChanged - Logueado");
 
                 } else {
-                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+         //           Log.w("TAG", "onAuthStateChanged - Cerro sesion");
                 }
             }
         };
@@ -50,10 +50,10 @@ public class TeFragment extends Fragment {
                     startActivity(intent);
 
 
-                    Log.w("TAG", "onAuthStateChanged - Logueado");
+           //         Log.w("TAG", "onAuthStateChanged - Logueado");
 
                 } else {
-                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+            //        Log.w("TAG", "onAuthStateChanged - Cerro sesion");
                 }
             }
         };

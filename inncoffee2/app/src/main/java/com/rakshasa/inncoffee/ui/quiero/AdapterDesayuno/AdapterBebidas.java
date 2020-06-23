@@ -108,7 +108,7 @@ public class AdapterBebidas extends RecyclerView.Adapter<AdapterBebidas.ViewHold
 
                     @Override
                     public void onCancelled (@NonNull DatabaseError databaseError) {
-                        Log.w("TAG", "Failed to read value.", databaseError.toException());
+              //          Log.w("TAG", "Failed to read value.", databaseError.toException());
                     }
                 });
 

@@ -142,7 +142,7 @@ public class WebViewPaymentPresenter implements WebViewPaymentContract.Presenter
         }
         webView.evaluateJavascript("(function() { return ('<html>'+document.getElementsByTagName('html')[0].innerHTML+'</html>'); })();", new ValueCallback<String>() {
             public void onReceiveValue(String str) {
-                Log.d("HTML", str);
+       //         Log.d("HTML", str);
                 if (str.contains("Error en datos enviados. Contacte con su comercio.")) {
                     Boolean unused = WebViewPaymentPresenter.this.status_error = true;
                 }

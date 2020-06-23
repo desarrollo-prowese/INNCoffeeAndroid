@@ -167,7 +167,7 @@ public class AdapterDesayuno1 extends RecyclerView.Adapter<AdapterDesayuno1.View
         holder.conteiner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                Log.v("STORNMG: " , String.valueOf(position));
+       //         Log.v("STORNMG: " , String.valueOf(position));
                 if (holder.botonera.getLayoutParams().height == 1){
                     holder.botonera.getLayoutParams().height = 450;
                     holder.cambiomenu2.setBackgroundResource(R.drawable.menornegros);
@@ -209,7 +209,7 @@ public class AdapterDesayuno1 extends RecyclerView.Adapter<AdapterDesayuno1.View
 
                     @Override
                     public void onCancelled (@NonNull DatabaseError databaseError) {
-                        Log.w("TAG", "Failed to read value.", databaseError.toException());
+      //                  Log.w("TAG", "Failed to read value.", databaseError.toException());
                     }
                 });
                 }
@@ -241,7 +241,7 @@ public class AdapterDesayuno1 extends RecyclerView.Adapter<AdapterDesayuno1.View
 
                        @Override
                        public void onCancelled (@NonNull DatabaseError databaseError) {
-                           Log.w("TAG", "Failed to read value.", databaseError.toException());
+         //                  Log.w("TAG", "Failed to read value.", databaseError.toException());
                        }
                    });
                }

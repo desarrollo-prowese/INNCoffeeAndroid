@@ -80,10 +80,10 @@ public class Te extends Fragment {
                 if (user != null) {
                     Intent intent = new Intent(getActivity(), QuieroFragment.class);
                     startActivity(intent);
-                    Log.w("TAG", "onAuthStateChanged - Logueado");
+           //         Log.w("TAG", "onAuthStateChanged - Logueado");
 
                 } else {
-                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+             //       Log.w("TAG", "onAuthStateChanged - Cerro sesion");
                 }
             }
         };
@@ -99,10 +99,10 @@ public class Te extends Fragment {
                     startActivity(intent);
 
 
-                    Log.w("TAG", "onAuthStateChanged - Logueado");
+                //    Log.w("TAG", "onAuthStateChanged - Logueado");
 
                 } else {
-                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+                 //   Log.w("TAG", "onAuthStateChanged - Cerro sesion");
                 }
             }
         };
@@ -142,7 +142,7 @@ public class Te extends Fragment {
         menos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                Log.v("que pasa", String.valueOf(contador2));
+            //    Log.v("que pasa", String.valueOf(contador2));
                 contador2--;
                 contador.setText(String.valueOf(contador2));
                 if (contador2 == 1) {
@@ -157,7 +157,7 @@ public class Te extends Fragment {
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                Log.v("que pasa", String.valueOf(contador2));
+          //      Log.v("que pasa", String.valueOf(contador2));
                 contador2++;
                 contador.setText(String.valueOf(contador2));
                 if (contador2 == 99) {
@@ -293,7 +293,7 @@ public class Te extends Fragment {
 
                         @Override
                         public void onCancelled (@NonNull DatabaseError databaseError) {
-                            Log.w("TAG", "Failed to read value.", databaseError.toException());
+             //               Log.w("TAG", "Failed to read value.", databaseError.toException());
                         }
                     });
 
@@ -326,8 +326,8 @@ public class Te extends Fragment {
                             nombreArticulo.setText(nombreleche);
                             precio.setText(precioLeche);
 
-                            Log.v("NONBRE ARTICULO ", nombreleche);
-                            Log.v("MI ID ", String.valueOf(idpanes));
+          //                  Log.v("NONBRE ARTICULO ", nombreleche);
+          //                  Log.v("MI ID ", String.valueOf(idpanes));
 
                         }
                     }
@@ -341,7 +341,7 @@ public class Te extends Fragment {
                 mCompare.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                        Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Leches").getValue() +" // "+ dataSnapshot.child("Te").child("TipoLeches").child(String.valueOf(idpanes)).child("Alergia").getValue() );
+            //            Log.v("Es Trigo" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Leches").getValue() +" // "+ dataSnapshot.child("Te").child("TipoLeches").child(String.valueOf(idpanes)).child("Alergia").getValue() );
                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
                         if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
                                 dataSnapshot.child("Te").child("TipoLeches").child(String.valueOf(idpanes)).child("Alergia").getValue()))

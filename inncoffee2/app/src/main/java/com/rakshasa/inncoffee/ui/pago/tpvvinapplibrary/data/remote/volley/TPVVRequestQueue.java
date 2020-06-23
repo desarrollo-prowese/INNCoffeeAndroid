@@ -38,7 +38,7 @@ public class TPVVRequestQueue {
 
     public RequestQueue getRequestQueue() {
         if (this.mRequestQueue == null) {
-            Log.v("Cache : " ,String.valueOf(mContext) + mCache);
+           // Log.v("Cache : " ,String.valueOf(mContext) + mCache);
             mCache = new DiskBasedCache(mContext.getCacheDir(), 1048576);
 
             mNetwork = new BasicNetwork((BaseHttpStack) new SSLHurlStack());

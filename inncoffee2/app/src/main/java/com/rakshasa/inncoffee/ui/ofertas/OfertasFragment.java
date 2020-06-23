@@ -51,10 +51,10 @@ public class OfertasFragment extends Fragment {
                 if (user != null) {
                     Intent intent = new Intent(getActivity(), MensajesFragment.class);
                     startActivity(intent);
-                    Log.w("TAG", "onAuthStateChanged - Logueado");
+                //    Log.w("TAG", "onAuthStateChanged - Logueado");
 
                 } else {
-                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+                //    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
                 }
             }
         };
@@ -70,10 +70,10 @@ public class OfertasFragment extends Fragment {
                     startActivity(intent);
 
 
-                    Log.w("TAG", "onAuthStateChanged - Logueado");
+             //       Log.w("TAG", "onAuthStateChanged - Logueado");
 
                 } else {
-                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+             //       Log.w("TAG", "onAuthStateChanged - Cerro sesion");
                 }
             }
         };
@@ -123,7 +123,7 @@ public class OfertasFragment extends Fragment {
                         String porcentaje = ds.child("porcentaje").getValue().toString();
 
 
-                        Log.v("Probando ", ofertas + porcentaje);
+                   //     Log.v("Probando ", ofertas + porcentaje);
                         mOfertas.add(new OfertasClass(ofertas,porcentaje));
                         keys.add(ds.getKey());
 

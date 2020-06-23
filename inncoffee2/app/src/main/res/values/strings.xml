@@ -1,7 +1,7 @@
 <resources>
 
 
-    <string name="app_name">INN COFFEE</string>
+    <string name="app_name">INN Offices</string>
     <string name="email">Correo Electronico</string>
     <string name="facebook_app_id">686505875173586</string>
     <string name="fb_login_protocol_scheme">fb686505875173586</string>

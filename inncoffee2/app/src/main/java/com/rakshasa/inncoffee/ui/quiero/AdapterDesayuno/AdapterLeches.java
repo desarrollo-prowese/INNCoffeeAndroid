@@ -114,7 +114,7 @@ public class AdapterLeches extends RecyclerView.Adapter<AdapterLeches.ViewHolder
 
                     @Override
                     public void onCancelled (@NonNull DatabaseError databaseError) {
-                        Log.w("TAG", "Failed to read value.", databaseError.toException());
+           //             Log.w("TAG", "Failed to read value.", databaseError.toException());
                     }
                 });
             }
@@ -151,7 +151,7 @@ public class AdapterLeches extends RecyclerView.Adapter<AdapterLeches.ViewHolder
 
                     @Override
                     public void onCancelled (@NonNull DatabaseError databaseError) {
-                        Log.w("TAG", "Failed to read value.", databaseError.toException());
+           //             Log.w("TAG", "Failed to read value.", databaseError.toException());
                     }
                 });
 

@@ -78,10 +78,10 @@ public class Leche extends Fragment {
                 if (user != null) {
                     Intent intent = new Intent(getActivity(), QuieroFragment.class);
                     startActivity(intent);
-                    Log.w("TAG", "onAuthStateChanged - Logueado");
+             //       Log.w("TAG", "onAuthStateChanged - Logueado");
 
                 } else {
-                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+              //      Log.w("TAG", "onAuthStateChanged - Cerro sesion");
                 }
             }
         };
@@ -97,10 +97,10 @@ public class Leche extends Fragment {
                     startActivity(intent);
 
 
-                    Log.w("TAG", "onAuthStateChanged - Logueado");
+             //       Log.w("TAG", "onAuthStateChanged - Logueado");
 
                 } else {
-                    Log.w("TAG", "onAuthStateChanged - Cerro sesion");
+               //     Log.w("TAG", "onAuthStateChanged - Cerro sesion");
                 }
             }
         };
@@ -138,7 +138,7 @@ public class Leche extends Fragment {
         menos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                Log.v("que pasa", String.valueOf(contador2));
+        //        Log.v("que pasa", String.valueOf(contador2));
                 contador2--;
                 contador.setText(String.valueOf(contador2));
                 if (contador2 == 1) {
@@ -153,7 +153,7 @@ public class Leche extends Fragment {
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
-                Log.v("que pasa", String.valueOf(contador2));
+        //        Log.v("que pasa", String.valueOf(contador2));
                 contador2++;
                 contador.setText(String.valueOf(contador2));
                 if (contador2 == 99) {
@@ -277,7 +277,7 @@ public class Leche extends Fragment {
 
                         @Override
                         public void onCancelled (@NonNull DatabaseError databaseError) {
-                            Log.w("TAG", "Failed to read value.", databaseError.toException());
+              //              Log.w("TAG", "Failed to read value.", databaseError.toException());
                         }
                     });
 
@@ -311,12 +311,12 @@ public class Leche extends Fragment {
                            nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                            precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
                            imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
-                           Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                           Glide.with(requireContext()).load(imagen).into(Imagen);
                            nombreArticulo.setText(nombre);
                            precio.setText(precios);
 
-                           Log.v("NONBRE ARTICULO ", nombre);
-                           Log.v("MI ID ", String.valueOf(id));
+            //               Log.v("NONBRE ARTICULO ", nombre);
+            //               Log.v("MI ID ", String.valueOf(id));
 
                        }
                    }
@@ -330,7 +330,7 @@ public class Leche extends Fragment {
                mCompare.addValueEventListener(new ValueEventListener() {
                    @Override
                    public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                       Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Cafes").child("Leches").child(String.valueOf(id)).child("Alergia").getValue() );
+              //         Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Cafes").child("Leches").child(String.valueOf(id)).child("Alergia").getValue() );
                        if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
                            if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
                                    dataSnapshot.child("Cafes").child("Leches").child(String.valueOf(id)).child("Alergia").getValue()))
@@ -380,8 +380,8 @@ public class Leche extends Fragment {
                                  nombreArticulo.setText(nombre);
                                  precio.setText(precios);
                              }
-                             Log.v("MI ID ", String.valueOf(id));
-                             Log.v("NONBRE ARTICULO ", nombre);
+           //                  Log.v("MI ID ", String.valueOf(id));
+           //                  Log.v("NONBRE ARTICULO ", nombre);
 
                          }
                      }
@@ -395,7 +395,7 @@ public class Leche extends Fragment {
                  mCompare.addValueEventListener(new ValueEventListener() {
                      @Override
                      public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                         Log.v("Es Lacteos", dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() + " // " + dataSnapshot.child("Cafes").child("Leches").child(String.valueOf(id)).child("Alergia").getValue());
+          //               Log.v("Es Lacteos", dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() + " // " + dataSnapshot.child("Cafes").child("Leches").child(String.valueOf(id)).child("Alergia").getValue());
                          if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()) {
                              if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
                                      dataSnapshot.child("Cafes").child("Leches").child(String.valueOf(id)).child("Alergia").getValue())) {
@@ -438,12 +438,12 @@ public class Leche extends Fragment {
                                         nombre = dataSnapshot.child(String.valueOf(id)).child("nombrearticulo").getValue().toString();
                                         precios = dataSnapshot.child(String.valueOf(id)).child("precio").getValue().toString();
                                         imagen = dataSnapshot.child(String.valueOf(id)).child("imagen").getValue().toString();
-                                        Glide.with(Objects.requireNonNull(getContext())).load(imagen).into(Imagen);
+                                        Glide.with(requireContext()).load(imagen).into(Imagen);
                                         nombreArticulo.setText(nombre);
                                         precio.setText(precios);
                                     }
-                                    Log.v("MI ID ", String.valueOf(id));
-                                    Log.v("NONBRE ARTICULO ", nombre);
+                 //                   Log.v("MI ID ", String.valueOf(id));
+                //                    Log.v("NONBRE ARTICULO ", nombre);
 
                                 }
                             }
@@ -457,7 +457,7 @@ public class Leche extends Fragment {
                         mCompare.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange (@NonNull DataSnapshot dataSnapshot) {
-                                Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Cafes").child("Leches").child(String.valueOf(id)).child("Alergia").getValue() );
+             //                   Log.v("Es Lacteos" ,dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue() +" // "+ dataSnapshot.child("Cafes").child("Leches").child(String.valueOf(id)).child("Alergia").getValue() );
                                 if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").exists()){
                                     if (dataSnapshot.child("Users").child(ID).child("Alergias").child("Lacteos").getValue().equals(
                                             dataSnapshot.child("Cafes").child("Leches").child(String.valueOf(id)).child("Alergia").getValue()))
