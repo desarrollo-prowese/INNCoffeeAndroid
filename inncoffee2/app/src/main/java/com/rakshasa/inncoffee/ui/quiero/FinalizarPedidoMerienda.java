@@ -394,7 +394,7 @@ public class FinalizarPedidoMerienda extends Fragment {
         TPVVConfiguration.setFuc("351003009");
         TPVVConfiguration.setTerminal("1");
         TPVVConfiguration.setEnvironment(TPVVConstants.ENVIRONMENT_REAL) ;
-        TPVVConfiguration.setLicense("862CQBjeHi7ZwpyNcq2Q");
+        TPVVConfiguration.setLicense("EGDU1KIQmG74sD8IIBmF");
 
     }
 
